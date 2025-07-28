@@ -1,9 +1,15 @@
-<h1>Welcome to your library project</h1>
-<p>
-  Create your package using @sveltejs/package and preview/showcase your work
-  with SvelteKit
-</p>
-<p>
-  Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the
-  documentation
-</p>
+<script lang="ts">
+  import { Goto } from "$lib/goto";
+  import { toTitleCase } from "$lib/utils";
+  import { StorybookNavigationActionIds } from "./+layout.svelte";
+
+  const paths = Object.values(StorybookNavigationActionIds);
+</script>
+
+<div class="flex flex-col items-start rounded-lg border p-4">
+  {#each paths as path (path)}
+    <Goto href={path}>
+      {toTitleCase(path.split("/").slice(-1)[0])}
+    </Goto>
+  {/each}
+</div>

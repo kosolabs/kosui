@@ -1,6 +1,6 @@
-import prettier from "eslint-config-prettier";
 import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
+import prettier from "eslint-config-prettier";
 import svelte from "eslint-plugin-svelte";
 import globals from "globals";
 import { fileURLToPath } from "node:url";
@@ -35,6 +35,18 @@ export default ts.config(
         parser: ts.parser,
         svelteConfig,
       },
+    },
+  },
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
     },
   },
 );

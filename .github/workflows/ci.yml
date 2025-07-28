@@ -22,5 +22,6 @@ jobs:
           cache: "pnpm"
           cache-dependency-path: pnpm-lock.yaml
       - run: pnpm install
+      - run: pnpm run "/^(build|check|lint|test:unit)$/"
       - run: pnpm exec playwright install --with-deps
-      - run: pnpm run "/^(build|check|lint|test:unit|test:e2e)$/"
+      - run: pnpm test:e2e

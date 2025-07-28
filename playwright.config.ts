@@ -1,9 +1,16 @@
-import { defineConfig } from "@playwright/test";
+import type { PlaywrightTestConfig } from "@playwright/test";
 
-export default defineConfig({
+const port = 5173;
+
+const config: PlaywrightTestConfig = {
   webServer: {
-    command: "npm run build && npm run preview",
-    port: 4173,
+    command: `pnpm build && pnpm preview --port ${port}`,
+    port,
+    reuseExistingServer: true,
+    stdout: "pipe",
   },
   testDir: "e2e",
-});
+  fullyParallel: true,
+};
+
+export default config;
