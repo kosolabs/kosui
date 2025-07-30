@@ -13,21 +13,21 @@ type ShowDialogProps<T> = {
   icon?: typeof Icon;
   title?: string;
   inputProps?: InputProps;
-  message: Snippet | string;
+  message: Snippet<[]> | string;
   buttons: ButtonProps<T>[];
 };
 
 type NoticeDialogProps = {
   icon?: typeof Icon;
   title?: string;
-  message: Snippet | string;
+  message: Snippet<[]> | string;
   acceptText?: string;
 };
 
 type ConfirmDialogProps = {
   icon?: typeof Icon;
   title?: string;
-  message: Snippet | string;
+  message: Snippet<[]> | string;
   cancelText?: string;
   acceptText?: string;
 };
@@ -36,13 +36,13 @@ type InputDialogProps = {
   icon?: typeof Icon;
   title?: string;
   props: InputProps;
-  message: Snippet | string;
+  message: Snippet<[]> | string;
   cancelText?: string;
   acceptText?: string;
 };
 
 export class DialoguerContext {
-  message: Snippet | string = $state("");
+  message: Snippet<[]> | string = $state("");
   icon: typeof Icon | undefined = $state();
   title: string | undefined = $state();
   inputProps: InputProps | undefined = $state();
