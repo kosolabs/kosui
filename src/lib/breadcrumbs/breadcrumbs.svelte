@@ -33,7 +33,7 @@
 </script>
 
 <div class={twMerge("flex gap-2", className)}>
-  {#each crumbs as { path, title }, index (path)}
+  {#each crumbs as { path, title }, index (title)}
     {#if index !== 0}
       <div>
         {#if typeof separator === "function"}
