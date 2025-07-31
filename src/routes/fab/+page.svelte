@@ -3,7 +3,7 @@
   import { Plus } from "@lucide/svelte";
 </script>
 
-<div class="flex flex-wrap gap-2">
+<div class="flex flex-wrap gap-4">
   <div
     class="flex h-96 flex-1 flex-col rounded-lg bg-m3-surface-container-highest p-2"
   >

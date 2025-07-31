@@ -4,7 +4,7 @@
   import { toTitleCase } from "$lib/utils";
 </script>
 
-<div class="flex flex-col gap-4 rounded-lg border p-4">
+<div class="flex flex-col gap-4">
   {#each underlines as underline (underline)}
     {@const underlineTitle = toTitleCase(underline)}
     <div>

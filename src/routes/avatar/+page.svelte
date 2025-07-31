@@ -4,7 +4,7 @@
   import { UserRound } from "@lucide/svelte";
 </script>
 
-<div class="flex gap-4 rounded-lg border p-4">
+<div class="flex flex-wrap gap-4 rounded-lg border p-4">
   {#each variants as variant (variant)}
     {#each colors as color (color)}
       <Avatar
@@ -16,7 +16,7 @@
   {/each}
 </div>
 
-<div class="flex gap-4 rounded-lg border p-4">
+<div class="flex flex-wrap gap-4 rounded-lg border p-4">
   {#each variants as variant (variant)}
     {#each colors as color (color)}
       <Avatar {variant} {color} shape="circle">FB</Avatar>
@@ -24,7 +24,7 @@
   {/each}
 </div>
 
-<div class="flex gap-4 rounded-lg border p-4">
+<div class="flex flex-wrap gap-4 rounded-lg border p-4">
   {#each variants as variant (variant)}
     {#each colors as color (color)}
       <Avatar {variant} {color} shape="square"><UserRound /></Avatar>

@@ -49,7 +49,7 @@
   <div>{selected}</div>
 {/if}
 
-<div class="flex flex-col gap-4 rounded-lg border p-4">
+<div class="flex flex-col gap-4">
   <Autocomplete>
     <AutocompleteInput
       bind:value={filter}

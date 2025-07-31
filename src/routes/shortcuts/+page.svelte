@@ -2,7 +2,7 @@
   import { Shortcut, ShortcutBadge } from "$lib/shortcut";
 </script>
 
-<div class="flex flex-wrap items-center gap-4 rounded-lg border p-4">
+<div class="flex flex-wrap items-center gap-4">
   <div>
     Reboot:
     <ShortcutBadge
