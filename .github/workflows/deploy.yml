@@ -1,6 +1,8 @@
 name: Kosui CI
 on:
-  pull_request:
+  push:
+    branches:
+      - main
 concurrency:
   group: ci-workflow-${{ github.workflow }}-ref-${{ github.ref }}
   # Cancel in-progress workflows for PRs (but not main).
@@ -32,3 +34,6 @@ jobs:
       - run: pnpm run "/^(build|check|lint|test:unit)$/"
       - run: pnpm exec playwright install --with-deps
       - run: pnpm test:e2e
+      - env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm publish
