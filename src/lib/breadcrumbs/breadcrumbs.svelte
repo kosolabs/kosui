@@ -1,39 +1,30 @@
 <script module lang="ts">
-  import { page } from "$app/state";
+  import { Link, type LinkProps } from "$lib";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import { toTitleCase, type ClassName } from "../utils";
 
   type Crumb = {
-    path: string;
     title: string;
+    href: string;
   };
 
-  type BreadcrumbsProps = {
+  export type BreadcrumbsProps = {
+    path: Crumb[];
     separator?: Snippet | string;
-  } & ClassName;
+  } & Omit<LinkProps, "children">;
 </script>
 
 <script lang="ts">
-  import { Goto } from "../goto";
-
-  const { separator = "›", class: className }: BreadcrumbsProps = $props();
-
-  let crumbs = $derived.by(() => {
-    const parts = page.url.pathname.split("/");
-    const crumbs: Crumb[] = [{ path: "/", title: "Home" }];
-    for (let i = 1; i < parts.length; i++) {
-      crumbs.push({
-        path: parts.slice(0, i + 1).join("/"),
-        title: toTitleCase(parts[i]),
-      });
-    }
-    return crumbs;
-  });
+  const {
+    path,
+    separator = "›",
+    class: className,
+    ...restProps
+  }: BreadcrumbsProps = $props();
 </script>
 
 <div class={twMerge("flex gap-2", className)}>
-  {#each crumbs as { path, title }, index (title)}
+  {#each path as { title, href }, index (title)}
     {#if index !== 0}
       <div>
         {#if typeof separator === "function"}
@@ -43,6 +34,6 @@
         {/if}
       </div>
     {/if}
-    <Goto href={path} color="inherit">{title}</Goto>
+    <Link {href} {...restProps}>{title}</Link>
   {/each}
 </div>
