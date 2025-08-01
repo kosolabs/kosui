@@ -1,6 +1,6 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 
-const port = 5173;
+const port = 5175;
 
 const config: PlaywrightTestConfig = {
   webServer: {

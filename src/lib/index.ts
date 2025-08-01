@@ -25,7 +25,6 @@ export * from "./command";
 export * from "./common";
 export * from "./dialog";
 export * from "./fab";
-export * from "./goto";
 export * from "./input";
 export * from "./link";
 export * from "./markdown";
