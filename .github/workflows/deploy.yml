@@ -34,6 +34,6 @@ jobs:
       - run: pnpm run "/^(build|check|lint|test:unit)$/"
       - run: pnpm exec playwright install --with-deps
       - run: pnpm test:e2e
-      - env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm publish
+      - run: pnpm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
