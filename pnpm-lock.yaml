@@ -10,6 +10,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      marked:
+        specifier: ^16.1.1
+        version: 16.1.1
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -62,9 +66,6 @@ importers:
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
-      marked:
-        specifier: ^16.1.1
-        version: 16.1.1
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
