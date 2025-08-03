@@ -20,6 +20,7 @@
     "/markdown",
     "/menus",
     "/progress-indicators",
+    "/skeleton",
     "/shortcuts",
     "/toggles",
     "/tooltips",
@@ -35,7 +36,8 @@
 </script>
 
 <div class="flex h-screen flex-col">
-  <div class="border-b p-4">
+  <div class="flex items-center gap-2 border-b p-4">
+    <img src="/kosui.svg" alt="Kosui" class="size-9" />
     <h1 class="text-3xl font-thin">
       {toTitleCase(page.url.pathname.split("/")[1]) || "Home"}
     </h1>
