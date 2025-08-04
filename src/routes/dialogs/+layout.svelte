@@ -4,4 +4,6 @@
   let { children } = $props();
 </script>
 
-<Dialoguer {children} />
+<Dialoguer>
+  {@render children()}
+</Dialoguer>

@@ -11,6 +11,12 @@ importers:
 
   .:
     dependencies:
+      '@floating-ui/dom':
+        specifier: ^1.7.2
+        version: 1.7.2
+      '@lucide/svelte':
+        specifier: ^0.526.0
+        version: 0.526.0(svelte@5.37.1)
       marked:
         specifier: ^16.1.1
         version: 16.1.1
@@ -21,12 +27,6 @@ importers:
       '@eslint/js':
         specifier: ^9.18.0
         version: 9.31.0
-      '@floating-ui/dom':
-        specifier: ^1.7.2
-        version: 1.7.2
-      '@lucide/svelte':
-        specifier: ^0.526.0
-        version: 0.526.0(svelte@5.37.1)
       '@playwright/test':
         specifier: ^1.49.1
         version: 1.54.1
