@@ -45,6 +45,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: pnpm test:e2e
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
       - run: pnpm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
