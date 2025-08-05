@@ -5,6 +5,7 @@
   "license": "MIT",
   "packageManager": "pnpm@10.14.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite dev",
     "build": "vite build && pnpm prepack",
     "preview": "vite preview",
