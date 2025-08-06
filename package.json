@@ -18,7 +18,7 @@
     "test:unit": "vitest",
     "test": "pnpm test:unit -- --run && pnpm test:e2e",
     "test:e2e": "playwright test",
-    "ci:publish": "pnpm publish -r"
+    "ci:publish": "changeset publish"
   },
   "engines": {
     "node": ">= 20"
