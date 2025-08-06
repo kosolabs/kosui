@@ -1,4 +1,4 @@
-name: Changesets
+name: Release
 
 on:
   push:
@@ -14,7 +14,9 @@ jobs:
     uses: ./.github/workflows/ci.yml
     permissions:
       contents: read
-  version:
+  release:
+    # prevents this action from running on forks
+    if: github.repository == 'kosolabs/kosui'
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     permissions:
