@@ -2,6 +2,11 @@ name: Kosui CI
 on:
   pull_request:
   workflow_call:
+  pull_request_target:
+    types:
+      - auto_merge_enabled
+    paths:
+      - "**/CHANGELOG.md"
 concurrency:
   group: ci-workflow-${{ github.workflow }}-ref-${{ github.ref }}
   # Cancel in-progress workflows for PRs (but not main).
@@ -47,7 +52,7 @@ jobs:
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/frontend/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-playwright-
       - run: pnpm exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
