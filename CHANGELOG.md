@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.19
+
+### Patch Changes
+
+- 2e90abb: Make the ToggleButton component default to "button" type
+
 ## 0.0.18
 
 ### Patch Changes
