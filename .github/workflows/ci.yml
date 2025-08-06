@@ -2,6 +2,11 @@ name: Kosui CI
 on:
   pull_request:
   workflow_call:
+  pull_request_target:
+    types:
+      - auto_merge_enabled
+    paths:
+      - "**/CHANGELOG.md"
 concurrency:
   group: ci-workflow-${{ github.workflow }}-ref-${{ github.ref }}
   # Cancel in-progress workflows for PRs (but not main).
