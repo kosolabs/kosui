@@ -25,6 +25,7 @@
     class: className,
     color = "primary",
     shape = "rounded",
+    type = "button",
     ...restProps
   }: ToggleButtonProps<T> = $props();
 
@@ -54,6 +55,7 @@
 
     className,
   )}
+  {type}
   {...mergeProps(restProps, { onclick: () => (ctx.value = value) })}
 >
   {@render children()}
