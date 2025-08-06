@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.17
+
+### Patch Changes
+
+- 5fc221b: Add automerge
+
 ## 0.0.16
 
 ### Patch Changes

@@ -1,5 +1,0 @@
----
-"kosui": patch
----
-
-Add automerge
