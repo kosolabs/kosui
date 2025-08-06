@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.18
+
+### Patch Changes
+
+- 5919991: Make buttons not submit automatically
+
 ## 0.0.17
 
 ### Patch Changes
