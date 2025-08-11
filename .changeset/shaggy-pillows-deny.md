@@ -1,5 +1,0 @@
----
-"kosui": patch
----
-
-Bump dependencies
