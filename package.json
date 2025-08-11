@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.2",
-    "@lucide/svelte": "^0.536.0",
+    "@lucide/svelte": "^0.539.0",
     "marked": "^16.1.1"
   },
   "peerDependencies": {
