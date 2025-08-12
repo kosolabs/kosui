@@ -1,13 +1,44 @@
 <script lang="ts" module>
+  import {
+    COLORS,
+    noop,
+    RADII,
+    SIZES,
+    type ClassName,
+    type Color,
+    type ColorProp,
+    type ElementRef,
+    type Radius,
+    type RadiusProp,
+    type Size,
+    type SizeProp,
+  } from "$lib";
   import type { HTMLInputAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { noop, type ClassName, type ElementRef } from "../utils";
+
+  export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
+  export type InputVariant = (typeof INPUT_VARIANTS)[number];
+  export type InputVariantProp = { variant?: InputVariant };
+
+  export const INPUT_COLORS = COLORS;
+  export type InputColor = Color;
+  export type InputColorProp = ColorProp;
+
+  export const INPUT_SIZES = SIZES;
+  export type InputSize = Size;
+  export type InputSizeProp = SizeProp;
+
+  export const INPUT_RADII = RADII;
+  export type InputRadius = Radius;
+  export type InputRadiusProp = RadiusProp;
 
   export type InputProps = ElementRef &
     ClassName &
-    Variants &
-    HTMLInputAttributes;
+    InputVariantProp &
+    InputSizeProp &
+    InputRadiusProp &
+    InputColorProp &
+    Omit<HTMLInputAttributes, "size">;
 </script>
 
 <script lang="ts">
@@ -17,24 +48,42 @@
     ref = noop,
     class: className,
     variant = "outlined",
-    color = "secondary",
-    shape = "rounded",
+    color = "primary",
+    size = "sm",
+    radius = "md",
     ...restProps
   }: InputProps = $props();
 </script>
 
 <input
+  bind:value
   bind:this={el}
   use:ref
-  bind:value
   class={twMerge(
-    "bg-m3-surface-container",
-    baseClasses({ variant, color, shape, hover: true, focus: true }),
+    variant === "outlined" &&
+      "bg-m3-surface-container-lowest outline-1 outline-m3-outline-variant hover:outline-m3-outline/80 disabled:hover:outline-m3-outline-variant",
+    variant === "filled" &&
+      "bg-m3-surface-container hover:bg-m3-surface-container-high focus:outline-1",
 
-    (variant === "outlined" || variant === "plain") &&
-      "hover:bg-m3-surface-container-low focus-visible:bg-m3-surface-container-low",
+    color === "primary" && "focus-visible:outline-m3-primary",
+    color === "secondary" && "focus-visible:outline-m3-secondary",
+    color === "tertiary" && "focus-visible:outline-m3-tertiary",
+    color === "error" && "focus-visible:outline-m3-error",
 
-    "h-9 px-3",
+    size === "xs" && "px-2.5 py-1.5 text-xs",
+    size === "sm" && "px-3 py-1.5 text-sm",
+    size === "md" && "px-3.5 py-2 text-base",
+    size === "lg" && "px-4 py-2.5 text-lg",
+    size === "xl" && "px-5 py-4 text-xl",
+
+    radius == "xs" && "rounded-xs",
+    radius == "sm" && "rounded-sm",
+    radius == "md" && "rounded-lg",
+    radius == "lg" && "rounded-2xl",
+    radius == "xl" && "rounded-4xl",
+
+    "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
+
     className,
   )}
   {...restProps}

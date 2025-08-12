@@ -41,4 +41,5 @@ export * from "./tooltip";
 
 export * from "./base";
 export * from "./merge-props";
+export * from "./stores.svelte";
 export * from "./utils";

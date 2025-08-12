@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { colors, shapes } from "$lib/base";
+  import { COLORS, SHAPES } from "$lib/base";
   import { ToggleButton, ToggleGroup } from "$lib/toggle";
   import { toTitleCase } from "$lib/utils";
 
@@ -8,8 +8,8 @@
 
 <div>{value}</div>
 
-{#each shapes as shape (shape)}
-  {#each colors as color (color)}
+{#each SHAPES as shape (shape)}
+  {#each COLORS as color (color)}
     {@const title = toTitleCase(shape) + " " + toTitleCase(color)}
     <div>
       <ToggleGroup bind:value>

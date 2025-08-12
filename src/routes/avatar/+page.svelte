@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Avatar } from "$lib/avatar";
-  import { colors, variants } from "$lib/base";
+  import { COLORS, VARIANTS } from "$lib/base";
   import { UserRound } from "@lucide/svelte";
 </script>
 
 <div class="flex flex-wrap gap-4 rounded-lg border p-4">
-  {#each variants as variant (variant)}
-    {#each colors as color (color)}
+  {#each VARIANTS as variant (variant)}
+    {#each COLORS as color (color)}
       <Avatar
         {variant}
         {color}
@@ -17,16 +17,16 @@
 </div>
 
 <div class="flex flex-wrap gap-4 rounded-lg border p-4">
-  {#each variants as variant (variant)}
-    {#each colors as color (color)}
+  {#each VARIANTS as variant (variant)}
+    {#each COLORS as color (color)}
       <Avatar {variant} {color} shape="circle">FB</Avatar>
     {/each}
   {/each}
 </div>
 
 <div class="flex flex-wrap gap-4 rounded-lg border p-4">
-  {#each variants as variant (variant)}
-    {#each colors as color (color)}
+  {#each VARIANTS as variant (variant)}
+    {#each COLORS as color (color)}
       <Avatar {variant} {color} shape="square"><UserRound /></Avatar>
     {/each}
   {/each}

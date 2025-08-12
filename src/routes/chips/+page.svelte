@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { colors, shapes, variants } from "$lib/base";
+  import { COLORS, SHAPES, VARIANTS } from "$lib/base";
   import { Chip } from "$lib/chip";
 </script>
 
 <div class="flex flex-wrap gap-4">
-  {#each shapes as shape (shape)}
-    {#each variants as variant (variant)}
-      {#each colors as color (color)}
+  {#each SHAPES as shape (shape)}
+    {#each VARIANTS as variant (variant)}
+      {#each COLORS as color (color)}
         <div>
           <Chip
             {variant}
