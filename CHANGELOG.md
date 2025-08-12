@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.21
+
+### Patch Changes
+
+- f6c747d: Make Input and Textarea follow new Mantine patterns
+
 ## 0.0.20
 
 ### Patch Changes
