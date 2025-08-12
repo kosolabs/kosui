@@ -1,14 +1,8 @@
 <script module lang="ts">
-  import type { HTMLInputAttributes } from "svelte/elements";
-  import { type Variants } from "../base";
-  import { Input } from "../input";
-  import type { ClassName, ElementRef } from "../utils";
+  import { Input, type InputProps } from "$lib";
   import { getAutocompleteContext } from "./autocomplete-context.svelte";
 
-  export type AutocompleteInputProps = {} & ElementRef &
-    ClassName &
-    Variants &
-    Omit<HTMLInputAttributes, "autocomplete">;
+  export type AutocompleteInputProps = InputProps;
 </script>
 
 <script lang="ts">

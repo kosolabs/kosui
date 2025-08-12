@@ -4,6 +4,7 @@ layer(base);
 @import "tailwindcss";
 
 @config '../tailwind.config.ts';
+/* @plugin "@tailwindcss/forms"; */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,

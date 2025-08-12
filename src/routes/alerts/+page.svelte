@@ -1,12 +1,12 @@
 <script lang="ts">
   import { Alert } from "$lib/alert";
-  import { colors, shapes, variants } from "$lib/base";
+  import { COLORS, SHAPES, VARIANTS } from "$lib/base";
 </script>
 
 <div class="flex flex-col gap-4">
-  {#each shapes as shape (shape)}
-    {#each variants as variant (variant)}
-      {#each colors as color (color)}
+  {#each SHAPES as shape (shape)}
+    {#each VARIANTS as variant (variant)}
+      {#each COLORS as color (color)}
         <div>
           <Alert {variant} {color} {shape}>
             This is an alert with (variant, color, shape): ({variant}, {color}, {shape})

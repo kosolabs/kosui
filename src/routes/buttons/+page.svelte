@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { colors, shapes, variants } from "$lib/base";
+  import { COLORS, SHAPES, VARIANTS } from "$lib/base";
   import { Button } from "$lib/button";
   import { toTitleCase } from "$lib/utils";
   import { Link2 } from "@lucide/svelte";
@@ -12,9 +12,9 @@
 {/if}
 
 <div class="flex flex-col gap-4">
-  {#each shapes as shape (shape)}
-    {#each variants as variant (variant)}
-      {#each colors as color (color)}
+  {#each SHAPES as shape (shape)}
+    {#each VARIANTS as variant (variant)}
+      {#each COLORS as color (color)}
         {@const title =
           toTitleCase(variant) +
           " " +

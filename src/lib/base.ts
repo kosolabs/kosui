@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-export const variants = [
+export const VARIANTS = [
   "elevated",
   "filled",
   "tonal",
@@ -8,33 +8,44 @@ export const variants = [
   "plain",
   "text",
 ] as const;
+export type Variant = (typeof VARIANTS)[number];
+export type VariantProp = { variant?: Variant };
 
-export const colors = [
+export const COLORS = [
   "primary",
   "secondary",
   "tertiary",
   "error",
   "inherit",
 ] as const;
+export type Color = (typeof COLORS)[number];
+export type ColorProp = { color?: Color };
 
-export const shapes = ["square", "rounded", "circle"] as const;
+export const SHAPES = ["square", "rounded", "circle"] as const;
+export type Shape = (typeof SHAPES)[number];
+export type ShapeProp = { shape?: Shape };
 
-export const underlines = ["always", "hover", "none"] as const;
+export const SIZES = ["xs", "sm", "md", "lg", "xl", "inherit"] as const;
+export type Size = (typeof SIZES)[number];
+export type SizeProp = { size?: Size };
 
-export type Variant = { variant?: (typeof variants)[number] };
-export type Color = { color?: (typeof colors)[number] };
-export type Shape = { shape?: (typeof shapes)[number] };
-export type Underline = { underline?: (typeof underlines)[number] };
+export const RADII = ["xs", "sm", "md", "lg", "xl", "inherit"] as const;
+export type Radius = (typeof RADII)[number];
+export type RadiusProp = { radius?: Radius };
 
-export type Variants = Variant &
-  Color &
-  Shape &
-  Underline & {
+export const UNDERLINES = ["always", "hover", "none"] as const;
+export type Underline = (typeof UNDERLINES)[number];
+export type UnderlineProp = { underline?: Underline };
+
+export type Variants = VariantProp &
+  ColorProp &
+  ShapeProp &
+  UnderlineProp & {
     hover?: boolean;
     focus?: boolean;
   };
 
-const hoverBaseClasses = ({ variant, color }: Variant & Color) =>
+const hoverBaseClasses = ({ variant, color }: VariantProp & ColorProp) =>
   twMerge(
     "disabled:text-m3-on-surface/38 disabled:bg-m3-on-surface/12 disabled:cursor-not-allowed",
 
@@ -75,7 +86,7 @@ const hoverBaseClasses = ({ variant, color }: Variant & Color) =>
       "hover:bg-m3-error/15",
   );
 
-const focusBaseClasses = ({ variant, color }: Variant & Color) =>
+const focusBaseClasses = ({ variant, color }: VariantProp & ColorProp) =>
   twMerge(
     "disabled:text-m3-on-surface/38 disabled:bg-m3-on-surface/12 disabled:cursor-not-allowed",
 
