@@ -28,7 +28,8 @@ jobs:
     steps:
       - name: Checkout code repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - uses: ./.github/actions/setup-pnpm
+      - name: Setup pnpm and node
+        uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
         uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba #v1.5.3
         with:

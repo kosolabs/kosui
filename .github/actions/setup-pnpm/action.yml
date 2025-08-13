@@ -13,6 +13,6 @@ runs:
         node-version-file: .nvmrc
         cache: "pnpm"
         cache-dependency-path: pnpm-lock.yaml
-    - name: Install Dependencies
+    - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
