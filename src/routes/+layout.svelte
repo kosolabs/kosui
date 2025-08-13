@@ -20,6 +20,7 @@
     "/markdown",
     "/menus",
     "/progress-indicators",
+    "/switch",
     "/shortcuts",
     "/skeleton",
     "/textarea",

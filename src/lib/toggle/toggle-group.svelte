@@ -36,6 +36,13 @@
   );
 </script>
 
-<div bind:this={el} use:ref class={twMerge("flex", className)} {...restProps}>
+<div
+  bind:this={el}
+  use:ref
+  role="listbox"
+  aria-orientation="horizontal"
+  class={twMerge("flex", className)}
+  {...restProps}
+>
   {@render children()}
 </div>

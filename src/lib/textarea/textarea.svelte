@@ -53,6 +53,8 @@
 <textarea
   bind:value
   class={twMerge(
+    "px-3 py-2 disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
+
     variant === "outlined" &&
       "bg-m3-surface-container-lowest outline-1 outline-m3-outline-variant hover:outline-m3-outline/80 disabled:hover:outline-m3-outline-variant",
     variant === "filled" &&
@@ -75,9 +77,6 @@
     radius == "lg" && "rounded-2xl",
     radius == "xl" && "rounded-4xl",
 
-    "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
-
-    "px-3 py-2",
     className,
   )}
   {...restProps}
