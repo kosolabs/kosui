@@ -22,6 +22,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write # Required for OIDC
     needs: build
     environment:
       name: kosuinpm
