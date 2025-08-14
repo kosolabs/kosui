@@ -1,6 +1,6 @@
 {
   "name": "kosui",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "type": "module",
   "license": "MIT",
   "packageManager": "pnpm@10.14.0",
