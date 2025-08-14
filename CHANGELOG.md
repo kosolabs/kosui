@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.22
+
+### Patch Changes
+
+- 0153fe9: Use OIDC auth with npmjs
+
 ## 0.0.21
 
 ### Patch Changes
