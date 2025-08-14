@@ -3,6 +3,10 @@
   "version": "0.0.23",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kosolabs/kosui.git"
+  },
   "packageManager": "pnpm@10.14.0",
   "scripts": {
     "dev": "vite dev",
