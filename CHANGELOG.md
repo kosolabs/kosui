@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.25
+
+### Patch Changes
+
+- de2531d: Add a Switch component
+
 ## 0.0.24
 
 ### Patch Changes
