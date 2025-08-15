@@ -35,6 +35,7 @@ export * from "./portal";
 export * from "./progress";
 export * from "./shortcut";
 export * from "./skeleton";
+export * from "./switch";
 export * from "./textarea";
 export * from "./toggle";
 export * from "./tooltip";

@@ -12,12 +12,15 @@
 <div class="rounded-md border">
   <div class="flex max-md:flex-col">
     {#if component}
-      <div class="flex flex-1 items-center justify-center p-4">
+      <div
+        class="flex flex-1 items-center justify-center p-4"
+        data-testid="component-preview"
+      >
         {@render component()}
       </div>
     {/if}
     {#if controls}
-      <div class="p-4 max-md:border-t md:border-l">
+      <div class="flex flex-col gap-2 p-4 max-md:border-t md:border-l">
         {@render controls()}
       </div>
     {/if}

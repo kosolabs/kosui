@@ -1,20 +1,18 @@
 <script lang="ts" module>
+  import type { HTMLInputAttributes } from "svelte/elements";
+  import { twMerge } from "tailwind-merge";
   import {
     COLORS,
-    noop,
     RADII,
     SIZES,
-    type ClassName,
     type Color,
     type ColorProp,
-    type ElementRef,
     type Radius,
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "$lib";
-  import type { HTMLInputAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
+  } from "../base";
+  import { noop, type ClassName, type ElementRef } from "../utils";
 
   export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
   export type InputVariant = (typeof INPUT_VARIANTS)[number];
@@ -60,6 +58,8 @@
   bind:this={el}
   use:ref
   class={twMerge(
+    "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
+
     variant === "outlined" &&
       "bg-m3-surface-container-lowest outline-1 outline-m3-outline-variant hover:outline-m3-outline/80 disabled:hover:outline-m3-outline-variant",
     variant === "filled" &&
@@ -81,8 +81,6 @@
     radius == "md" && "rounded-lg",
     radius == "lg" && "rounded-2xl",
     radius == "xl" && "rounded-4xl",
-
-    "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
 
     className,
   )}
