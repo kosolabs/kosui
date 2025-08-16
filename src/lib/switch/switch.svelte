@@ -52,44 +52,42 @@
   role="switch"
   aria-checked={checked}
   class={twMerge(
-    "group relative inline-flex cursor-pointer transition-all focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+    "group relative inline-flex cursor-pointer bg-m3-surface-container-highest transition-all focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
 
-    color === "primary" && "focus-visible:outline-m3-primary",
-    color === "secondary" && "focus-visible:outline-m3-secondary",
-    color === "tertiary" && "focus-visible:outline-m3-tertiary",
-    color === "error" && "focus-visible:outline-m3-error",
+    color === "primary" &&
+      "focus-visible:outline-m3-primary aria-checked:bg-m3-primary",
+    color === "secondary" &&
+      "focus-visible:outline-m3-secondary aria-checked:bg-m3-secondary",
+    color === "tertiary" &&
+      "focus-visible:outline-m3-tertiary aria-checked:bg-m3-tertiary",
+    color === "error" &&
+      "focus-visible:outline-m3-error aria-checked:bg-m3-error",
+
+    size === "xs" && "h-4 w-8",
+    size === "sm" && "h-5 w-10",
+    size === "md" && "h-6 w-12",
+    size === "lg" && "h-7 w-14",
+    size === "xl" && "h-8 w-16",
+
+    radius === "xs" && "rounded-xs",
+    radius === "sm" && "rounded-sm",
+    radius === "md" && "rounded-lg",
+    radius === "lg" && "rounded-2xl",
+    radius === "xl" && "rounded-4xl",
 
     className,
   )}
   {...mergeProps(restProps, { onclick: () => (checked = !checked) })}
 >
-  <!-- Track -->
-  <div
-    class={twMerge(
-      "bg-m3-surface-container-highest transition-colors",
-
-      color === "primary" && "group-aria-checked:bg-m3-primary",
-      color === "secondary" && "group-aria-checked:bg-m3-secondary",
-      color === "tertiary" && "group-aria-checked:bg-m3-tertiary",
-      color === "error" && "group-aria-checked:bg-m3-error",
-
-      size === "xs" && "h-4 w-8",
-      size === "sm" && "h-5 w-10",
-      size === "md" && "h-6 w-12",
-      size === "lg" && "h-7 w-14",
-      size === "xl" && "h-8 w-16",
-
-      radius === "xs" && "rounded-xs",
-      radius === "sm" && "rounded-sm",
-      radius === "md" && "rounded-lg",
-      radius === "lg" && "rounded-2xl",
-      radius === "xl" && "rounded-4xl",
-    )}
-  ></div>
   <!-- Thumb -->
   <div
     class={twMerge(
-      "absolute top-0.5 left-0.5 bg-m3-on-primary shadow-sm transition-all",
+      "absolute top-0.5 left-0.5 shadow-sm transition-all",
+
+      color === "primary" && "bg-m3-on-primary",
+      color === "secondary" && "bg-m3-on-secondary",
+      color === "tertiary" && "bg-m3-on-tertiary",
+      color === "error" && "bg-m3-on-error",
 
       size === "xs" && "size-3 group-aria-checked:translate-x-4",
       size === "sm" && "size-4 group-aria-checked:translate-x-5",

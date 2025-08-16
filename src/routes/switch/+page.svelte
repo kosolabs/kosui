@@ -5,11 +5,13 @@
     type SwitchRadius,
     type SwitchSize,
   } from "$lib";
-  import ColorSetting from "$ui/color-setting.svelte";
-  import DisabledSetting from "$ui/disabled-setting.svelte";
-  import RadiusSetting from "$ui/radius-setting.svelte";
-  import SizeSetting from "$ui/size-setting.svelte";
-  import Usage from "$ui/usage.svelte";
+  import {
+    ColorSetting,
+    DisabledSetting,
+    RadiusSetting,
+    SizeSetting,
+    Usage,
+  } from "$ui";
 
   let color: SwitchColor = $state("primary");
   let size: SwitchSize = $state("sm");

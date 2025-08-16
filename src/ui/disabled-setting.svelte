@@ -2,12 +2,12 @@
   import { Switch } from "$lib";
   import Setting from "./setting.svelte";
 
-  type DisabledSettingProps = {
+  export type DisabledSettingProps = {
     disabled: boolean;
   };
   let { disabled = $bindable() }: DisabledSettingProps = $props();
 </script>
 
 <Setting label="Disabled">
-  <Switch id="Disabled" bind:checked={disabled} />
+  <Switch id="Disabled" aria-label="disabled" bind:checked={disabled} />
 </Setting>

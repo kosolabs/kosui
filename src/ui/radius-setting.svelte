@@ -2,7 +2,7 @@
   import { RADII, ToggleButton, ToggleGroup, type Radius } from "$lib";
   import Setting from "./setting.svelte";
 
-  type RadiusSettingProps = {
+  export type RadiusSettingProps = {
     radius: Radius;
     radiiOptions?: readonly Radius[];
   };
