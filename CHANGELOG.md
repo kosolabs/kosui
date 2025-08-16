@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.26
+
+### Patch Changes
+
+- 5adc14a: Iterate on the Switch component and simplify tests
+
 ## 0.0.25
 
 ### Patch Changes
