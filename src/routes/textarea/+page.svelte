@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    Input,
     Textarea,
     TEXTAREA_VARIANTS,
     ToggleButton,
@@ -21,11 +22,37 @@
   let size: TextareaSize = $state("sm");
   let radius: TextareaRadius = $state("md");
   let disabled: boolean = $state(false);
+  let placeholder: string = $state("Input component");
+
+  const code = $derived.by(() => {
+    const props = [];
+
+    if (variant !== "filled") props.push(`variant="${variant}"`);
+    if (color !== "primary") props.push(`color="${color}"`);
+    if (size !== "sm") props.push(`size="${size}"`);
+    if (radius !== "md") props.push(`radius="${radius}"`);
+    if (disabled) props.push("disabled");
+    if (placeholder !== "") props.push(`placeholder="${placeholder}"`);
+
+    const propsString = props.length > 0 ? `\n  ${props.join("\n  ")}` : "";
+
+    return [
+      `<${"script"} lang="ts">`,
+      `  import { Textarea } from "kosui";`,
+      ``,
+      `  let checked: boolean = $state(false);`,
+      `</${"script"}>`,
+      ``,
+      `<Textarea `,
+      `  bind:value${propsString}`,
+      `/>`,
+    ].join("\n");
+  });
 </script>
 
 <h1 class="text-4xl">Textarea</h1>
 
-<Usage>
+<Usage {code}>
   {#snippet component()}
     <Textarea
       {variant}
@@ -33,7 +60,7 @@
       {size}
       {radius}
       {disabled}
-      placeholder="Input component"
+      placeholder="Textarea component"
     />
   {/snippet}
   {#snippet controls()}
@@ -48,8 +75,8 @@
     <SizeSetting bind:size />
     <RadiusSetting bind:radius />
     <DisabledSetting bind:disabled />
-  {/snippet}
-  {#snippet code()}
-    Code
+    <Setting label="Placeholder">
+      <Input variant="filled" bind:value={placeholder} />
+    </Setting>
   {/snippet}
 </Usage>

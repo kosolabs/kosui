@@ -1,12 +1,21 @@
 <script lang="ts">
+  import hljs from "highlight.js";
+  import svelte from "highlight.svelte";
   import type { Snippet } from "svelte";
+  import "./theme.css";
+
+  hljs.registerLanguage("svelte", svelte);
 
   export type UsageProps = {
     component?: Snippet<[]>;
     controls?: Snippet<[]>;
-    code?: Snippet<[]>;
+    code?: string;
   };
-  let { component, controls, code }: UsageProps = $props();
+  let { component, controls, code: source }: UsageProps = $props();
+
+  let code = $derived(
+    hljs.highlight(source ?? "", { language: "svelte" }).value,
+  );
 </script>
 
 <div class="rounded-md border">
@@ -25,9 +34,8 @@
       </div>
     {/if}
   </div>
-  {#if code}
-    <div class="rounded-b-md border-t bg-m3-surface-container p-4">
-      {@render code()}
-    </div>
-  {/if}
+  <div class="rounded-b-md border-t bg-m3-surface-container p-4 text-sm">
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+    <pre>{@html code}</pre>
+  </div>
 </div>
