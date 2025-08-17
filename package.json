@@ -19,7 +19,7 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
     "test:unit": "vitest",
-    "test": "pnpm test:unit -- --run && pnpm test:e2e",
+    "test": "pnpm run \"/^(build|check|lint|test:unit)$/\"",
     "test:e2e": "playwright test",
     "ci:publish": "changeset publish"
   },
