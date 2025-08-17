@@ -1,6 +1,4 @@
 <script lang="ts" module>
-  import type { HTMLButtonAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
   import {
     COLORS,
     RADII,
@@ -11,9 +9,13 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "../base";
-  import { mergeProps } from "../merge-props";
-  import type { ClassName } from "../utils";
+  } from "$lib/base";
+  import { mergeProps } from "$lib/merge-props";
+  import { SwitchThumb, type SwitchThumbProps } from "$lib/switch";
+  import type { ClassName } from "$lib/utils";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
+  import { twMerge } from "tailwind-merge";
 
   export const SWITCH_COLORS = COLORS;
   export type SwitchColor = Color;
@@ -29,16 +31,18 @@
 
   export type SwitchProps = {
     checked?: boolean;
+    thumb?: Snippet<[SwitchThumbProps]>;
   } & ClassName &
+    SwitchColorProp &
     SwitchSizeProp &
     SwitchRadiusProp &
-    SwitchColorProp &
     HTMLButtonAttributes;
 </script>
 
 <script lang="ts">
   let {
     checked = $bindable(false),
+    thumb = defaultThumb,
     class: className,
     color = "primary",
     size = "sm",
@@ -46,6 +50,10 @@
     ...restProps
   }: SwitchProps = $props();
 </script>
+
+{#snippet defaultThumb(props: SwitchThumbProps)}
+  <SwitchThumb {...props} />
+{/snippet}
 
 <button
   type="button"
@@ -79,27 +87,5 @@
   )}
   {...mergeProps(restProps, { onclick: () => (checked = !checked) })}
 >
-  <!-- Thumb -->
-  <div
-    class={twMerge(
-      "absolute top-0.5 left-0.5 shadow-sm transition-all",
-
-      color === "primary" && "bg-m3-on-primary",
-      color === "secondary" && "bg-m3-on-secondary",
-      color === "tertiary" && "bg-m3-on-tertiary",
-      color === "error" && "bg-m3-on-error",
-
-      size === "xs" && "size-3 group-aria-checked:translate-x-4",
-      size === "sm" && "size-4 group-aria-checked:translate-x-5",
-      size === "md" && "size-5 group-aria-checked:translate-x-6",
-      size === "lg" && "size-6 group-aria-checked:translate-x-7",
-      size === "xl" && "size-7 group-aria-checked:translate-x-8",
-
-      radius === "xs" && "rounded-xs",
-      radius === "sm" && "rounded-sm",
-      radius === "md" && "rounded-lg",
-      radius === "lg" && "rounded-2xl",
-      radius === "xl" && "rounded-4xl",
-    )}
-  ></div>
+  {@render thumb({ color, size, radius })}
 </button>
