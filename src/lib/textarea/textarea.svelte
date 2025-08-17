@@ -9,7 +9,7 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "$lib";
+  } from "$lib/base";
   import { type ClassName } from "$lib/utils";
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

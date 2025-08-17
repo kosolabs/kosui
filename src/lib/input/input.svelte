@@ -1,6 +1,4 @@
 <script lang="ts" module>
-  import type { HTMLInputAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
   import {
     COLORS,
     RADII,
@@ -11,8 +9,10 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "../base";
-  import { noop, type ClassName, type ElementRef } from "../utils";
+  } from "$lib/base";
+  import { noop, type ClassName, type ElementRef } from "$lib/utils";
+  import type { HTMLInputAttributes } from "svelte/elements";
+  import { twMerge } from "tailwind-merge";
 
   export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
   export type InputVariant = (typeof INPUT_VARIANTS)[number];
