@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Switch } from "$lib";
-  import Setting from "./setting.svelte";
+  import { Switch } from "$lib/index.js";
+  import { Setting } from "$ui/index.js";
 
   export type DisabledSettingProps = {
     disabled: boolean;

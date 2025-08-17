@@ -1,1 +1,4 @@
-export { default as CircularProgress } from "./circular-progress.svelte";
+export {
+  default as CircularProgress,
+  type CircularProgressProps,
+} from "./circular-progress.svelte";

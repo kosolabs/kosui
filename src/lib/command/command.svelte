@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import type { Snippet } from "svelte";
+  import { CommandContext, setCommandContext } from "$lib/command/index.js";
+  import { type ClassName } from "$lib/utils.js";
+  import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import type { ClassName } from "../utils";
-  import { CommandContext, setCommandContext } from "./command-context.svelte";
 
   export type CommandProps = {
     children: Snippet<[]>;

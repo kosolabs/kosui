@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CircularProgress } from "$lib/progress";
+  import { CircularProgress } from "$lib/index.js";
   import { CircleCheck, CircleFadingArrowUp } from "@lucide/svelte";
 </script>
 

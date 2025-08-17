@@ -1,7 +1,7 @@
 <script module lang="ts">
-  import type { Snippet } from "svelte";
-  import type { ElementRef } from "../utils";
-  import { MenuContext, setMenuContext } from "./menu-context.svelte";
+  import { MenuContext, setMenuContext } from "$lib/menu/index.js";
+  import { type ElementRef } from "$lib/utils.js";
+  import { type Snippet } from "svelte";
 
   export type MenuProps = {
     open?: boolean;

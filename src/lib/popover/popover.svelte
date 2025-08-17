@@ -1,18 +1,18 @@
 <script lang="ts" module>
-  import * as floatingUi from "@floating-ui/dom";
-  import { type Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
-  import { scale } from "svelte/transition";
-  import { twMerge, type ClassNameValue } from "tailwind-merge";
-  import { events } from "..";
-  import { mergeProps } from "../merge-props";
-  import { Shortcut } from "../shortcut";
+  import { events } from "$lib/index.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { Shortcut } from "$lib/shortcut/index.js";
   import {
     noop,
     type ClassName,
     type ElementRef,
     type ToggleEventWithTarget,
-  } from "../utils";
+  } from "$lib/utils.js";
+  import * as floatingUi from "@floating-ui/dom";
+  import { type Snippet } from "svelte";
+  import { type HTMLAttributes } from "svelte/elements";
+  import { scale } from "svelte/transition";
+  import { twMerge, type ClassNameValue } from "tailwind-merge";
 
   export type PopoverProps = {
     arrow?: boolean;

@@ -9,13 +9,15 @@
     type TextareaRadius,
     type TextareaSize,
     type TextareaVariant,
-  } from "$lib";
-  import ColorSetting from "$ui/color-setting.svelte";
-  import DisabledSetting from "$ui/disabled-setting.svelte";
-  import RadiusSetting from "$ui/radius-setting.svelte";
-  import Setting from "$ui/setting.svelte";
-  import SizeSetting from "$ui/size-setting.svelte";
-  import Usage from "$ui/usage.svelte";
+  } from "$lib/index.js";
+  import {
+    ColorSetting,
+    DisabledSetting,
+    RadiusSetting,
+    Setting,
+    SizeSetting,
+    Usage,
+  } from "$ui/index.js";
 
   let variant: TextareaVariant = $state("filled");
   let color: TextareaColor = $state("primary");

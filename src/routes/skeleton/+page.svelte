@@ -1,5 +1,5 @@
 <script>
-  import { Skeleton } from "$lib/skeleton";
+  import { Skeleton } from "$lib/index.js";
 </script>
 
 <Skeleton class="h-9 p-4" />

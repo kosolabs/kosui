@@ -1,12 +1,12 @@
 <script lang="ts" module>
+  import { type Variants } from "$lib/base.js";
+  import { getMenuContext } from "$lib/menu/index.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { Shortcut } from "$lib/shortcut/index.js";
+  import { type ClassName } from "$lib/utils.js";
   import { type Snippet } from "svelte";
-  import type { HTMLButtonAttributes } from "svelte/elements";
+  import { type HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import type { Variants } from "../base";
-  import { mergeProps } from "../merge-props";
-  import { Shortcut } from "../shortcut";
-  import { type ClassName } from "../utils";
-  import { getMenuContext } from "./menu-context.svelte";
 
   export type MenuTriggerProps = {
     children?: Snippet;

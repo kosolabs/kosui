@@ -4,7 +4,7 @@
     AutocompleteContent,
     AutocompleteInput,
     AutocompleteItem,
-  } from "$lib/autocomplete";
+  } from "$lib/index.js";
 
   type Item = {
     title: string;

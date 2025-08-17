@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import { Input } from "../input";
-  import DialogButton from "./dialog-button.svelte";
-  import Dialog from "./dialog.svelte";
   import {
     DialoguerContext,
     setDialoguerContext,
-    type ButtonProps,
-  } from "./dialoguer-context.svelte";
+    type DialoguerButtonProps,
+  } from "$lib/dialog/index.js";
+  import { Input } from "$lib/input/index.js";
+  import { type Snippet } from "svelte";
+  import DialogButton from "./dialog-button.svelte";
+  import Dialog from "./dialog.svelte";
 
   const dialog = setDialoguerContext(new DialoguerContext());
 
@@ -18,7 +18,7 @@
 
   let value: string = $derived(dialog.inputProps?.value ?? "");
 
-  function getValue(button: ButtonProps<unknown>) {
+  function getValue(button: DialoguerButtonProps<unknown>) {
     if (dialog.inputProps === undefined) {
       return button.value;
     }

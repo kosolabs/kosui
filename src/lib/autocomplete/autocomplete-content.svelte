@@ -1,10 +1,10 @@
 <script module lang="ts">
-  import type { Snippet } from "svelte";
+  import { getAutocompleteContext } from "$lib/autocomplete/index.js";
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { Popover, type PopoverProps } from "$lib/popover/index.js";
+  import { type ClassName } from "$lib/utils.js";
+  import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { Popover, type PopoverProps } from "../popover";
-  import type { ClassName } from "../utils";
-  import { getAutocompleteContext } from "./autocomplete-context.svelte";
 
   export type AutocompleteProps = {
     children: Snippet;

@@ -1,9 +1,9 @@
-import type { Icon } from "@lucide/svelte";
+import { type Variants } from "$lib/base.js";
+import { type InputProps } from "$lib/input/index.js";
+import { type Icon } from "@lucide/svelte";
 import { getContext, setContext, type Snippet } from "svelte";
-import type { Variants } from "../base";
-import type { InputProps } from "../input";
 
-export type ButtonProps<T> = {
+export type DialoguerButtonProps<T> = {
   text: string;
   value: T;
   default?: boolean;
@@ -14,7 +14,7 @@ type ShowDialogProps<T> = {
   title?: string;
   inputProps?: InputProps;
   message: Snippet<[]> | string;
-  buttons: ButtonProps<T>[];
+  buttons: DialoguerButtonProps<T>[];
 };
 
 type NoticeDialogProps = {
@@ -46,7 +46,7 @@ export class DialoguerContext {
   icon: typeof Icon | undefined = $state();
   title: string | undefined = $state();
   inputProps: InputProps | undefined = $state();
-  buttons: ButtonProps<unknown>[] = $state.raw([]);
+  buttons: DialoguerButtonProps<unknown>[] = $state.raw([]);
   resolve: (value: unknown) => void = $state(() => {});
   open: boolean = $state(false);
 

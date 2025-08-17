@@ -1,6 +1,5 @@
 <script>
-  import { Badge } from "$lib/badge";
-  import { Button } from "$lib/button";
+  import { Badge, Button } from "$lib/index.js";
   import { Menu } from "@lucide/svelte";
 </script>
 

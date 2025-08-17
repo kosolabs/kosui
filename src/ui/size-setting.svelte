@@ -1,6 +1,11 @@
 <script lang="ts">
-  import { SWITCH_SIZES, ToggleButton, ToggleGroup, type Size } from "$lib";
-  import Setting from "./setting.svelte";
+  import {
+    SWITCH_SIZES,
+    ToggleButton,
+    ToggleGroup,
+    type Size,
+  } from "$lib/index.js";
+  import { Setting } from "$ui/index.js";
 
   export type SizeSettingProps = {
     size: Size;

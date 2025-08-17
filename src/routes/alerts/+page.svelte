@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Alert } from "$lib/alert";
-  import { COLORS, SHAPES, VARIANTS } from "$lib/base";
+  import { Alert, COLORS, SHAPES, VARIANTS } from "$lib/index.js";
 </script>
 
 <div class="flex flex-col gap-4">

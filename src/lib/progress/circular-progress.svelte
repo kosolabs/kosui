@@ -1,9 +1,6 @@
-<script lang="ts">
-  import type { Snippet } from "svelte";
-
-  const DASH_ARRAY = 2 * 3.1415926535 * 10;
-
-  type Props = {
+<script lang="ts" module>
+  import { type Snippet } from "svelte";
+  export type CircularProgressProps = {
     children?: Snippet;
     progress?: number;
     size?: string | number;
@@ -12,6 +9,10 @@
     color?: string;
     class?: string;
   };
+</script>
+
+<script lang="ts">
+  const DASH_ARRAY = 2 * 3.1415926535 * 10;
 
   const {
     children,
@@ -21,7 +22,7 @@
     textColor = "currentColor",
     color = "currentColor",
     class: className,
-  }: Props = $props();
+  }: CircularProgressProps = $props();
 </script>
 
 <svg

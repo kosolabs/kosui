@@ -1,7 +1,7 @@
 <script lang="ts">
   import hljs from "highlight.js";
   import svelte from "highlight.svelte";
-  import type { Snippet } from "svelte";
+  import { type Snippet } from "svelte";
   import "./theme.css";
 
   hljs.registerLanguage("svelte", svelte);

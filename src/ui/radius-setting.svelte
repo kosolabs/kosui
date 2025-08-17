@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { RADII, ToggleButton, ToggleGroup, type Radius } from "$lib";
-  import Setting from "./setting.svelte";
+  import { RADII, ToggleButton, ToggleGroup, type Radius } from "$lib/index.js";
+  import { Setting } from "$ui/index.js";
 
   export type RadiusSettingProps = {
     radius: Radius;

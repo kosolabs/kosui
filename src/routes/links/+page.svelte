@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { COLORS, UNDERLINES } from "$lib/base";
-  import { Link } from "$lib/link";
-  import { toTitleCase } from "$lib/utils";
+  import { COLORS, Link, toTitleCase, UNDERLINES } from "$lib/index.js";
 </script>
 
 <div class="flex flex-col gap-4">

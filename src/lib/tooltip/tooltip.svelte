@@ -1,8 +1,8 @@
 <script lang="ts" module>
+  import { Popover, type PopoverProps } from "$lib/popover/index.js";
+  import { type ClassName } from "$lib/utils.js";
   import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import { Popover, type PopoverProps } from "../popover";
-  import type { ClassName } from "../utils";
 
   export type TooltipTriggerProps = {
     ref: (el: HTMLElement) => void;

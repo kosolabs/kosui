@@ -1,11 +1,11 @@
 <script module lang="ts">
+  import { getAutocompleteContext } from "$lib/autocomplete/index.js";
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { type ClassName, type ElementRef } from "$lib/utils.js";
   import { type Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { mergeProps } from "../merge-props";
-  import { type ClassName, type ElementRef } from "../utils";
-  import { getAutocompleteContext } from "./autocomplete-context.svelte";
 
   export type AutocompleteItemProps = {
     onSelect?: (el: HTMLElement) => void;

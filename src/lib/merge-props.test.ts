@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { mergeProps } from "./merge-props";
+import { mergeProps } from "./merge-props.js";
 
 class CustomEvent extends Event {
   defaultPrevented = false;

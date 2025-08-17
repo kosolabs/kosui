@@ -1,8 +1,8 @@
 <script lang="ts" module>
-  import { Button, type ButtonProps } from "../button";
-  import { mergeProps } from "../merge-props";
-  import { Shortcut } from "../shortcut";
-  import { getMenuContext } from "./menu-context.svelte";
+  import { Button, type ButtonProps } from "$lib/button/index.js";
+  import { getMenuContext } from "$lib/menu/index.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { Shortcut } from "$lib/shortcut/index.js";
 
   export type MenuTriggerButtonProps = {} & ButtonProps;
 </script>

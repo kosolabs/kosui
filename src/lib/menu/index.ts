@@ -1,4 +1,7 @@
-export { Divider as MenuDivider, Header as MenuHeader } from "../common";
+export {
+  Divider as MenuDivider,
+  Header as MenuHeader,
+} from "$lib/common/index.js";
 export {
   default as MenuActions,
   type MenuActionsProps,
@@ -7,6 +10,11 @@ export {
   default as MenuContent,
   type MenuContentProps,
 } from "./menu-content.svelte";
+export {
+  getMenuContext,
+  MenuContext,
+  setMenuContext,
+} from "./menu-context.svelte.js";
 export { default as MenuItem, type MenuItemProps } from "./menu-item.svelte";
 export {
   default as MenuTriggerButton,

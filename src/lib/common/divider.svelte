@@ -1,7 +1,7 @@
 <script module lang="ts">
-  import type { HTMLAttributes } from "svelte/elements";
+  import { type ClassName } from "$lib/utils.js";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import type { ClassName } from "../utils";
 
   export type DividerProps = {} & ClassName & HTMLAttributes<HTMLHRElement>;
 </script>

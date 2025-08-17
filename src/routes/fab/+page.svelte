@@ -1,5 +1,5 @@
 <script>
-  import { Fab } from "$lib/fab";
+  import { Fab } from "$lib/index.js";
   import { Plus } from "@lucide/svelte";
 </script>
 

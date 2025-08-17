@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Tokens } from "marked";
-  import type { MarkdownComponentProps } from ".";
+  import { type MarkdownComponentProps } from "$lib/markdown/index.js";
+  import { type Tokens } from "marked";
 
   let { token }: MarkdownComponentProps<Tokens.HTML | Tokens.Tag> = $props();
 </script>

@@ -1,9 +1,9 @@
 <script module lang="ts">
-  import type { Icon } from "@lucide/svelte";
-  import type { Snippet } from "svelte";
+  import { mergeComponentProps } from "$lib/merge-props.js";
+  import { Modal, type ModalProps } from "$lib/modal/index.js";
+  import { type Icon } from "@lucide/svelte";
+  import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import { mergeComponentProps } from "../merge-props";
-  import { Modal, type ModalProps } from "../modal";
 
   export type DialogProps<T> = {
     ref?: HTMLDialogElement;

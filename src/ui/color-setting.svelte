@@ -1,6 +1,11 @@
 <script lang="ts">
-  import { SWITCH_COLORS, ToggleButton, ToggleGroup, type Color } from "$lib";
-  import Setting from "./setting.svelte";
+  import {
+    SWITCH_COLORS,
+    ToggleButton,
+    ToggleGroup,
+    type Color,
+  } from "$lib/index.js";
+  import { Setting } from "$ui/index.js";
 
   export type ColorSettingProps = {
     color: Color;

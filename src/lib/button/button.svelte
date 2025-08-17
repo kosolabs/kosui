@@ -1,12 +1,12 @@
 <script lang="ts" module>
-  import type { Icon } from "@lucide/svelte";
-  import type { Snippet } from "svelte";
-  import type { HTMLButtonAttributes } from "svelte/elements";
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { Tooltip, type TooltipTriggerProps } from "$lib/tooltip/index.js";
+  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import { type Icon } from "@lucide/svelte";
+  import { type Snippet } from "svelte";
+  import { type HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { mergeProps } from "../merge-props";
-  import { Tooltip, type TooltipTriggerProps } from "../tooltip";
-  import { noop, type ClassName, type ElementRef } from "../utils";
 
   export type ButtonProps = {
     icon?: typeof Icon;

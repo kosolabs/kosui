@@ -1,14 +1,14 @@
 <script>
-  import { baseClasses } from "$lib/base";
-  import { Button } from "$lib/button";
   import {
+    baseClasses,
+    Button,
     Menu,
     MenuContent,
     MenuDivider,
     MenuHeader,
     MenuItem,
     MenuTrigger,
-  } from "$lib/menu";
+  } from "$lib/index.js";
   import { twMerge } from "tailwind-merge";
 
   let open = $state(false);

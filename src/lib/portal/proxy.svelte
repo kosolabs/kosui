@@ -1,8 +1,11 @@
-<script lang="ts">
-  import type { Snippet } from "svelte";
+<script lang="ts" module>
+  import { type Snippet } from "svelte";
 
-  type Props = { children?: Snippet };
-  const { children }: Props = $props();
+  export type ProxyProps = { children?: Snippet };
+</script>
+
+<script lang="ts">
+  const { children }: ProxyProps = $props();
 </script>
 
 {#if children}

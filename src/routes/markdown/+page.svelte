@@ -1,13 +1,13 @@
 <script lang="ts">
   import {
     Markdown,
+    MarkdownBlockquote,
+    MarkdownCode,
     MarkdownHeading,
+    MarkdownList,
     MarkdownTable,
     MarkdownTableCell,
-  } from "$lib/markdown";
-  import MarkdownBlockquote from "$lib/markdown/markdown-blockquote.svelte";
-  import MarkdownCode from "$lib/markdown/markdown-code.svelte";
-  import MarkdownList from "$lib/markdown/markdown-list.svelte";
+  } from "$lib/index.js";
   import { twMerge } from "tailwind-merge";
 
   let value = `

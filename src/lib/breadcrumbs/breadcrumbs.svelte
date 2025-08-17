@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { Link, type LinkProps } from "$lib";
-  import type { Snippet } from "svelte";
+  import { Link, type LinkProps } from "$lib/link/index.js";
+  import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 
   type Crumb = {
