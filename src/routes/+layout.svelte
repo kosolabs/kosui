@@ -1,6 +1,7 @@
 <script module lang="ts">
   import { page } from "$app/state";
   import { Link, toTitleCase } from "$lib/index.js";
+  import { KosuiLogo } from "$ui";
   import { type Snippet } from "svelte";
   import "../app.css";
 
@@ -39,7 +40,7 @@
 
 <div class="flex h-screen flex-col">
   <div class="flex items-center gap-2 border-b p-4">
-    <img src="/kosui.svg" alt="Kosui" class="size-9" />
+    <KosuiLogo />
     <h1 class="text-3xl font-thin">
       {toTitleCase(page.url.pathname.split("/")[1]) || "Home"}
     </h1>
