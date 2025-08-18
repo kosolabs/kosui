@@ -11,7 +11,7 @@ multi-ecosystem-groups:
 updates:
   - package-ecosystem: "npm"
     directories:
-      - "/frontend"
+      - "/"
     patterns:
       - "*"
     multi-ecosystem-group: "all-deps"
