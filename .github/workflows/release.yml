@@ -6,6 +6,9 @@ on:
       - main
 env:
   CI: true
+concurrency:
+  group: workflow-${{ github.workflow }}
+  cancel-in-progress: false
 permissions:
   contents: read
 
