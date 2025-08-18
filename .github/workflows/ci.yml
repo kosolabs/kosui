@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
-      - run: pnpm run "/^(build|check|lint|test:unit)$/"
+      - run: pnpm test
 
   e2e:
     runs-on: ubuntu-24.04
