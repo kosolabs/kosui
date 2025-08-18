@@ -1,5 +1,12 @@
 # kosui
 
+## 0.0.27
+
+### Patch Changes
+
+- bcb7a3d: Convert to a Svelte library (bundler -> NodeNext)
+- ace9cf6: Extract thumb into SwitchThumb component to allow customization
+
 ## 0.0.26
 
 ### Patch Changes
