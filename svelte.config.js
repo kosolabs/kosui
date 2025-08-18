@@ -12,6 +12,9 @@ const config = {
       fallback: "index.html",
       precompress: true,
     }),
+    paths: {
+      base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
+    },
     alias: {
       $ui: "src/ui/index.ts",
       "$ui/*": "src/ui/*",
