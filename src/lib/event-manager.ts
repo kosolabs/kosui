@@ -1,7 +1,7 @@
+import { runEventHandlers } from "$lib/merge-props.js";
+import { noop } from "$lib/utils.js";
 import type { EventHandler } from "svelte/elements";
 import { on } from "svelte/events";
-import { runEventHandlers } from "./merge-props";
-import { noop } from "./utils";
 
 type EventType = keyof DocumentEventMap;
 

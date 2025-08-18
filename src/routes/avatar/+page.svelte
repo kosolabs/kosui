@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { Avatar } from "$lib/avatar";
-  import { COLORS, VARIANTS } from "$lib/base";
+  import { Avatar, COLORS, VARIANTS } from "$lib/index.js";
   import { UserRound } from "@lucide/svelte";
 </script>
 

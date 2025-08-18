@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import { type Config } from "tailwindcss";
 
 function m3(prop: string): string {
   return `rgb(from var(--md-sys-color-${prop}) r g b / <alpha-value>)`;

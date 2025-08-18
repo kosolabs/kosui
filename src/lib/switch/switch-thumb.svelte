@@ -3,9 +3,9 @@
     SwitchColorProp,
     SwitchRadiusProp,
     SwitchSizeProp,
-  } from "$lib/switch";
-  import type { ClassName } from "$lib/utils";
-  import type { HTMLAttributes } from "svelte/elements";
+  } from "$lib/switch/index.js";
+  import { type ClassName } from "$lib/utils.js";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type SwitchThumbProps = {} & ClassName &

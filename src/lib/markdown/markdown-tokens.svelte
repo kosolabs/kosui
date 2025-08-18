@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { MarkedToken } from "marked";
-  import { MarkdownToken } from ".";
+  import { MarkdownToken } from "$lib/markdown/index.js";
+  import { type MarkedToken } from "marked";
 
   export type MarkdownTokensProps = {
     tokens: MarkedToken[];

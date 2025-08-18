@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
+  import { Box, type BoxProps } from "$lib/box/index.js";
+  import { type Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
-  import { Box, type BoxProps } from "../box";
 
   export type SkeletonProps = { children?: Snippet } & BoxProps;
   let {

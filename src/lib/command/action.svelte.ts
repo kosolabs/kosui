@@ -1,6 +1,6 @@
+import { type Shortcut } from "$lib/shortcut/index.js";
 import { CircleSlash, type Icon } from "@lucide/svelte";
 import { untrack } from "svelte";
-import type { Shortcut } from "../shortcut";
 
 type ActionProps = {
   id: string;

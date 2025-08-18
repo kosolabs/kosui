@@ -1,8 +1,10 @@
 <script lang="ts">
-  import type { Tokens } from "marked";
-  import type { HTMLTableAttributes } from "svelte/elements";
-  import type { MarkdownComponentProps } from ".";
-  import { getMarkdownContext } from ".";
+  import {
+    getMarkdownContext,
+    type MarkdownComponentProps,
+  } from "$lib/markdown/index.js";
+  import { type Tokens } from "marked";
+  import { type HTMLTableAttributes } from "svelte/elements";
 
   let {
     token,

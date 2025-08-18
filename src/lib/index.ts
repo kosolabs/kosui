@@ -1,4 +1,4 @@
-import { EventManager } from "./event-manager";
+import { EventManager } from "./event-manager.js";
 
 /**
  * A global event manager. Register event listeners with the `on` method.
@@ -13,34 +13,34 @@ import { EventManager } from "./event-manager";
  */
 export const events = new EventManager();
 
-export * from "./alert";
-export * from "./autocomplete";
-export * from "./avatar";
-export * from "./badge";
-export * from "./box";
-export * from "./breadcrumbs";
-export * from "./button";
-export * from "./chip";
-export * from "./command";
-export * from "./common";
-export * from "./dialog";
-export * from "./fab";
-export * from "./input";
-export * from "./link";
-export * from "./markdown";
-export * from "./menu";
-export * from "./modal";
-export * from "./popover";
-export * from "./portal";
-export * from "./progress";
-export * from "./shortcut";
-export * from "./skeleton";
-export * from "./switch";
-export * from "./textarea";
-export * from "./toggle";
-export * from "./tooltip";
+export * from "./alert/index.js";
+export * from "./autocomplete/index.js";
+export * from "./avatar/index.js";
+export * from "./badge/index.js";
+export * from "./box/index.js";
+export * from "./breadcrumbs/index.js";
+export * from "./button/index.js";
+export * from "./chip/index.js";
+export * from "./command/index.js";
+export * from "./common/index.js";
+export * from "./dialog/index.js";
+export * from "./fab/index.js";
+export * from "./input/index.js";
+export * from "./link/index.js";
+export * from "./markdown/index.js";
+export * from "./menu/index.js";
+export * from "./modal/index.js";
+export * from "./popover/index.js";
+export * from "./portal/index.js";
+export * from "./progress/index.js";
+export * from "./shortcut/index.js";
+export * from "./skeleton/index.js";
+export * from "./switch/index.js";
+export * from "./textarea/index.js";
+export * from "./toggle/index.js";
+export * from "./tooltip/index.js";
 
-export * from "./base";
-export * from "./merge-props";
+export * from "./base.js";
+export * from "./merge-props.js";
 export * from "./stores.svelte";
-export * from "./utils";
+export * from "./utils.js";

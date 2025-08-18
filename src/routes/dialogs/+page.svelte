@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { Button } from "$lib/button";
-  import { Dialog, DialogButton, getDialoguerContext } from "$lib/dialog";
+  import {
+    Button,
+    Dialog,
+    DialogButton,
+    getDialoguerContext,
+  } from "$lib/index.js";
   import { CalendarDays, TriangleAlert } from "@lucide/svelte";
 
   const dialog = getDialoguerContext();

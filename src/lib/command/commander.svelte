@@ -1,6 +1,4 @@
 <script module lang="ts">
-  import { match } from "$lib/utils";
-  import { Check, ChevronRight } from "@lucide/svelte";
   import {
     Action,
     Command,
@@ -9,10 +7,12 @@
     CommandItem,
     CommandSearch,
     Registry,
-  } from ".";
-  import { events } from "..";
-  import { Modal } from "../modal";
-  import { Shortcut, ShortcutBadge } from "../shortcut";
+  } from "$lib/command/index.js";
+  import { events } from "$lib/index.js";
+  import { Modal } from "$lib/modal/index.js";
+  import { Shortcut, ShortcutBadge } from "$lib/shortcut/index.js";
+  import { match } from "$lib/utils.js";
+  import { Check, ChevronRight } from "@lucide/svelte";
 
   export type CommanderProps = {
     open?: boolean;

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import { type Snippet } from "svelte";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { noop, type ClassName, type ElementRef } from "../utils";
 
   export type BoxProps = {
     centered?: boolean;

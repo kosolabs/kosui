@@ -1,5 +1,5 @@
 <script>
-  import { Breadcrumbs } from "$lib";
+  import { Breadcrumbs } from "$lib/index.js";
 </script>
 
 <Breadcrumbs

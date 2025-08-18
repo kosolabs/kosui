@@ -1,7 +1,11 @@
 <script lang="ts">
-  import { COLORS, SHAPES } from "$lib/base";
-  import { ToggleButton, ToggleGroup } from "$lib/toggle";
-  import { toTitleCase } from "$lib/utils";
+  import {
+    COLORS,
+    SHAPES,
+    ToggleButton,
+    ToggleGroup,
+    toTitleCase,
+  } from "$lib/index.js";
 
   let value: "1" | "2" | "3" | undefined = $state("2");
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Tokens } from "marked";
-  import type { HTMLImgAttributes } from "svelte/elements";
-  import type { MarkdownComponentProps } from ".";
+  import { type MarkdownComponentProps } from "$lib/markdown/index.js";
+  import { type Tokens } from "marked";
+  import { type HTMLImgAttributes } from "svelte/elements";
 
   let {
     token,

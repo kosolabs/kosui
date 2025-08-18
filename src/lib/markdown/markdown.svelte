@@ -1,12 +1,5 @@
 <script module lang="ts">
   import {
-    Lexer,
-    type MarkedOptions,
-    type MarkedToken,
-    type Tokens,
-  } from "marked";
-  import type { Snippet } from "svelte";
-  import {
     MarkdownBlockquote,
     MarkdownBr,
     MarkdownCode,
@@ -32,7 +25,14 @@
     MarkdownTokens,
     setMarkdownContext,
     type MarkdownComponentProps,
-  } from ".";
+  } from "$lib/markdown/index.js";
+  import {
+    Lexer,
+    type MarkedOptions,
+    type MarkedToken,
+    type Tokens,
+  } from "marked";
+  import { type Snippet } from "svelte";
 
   export type MarkdownProps = {
     value: string;

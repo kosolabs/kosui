@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Shortcut, ShortcutBadge } from "$lib/shortcut";
+  import { Shortcut, ShortcutBadge } from "$lib/index.js";
 </script>
 
 <div class="flex flex-wrap items-center gap-4">

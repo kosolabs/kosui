@@ -1,6 +1,6 @@
 <script lang="ts" module>
+  import { Box, type BoxProps } from "$lib/box/index.js";
   import { twMerge } from "tailwind-merge";
-  import { Box, type BoxProps } from "../box";
 
   export type AvatarProps = {
     src?: string;

@@ -1,13 +1,12 @@
 <script module lang="ts">
-  import { Input, type InputProps } from "$lib";
-  import { getAutocompleteContext } from "./autocomplete-context.svelte";
+  import { getAutocompleteContext } from "$lib/autocomplete/index.js";
+  import { Input, type InputProps } from "$lib/input/index.js";
+  import { mergeComponentProps } from "$lib/merge-props.js";
 
   export type AutocompleteInputProps = InputProps;
 </script>
 
 <script lang="ts">
-  import { mergeComponentProps } from "../merge-props";
-
   let {
     el = $bindable(),
     value = $bindable(""),

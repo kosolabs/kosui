@@ -1,9 +1,12 @@
-<script lang="ts">
+<script lang="ts" module>
+  import { Proxy } from "$lib/portal/index.js";
   import { mount, unmount, type Snippet } from "svelte";
-  import Proxy from "./proxy.svelte";
 
-  type Props = { children?: Snippet; target?: HTMLElement };
-  const { children, target = document.body }: Props = $props();
+  export type PortalProps = { children?: Snippet; target?: HTMLElement };
+</script>
+
+<script lang="ts">
+  const { children, target = document.body }: PortalProps = $props();
 
   $effect(() => {
     const instance = mount(Proxy, { target, props: { children } });

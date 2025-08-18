@@ -1,6 +1,6 @@
 <script module lang="ts">
   import { page } from "$app/state";
-  import { Link, toTitleCase } from "$lib";
+  import { Link, toTitleCase } from "$lib/index.js";
   import { type Snippet } from "svelte";
   import "../app.css";
 

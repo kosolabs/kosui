@@ -1,5 +1,5 @@
+import { ItemContext } from "$lib/common/index.js";
 import { getContext, setContext } from "svelte";
-import { ItemContext } from "../common";
 
 export class CommandContext extends ItemContext {}
 

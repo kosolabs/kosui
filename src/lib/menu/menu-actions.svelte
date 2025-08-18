@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { type Action } from "$lib/command/index.js";
+  import { MenuDivider, MenuHeader, MenuItem } from "$lib/menu/index.js";
   import { Check } from "@lucide/svelte";
-  import { MenuDivider, MenuHeader, MenuItem } from ".";
-  import type { Action } from "../command";
 
   export type MenuActionsProps = {
     actions: Action[];

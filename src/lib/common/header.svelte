@@ -1,9 +1,9 @@
 <script module lang="ts">
-  import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { type ClassName } from "$lib/utils.js";
+  import { type Snippet } from "svelte";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import type { ClassName } from "../utils";
 
   export type HeaderProps = {
     children: Snippet;

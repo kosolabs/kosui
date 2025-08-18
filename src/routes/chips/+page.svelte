@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { COLORS, SHAPES, VARIANTS } from "$lib/base";
-  import { Chip } from "$lib/chip";
+  import { Chip, COLORS, SHAPES, VARIANTS } from "$lib/index.js";
 </script>
 
 <div class="flex flex-wrap gap-4">

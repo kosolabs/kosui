@@ -1,11 +1,11 @@
 <script module lang="ts">
+  import { baseClasses, type Variants } from "$lib/base.js";
+  import { getCommandContext } from "$lib/command/index.js";
+  import { mergeProps } from "$lib/merge-props.js";
+  import { type ClassName, type ElementRef } from "$lib/utils.js";
   import { type Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import { type HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
-  import { baseClasses, type Variants } from "../base";
-  import { mergeProps } from "../merge-props";
-  import { type ClassName, type ElementRef } from "../utils";
-  import { getCommandContext } from "./command-context.svelte";
 
   export type CommandItemProps = {
     onSelect?: (el: HTMLElement) => void;

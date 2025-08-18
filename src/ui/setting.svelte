@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import Label from "./label.svelte";
+  import { Label } from "$ui/index.js";
+  import { type Snippet } from "svelte";
 
   export type SettingProps = {
     label: string;

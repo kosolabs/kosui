@@ -4,14 +4,14 @@
     type SwitchColor,
     type SwitchRadius,
     type SwitchSize,
-  } from "$lib";
+  } from "$lib/index.js";
   import {
     ColorSetting,
     DisabledSetting,
     RadiusSetting,
     SizeSetting,
     Usage,
-  } from "$ui";
+  } from "$ui/index.js";
 
   let color: SwitchColor = $state("primary");
   let size: SwitchSize = $state("sm");
