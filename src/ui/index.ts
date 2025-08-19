@@ -17,4 +17,8 @@ export {
   default as SizeSetting,
   type SizeSettingProps,
 } from "./size-setting.svelte";
+export {
+  default as SwitchSetting,
+  type SwitchSettingProps,
+} from "./switch-setting.svelte";
 export { default as Usage, type UsageProps } from "./usage.svelte";

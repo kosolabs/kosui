@@ -10,16 +10,14 @@ test.describe("Switch Component Tests", () => {
   test("switch should have correct role and ARIA attributes", async ({
     page,
   }) => {
-    const componentPane = page.getByTestId("component-preview");
-    const switchElement = componentPane.getByRole("switch");
+    const switchElement = page.getByTestId("preview").getByRole("switch");
     await expect(switchElement).toBeVisible();
     await expect(switchElement).toHaveAttribute("role", "switch");
     await expect(switchElement).toHaveAttribute("type", "button");
   });
 
   test("switch should toggle when clicked", async ({ page }) => {
-    const componentPane = page.getByTestId("component-preview");
-    const switchElement = componentPane.getByRole("switch");
+    const switchElement = page.getByTestId("preview").getByRole("switch");
 
     // Initially unchecked
     await expect(switchElement).not.toBeChecked();
@@ -34,8 +32,7 @@ test.describe("Switch Component Tests", () => {
   });
 
   test("switch should toggle when space key is pressed", async ({ page }) => {
-    const componentPane = page.getByTestId("component-preview");
-    const switchElement = componentPane.getByRole("switch");
+    const switchElement = page.getByTestId("preview").getByRole("switch");
 
     // Focus the switch
     await switchElement.focus();
@@ -54,8 +51,7 @@ test.describe("Switch Component Tests", () => {
   });
 
   test("switch component supports disabled attribute", async ({ page }) => {
-    const componentPane = page.getByTestId("component-preview");
-    const switchElement = componentPane.getByRole("switch");
+    const switchElement = page.getByTestId("preview").getByRole("switch");
     const disabledControlSwitch = page.getByRole("switch", {
       name: "disabled",
     });

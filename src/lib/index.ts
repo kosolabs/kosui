@@ -35,6 +35,7 @@ export * from "./portal/index.js";
 export * from "./progress/index.js";
 export * from "./shortcut/index.js";
 export * from "./skeleton/index.js";
+export * from "./slider/index.js";
 export * from "./switch/index.js";
 export * from "./textarea/index.js";
 export * from "./toggle/index.js";

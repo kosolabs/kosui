@@ -101,6 +101,8 @@ export class Shortcut {
 
   static ARROW_UP = new Shortcut({ key: "ArrowUp" });
   static ARROW_DOWN = new Shortcut({ key: "ArrowDown" });
+  static ARROW_LEFT = new Shortcut({ key: "ArrowLeft" });
+  static ARROW_RIGHT = new Shortcut({ key: "ArrowRight" });
   static END = new Shortcut({ key: "End" });
   static ENTER = new Shortcut({ key: "Enter" });
   static ESCAPE = new Shortcut({ key: "Escape" });
