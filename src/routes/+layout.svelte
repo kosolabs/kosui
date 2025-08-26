@@ -21,6 +21,7 @@
     "/markdown",
     "/menus",
     "/progress-indicators",
+    "/slider",
     "/switch",
     "/shortcuts",
     "/skeleton",

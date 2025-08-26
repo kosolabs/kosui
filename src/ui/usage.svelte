@@ -23,7 +23,7 @@
     {#if component}
       <div
         class="flex flex-1 items-center justify-center p-4"
-        data-testid="component-preview"
+        data-testid="preview"
       >
         {@render component()}
       </div>
