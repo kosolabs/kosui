@@ -196,16 +196,16 @@
     class={twMerge(
       "absolute top-1/2 h-full -translate-y-1/2 transition-all",
 
-      color === "primary" && "bg-m3-primary",
-      color === "secondary" && "bg-m3-secondary",
-      color === "tertiary" && "bg-m3-tertiary",
-      color === "error" && "bg-m3-error",
+      ctx.color === "primary" && "bg-m3-primary",
+      ctx.color === "secondary" && "bg-m3-secondary",
+      ctx.color === "tertiary" && "bg-m3-tertiary",
+      ctx.color === "error" && "bg-m3-error",
 
-      radius === "xs" && "rounded-xs",
-      radius === "sm" && "rounded-sm",
-      radius === "md" && "rounded-lg",
-      radius === "lg" && "rounded-2xl",
-      radius === "xl" && "rounded-4xl",
+      ctx.radius === "xs" && "rounded-xs",
+      ctx.radius === "sm" && "rounded-sm",
+      ctx.radius === "md" && "rounded-lg",
+      ctx.radius === "lg" && "rounded-2xl",
+      ctx.radius === "xl" && "rounded-4xl",
     )}
     style={ctx.inverted
       ? `right: 0; width: ${100 - ctx.position}%`

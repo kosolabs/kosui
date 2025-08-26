@@ -237,8 +237,12 @@ export class SliderContext {
       event.stopImmediatePropagation();
     } else if (Shortcut.HOME.matches(event)) {
       this.value = this.min;
+      event.preventDefault();
+      event.stopImmediatePropagation();
     } else if (Shortcut.END.matches(event)) {
       this.value = this.max;
+      event.preventDefault();
+      event.stopImmediatePropagation();
     }
 
     this.onChangeEnd?.(this.value);
