@@ -11,6 +11,10 @@ async function getSliderValue(page: Page): Promise<number> {
   return parseInt(sliderValue!);
 }
 
+function expectSliderValue(page: Page): ReturnType<typeof expect.poll<number>> {
+  return expect.poll(async () => await getSliderValue(page));
+}
+
 async function getSliderBoundingBox(
   slider: Locator,
 ): Promise<{ x: number; y: number; width: number; height: number }> {
@@ -89,8 +93,7 @@ test.describe("Slider Component Tests", () => {
 
     // Test arrow right increases value
     await page.keyboard.press("ArrowRight");
-    const currentValue = await getSliderValue(page);
-    expect(currentValue).toBeGreaterThan(initialValue);
+    await expectSliderValue(page).toBeGreaterThan(initialValue);
   });
 
   test("slider should increase on ArrowUp", async ({ page }) => {
@@ -102,8 +105,7 @@ test.describe("Slider Component Tests", () => {
 
     // Test arrow up increases value
     await page.keyboard.press("ArrowUp");
-    const currentValue = await getSliderValue(page);
-    expect(currentValue).toBeGreaterThan(initialValue);
+    await expectSliderValue(page).toBeGreaterThan(initialValue);
   });
 
   test("slider should decrease on ArrowLeft", async ({ page }) => {
@@ -115,8 +117,7 @@ test.describe("Slider Component Tests", () => {
 
     // Test arrow left decreases value
     await page.keyboard.press("ArrowLeft");
-    const currentValue = await getSliderValue(page);
-    expect(currentValue).toBeLessThan(initialValue);
+    await expectSliderValue(page).toBeLessThan(initialValue);
   });
 
   test("slider should decrease on ArrowDown", async ({ page }) => {
@@ -128,8 +129,7 @@ test.describe("Slider Component Tests", () => {
 
     // Test arrow down decreases value
     await page.keyboard.press("ArrowDown");
-    const currentValue = await getSliderValue(page);
-    expect(currentValue).toBeLessThan(initialValue);
+    await expectSliderValue(page).toBeLessThan(initialValue);
   });
 
   test("slider have minimum value on Home", async ({ page }) => {
@@ -150,8 +150,7 @@ test.describe("Slider Component Tests", () => {
 
     // Test end sets value to max
     await page.keyboard.press("End");
-    const currentValue = await getSliderValue(page);
-    expect(currentValue).toBe(100);
+    await expectSliderValue(page).toBe(100);
   });
 
   test("slider should support drag interaction", async ({ page }) => {
@@ -174,12 +173,12 @@ test.describe("Slider Component Tests", () => {
     );
 
     // Check value changed during drag
-    expect(await getSliderValue(page)).toBeGreaterThan(50);
+    await expectSliderValue(page).toBeGreaterThan(50);
 
     await page.mouse.up();
 
     // Value should remain after releasing
-    expect(await getSliderValue(page)).toBeGreaterThan(50);
+    await expectSliderValue(page).toBeGreaterThan(50);
   });
 
   test("disabled slider should not respond to interactions", async ({
@@ -232,6 +231,28 @@ test.describe("Slider Component Tests", () => {
     await expect(
       page.getByTestId("preview").getByText("50%"),
     ).not.toBeVisible();
+  });
+
+  test("slider should change value when a mark is clicked", async ({
+    page,
+  }) => {
+    // Click the 20% mark
+    await page
+      .getByTestId("preview")
+      .getByRole("button", { name: "20%" })
+      .click();
+
+    // Value should be 20
+    await expectSliderValue(page).toBe(20);
+
+    // Click the 50% mark
+    await page
+      .getByTestId("preview")
+      .getByRole("button", { name: "50%" })
+      .click();
+
+    // Value should be 50
+    await expectSliderValue(page).toBe(50);
   });
 
   test("label should appear when thumb is hovered", async ({ page }) => {
@@ -329,11 +350,9 @@ test.describe("Slider Component Tests", () => {
       sliderBox.y + sliderBox.height / 2,
     );
 
-    const newValue = await getSliderValue(page);
-
     // In inverted mode, clicking on the left should result in a higher value
     // than clicking on the right in normal mode
-    expect(newValue).toBeGreaterThan(initialValue);
+    await expectSliderValue(page).toBeGreaterThan(initialValue);
   });
 
   test("restrict to marks should snap to mark values", async ({ page }) => {
@@ -354,10 +373,8 @@ test.describe("Slider Component Tests", () => {
       sliderBox.y + sliderBox.height / 2,
     );
 
-    const finalValue = await getSliderValue(page);
-
     // Should snap to either 20 or 50 (the defined marks)
-    expect(finalValue).toBe(50);
+    await expectSliderValue(page).toBe(50);
   });
 
   test("slider should be focusable and have visible focus state", async ({

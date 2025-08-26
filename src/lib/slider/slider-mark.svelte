@@ -29,5 +29,5 @@
   {...restProps}
 >
   {@render ctx.markDotRenderer({})}
-  {@render ctx.markLabelRenderer({ label })}
+  {@render ctx.markLabelRenderer({ value, label })}
 </div>
