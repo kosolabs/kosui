@@ -10,8 +10,8 @@
     type Size,
     type SizeProp,
   } from "$lib/base.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type HTMLTextareaAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { HTMLTextareaAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export const TEXTAREA_VARIANTS = ["outlined", "filled", "inherit"] as const;

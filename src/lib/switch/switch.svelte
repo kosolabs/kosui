@@ -12,9 +12,9 @@
   } from "$lib/base.js";
   import { mergeProps } from "$lib/merge-props.js";
   import { SwitchThumb, type SwitchThumbProps } from "$lib/switch/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLButtonAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export const SWITCH_COLORS = COLORS;

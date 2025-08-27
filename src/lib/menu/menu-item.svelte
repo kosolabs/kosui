@@ -3,9 +3,9 @@
   import { getMenuContext } from "$lib/menu/index.js";
   import { mergeProps } from "$lib/merge-props.js";
   import { Shortcut } from "$lib/shortcut/index.js";
-  import { type ClassName, type ElementRef } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLButtonAttributes } from "svelte/elements";
+  import type { ClassName, ElementRef } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type MenuItemProps = {

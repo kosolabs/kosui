@@ -1,4 +1,4 @@
-import { type PlaywrightTestConfig } from "@playwright/test";
+import type { PlaywrightTestConfig } from "@playwright/test";
 
 const port = 5175;
 

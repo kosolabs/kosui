@@ -2,7 +2,7 @@
   import { page } from "$app/state";
   import { Link, toTitleCase } from "$lib/index.js";
   import { KosuiLogo } from "$ui";
-  import { type Snippet } from "svelte";
+  import type { Snippet } from "svelte";
   import "../app.css";
 
   const paths = [

@@ -2,9 +2,9 @@
   import { events } from "$lib/index.js";
   import { mergeProps } from "$lib/merge-props.js";
   import { Shortcut } from "$lib/shortcut/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLDialogAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
+  import type { HTMLDialogAttributes } from "svelte/elements";
   import { scale } from "svelte/transition";
   import { twMerge } from "tailwind-merge";
 

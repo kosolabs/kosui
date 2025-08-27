@@ -11,7 +11,7 @@
     type SizeProp,
   } from "$lib/base.js";
   import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
-  import { type HTMLInputAttributes } from "svelte/elements";
+  import type { HTMLInputAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
