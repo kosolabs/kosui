@@ -60,7 +60,7 @@ jobs:
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b #v2.1.1
         if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
         id: releaser-token
         with:
