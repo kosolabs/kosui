@@ -52,6 +52,7 @@ jobs:
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
+        id: changesets
         uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba #v1.5.3
         with:
           commit: "chore: update versions"
@@ -59,3 +60,8 @@ jobs:
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge for Changesets PRs
+        if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
+        run: gh pr --repo "${{ github.repository }}" merge --auto --merge "${{ steps.changesets.outputs.pullRequestNumber }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
