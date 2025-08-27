@@ -62,6 +62,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable auto-merge for Changesets PRs
         if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
-        run: gh pr --repo "${{ github.repository }}" merge --auto --squash "${{ steps.changesets.outputs.pullRequestNumber }}"
+        run: |
+          gh pr --repo "${{ github.repository }}" ready "${{ steps.changesets.outputs.pullRequestNumber }}" --undo
+          gh pr --repo "${{ github.repository }}" ready "${{ steps.changesets.outputs.pullRequestNumber }}"
+          gh pr --repo "${{ github.repository }}" merge --auto --squash "${{ steps.changesets.outputs.pullRequestNumber }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
