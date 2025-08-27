@@ -60,11 +60,14 @@ jobs:
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b #v2.1.1
+        if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
+        id: releaser-token
+        with:
+          app-id: ${{ secrets.RELEASER_APP_ID }}
+          private-key: ${{ secrets.RELEASER_PRIVATE_KEY }}
       - name: Enable auto-merge for Changesets PRs
         if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
-        run: |
-          gh pr --repo "${{ github.repository }}" ready "${{ steps.changesets.outputs.pullRequestNumber }}" --undo
-          gh pr --repo "${{ github.repository }}" ready "${{ steps.changesets.outputs.pullRequestNumber }}"
-          gh pr --repo "${{ github.repository }}" merge --auto --squash "${{ steps.changesets.outputs.pullRequestNumber }}"
+        run: gh pr --repo "${{ github.repository }}" merge --auto --squash "${{ steps.changesets.outputs.pullRequestNumber }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.releaser-token.outputs.token }}
