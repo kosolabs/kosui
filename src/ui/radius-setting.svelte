@@ -1,19 +1,28 @@
 <script lang="ts">
-  import { RADII, ToggleButton, ToggleGroup, type Radius } from "$lib/index.js";
+  import { RADII, Slider, type Radius } from "$lib/index.js";
   import { Setting } from "$ui/index.js";
 
   export type RadiusSettingProps = {
     radius: Radius;
-    radiiOptions?: readonly Radius[];
+    radii?: readonly Radius[];
   };
-  let { radius = $bindable(), radiiOptions = RADII }: RadiusSettingProps =
+  let { radius = $bindable(), radii: radii = RADII }: RadiusSettingProps =
     $props();
+
+  const v2r: Record<number, Radius> = Object.fromEntries(
+    radii.map((radius, index) => [index, radius]),
+  );
+  const r2v: Record<Radius, number> = Object.fromEntries(
+    radii.map((radius, index) => [radius, index]),
+  ) as Record<Radius, number>;
 </script>
 
 <Setting label="radius">
-  <ToggleGroup id="radius" aria-label="radius" bind:value={radius}>
-    {#each radiiOptions as radius (radius)}
-      <ToggleButton value={radius}>{radius}</ToggleButton>
-    {/each}
-  </ToggleGroup>
+  <Slider
+    bind:value={() => r2v[radius], (v) => (radius = v2r[v])}
+    max={6}
+    marks={radii.map((label, value) => ({ label, value }))}
+    label={(value) => v2r[value]}
+    restrictToMarks
+  />
 </Setting>
