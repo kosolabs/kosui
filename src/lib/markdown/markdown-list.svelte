@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { type MarkdownComponentProps } from "$lib/markdown/index.js";
-  import { type Tokens } from "marked";
-  import { type HTMLOlAttributes } from "svelte/elements";
+  import type { MarkdownComponentProps } from "$lib/markdown/index.js";
+  import type { Tokens } from "marked";
+  import type { HTMLOlAttributes } from "svelte/elements";
   import MarkdownTokens from "./markdown-tokens.svelte";
 
   let {

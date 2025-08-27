@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { type Snippet } from "svelte";
+  import type { Snippet } from "svelte";
   export type CircularProgressProps = {
     children?: Snippet;
     progress?: number;

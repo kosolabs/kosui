@@ -27,9 +27,9 @@
     type SliderMarkLabelProps,
     type SliderMarkProps,
   } from "$lib/slider/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export const SLIDER_COLORS = COLORS;

@@ -1,8 +1,8 @@
 <script module lang="ts">
   import { baseClasses, type Variants } from "$lib/base.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type HeaderProps = {

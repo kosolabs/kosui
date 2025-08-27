@@ -1,8 +1,8 @@
 <script lang="ts" module>
   import { mergeProps } from "$lib/merge-props.js";
   import { getSliderContext } from "$lib/slider/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { ClassName } from "$lib/utils.js";
+  import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type SliderHandleProps = {} & ClassName &

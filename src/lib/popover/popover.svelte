@@ -9,8 +9,8 @@
     type ToggleEventWithTarget,
   } from "$lib/utils.js";
   import * as floatingUi from "@floating-ui/dom";
-  import { type Snippet } from "svelte";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
   import { scale } from "svelte/transition";
   import { twMerge, type ClassNameValue } from "tailwind-merge";
 

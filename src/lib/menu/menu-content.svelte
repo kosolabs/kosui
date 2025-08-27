@@ -3,8 +3,8 @@
   import { getMenuContext } from "$lib/menu/index.js";
   import { mergeComponentProps } from "$lib/merge-props.js";
   import { Popover, type PopoverProps } from "$lib/popover/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 
   export type MenuContentProps = {

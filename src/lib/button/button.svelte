@@ -3,9 +3,9 @@
   import { mergeProps } from "$lib/merge-props.js";
   import { Tooltip, type TooltipTriggerProps } from "$lib/tooltip/index.js";
   import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
-  import { type Icon } from "@lucide/svelte";
-  import { type Snippet } from "svelte";
-  import { type HTMLButtonAttributes } from "svelte/elements";
+  import type { Icon } from "@lucide/svelte";
+  import type { Snippet } from "svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type ButtonProps = {

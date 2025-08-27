@@ -1,4 +1,4 @@
-import { type MarkedToken, type Tokens } from "marked";
+import type { MarkedToken, Tokens } from "marked";
 import { getContext, setContext, type Snippet } from "svelte";
 
 type Token = {

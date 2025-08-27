@@ -32,7 +32,7 @@
     type MarkedToken,
     type Tokens,
   } from "marked";
-  import { type Snippet } from "svelte";
+  import type { Snippet } from "svelte";
 
   export type MarkdownProps = {
     value: string;

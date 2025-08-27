@@ -1,6 +1,6 @@
-import { type Variants } from "$lib/base.js";
-import { type InputProps } from "$lib/input/index.js";
-import { type Icon } from "@lucide/svelte";
+import type { Variants } from "$lib/base.js";
+import type { InputProps } from "$lib/input/index.js";
+import type { Icon } from "@lucide/svelte";
 import { getContext, setContext, type Snippet } from "svelte";
 
 export type DialoguerButtonProps<T> = {

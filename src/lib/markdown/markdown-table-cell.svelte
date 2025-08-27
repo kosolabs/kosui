@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { type MarkdownComponentProps } from "$lib/markdown/index.js";
-  import { type MarkedToken, type Tokens } from "marked";
+  import type { MarkdownComponentProps } from "$lib/markdown/index.js";
+  import type { MarkedToken, Tokens } from "marked";
   import {
     type HTMLTdAttributes,
     type HTMLThAttributes,

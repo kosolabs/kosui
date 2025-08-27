@@ -1,8 +1,8 @@
 <script lang="ts">
   import { baseClasses, type Variants } from "$lib/base.js";
   import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { Snippet } from "svelte";
+  import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 
   export type BoxProps = {

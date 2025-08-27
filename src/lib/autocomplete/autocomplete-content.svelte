@@ -2,8 +2,8 @@
   import { getAutocompleteContext } from "$lib/autocomplete/index.js";
   import { baseClasses, type Variants } from "$lib/base.js";
   import { Popover, type PopoverProps } from "$lib/popover/index.js";
-  import { type ClassName } from "$lib/utils.js";
-  import { type Snippet } from "svelte";
+  import type { ClassName } from "$lib/utils.js";
+  import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 
   export type AutocompleteProps = {

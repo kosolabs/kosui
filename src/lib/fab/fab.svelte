@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, type ButtonProps } from "$lib/button/index.js";
-  import { type ElementRef } from "$lib/utils.js";
+  import type { ElementRef } from "$lib/utils.js";
   import { twMerge } from "tailwind-merge";
 
   export type FabProps = {} & ElementRef & ButtonProps;
