@@ -36,8 +36,9 @@
     ...restProps
   }: TooltipProps = $props();
 
-  const isTouchDevice =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  function isTouchDevice() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  }
 
   let timeout: number;
 
@@ -64,7 +65,7 @@
       }
     : {
         ref: (ref) => (anchorEl = ref),
-        onmouseenter: () => !isTouchDevice && show(),
+        onmouseenter: () => !isTouchDevice() && show(),
         onmouseleave: () => hide(),
         ontouchstart: () => show(delay),
         ontouchend: () => cancel(),
