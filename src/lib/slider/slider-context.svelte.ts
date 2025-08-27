@@ -41,9 +41,10 @@ export class SliderContext {
   markDotRenderer: Snippet<[SliderMarkDotProps]>;
   markLabelRenderer: Snippet<[SliderMarkLabelProps]>;
   sliderEl!: HTMLDivElement;
-  isHovered: boolean = $state(false);
-  isDragging: boolean = $state(false);
-  isFocused: boolean = $state(false);
+  hovered: boolean = $state(false);
+  clicked: boolean = $state(false);
+  dragging: boolean = $state(false);
+  focused: boolean = $state(false);
 
   constructor(
     getValue: () => number,
@@ -154,6 +155,10 @@ export class SliderContext {
     return this.getPositionFromValue(this.value);
   }
 
+  get animated(): boolean {
+    return !this.dragging || this.restrictToMarks;
+  }
+
   clamp = (val: number, minVal: number, maxVal: number): number => {
     return Math.min(Math.max(val, minVal), maxVal);
   };
@@ -189,7 +194,7 @@ export class SliderContext {
   pointerDown = (event: PointerEvent) => {
     if (this.disabled) return;
 
-    this.isDragging = true;
+    this.clicked = true;
     this.sliderEl.setPointerCapture(event.pointerId);
 
     this.value = this.getValueFromPosition(event.clientX);
@@ -199,8 +204,9 @@ export class SliderContext {
   };
 
   pointerMove = (event: PointerEvent) => {
-    if (this.disabled || !this.isDragging) return;
+    if (this.disabled || !this.clicked) return;
 
+    this.dragging = true;
     this.value = this.getValueFromPosition(event.clientX);
 
     event.preventDefault();
@@ -208,9 +214,10 @@ export class SliderContext {
   };
 
   pointerUp = (event: PointerEvent) => {
-    if (this.disabled || !this.isDragging) return;
+    if (this.disabled || !this.clicked) return;
 
-    this.isDragging = false;
+    this.dragging = false;
+    this.clicked = false;
     this.sliderEl.releasePointerCapture(event.pointerId);
     this.onChangeEnd?.(this.value);
 
@@ -249,11 +256,11 @@ export class SliderContext {
   };
 
   focus = () => {
-    this.isFocused = true;
+    this.focused = true;
   };
 
   blur = () => {
-    this.isFocused = false;
+    this.focused = false;
   };
 }
 
