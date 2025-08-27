@@ -1,4 +1,5 @@
 <script module lang="ts">
+  import { resolve } from "$app/paths";
   import { page } from "$app/state";
   import { Link, toTitleCase } from "$lib/index.js";
   import { KosuiLogo } from "$ui";
@@ -6,28 +7,28 @@
   import "../app.css";
 
   const paths = [
-    "/alerts",
-    "/autocomplete",
-    "/avatar",
-    "/badge",
-    "/breadcrumbs",
-    "/buttons",
-    "/chips",
-    "/command",
-    "/dialogs",
-    "/fab",
-    "/input",
-    "/links",
-    "/markdown",
-    "/menus",
-    "/progress-indicators",
-    "/slider",
-    "/switch",
-    "/shortcuts",
-    "/skeleton",
-    "/textarea",
-    "/toggles",
-    "/tooltips",
+    resolve("/alerts"),
+    resolve("/autocomplete"),
+    resolve("/avatar"),
+    resolve("/badge"),
+    resolve("/breadcrumbs"),
+    resolve("/buttons"),
+    resolve("/chips"),
+    resolve("/command"),
+    resolve("/dialogs"),
+    resolve("/fab"),
+    resolve("/input"),
+    resolve("/links"),
+    resolve("/markdown"),
+    resolve("/menus"),
+    resolve("/progress-indicators"),
+    resolve("/slider"),
+    resolve("/switch"),
+    resolve("/shortcuts"),
+    resolve("/skeleton"),
+    resolve("/textarea"),
+    resolve("/toggles"),
+    resolve("/tooltips"),
   ];
 </script>
 
