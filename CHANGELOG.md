@@ -1,5 +1,13 @@
 # kosui
 
+## 0.0.28
+
+### Patch Changes
+
+- 874f154: Auto-merge releases
+- d69e9d9: Add support for click slider marks
+- dca575f: Add slider component
+
 ## 0.0.27
 
 ### Patch Changes
