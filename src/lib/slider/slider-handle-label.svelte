@@ -12,7 +12,7 @@
 
   const showLabel = $derived(
     !ctx.disabled &&
-      (ctx.labelAlwaysOn || ctx.isHovered || ctx.isDragging || ctx.isFocused),
+      (ctx.labelAlwaysOn || ctx.hovered || ctx.dragging || ctx.focused),
   );
 </script>
 

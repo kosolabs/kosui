@@ -18,8 +18,9 @@
 <div class="relative">
   <div
     class={twMerge(
-      "border-2 border-m3-surface shadow-md transition-all",
+      "border-2 border-m3-surface shadow-md",
 
+      ctx.animated && "transition-all",
       !ctx.disabled && "hover:scale-110 focus:scale-110 active:scale-110",
 
       ctx.color === "primary" && "bg-m3-primary",
@@ -33,17 +34,19 @@
       ctx.size === "lg" && "size-6",
       ctx.size === "xl" && "size-7",
 
+      ctx.radius === "none" && "rounded-none",
       ctx.radius === "xs" && "rounded-xs",
       ctx.radius === "sm" && "rounded-sm",
       ctx.radius === "md" && "rounded-lg",
       ctx.radius === "lg" && "rounded-2xl",
-      ctx.radius === "xl" && "rounded-full",
+      ctx.radius === "xl" && "rounded-4xl",
+      ctx.radius === "full" && "rounded-full",
 
       className,
     )}
     {...mergeProps(restProps, {
-      onpointerenter: () => (ctx.isHovered = true),
-      onpointerleave: () => (ctx.isHovered = false),
+      onpointerenter: () => (ctx.hovered = true),
+      onpointerleave: () => (ctx.hovered = false),
     })}
   ></div>
 
