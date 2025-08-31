@@ -25,11 +25,11 @@ export const SHAPES = ["square", "rounded", "circle"] as const;
 export type Shape = (typeof SHAPES)[number];
 export type ShapeProp = { shape?: Shape };
 
-export const SIZES = ["xs", "sm", "md", "lg", "xl", "inherit"] as const;
+export const SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 export type Size = (typeof SIZES)[number];
 export type SizeProp = { size?: Size };
 
-export const RADII = ["xs", "sm", "md", "lg", "xl", "inherit"] as const;
+export const RADII = ["none", "xs", "sm", "md", "lg", "xl", "full"] as const;
 export type Radius = (typeof RADII)[number];
 export type RadiusProp = { radius?: Radius };
 
