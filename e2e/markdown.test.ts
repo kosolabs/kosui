@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Markdown Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/markdown");
+    await gotoComponent(page, "Markdown");
   });
 
   test("renders without warnings", async ({ page }) => {

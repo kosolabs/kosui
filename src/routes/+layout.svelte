@@ -4,6 +4,7 @@
   import { Link, toTitleCase } from "$lib/index.js";
   import { KosuiLogo } from "$ui";
   import type { Snippet } from "svelte";
+  import { onMount } from "svelte";
   import "../app.css";
 
   const paths = [
@@ -38,6 +39,10 @@
   };
 
   const { children }: Props = $props();
+
+  onMount(() => {
+    document.body.classList.add("hydrated");
+  });
 </script>
 
 <div class="flex h-screen flex-col">

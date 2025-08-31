@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Button Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/buttons");
+    await gotoComponent(page, "Buttons");
   });
 
   test("buttons should have correct roles", async ({ page }) => {

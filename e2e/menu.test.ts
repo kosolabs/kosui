@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Menu Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/menus");
+    await gotoComponent(page, "Menus");
   });
 
   test("menus should have correct roles", async ({ page }) => {

@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
-test.describe.configure({ mode: "parallel" });
+test.describe.configure({ mode: "serial" });
 
 test.describe("Dialog Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/dialogs");
+    await gotoComponent(page, "Dialogs");
   });
 
   test("notice dialog should open and close with OK", async ({ page }) => {

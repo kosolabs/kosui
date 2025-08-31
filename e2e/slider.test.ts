@@ -1,4 +1,5 @@
 import { expect, Locator, Page, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
 test.describe.configure({ mode: "parallel" });
 
@@ -25,7 +26,7 @@ async function getSliderBoundingBox(
 
 test.describe("Slider Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/slider");
+    await gotoComponent(page, "Slider");
   });
 
   test("slider should have correct role and ARIA attributes", async ({
