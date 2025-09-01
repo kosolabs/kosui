@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { gotoComponent } from "./test-utils";
 
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Switch Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/switch");
+    await gotoComponent(page, "Switch");
   });
 
   test("switch should have correct role and ARIA attributes", async ({
