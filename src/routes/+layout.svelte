@@ -12,7 +12,7 @@
     resolve("/avatar"),
     resolve("/badge"),
     resolve("/breadcrumbs"),
-    resolve("/buttons"),
+    resolve("/button"),
     resolve("/chips"),
     resolve("/command"),
     resolve("/dialogs"),
@@ -42,7 +42,7 @@
 
 <div class="flex h-screen flex-col">
   <div class="flex items-center gap-2 border-b p-4">
-    <KosuiLogo />
+    <KosuiLogo class="size-24" />
     <h1 class="text-3xl font-thin">
       {toTitleCase(page.url.pathname.split("/")[1]) || "Home"}
     </h1>

@@ -9,7 +9,14 @@
   let { label, children }: SettingProps = $props();
 </script>
 
-<div class="flex flex-col">
+<div class="stack">
   <Label for={label}>{label}</Label>
   {@render children()}
 </div>
+
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

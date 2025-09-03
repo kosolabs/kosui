@@ -4,7 +4,7 @@ test.describe.configure({ mode: "parallel" });
 
 test.describe("Button Component Tests", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/buttons");
+    await page.goto("/button");
   });
 
   test("buttons should have correct roles", async ({ page }) => {

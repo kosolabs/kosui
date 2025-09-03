@@ -18,24 +18,67 @@
   );
 </script>
 
-<div class="rounded-md border">
-  <div class="flex max-md:flex-col">
+<div class="usage">
+  <div class="responsive">
     {#if component}
-      <div
-        class="flex flex-1 items-center justify-center p-4"
-        data-testid="preview"
-      >
+      <div data-testid="preview" class="component">
         {@render component()}
       </div>
     {/if}
     {#if controls}
-      <div class="flex flex-col gap-2 p-4 max-md:border-t md:border-l">
+      <div class="controls">
         {@render controls()}
       </div>
     {/if}
   </div>
-  <div class="rounded-b-md border-t bg-m3-surface-container p-4 text-sm">
+  <div class="code">
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <pre>{@html code}</pre>
   </div>
 </div>
+
+<style>
+  .usage {
+    border-radius: var(--radius-md);
+    border-width: 1px;
+  }
+
+  .responsive {
+    display: flex;
+
+    @media (max-width: 64rem) {
+      flex-direction: column;
+    }
+  }
+
+  .component {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 4);
+
+    @media (max-width: 64rem) {
+      border-top-width: 1px;
+    }
+    @media (min-width: 64rem) {
+      border-left-width: 1px;
+    }
+  }
+
+  .code {
+    background-color: rgb(from var(--md-sys-color-surface-container) r g b / 1);
+    border-top-width: 1px;
+    border-bottom-right-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+    padding: calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+  }
+</style>
