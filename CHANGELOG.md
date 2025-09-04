@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.31
+
+### Patch Changes
+
+- c7a9d4a: "Wrap all CSS in a components @layer"
+
 ## 0.0.30
 
 ### Patch Changes
