@@ -16,6 +16,7 @@ export const COLORS = [
   "secondary",
   "tertiary",
   "error",
+  "plain",
   "inherit",
 ] as const;
 export type Color = (typeof COLORS)[number];

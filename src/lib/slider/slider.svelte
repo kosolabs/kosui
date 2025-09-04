@@ -98,7 +98,7 @@
     class: className,
     color = "primary",
     size = "md",
-    radius = "xl",
+    radius = "full",
     ...restProps
   }: SliderProps = $props();
 
