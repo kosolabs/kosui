@@ -52,6 +52,7 @@
 </script>
 
 <div
+  role="alert"
   {...mergeProps(props, {
     class: [
       "base",
