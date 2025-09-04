@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.30
+
+### Patch Changes
+
+- 51d4cd1: Add role="alert" to the Alert component
+
 ## 0.0.29
 
 ### Patch Changes
