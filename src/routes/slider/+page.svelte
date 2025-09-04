@@ -20,7 +20,7 @@
 
   let color: SliderColor = $state("primary");
   let size: SliderSize = $state("md");
-  let radius: SliderRadius = $state("xl");
+  let radius: SliderRadius = $state("full");
   let disabled: boolean = $state(false);
   let value: number = $state(30);
   let labelAlwaysOn: boolean = $state(false);
@@ -39,7 +39,7 @@
 
     if (color !== "primary") props.push(`color="${color}"`);
     if (size !== "md") props.push(`size="${size}"`);
-    if (radius !== "xl") props.push(`radius="${radius}"`);
+    if (radius !== "full") props.push(`radius="${radius}"`);
     if (disabled) props.push("disabled");
     if (labelAlwaysOn) props.push("labelAlwaysOn");
     if (inverted) props.push("inverted");

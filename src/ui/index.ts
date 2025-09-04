@@ -21,4 +21,8 @@ export {
   default as SwitchSetting,
   type SwitchSettingProps,
 } from "./switch-setting.svelte";
+export {
+  default as ToggleButtonSetting,
+  type ToggleButtonSettingProps,
+} from "./toggle-button-setting.svelte";
 export { default as Usage, type UsageProps } from "./usage.svelte";

@@ -24,5 +24,6 @@
     marks={radii.map((label, value) => ({ label, value }))}
     label={(value) => v2r[value]}
     restrictToMarks
+    class="min-w-96"
   />
 </Setting>

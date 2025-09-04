@@ -7,7 +7,7 @@
   import "../app.css";
 
   const paths = [
-    resolve("/alerts"),
+    resolve("/alert"),
     resolve("/autocomplete"),
     resolve("/avatar"),
     resolve("/badge"),
