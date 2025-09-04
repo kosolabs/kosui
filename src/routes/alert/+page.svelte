@@ -45,8 +45,8 @@
 <Usage {code}>
   {#snippet component()}
     <Alert {radius} {variant} {color} {outlined} {elevated}>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
-      quae tempore necessitatibus placeat saepe.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
     </Alert>
   {/snippet}
   {#snippet controls()}
