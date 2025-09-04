@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.29
+
+### Patch Changes
+
+- 6c33831: Migrate Alert off of Tailwind
+
 ## 0.0.28
 
 ### Patch Changes
