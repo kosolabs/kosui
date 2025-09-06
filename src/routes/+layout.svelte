@@ -42,7 +42,7 @@
 
 <div class="flex h-screen flex-col">
   <div class="flex items-center gap-2 border-b p-4">
-    <KosuiLogo class="size-24" />
+    <KosuiLogo />
     <h1 class="text-3xl font-thin">
       {toTitleCase(page.url.pathname.split("/")[1]) || "Home"}
     </h1>
