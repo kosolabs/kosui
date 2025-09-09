@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.32
+
+### Patch Changes
+
+- bda4828: Update deps
+
 ## 0.0.31
 
 ### Patch Changes
