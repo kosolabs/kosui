@@ -1,0 +1,5 @@
+---
+"kosui": patch
+---
+
+Update deps

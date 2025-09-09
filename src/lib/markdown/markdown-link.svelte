@@ -10,6 +10,8 @@
   }: MarkdownComponentProps<Tokens.Link> & HTMLAnchorAttributes = $props();
 </script>
 
+<!-- Maybe there's a better way to handle this. See https://github.com/sveltejs/eslint-plugin-svelte/issues/1314-->
+<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 <a href={token.href} title={token.title} {...restProps}>
   {@render children()}
 </a>
