@@ -9,6 +9,7 @@
     type SliderSize,
   } from "$lib/index.js";
   import {
+    Code,
     ColorSetting,
     DisabledSetting,
     RadiusSetting,
@@ -34,48 +35,6 @@
     { value: 80, label: "80%" },
   ]);
 
-  const code = $derived.by(() => {
-    const props = [];
-
-    if (color !== "primary") props.push(`color="${color}"`);
-    if (size !== "md") props.push(`size="${size}"`);
-    if (radius !== "full") props.push(`radius="${radius}"`);
-    if (disabled) props.push("disabled");
-    if (labelAlwaysOn) props.push("labelAlwaysOn");
-    if (inverted) props.push("inverted");
-    if (withMarks) props.push("marks={marks}");
-    if (restrictToMarks) props.push("restrictToMarks");
-
-    const propsString = props.length > 0 ? ` ${props.join(" ")}` : "";
-
-    const lines = [
-      `<${"script"} lang="ts">`,
-      `  import { Slider } from "kosui";`,
-      ``,
-      `  let value: number = $state(30);`,
-    ];
-
-    if (withMarks) {
-      lines.push(
-        ``,
-        `  const marks = [`,
-        `    { value: 20, label: "20%" },`,
-        `    { value: 50, label: "50%" },`,
-        `    { value: 80, label: "80%" },`,
-        `  ];`,
-      );
-    }
-
-    lines.push(
-      `</${"script"}>`,
-      ``,
-      `<Slider bind:value${propsString} />`,
-      `<div class="text-sm">Value: {value}</div>`,
-    );
-
-    return lines.join("\n");
-  });
-
   onMount(() => {
     events.on("keydown", (e) => {
       if (Shortcut.ENTER.matches(e)) {
@@ -90,7 +49,7 @@
 
 <h1 class="text-4xl">Slider</h1>
 
-<Usage {code}>
+<Usage>
   {#snippet component()}
     <div class="w-full max-w-md">
       <Slider
@@ -119,5 +78,33 @@
     <SwitchSetting label="Inverted" bind:value={inverted} />
     <SwitchSetting label="Show marks" bind:value={withMarks} />
     <SwitchSetting label="Restrict to marks" bind:value={restrictToMarks} />
+  {/snippet}
+  {#snippet code()}
+    <Code
+      component="Slider"
+      bindables={["value"]}
+      defaults={{
+        value: 30,
+        color: "primary",
+        size: "md",
+        radius: "full",
+        disabled: false,
+        labelAlwaysOn: false,
+        inverted: false,
+        marks: [],
+        restrictToMarks: false,
+      }}
+      values={{
+        value,
+        color,
+        size,
+        radius,
+        disabled,
+        labelAlwaysOn,
+        inverted,
+        marks: withMarks ? marks : [],
+        restrictToMarks,
+      }}
+    />
   {/snippet}
 </Usage>

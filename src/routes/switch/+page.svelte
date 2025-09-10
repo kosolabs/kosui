@@ -6,6 +6,7 @@
     type SwitchSize,
   } from "$lib/index.js";
   import {
+    Code,
     ColorSetting,
     DisabledSetting,
     RadiusSetting,
@@ -18,32 +19,11 @@
   let radius: SwitchRadius = $state("xl");
   let disabled: boolean = $state(false);
   let checked: boolean = $state(false);
-
-  const code = $derived.by(() => {
-    const props = [];
-
-    if (color !== "primary") props.push(`color="${color}"`);
-    if (size !== "sm") props.push(`size="${size}"`);
-    if (radius !== "xl") props.push(`radius="${radius}"`);
-    if (disabled) props.push("disabled");
-
-    const propsString = props.length > 0 ? ` ${props.join(" ")}` : "";
-
-    return [
-      `<${"script"} lang="ts">`,
-      `  import { Switch } from "kosui";`,
-      ``,
-      `  let checked: boolean = $state(false);`,
-      `</${"script"}>`,
-      ``,
-      `<Switch bind:checked${propsString} />`,
-    ].join("\n");
-  });
 </script>
 
 <h1 class="text-4xl">Switch</h1>
 
-<Usage {code}>
+<Usage>
   {#snippet component()}
     <Switch bind:checked {color} {size} {radius} {disabled} />
   {/snippet}
@@ -52,5 +32,25 @@
     <SizeSetting bind:size />
     <RadiusSetting bind:radius />
     <DisabledSetting bind:disabled />
+  {/snippet}
+  {#snippet code()}
+    <Code
+      component="Switch"
+      bindables={["checked"]}
+      defaults={{
+        color: "primary",
+        size: "sm",
+        radius: "xl",
+        disabled: false,
+        checked: false,
+      }}
+      values={{
+        color,
+        size,
+        radius,
+        disabled,
+        checked,
+      }}
+    />
   {/snippet}
 </Usage>

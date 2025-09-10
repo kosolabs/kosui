@@ -1,3 +1,4 @@
+export { default as Code, type CodeProps } from "./code.svelte";
 export {
   default as ColorSetting,
   type ColorSettingProps,

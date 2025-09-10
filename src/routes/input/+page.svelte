@@ -10,6 +10,7 @@
     type InputVariant,
   } from "$lib/index.js";
   import {
+    Code,
     ColorSetting,
     DisabledSetting,
     RadiusSetting,
@@ -24,36 +25,11 @@
   let radius: InputRadius = $state("md");
   let disabled: boolean = $state(false);
   let placeholder: string = $state("Input component");
-
-  const code = $derived.by(() => {
-    const props = [];
-
-    if (variant !== "filled") props.push(`variant="${variant}"`);
-    if (color !== "primary") props.push(`color="${color}"`);
-    if (size !== "sm") props.push(`size="${size}"`);
-    if (radius !== "md") props.push(`radius="${radius}"`);
-    if (disabled) props.push("disabled");
-    if (placeholder !== "") props.push(`placeholder="${placeholder}"`);
-
-    const propsString = props.length > 0 ? `\n  ${props.join("\n  ")}` : "";
-
-    return [
-      `<${"script"} lang="ts">`,
-      `  import { Input } from "kosui";`,
-      ``,
-      `  let checked: boolean = $state(false);`,
-      `</${"script"}>`,
-      ``,
-      `<Input `,
-      `  bind:value${propsString}`,
-      `/>`,
-    ].join("\n");
-  });
 </script>
 
 <h1 class="text-4xl">Input</h1>
 
-<Usage {code}>
+<Usage>
   {#snippet component()}
     <Input {variant} {color} {size} {radius} {disabled} {placeholder} />
   {/snippet}
@@ -72,5 +48,28 @@
     <Setting label="Placeholder">
       <Input variant="filled" bind:value={placeholder} />
     </Setting>
+  {/snippet}
+  {#snippet code()}
+    <Code
+      component="Input"
+      bindables={["value"]}
+      defaults={{
+        value: "",
+        variant: "filled",
+        color: "primary",
+        size: "sm",
+        radius: "md",
+        disabled: false,
+        placeholder: "",
+      }}
+      values={{
+        variant,
+        color,
+        size,
+        radius,
+        disabled,
+        placeholder,
+      }}
+    />
   {/snippet}
 </Usage>
