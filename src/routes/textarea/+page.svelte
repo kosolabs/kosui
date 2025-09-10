@@ -11,6 +11,7 @@
     type TextareaVariant,
   } from "$lib/index.js";
   import {
+    Code,
     ColorSetting,
     DisabledSetting,
     RadiusSetting,
@@ -24,46 +25,14 @@
   let size: TextareaSize = $state("sm");
   let radius: TextareaRadius = $state("md");
   let disabled: boolean = $state(false);
-  let placeholder: string = $state("Input component");
-
-  const code = $derived.by(() => {
-    const props = [];
-
-    if (variant !== "filled") props.push(`variant="${variant}"`);
-    if (color !== "primary") props.push(`color="${color}"`);
-    if (size !== "sm") props.push(`size="${size}"`);
-    if (radius !== "md") props.push(`radius="${radius}"`);
-    if (disabled) props.push("disabled");
-    if (placeholder !== "") props.push(`placeholder="${placeholder}"`);
-
-    const propsString = props.length > 0 ? `\n  ${props.join("\n  ")}` : "";
-
-    return [
-      `<${"script"} lang="ts">`,
-      `  import { Textarea } from "kosui";`,
-      ``,
-      `  let checked: boolean = $state(false);`,
-      `</${"script"}>`,
-      ``,
-      `<Textarea `,
-      `  bind:value${propsString}`,
-      `/>`,
-    ].join("\n");
-  });
+  let placeholder: string = $state("Text area component");
 </script>
 
 <h1 class="text-4xl">Textarea</h1>
 
-<Usage {code}>
+<Usage>
   {#snippet component()}
-    <Textarea
-      {variant}
-      {color}
-      {size}
-      {radius}
-      {disabled}
-      placeholder="Textarea component"
-    />
+    <Textarea {variant} {color} {size} {radius} {disabled} {placeholder} />
   {/snippet}
   {#snippet controls()}
     <Setting label="Variant">
@@ -80,5 +49,28 @@
     <Setting label="Placeholder">
       <Input variant="filled" bind:value={placeholder} />
     </Setting>
+  {/snippet}
+  {#snippet code()}
+    <Code
+      component="Textarea"
+      bindables={["value"]}
+      defaults={{
+        value: "",
+        variant: "filled",
+        color: "primary",
+        size: "sm",
+        radius: "md",
+        disabled: false,
+        placeholder: "",
+      }}
+      values={{
+        variant,
+        color,
+        size,
+        radius,
+        disabled,
+        placeholder,
+      }}
+    />
   {/snippet}
 </Usage>

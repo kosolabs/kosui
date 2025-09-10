@@ -9,6 +9,7 @@
     type AlertVariant,
   } from "$lib/index.js";
   import {
+    Code,
     ColorSetting,
     RadiusSetting,
     SwitchSetting,
@@ -21,28 +22,9 @@
   let radius: AlertRadius = $state("sm");
   let outlined: AlertOutlined = $state(false);
   let elevated: AlertElevated = $state(false);
-
-  const code = $derived.by(() => {
-    const props = [];
-
-    if (variant !== "tonal") props.push(`variant="${variant}"`);
-    if (color !== "primary") props.push(`color="${color}"`);
-    if (radius !== "sm") props.push(`radius="${radius}"`);
-    if (outlined) props.push("outlined");
-    if (elevated) props.push("elevated");
-    const propsString = props.length > 0 ? `\n  ${props.join("\n  ")}\n` : " ";
-
-    return [
-      `<${"script"} lang="ts">`,
-      `  import { Alert } from "kosui";`,
-      `</${"script"}>`,
-      ``,
-      `<Alert${propsString}/>`,
-    ].join("\n");
-  });
 </script>
 
-<Usage {code}>
+<Usage>
   {#snippet component()}
     <Alert {radius} {variant} {color} {outlined} {elevated}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -59,5 +41,24 @@
     <RadiusSetting bind:radius />
     <SwitchSetting label="Outlined" bind:value={outlined} />
     <SwitchSetting label="Elevated" bind:value={elevated} />
+  {/snippet}
+  {#snippet code()}
+    <Code
+      component="Alert"
+      defaults={{
+        variant: "tonal",
+        color: "primary",
+        radius: "sm",
+        outlined: false,
+        elevated: false,
+      }}
+      values={{
+        variant,
+        color,
+        radius,
+        outlined,
+        elevated,
+      }}
+    />
   {/snippet}
 </Usage>
