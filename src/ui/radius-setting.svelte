@@ -20,7 +20,7 @@
 <Setting label="radius">
   <Slider
     bind:value={() => r2v[radius], (v) => (radius = v2r[v])}
-    max={6}
+    max={radii.length - 1}
     marks={radii.map((label, value) => ({ label, value }))}
     label={(value) => v2r[value]}
     restrictToMarks
