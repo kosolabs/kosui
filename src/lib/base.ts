@@ -30,7 +30,18 @@ export const SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 export type Size = (typeof SIZES)[number];
 export type SizeProp = { size?: Size };
 
-export const RADII = ["none", "xs", "sm", "md", "lg", "xl", "full"] as const;
+export const RADII = [
+  "none",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "2xl",
+  "3xl",
+  "4xl",
+  "full",
+] as const;
 export type Radius = (typeof RADII)[number];
 export type RadiusProp = { radius?: Radius };
 

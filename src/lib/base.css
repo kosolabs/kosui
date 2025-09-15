@@ -1,0 +1,71 @@
+.radius-none {
+  --radius: none;
+}
+
+.radius-xs {
+  --radius: 0.125rem;
+}
+
+.radius-sm {
+  --radius: 0.25rem;
+}
+
+.radius-md {
+  --radius: 0.375rem;
+}
+
+.radius-lg {
+  --radius: 0.5rem;
+}
+
+.radius-xl {
+  --radius: 0.75rem;
+}
+
+.radius-2xl {
+  --radius: 1rem;
+}
+
+.radius-3xl {
+  --radius: 1.5rem;
+}
+
+.radius-4xl {
+  --radius: 2rem;
+}
+
+.radius-full {
+  --radius: calc(infinity * 1px);
+}
+
+.color-primary {
+  --color-main: var(--md-sys-color-primary);
+  --color-on-main: var(--md-sys-color-on-primary);
+  --color-tonal: var(--md-sys-color-primary-container);
+  --color-on-tonal: var(--md-sys-color-on-primary-container);
+  --color-shadow: var(--md-sys-color-shadow);
+}
+
+.color-secondary {
+  --color-main: var(--md-sys-color-secondary);
+  --color-on-main: var(--md-sys-color-on-secondary);
+  --color-tonal: var(--md-sys-color-secondary-container);
+  --color-on-tonal: var(--md-sys-color-on-secondary-container);
+  --color-shadow: var(--md-sys-color-shadow);
+}
+
+.color-tertiary {
+  --color-main: var(--md-sys-color-tertiary);
+  --color-on-main: var(--md-sys-color-on-tertiary);
+  --color-tonal: var(--md-sys-color-tertiary-container);
+  --color-on-tonal: var(--md-sys-color-on-tertiary-container);
+  --color-shadow: var(--md-sys-color-shadow);
+}
+
+.color-error {
+  --color-main: var(--md-sys-color-error);
+  --color-on-main: var(--md-sys-color-on-error);
+  --color-tonal: var(--md-sys-color-error-container);
+  --color-on-tonal: var(--md-sys-color-on-error-container);
+  --color-shadow: var(--md-sys-color-shadow);
+}

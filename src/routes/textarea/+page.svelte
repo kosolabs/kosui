@@ -18,7 +18,7 @@
     Setting,
     SizeSetting,
     Usage,
-  } from "$ui/index.js";
+  } from "$ui";
 
   let variant: TextareaVariant = $state("filled");
   let color: TextareaColor = $state("primary");

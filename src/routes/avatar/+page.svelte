@@ -3,6 +3,8 @@
   import { UserRound } from "@lucide/svelte";
 </script>
 
+<h1>Avatar</h1>
+
 <div class="flex flex-wrap gap-4 rounded-lg border p-4">
   {#each VARIANTS as variant (variant)}
     {#each COLORS as color (color)}
@@ -30,3 +32,9 @@
     {/each}
   {/each}
 </div>
+
+<style>
+  h1 {
+    font-size: var(--text-4xl);
+  }
+</style>

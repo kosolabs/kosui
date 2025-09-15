@@ -7,7 +7,6 @@
     type Radius,
     type RadiusProp,
   } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
@@ -47,138 +46,54 @@
     outlined = false,
     elevated = false,
     children,
+    class: className,
     ...props
   }: AlertProps = $props();
 </script>
 
 <div
   role="alert"
-  {...mergeProps(props, {
-    class: [
-      "base",
-      `radius-${radius}`,
-      `variant-${variant}`,
-      `color-${color}`,
-      outlined && "outlined",
-      elevated && "elevated",
-    ],
-  })}
+  class={[
+    "base",
+    `variant-${variant}`,
+    `color-${color}`,
+    `radius-${radius}`,
+    outlined && "outlined",
+    elevated && "elevated",
+    className,
+  ]}
+  {...props}
 >
   {@render children()}
 </div>
 
 <style>
+  @import "../base.css";
+
   .base {
     padding: calc(var(--spacing) * 4);
+    border-radius: var(--radius);
   }
 
-  .elevated {
-    box-shadow:
-      0 1px 3px 0 rgb(from var(--md-sys-color-shadow, rgb(0 0 0)) r g b / 0.2),
-      0 1px 2px -1px
-        rgb(from var(--md-sys-color-shadow, rgb(0 0 0)) r g b / 0.2);
+  .variant-filled {
+    background-color: var(--color-main);
+    color: var(--color-on-main);
   }
 
-  .variant-filled.color-primary {
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-  }
-
-  .variant-filled.color-secondary {
-    background-color: var(--md-sys-color-secondary);
-    color: var(--md-sys-color-on-secondary);
-  }
-
-  .variant-filled.color-tertiary {
-    background-color: var(--md-sys-color-tertiary);
-    color: var(--md-sys-color-on-tertiary);
-  }
-
-  .variant-filled.color-error {
-    background-color: var(--md-sys-color-error);
-    color: var(--md-sys-color-on-error);
-  }
-
-  .variant-filled.color-plain {
-    background-color: var(--md-sys-color-inverse-surface);
-    color: var(--md-sys-color-inverse-on-surface);
-  }
-
-  .variant-tonal.color-primary {
-    background-color: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
-  }
-
-  .variant-tonal.color-secondary {
-    background-color: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
-  }
-
-  .variant-tonal.color-tertiary {
-    background-color: var(--md-sys-color-tertiary-container);
-    color: var(--md-sys-color-on-tertiary-container);
-  }
-
-  .variant-tonal.color-error {
-    background-color: var(--md-sys-color-error-container);
-    color: var(--md-sys-color-on-error-container);
-  }
-
-  .variant-tonal.color-plain {
-    background-color: var(--md-sys-color-surface-variant);
-    color: var(--md-sys-color-on-surface-variant);
+  .variant-tonal {
+    background-color: var(--color-tonal);
+    color: var(--color-on-tonal);
   }
 
   .outlined {
     border-width: 1px;
     border-style: solid;
+    border-color: var(--color-main);
   }
 
-  .outlined.color-primary {
-    border-color: var(--md-sys-color-primary);
-  }
-
-  .outlined.color-secondary {
-    border-color: var(--md-sys-color-secondary);
-  }
-
-  .outlined.color-tertiary {
-    border-color: var(--md-sys-color-tertiary);
-  }
-
-  .outlined.color-error {
-    border-color: var(--md-sys-color-error);
-  }
-
-  .outlined.color-plain {
-    border-color: var(--md-sys-color-outline);
-  }
-
-  .radius-none {
-    border-radius: 0;
-  }
-
-  .radius-xs {
-    border-radius: var(--radius-xs);
-  }
-
-  .radius-sm {
-    border-radius: var(--radius-sm);
-  }
-
-  .radius-md {
-    border-radius: var(--radius-lg);
-  }
-
-  .radius-lg {
-    border-radius: var(--radius-2xl);
-  }
-
-  .radius-xl {
-    border-radius: var(--radius-4xl);
-  }
-
-  .radius-full {
-    border-radius: calc(infinity * 1px);
+  .elevated {
+    box-shadow:
+      0 1px 3px 0 rgb(from var(--color-shadow, rgb(0 0 0)) r g b / 0.2),
+      0 1px 2px -1px rgb(from var(--color-shadow, rgb(0 0 0)) r g b / 0.2);
   }
 </style>
