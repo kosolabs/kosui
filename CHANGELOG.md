@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.33
+
+### Patch Changes
+
+- 8d64373: Update all depenencies
+
 ## 0.0.32
 
 ### Patch Changes
