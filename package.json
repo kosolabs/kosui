@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/kosolabs/kosui.git"
   },
-  "packageManager": "pnpm@10.17.0",
+  "packageManager": "pnpm@10.17.1",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && pnpm prepack",
