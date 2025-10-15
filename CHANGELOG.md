@@ -1,5 +1,11 @@
 # kosui
 
+## 0.0.34
+
+### Patch Changes
+
+- a311a63: Update dependencies
+
 ## 0.0.33
 
 ### Patch Changes
