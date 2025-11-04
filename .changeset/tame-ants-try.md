@@ -1,5 +1,0 @@
----
-"kosui": minor
----
-
-Bump deps
