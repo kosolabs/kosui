@@ -41,6 +41,7 @@
 </script>
 
 {#if href}
+  <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
   <a bind:this={el} use:ref class={classes} {href} {...props}>
     {@render children()}
   </a>
