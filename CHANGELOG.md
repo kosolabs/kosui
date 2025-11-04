@@ -1,5 +1,11 @@
 # kosui
 
+## 0.1.0
+
+### Minor Changes
+
+- f6ad965: Bump deps
+
 ## 0.0.34
 
 ### Patch Changes
