@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/kosolabs/kosui.git"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.22.0",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && pnpm prepack",
@@ -44,8 +44,8 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.4",
-    "@lucide/svelte": "^0.552.0",
-    "marked": "^16.4.1"
+    "@lucide/svelte": "^0.553.0",
+    "marked": "^17.0.0"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
