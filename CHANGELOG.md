@@ -1,5 +1,11 @@
 # kosui
 
+## 0.1.1
+
+### Patch Changes
+
+- a041ee2: update all dependencies
+
 ## 0.1.0
 
 ### Minor Changes
