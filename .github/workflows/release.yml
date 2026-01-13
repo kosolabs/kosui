@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        uses: actions/deploy-pages@v4.0.5
   release:
     # prevents this action from running on forks
     if: github.repository == 'kosolabs/kosui'
@@ -48,19 +48,19 @@ jobs:
       url: https://www.npmjs.com/package/kosui
     steps:
       - name: Checkout code repository
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@v6.0.1
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
         id: changesets
-        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba #v1.5.3
+        uses: changesets/action@v1.5.3
         with:
           commit: "chore: update versions"
           title: "chore: update versions"
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      - uses: actions/create-github-app-token@v2.2.1
         if: steps.changesets.outputs.hasChangesets == 'true' && steps.changesets.outputs.published == 'false'
         id: releaser-token
         with:
