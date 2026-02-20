@@ -8,7 +8,7 @@ runs:
       with:
         package_json_file: package.json
     - name: Setup Node
-      uses: actions/setup-node@v6.1.0
+      uses: actions/setup-node@v6.2.0
       with:
         node-version-file: .nvmrc
         cache: "pnpm"
