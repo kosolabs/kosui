@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - run: pnpm test
@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Cache Playwright
         id: playwright-cache
-        uses: actions/cache@v5.0.1
+        uses: actions/cache@v5.0.3
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
