@@ -48,12 +48,12 @@ jobs:
       url: https://www.npmjs.com/package/kosui
     steps:
       - name: Checkout code repository
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v6.0.3
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
         id: changesets
-        uses: changesets/action@v1.8.0
+        uses: changesets/action@v1.9.0
         with:
           commit: "chore: update versions"
           title: "chore: update versions"
