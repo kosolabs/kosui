@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5.0.0
+        uses: actions/deploy-pages@v5.0.1
   release:
     # prevents this action from running on forks
     if: github.repository == 'kosolabs/kosui'
@@ -48,12 +48,12 @@ jobs:
       url: https://www.npmjs.com/package/kosui
     steps:
       - name: Checkout code repository
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.1
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
         id: changesets
-        uses: changesets/action@v1.9.0
+        uses: changesets/action@v2.1.1
         with:
           commit: "chore: update versions"
           title: "chore: update versions"
