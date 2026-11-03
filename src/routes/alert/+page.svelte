@@ -14,7 +14,7 @@
     RadiusSetting,
     SwitchSetting,
     ToggleButtonSetting,
-    Usage,
+    Playground,
   } from "#ui";
 
   let variant: AlertVariant = $state("tonal");
@@ -24,7 +24,7 @@
   let elevated: AlertElevated = $state(false);
 </script>
 
-<Usage>
+<Playground>
   {#snippet component()}
     <Alert {radius} {variant} {color} {outlined} {elevated}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -61,4 +61,4 @@
       }}
     />
   {/snippet}
-</Usage>
+</Playground>

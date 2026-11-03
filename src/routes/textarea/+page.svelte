@@ -17,7 +17,7 @@
     RadiusSetting,
     Setting,
     SizeSetting,
-    Usage,
+    Playground,
   } from "#ui";
 
   let variant: TextareaVariant = $state("filled");
@@ -30,7 +30,7 @@
 
 <h1 class="text-4xl">Textarea</h1>
 
-<Usage>
+<Playground>
   {#snippet component()}
     <Textarea {variant} {color} {size} {radius} {disabled} {placeholder} />
   {/snippet}
@@ -73,4 +73,4 @@
       }}
     />
   {/snippet}
-</Usage>
+</Playground>

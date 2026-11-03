@@ -11,7 +11,7 @@
     DisabledSetting,
     RadiusSetting,
     SizeSetting,
-    Usage,
+    Playground,
   } from "#ui";
 
   let color: SwitchColor = $state("primary");
@@ -23,7 +23,7 @@
 
 <h1 class="text-4xl">Switch</h1>
 
-<Usage>
+<Playground>
   {#snippet component()}
     <Switch bind:checked {color} {size} {radius} {disabled} />
   {/snippet}
@@ -53,4 +53,4 @@
       }}
     />
   {/snippet}
-</Usage>
+</Playground>

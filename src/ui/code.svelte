@@ -1,7 +1,5 @@
 <script lang="ts">
-  import hljs from "highlight.js";
-  import svelte from "highlight.svelte";
-  hljs.registerLanguage("svelte", svelte);
+  import CodeBlock from "./code-block.svelte";
 
   export type CodeProps<
     T extends Record<string, unknown> = Record<string, unknown>,
@@ -102,5 +100,4 @@
   }
 </script>
 
-<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-<pre>{@html hljs.highlight(code, { language: "svelte" }).value}</pre>
+<CodeBlock {code} />

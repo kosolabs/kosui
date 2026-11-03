@@ -2,15 +2,15 @@
   import type { Snippet } from "svelte";
   import "./theme.css";
 
-  export type UsageProps = {
+  export type PlaygroundProps = {
     component?: Snippet<[]>;
     controls?: Snippet<[]>;
     code?: Snippet<[]>;
   };
-  let { component, controls, code }: UsageProps = $props();
+  let { component, controls, code }: PlaygroundProps = $props();
 </script>
 
-<div class="usage">
+<div class="playground">
   <div class="responsive">
     {#if component}
       <div data-testid="preview" class="component">
@@ -31,7 +31,7 @@
 </div>
 
 <style>
-  .usage {
+  .playground {
     border-radius: var(--radius-md);
     border-width: 1px;
   }
