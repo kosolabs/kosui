@@ -15,11 +15,13 @@
     Code,
     DisabledSetting,
     Example,
+    GuidanceTable,
     Playground,
     PropsTable,
     Section,
     SwitchSetting,
     ToggleButtonSetting,
+    type GuidanceRow,
   } from "#ui";
   import { Save } from "@lucide/svelte";
   import DestructiveExample from "./examples/destructive.svelte";
@@ -39,50 +41,50 @@
 
   const CONTENTS = ["label", "icon", "both"];
 
-  const VARIANT_GUIDANCE: { variant: Variant; use: string }[] = [
+  const VARIANT_GUIDANCE: GuidanceRow<Variant>[] = [
     {
-      variant: "filled",
+      name: "filled",
       use: "The main action in a view, like Save or Submit. Use one per view.",
     },
     {
-      variant: "tonal",
+      name: "tonal",
       use: "Secondary actions that still need weight, often next to a filled button.",
     },
     {
-      variant: "elevated",
+      name: "elevated",
       use: "Like tonal, with a shadow that separates it from busy or patterned backgrounds.",
     },
     {
-      variant: "outlined",
+      name: "outlined",
       use: "The default. Medium emphasis for actions that matter but aren't the main one.",
     },
     {
-      variant: "plain",
+      name: "plain",
       use: "Low emphasis with no container until hover. Good for Cancel, toolbars and icon buttons.",
     },
     {
-      variant: "text",
+      name: "text",
       use: "The lightest touch: text that fades slightly on hover, for actions inside dense layouts.",
     },
   ];
 
-  const COLOR_GUIDANCE: { color: Color; use: string }[] = [
-    { color: "primary", use: "The default, for most actions." },
+  const COLOR_GUIDANCE: GuidanceRow<Color>[] = [
+    { name: "primary", use: "The default, for most actions." },
     {
-      color: "secondary",
+      name: "secondary",
       use: "Less prominent actions, in your theme's secondary color.",
     },
     {
-      color: "tertiary",
+      name: "tertiary",
       use: "Contrasting accents, in your theme's tertiary color.",
     },
-    { color: "error", use: "Destructive actions, like Delete." },
+    { name: "error", use: "Destructive actions, like Delete." },
     {
-      color: "plain",
+      name: "plain",
       use: "Uses the surrounding text color.",
     },
     {
-      color: "inherit",
+      name: "inherit",
       use: "Uses the surrounding text color.",
     },
   ];
@@ -111,32 +113,6 @@
     onclick: () => presses++,
   });
 </script>
-
-{#snippet guidanceTable(
-  heading: string,
-  rows: { name: string; button: ButtonProps; use: string }[],
-)}
-  <div class="overflow-x-auto rounded-md border">
-    <table class="w-full text-left text-sm">
-      <thead class="bg-m3-surface-container">
-        <tr>
-          <th class="p-3 font-medium">Example</th>
-          <th class="p-3 font-medium">{heading}</th>
-          <th class="p-3 font-medium">Use it for</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each rows as row (row.name)}
-          <tr class="border-t">
-            <td class="p-3"><Button {...row.button}>Save</Button></td>
-            <td class="p-3"><code>{row.name}</code></td>
-            <td class="min-w-64 p-3">{row.use}</td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
-  </div>
-{/snippet}
 
 <div class="flex max-w-5xl flex-col gap-12">
   <p class="max-w-prose text-lg">
@@ -214,14 +190,11 @@
       Variants set how much attention a button draws. Give each view one clearly
       most important action, and step down in emphasis from there.
     </p>
-    {@render guidanceTable(
-      "Variant",
-      VARIANT_GUIDANCE.map(({ variant, use }) => ({
-        name: variant,
-        button: { variant },
-        use,
-      })),
-    )}
+    <GuidanceTable heading="Variant" rows={VARIANT_GUIDANCE}>
+      {#snippet example(variant)}
+        <Button {variant}>Save</Button>
+      {/snippet}
+    </GuidanceTable>
   </Section>
 
   <Section title="Choosing a color">
@@ -229,14 +202,11 @@
       Colors come from your theme. Most buttons stay primary; reach for the
       others to separate kinds of actions, not for decoration.
     </p>
-    {@render guidanceTable(
-      "Color",
-      COLOR_GUIDANCE.map(({ color, use }) => ({
-        name: color,
-        button: { variant: "filled", color },
-        use,
-      })),
-    )}
+    <GuidanceTable heading="Color" rows={COLOR_GUIDANCE}>
+      {#snippet example(color)}
+        <Button variant="filled" {color}>Save</Button>
+      {/snippet}
+    </GuidanceTable>
   </Section>
 
   <Section title="Examples">

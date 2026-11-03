@@ -11,7 +11,7 @@
   export type BreadcrumbsProps = {
     path: Crumb[];
     separator?: Snippet | string;
-  } & Omit<LinkProps, "children">;
+  } & Omit<LinkProps, "children" | "href">;
 </script>
 
 <script lang="ts">
@@ -34,6 +34,6 @@
         {/if}
       </div>
     {/if}
-    <Link {href} {...restProps}>{title}</Link>
+    <Link {href} underline="hover" {...restProps}>{title}</Link>
   {/each}
 </div>
