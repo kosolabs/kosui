@@ -10,7 +10,7 @@
     type Size,
     type SizeProp,
   } from "#lib/base.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
 
   export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
@@ -42,7 +42,6 @@
   let {
     value = $bindable(),
     el = $bindable(),
-    ref = noop,
     class: className,
     variant = "outlined",
     color = "primary",
@@ -55,7 +54,6 @@
 <input
   bind:value
   bind:this={el}
-  use:ref
   class={cn(
     "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
 

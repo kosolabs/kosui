@@ -4,7 +4,6 @@
   import { Shortcut } from "#lib/shortcut/index.js";
   import {
     cn,
-    noop,
     type ClassName,
     type ElementRef,
     type ToggleEventWithTarget,
@@ -40,7 +39,6 @@
     children,
     onKeydownWhileOpen,
     el: popoverEl = $bindable(),
-    ref = noop,
     arrowClass,
     class: className,
     ...restProps
@@ -161,7 +159,6 @@
 {#if open}
   <div
     bind:this={popoverEl}
-    use:ref
     popover="manual"
     class={cn(className)}
     transition:scale={{ duration: 150, start: 0.95 }}

@@ -8,7 +8,7 @@
   import { scale } from "svelte/transition";
 
   export type ModalProps = {
-    ref?: HTMLDialogElement;
+    el?: HTMLDialogElement;
     onCancel?: () => void;
     children: Snippet;
   } & ClassName &
@@ -17,7 +17,7 @@
 
 <script lang="ts">
   let {
-    ref = $bindable(),
+    el = $bindable(),
     open = $bindable(),
     onCancel,
     children,
@@ -35,8 +35,8 @@
   }
 
   function handleClickOutside(event: MouseEvent) {
-    if (ref && ref === event.target) {
-      const rect = ref.getBoundingClientRect();
+    if (el && el === event.target) {
+      const rect = el.getBoundingClientRect();
       if (
         event.clientY < rect.top ||
         event.clientY > rect.top + rect.height ||
@@ -52,8 +52,8 @@
   }
 
   $effect(() => {
-    if (ref) {
-      ref.showModal();
+    if (el) {
+      el.showModal();
       events.on("keydown", handleKeydown);
       events.on("mousedown", handleClickOutside);
 
@@ -67,20 +67,20 @@
 
 {#if open}
   <dialog
-    bind:this={ref}
+    bind:this={el}
     class={cn("m-auto rounded-lg p-5 shadow-lg", className)}
     transition:scale={{ duration: 150, start: 0.95 }}
     {...mergeProps(restProps, {
       onintrostart: () => {
-        if (ref) {
-          ref.classList.remove("backdrop-out");
-          ref.classList.add("backdrop-in");
+        if (el) {
+          el.classList.remove("backdrop-out");
+          el.classList.add("backdrop-in");
         }
       },
       onoutrostart: () => {
-        if (ref) {
-          ref.classList.remove("backdrop-in");
-          ref.classList.add("backdrop-out");
+        if (el) {
+          el.classList.remove("backdrop-in");
+          el.classList.add("backdrop-out");
         }
       },
     })}

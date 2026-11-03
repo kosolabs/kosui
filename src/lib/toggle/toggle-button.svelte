@@ -2,7 +2,7 @@
   import type { Variants } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { getToggleContext } from "#lib/toggle/index.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
 
@@ -20,7 +20,6 @@
     value,
     children,
     el = $bindable(),
-    ref = noop,
     class: className,
     color = "primary",
     shape = "rounded",
@@ -33,7 +32,6 @@
 
 <button
   bind:this={el}
-  use:ref
   role="option"
   aria-selected={ctx.value === value}
   class={cn(

@@ -6,7 +6,7 @@
   import { cn } from "#lib/utils.js";
 
   export type DialogProps<T> = {
-    ref?: HTMLDialogElement;
+    el?: HTMLDialogElement;
     onSelect?: (value: T | undefined) => void;
     icon?: LucideIcon;
     title?: string;
@@ -17,7 +17,7 @@
 
 <script lang="ts" generics="T">
   let {
-    ref = $bindable(),
+    el = $bindable(),
     open = $bindable(),
     onSelect,
     class: className,
@@ -39,7 +39,7 @@
 </script>
 
 <Modal
-  bind:ref
+  bind:el
   bind:open
   class={cn("w-[min(calc(100%-1em),36em)]", className)}
   {...mergeComponentProps(

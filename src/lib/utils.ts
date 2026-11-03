@@ -6,7 +6,6 @@ export function noop() {}
 
 export type ElementRef = {
   el?: HTMLElement;
-  ref?: (el: HTMLElement) => void;
 };
 
 export type ClassName = { class?: ClassValue };
