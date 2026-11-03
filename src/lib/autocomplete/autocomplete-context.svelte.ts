@@ -1,5 +1,5 @@
-import { Bindable } from "$lib/bindable.svelte.js";
-import { ItemContext } from "$lib/common/index.js";
+import { Bindable } from "#lib/bindable.svelte.js";
+import { ItemContext } from "#lib/common/index.js";
 import { getContext, setContext } from "svelte";
 
 export class AutocompleteContext extends ItemContext {

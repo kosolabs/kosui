@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Chip, COLORS, SHAPES, VARIANTS } from "$lib/index.js";
+  import { Chip, COLORS, SHAPES, VARIANTS } from "#lib/index.js";
 </script>
 
 <div class="flex flex-wrap gap-4">

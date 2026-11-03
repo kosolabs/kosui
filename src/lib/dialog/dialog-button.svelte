@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { Button, type ButtonProps } from "$lib/button/index.js";
+  import { Button, type ButtonProps } from "#lib/button/index.js";
   import type { Snippet } from "svelte";
 
   export type DialogButtonProps<T> = {

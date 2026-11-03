@@ -3,8 +3,8 @@
     DialoguerContext,
     setDialoguerContext,
     type DialoguerButtonProps,
-  } from "$lib/dialog/index.js";
-  import { Input } from "$lib/input/index.js";
+  } from "#lib/dialog/index.js";
+  import { Input } from "#lib/input/index.js";
   import type { Snippet } from "svelte";
   import DialogButton from "./dialog-button.svelte";
   import Dialog from "./dialog.svelte";

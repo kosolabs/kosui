@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ClassName } from "$lib/utils.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 

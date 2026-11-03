@@ -6,7 +6,7 @@
     type ColorProp,
     type Radius,
     type RadiusProp,
-  } from "$lib/base.js";
+  } from "#lib/base.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 

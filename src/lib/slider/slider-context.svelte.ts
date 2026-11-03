@@ -1,5 +1,5 @@
-import { Bindable } from "$lib/bindable.svelte.js";
-import { Shortcut } from "$lib/shortcut/shortcut.js";
+import { Bindable } from "#lib/bindable.svelte.js";
+import { Shortcut } from "#lib/shortcut/shortcut.js";
 import type {
   SliderColor,
   SliderHandleLabelArrowProps,
@@ -10,7 +10,7 @@ import type {
   SliderMarkProps,
   SliderRadius,
   SliderSize,
-} from "$lib/slider/index.js";
+} from "#lib/slider/index.js";
 import { getContext, setContext, type Snippet } from "svelte";
 
 export type Mark = {

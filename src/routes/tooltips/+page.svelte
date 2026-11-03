@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Link, Shortcut, Tooltip } from "$lib/index.js";
+  import { Button, Link, Shortcut, Tooltip } from "#lib/index.js";
 
   const shortcut = new Shortcut({ key: "Enter", shift: true });
 

@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import type { ClassName } from "$lib/utils.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 

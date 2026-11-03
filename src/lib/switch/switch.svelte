@@ -9,9 +9,9 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
-  import type { ClassName } from "$lib/utils.js";
+  } from "#lib/base.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

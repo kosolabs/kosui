@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Switch } from "$lib/index.js";
+  import { Switch } from "#lib/index.js";
 
   export type SwitchSettingProps = {
     label: string;

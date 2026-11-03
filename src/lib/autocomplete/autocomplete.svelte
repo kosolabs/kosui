@@ -2,8 +2,8 @@
   import {
     AutocompleteContext,
     setAutocompleteContext,
-  } from "$lib/autocomplete/index.js";
-  import type { ClassName } from "$lib/utils.js";
+  } from "#lib/autocomplete/index.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
 
   export type AutocompleteProps = {

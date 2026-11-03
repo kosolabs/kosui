@@ -7,7 +7,7 @@
     type AlertOutlined,
     type AlertRadius,
     type AlertVariant,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
@@ -15,7 +15,7 @@
     SwitchSetting,
     ToggleButtonSetting,
     Usage,
-  } from "$ui";
+  } from "#ui";
 
   let variant: AlertVariant = $state("tonal");
   let color: AlertColor = $state("primary");

@@ -4,7 +4,7 @@
     CommandDivider,
     CommandInput,
     CommandItem,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
 
   type Item = {
     title: string;

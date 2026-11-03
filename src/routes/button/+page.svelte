@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, COLORS, SHAPES, toTitleCase, VARIANTS } from "$lib/index.js";
+  import { Button, COLORS, SHAPES, toTitleCase, VARIANTS } from "#lib/index.js";
   import { Link2 } from "@lucide/svelte";
 
   let clicked = $state(false);

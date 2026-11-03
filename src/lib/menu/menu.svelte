@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { MenuContext, setMenuContext } from "$lib/menu/index.js";
-  import type { ElementRef } from "$lib/utils.js";
+  import { MenuContext, setMenuContext } from "#lib/menu/index.js";
+  import type { ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
 
   export type MenuProps = {

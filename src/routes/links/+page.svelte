@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { COLORS, Link, toTitleCase, UNDERLINES } from "$lib/index.js";
+  import { COLORS, Link, toTitleCase, UNDERLINES } from "#lib/index.js";
 </script>
 
 <div class="flex flex-col gap-4">

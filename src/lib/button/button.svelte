@@ -1,8 +1,8 @@
 <script lang="ts" module>
-  import { baseClasses, type Variants } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
-  import { Tooltip, type TooltipTriggerProps } from "$lib/tooltip/index.js";
-  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import { baseClasses, type Variants } from "#lib/base.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import { Tooltip, type TooltipTriggerProps } from "#lib/tooltip/index.js";
+  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";

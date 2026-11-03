@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { Box, type BoxProps } from "$lib/box/index.js";
+  import { Box, type BoxProps } from "#lib/box/index.js";
   import { X } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";

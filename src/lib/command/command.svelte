@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { CommandContext, setCommandContext } from "$lib/command/index.js";
-  import type { ClassName } from "$lib/utils.js";
+  import { CommandContext, setCommandContext } from "#lib/command/index.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 

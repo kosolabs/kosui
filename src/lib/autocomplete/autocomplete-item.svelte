@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import { getAutocompleteContext } from "$lib/autocomplete/index.js";
-  import { baseClasses, type Variants } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
-  import type { ClassName, ElementRef } from "$lib/utils.js";
+  import { getAutocompleteContext } from "#lib/autocomplete/index.js";
+  import { baseClasses, type Variants } from "#lib/base.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import type { ClassName, ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

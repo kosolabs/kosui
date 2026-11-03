@@ -8,7 +8,7 @@
     type InputRadius,
     type InputSize,
     type InputVariant,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
@@ -17,7 +17,7 @@
     Setting,
     SizeSetting,
     Usage,
-  } from "$ui/index.js";
+  } from "#ui";
 
   let variant: InputVariant = $state("filled");
   let color: InputColor = $state("primary");
