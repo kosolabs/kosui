@@ -36,6 +36,8 @@
   import iconButtonsSource from "./examples/icon-buttons.svelte?raw";
   import LoadingExample from "./examples/loading.svelte";
   import loadingSource from "./examples/loading.svelte?raw";
+  import NavigateExample from "./examples/navigate.svelte";
+  import navigateSource from "./examples/navigate.svelte?raw";
   import PrimaryButton from "./examples/primary-button.svelte";
   import primaryButtonSource from "./examples/primary-button.svelte?raw";
 
@@ -117,8 +119,9 @@
 <div class="flex max-w-5xl flex-col gap-12">
   <p class="max-w-prose text-lg">
     Buttons let people take an action, like saving a form, opening a dialog or
-    deleting an item. To take people to another page, use a
-    <Link href={resolve("links")}>Link</Link> instead.
+    deleting an item. Give a button an <code>href</code> when navigation should
+    look like a button; for links in text, use a
+    <Link href={resolve("links")}>Link</Link>.
   </p>
 
   <Playground>
@@ -248,13 +251,23 @@
       {/snippet}
       <LoadingExample />
     </Example>
+
+    <Example title="Navigating" source={navigateSource}>
+      {#snippet description()}
+        With an <code>href</code>, Button renders a link. Use it for navigation
+        that should stand out, like a call to action. It keeps link semantics:
+        Enter follows it, and it appears in a screen reader's list of links.
+      {/snippet}
+      <NavigateExample />
+    </Example>
   </Section>
 
   <Section title="Accessibility">
     <ul class="flex max-w-prose list-disc flex-col gap-2 pl-5">
       <li>
         Button renders a native <code>&lt;button&gt;</code>, so Enter and Space
-        activate it and it works inside forms.
+        activate it and it works inside forms. With an <code>href</code>, it
+        renders a native <code>&lt;a&gt;</code> instead.
       </li>
       <li>
         A focus ring appears for keyboard focus only, not after a mouse click.
@@ -295,6 +308,12 @@
           description: "Corner style.",
         },
         {
+          name: "href",
+          type: "string",
+          description:
+            "Renders an `<a>` that navigates there, instead of a `<button>`.",
+        },
+        {
           name: "icon",
           type: "LucideIcon",
           description: "An icon shown before the label.",
@@ -317,12 +336,13 @@
           type: `"button" | "submit" | "reset"`,
           default: `"button"`,
           description:
-            "Unlike HTML, defaults to `button`. Set `submit` to submit a form.",
+            "Unlike HTML, defaults to `button`. Set `submit` to submit a form. Not used with `href`.",
         },
         {
           name: "el",
           type: "HTMLElement",
-          description: "Bindable. The rendered `<button>` element.",
+          description:
+            "Bindable. The rendered `<button>`, or `<a>` with `href`.",
         },
         {
           name: "ref",
@@ -344,8 +364,9 @@
       ]}
     />
     <p class="max-w-prose text-sm text-m3-on-surface-variant">
-      Every other <code>&lt;button&gt;</code> attribute, event handler and attachment
-      passes through to the element.
+      Every other attribute of the rendered element (<code>&lt;button&gt;</code
+      >, or <code>&lt;a&gt;</code> with <code>href</code>), every event handler
+      and every attachment passes through to it.
     </p>
   </Section>
 

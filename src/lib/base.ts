@@ -49,9 +49,9 @@ export const UNDERLINES = ["always", "hover", "none"] as const;
 export type Underline = (typeof UNDERLINES)[number];
 export type UnderlineProp = { underline?: Underline };
 
-export type Variants = VariantProp &
-  ColorProp &
-  ShapeProp &
+export type Variants = VariantProp & ColorProp & ShapeProp;
+
+export type BaseClassOptions = Variants &
   UnderlineProp & {
     hover?: boolean;
     focus?: boolean;
@@ -147,7 +147,7 @@ export const baseClasses = ({
   underline,
   hover = false,
   focus = false,
-}: Variants) =>
+}: BaseClassOptions) =>
   cn(
     variant === "elevated" &&
       "bg-m3-surface-container-low shadow shadow-m3-shadow/20",

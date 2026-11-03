@@ -1,10 +1,10 @@
 <script lang="ts" module>
-  import { Button, type ButtonProps } from "#lib/button/index.js";
+  import { Button, type ButtonActionProps } from "#lib/button/index.js";
   import { getMenuContext } from "#lib/menu/index.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { Shortcut } from "#lib/shortcut/index.js";
 
-  export type MenuTriggerButtonProps = {} & ButtonProps;
+  export type MenuTriggerButtonProps = {} & ButtonActionProps;
 </script>
 
 <script lang="ts">

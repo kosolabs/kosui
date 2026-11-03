@@ -1,5 +1,9 @@
 <script module lang="ts">
-  import { baseClasses, type Variants } from "#lib/base.js";
+  import {
+    baseClasses,
+    type ColorProp,
+    type UnderlineProp,
+  } from "#lib/base.js";
   import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAnchorAttributes } from "svelte/elements";
@@ -9,7 +13,8 @@
     children: Snippet;
   } & ElementRef &
     ClassName &
-    Variants &
+    ColorProp &
+    UnderlineProp &
     Omit<HTMLAnchorAttributes, "href">;
 </script>
 
@@ -20,16 +25,10 @@
     el = $bindable(),
     ref = noop,
     class: className,
-    variant = "text",
     color = "primary",
-    shape = "rounded",
-    underline,
+    underline = "always",
     ...props
   }: LinkProps = $props();
-
-  let resolvedUnderline = $derived(
-    underline ?? (variant === "text" ? "always" : "none"),
-  );
 </script>
 
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
@@ -39,15 +38,13 @@
   {href}
   class={cn(
     baseClasses({
-      variant,
+      variant: "text",
       color,
-      shape,
-      underline: resolvedUnderline,
+      shape: "rounded",
+      underline,
       hover: true,
       focus: true,
     }),
-    variant !== "text" &&
-      "inline-flex h-9 items-center justify-center gap-2 text-nowrap transition-all active:scale-95",
     className,
   )}
   {...props}

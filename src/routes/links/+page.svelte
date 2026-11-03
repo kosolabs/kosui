@@ -3,13 +3,9 @@
   import {
     COLORS,
     Link,
-    SHAPES,
     UNDERLINES,
-    VARIANTS,
     type Color,
-    type Shape,
     type Underline,
-    type Variant,
   } from "#lib/index.js";
   import {
     Code,
@@ -21,8 +17,6 @@
     ToggleButtonSetting,
     type GuidanceRow,
   } from "#ui";
-  import CallToActionExample from "./examples/call-to-action.svelte";
-  import callToActionSource from "./examples/call-to-action.svelte?raw";
   import ExternalExample from "./examples/external.svelte";
   import externalSource from "./examples/external.svelte?raw";
   import InTextExample from "./examples/in-text.svelte";
@@ -43,16 +37,12 @@
     },
     {
       name: "none",
-      use: "Links styled as buttons, or links marked by another cue, like an icon. The default for button-like variants.",
+      use: "Links marked by another cue, like an icon or a card around them.",
     },
   ];
 
-  let variant: Variant = $state("text");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
   let underline: Underline = $state("always");
-
-  let defaultUnderline = $derived(variant === "text" ? "always" : "none");
 </script>
 
 <div class="flex max-w-5xl flex-col gap-12">
@@ -64,26 +54,13 @@
 
   <Playground>
     {#snippet component()}
-      {#if variant === "text"}
-        <p class="max-w-prose">
-          Kosui components are written in Svelte. Read the
-          <Link href={HREF} {variant} {color} {shape} {underline}>
-            Svelte docs
-          </Link>
-          to learn more.
-        </p>
-      {:else}
-        <Link href={HREF} {variant} {color} {shape} {underline}>
-          Svelte docs
-        </Link>
-      {/if}
+      <p class="max-w-prose">
+        Kosui components are written in Svelte. Read the
+        <Link href={HREF} {color} {underline}>Svelte docs</Link>
+        to learn more.
+      </p>
     {/snippet}
     {#snippet controls()}
-      <ToggleButtonSetting
-        bind:value={variant}
-        options={[...VARIANTS]}
-        label="Variant"
-      />
       <ToggleButtonSetting
         bind:value={color}
         options={[...COLORS]}
@@ -94,23 +71,12 @@
         options={[...UNDERLINES]}
         label="Underline"
       />
-      <ToggleButtonSetting
-        bind:value={shape}
-        options={[...SHAPES]}
-        label="Shape"
-      />
     {/snippet}
     {#snippet code()}
       <Code
         component="Link"
-        defaults={{
-          href: "",
-          variant: "text",
-          color: "primary",
-          underline: defaultUnderline,
-          shape: "rounded",
-        }}
-        values={{ href: HREF, variant, color, underline, shape }}
+        defaults={{ href: "", color: "primary", underline: "always" }}
+        values={{ href: HREF, color, underline }}
         children="Svelte docs"
       />
     {/snippet}
@@ -128,13 +94,11 @@
     </GuidanceTable>
   </Section>
 
-  <Section title="Choosing a variant">
+  <Section title="Links that look like buttons">
     <p class="max-w-prose">
-      Most links use the default <code>text</code> variant. The other variants
-      make a link look like a button, for navigation that should stand out, like
-      a call to action. They follow the same emphasis guidance as
-      <Link href={resolve("button")}>Button variants</Link>: what matters is
-      whether it navigates (a Link) or acts (a Button), not how it looks.
+      For navigation that should look like a button, like a call to action, give
+      a <Link href={resolve("button")}>Button</Link> an <code>href</code>. It
+      renders a link with all of Button's variants.
     </p>
   </Section>
 
@@ -153,14 +117,6 @@
         paths through <code>resolve()</code>.
       {/snippet}
       <NavigationExample />
-    </Example>
-
-    <Example title="Call to action" source={callToActionSource}>
-      {#snippet description()}
-        A link that should look like a button keeps link semantics: it still
-        navigates, and appears in a screen reader's list of links.
-      {/snippet}
-      <CallToActionExample />
     </Example>
 
     <Example title="Opening a new tab" source={externalSource}>
@@ -212,29 +168,15 @@
         {
           name: "underline",
           type: `"always" | "hover" | "none"`,
-          default: `"always"` + " or " + `"none"`,
+          default: `"always"`,
           description:
-            "Defaults to `always` for the `text` variant and `none` for the others.",
-        },
-        {
-          name: "variant",
-          type: `"elevated" | "filled" | "tonal" | "outlined" | "plain" | "text"`,
-          default: `"text"`,
-          description:
-            "`text` for links; the others make a link look like a button.",
+            "When the link is underlined. Keep `always` for links in text.",
         },
         {
           name: "color",
           type: `"primary" | "secondary" | "tertiary" | "error" | "plain" | "inherit"`,
           default: `"primary"`,
           description: "The theme color the link uses.",
-        },
-        {
-          name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description:
-            "Corner style, for button-like variants and the focus ring.",
         },
         {
           name: "el",
