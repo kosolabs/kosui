@@ -120,12 +120,12 @@
       () => radius,
       (val) => onChange?.(val),
       (val) => onChangeEnd?.(val),
-      sliderHandle,
-      sliderHandleLabel,
-      sliderHandleLabelArrow,
-      sliderMark,
-      sliderMarkDot,
-      sliderMarkLabel,
+      () => sliderHandle,
+      () => sliderHandleLabel,
+      () => sliderHandleLabelArrow,
+      () => sliderMark,
+      () => sliderMarkDot,
+      () => sliderMarkLabel,
     ),
   );
 

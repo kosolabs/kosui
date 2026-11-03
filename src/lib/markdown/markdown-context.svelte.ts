@@ -19,32 +19,33 @@ type Renderers = {
 };
 
 export class MarkdownContext {
-  #renderers: Renderers;
-  #tableCellRenderer: TokenRenderer<Tokens.TableCell>;
+  #renderers: () => Renderers;
+  #tableCellRenderer: () => TokenRenderer<Tokens.TableCell>;
 
   constructor(
-    renderers: Renderers,
-    tableCellRenderer: TokenRenderer<Tokens.TableCell>,
+    renderers: () => Renderers,
+    tableCellRenderer: () => TokenRenderer<Tokens.TableCell>,
   ) {
     this.#renderers = renderers;
     this.#tableCellRenderer = tableCellRenderer;
   }
 
-  get renderers() {
-    return this.#renderers;
+  get renderers(): Renderers {
+    return this.#renderers();
   }
 
-  get tableCellRenderer() {
-    return this.#tableCellRenderer;
+  get tableCellRenderer(): TokenRenderer<Tokens.TableCell> {
+    return this.#tableCellRenderer();
   }
 
   getRenderer<T extends TokenType>(
     type: T,
   ): TokenRenderer<Token[T]> | undefined {
-    if (!this.#renderers[type]) {
+    const renderer = this.renderers[type];
+    if (!renderer) {
       console.warn("No renderer registered for", type);
     }
-    return this.#renderers[type];
+    return renderer;
   }
 }
 

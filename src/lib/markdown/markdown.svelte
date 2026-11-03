@@ -90,7 +90,7 @@
 
   setMarkdownContext(
     new MarkdownContext(
-      {
+      () => ({
         blockquote,
         br,
         code,
@@ -111,8 +111,8 @@
         strong,
         table,
         text,
-      },
-      tableCell,
+      }),
+      () => tableCell,
     ),
   );
 
