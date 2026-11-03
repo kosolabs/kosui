@@ -1,14 +1,14 @@
 <script module lang="ts">
   import { mergeComponentProps } from "$lib/merge-props.js";
   import { Modal, type ModalProps } from "$lib/modal/index.js";
-  import type { Icon } from "@lucide/svelte";
+  import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";
 
   export type DialogProps<T> = {
     ref?: HTMLDialogElement;
     onSelect?: (value: T | undefined) => void;
-    icon?: typeof Icon;
+    icon?: LucideIcon;
     title?: string;
     children: Snippet;
     actions?: Snippet<[{ onSelect: (value: T | undefined) => void }]>;

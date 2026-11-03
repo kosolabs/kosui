@@ -156,10 +156,6 @@
       }
     }
   }
-
-  if (!children) {
-    console.log(children);
-  }
 </script>
 
 {#if open}

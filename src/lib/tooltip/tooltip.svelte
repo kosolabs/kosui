@@ -58,18 +58,20 @@
     open = false;
   }
 
-  const triggerProps: TooltipTriggerProps = click
-    ? {
-        ref: (ref) => (anchorEl = ref),
-        onclick: () => (open = true),
-      }
-    : {
-        ref: (ref) => (anchorEl = ref),
-        onmouseenter: () => !isTouchDevice() && show(),
-        onmouseleave: () => hide(),
-        ontouchstart: () => show(delay),
-        ontouchend: () => cancel(),
-      };
+  const triggerProps: TooltipTriggerProps = $derived(
+    click
+      ? {
+          ref: (ref) => (anchorEl = ref),
+          onclick: () => (open = true),
+        }
+      : {
+          ref: (ref) => (anchorEl = ref),
+          onmouseenter: () => !isTouchDevice() && show(),
+          onmouseleave: () => hide(),
+          ontouchstart: () => show(delay),
+          ontouchend: () => cancel(),
+        },
+  );
 </script>
 
 <Popover

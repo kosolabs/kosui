@@ -1,5 +1,5 @@
 import type { Shortcut } from "$lib/shortcut/index.js";
-import { CircleSlash, type Icon } from "@lucide/svelte";
+import { CircleSlash, type LucideIcon } from "@lucide/svelte";
 import { untrack } from "svelte";
 
 type ActionProps = {
@@ -8,7 +8,7 @@ type ActionProps = {
   category?: string;
   name?: string;
   description?: string;
-  icon?: typeof Icon;
+  icon?: LucideIcon;
   enabled?: () => boolean;
   selected?: () => boolean;
   shortcut?: Shortcut;
@@ -20,7 +20,7 @@ export class Action {
   category: string;
   name: string;
   description: string;
-  icon: typeof Icon;
+  icon: LucideIcon;
   enabled: () => boolean;
   selected?: () => boolean;
   shortcut?: Shortcut;

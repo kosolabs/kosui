@@ -13,6 +13,11 @@ runs:
         node-version-file: .nvmrc
         cache: "pnpm"
         cache-dependency-path: pnpm-lock.yaml
-    - name: Install dependencies
+    - name: Install dependencies (fail on warnings)
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: |
+        pnpm install --frozen-lockfile 2>&1 | tee "$RUNNER_TEMP/pnpm-install.log"
+        if grep -E '\bWARN\b' "$RUNNER_TEMP/pnpm-install.log"; then
+          echo "::error::pnpm install emitted warnings (see above); fix them before merging."
+          exit 1
+        fi
