@@ -38,3 +38,8 @@ export {
   type PropsTableProps,
 } from "./props-table.svelte";
 export { default as Section, type SectionProps } from "./section.svelte";
+export {
+  default as GuidanceTable,
+  type GuidanceRow,
+  type GuidanceTableProps,
+} from "./guidance-table.svelte";

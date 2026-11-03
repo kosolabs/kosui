@@ -51,7 +51,7 @@
     aria-describedby={tooltipLabel ? undefined : describedBy}
     class={cn(
       baseClasses({ variant, color, shape, hover: true, focus: true }),
-      "flex items-center justify-center gap-2 text-sm text-nowrap transition-all select-none enabled:active:scale-95",
+      "inline-flex items-center justify-center gap-2 text-sm text-nowrap transition-all select-none enabled:active:scale-95",
       children ? "px-4 py-2" : "p-2",
       className,
     )}

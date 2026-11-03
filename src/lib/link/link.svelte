@@ -2,22 +2,20 @@
   import { baseClasses, type Variants } from "#lib/base.js";
   import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
-  import type {
-    HTMLAnchorAttributes,
-    HTMLButtonAttributes,
-  } from "svelte/elements";
+  import type { HTMLAnchorAttributes } from "svelte/elements";
 
   export type LinkProps = {
+    href: string;
     children: Snippet;
   } & ElementRef &
     ClassName &
     Variants &
-    HTMLButtonAttributes &
-    HTMLAnchorAttributes;
+    Omit<HTMLAnchorAttributes, "href">;
 </script>
 
 <script lang="ts">
   let {
+    href,
     children,
     el = $bindable(),
     ref = noop,
@@ -25,36 +23,35 @@
     variant = "text",
     color = "primary",
     shape = "rounded",
-    underline = "hover",
-    href,
+    underline,
     ...props
   }: LinkProps = $props();
 
-  const classes = $derived(
-    cn(
-      baseClasses({
-        variant,
-        color,
-        shape,
-        underline,
-        hover: true,
-        focus: true,
-      }),
-      variant !== "text" &&
-        "flex h-9 items-center justify-center gap-2 text-nowrap transition-all active:scale-95",
-      "cursor-pointer",
-      className,
-    ),
+  let resolvedUnderline = $derived(
+    underline ?? (variant === "text" ? "always" : "none"),
   );
 </script>
 
-{#if href}
-  <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-  <a bind:this={el} use:ref class={classes} {href} {...props}>
-    {@render children()}
-  </a>
-{:else}
-  <button bind:this={el} use:ref class={classes} {...props}>
-    {@render children()}
-  </button>
-{/if}
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
+<a
+  bind:this={el}
+  use:ref
+  {href}
+  class={cn(
+    baseClasses({
+      variant,
+      color,
+      shape,
+      underline: resolvedUnderline,
+      hover: true,
+      focus: true,
+    }),
+    variant !== "text" &&
+      "inline-flex h-9 items-center justify-center gap-2 text-nowrap transition-all active:scale-95",
+    className,
+  )}
+  {...props}
+>
+  {@render children()}
+</a>
+<!-- eslint-enable svelte/no-navigation-without-resolve -->

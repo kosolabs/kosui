@@ -50,7 +50,7 @@
   <div class="flex min-h-0 flex-1">
     <aside class="flex flex-col items-start overflow-y-auto border-r p-6">
       {#each paths as path (path)}
-        <Link href={path}>
+        <Link href={path} underline="hover">
           {toTitleCase(path.split("/").slice(-1)[0])}
         </Link>
       {/each}

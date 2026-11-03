@@ -106,7 +106,9 @@
     <div class="flex w-50 flex-col gap-2">
       <div>Rich Title</div>
       <div>
-        I'm a rich tooltip with a <Link>link to a thing</Link> which should wrap.
+        I'm a rich tooltip with a <Link href="https://svelte.dev"
+          >link to a thing</Link
+        > which should wrap.
       </div>
       <div class="flex gap-2">
         <Button>Action 1</Button>
@@ -122,8 +124,9 @@
     <div class="flex w-50 flex-col gap-2">
       <div>Rich Title</div>
       <div>
-        I'm a rich tooltip with a <Link>link to a thing</Link> which should wrap.
-        And I should have an arrow.
+        I'm a rich tooltip with a <Link href="https://svelte.dev"
+          >link to a thing</Link
+        > which should wrap. And I should have an arrow.
       </div>
       <div class="flex gap-2">
         <Button>Action 1</Button>
