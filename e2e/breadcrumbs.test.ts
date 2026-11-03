@@ -9,10 +9,10 @@ test.describe("Breadcrumbs Component Tests", () => {
 
   test("breadcrumbs should render", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("link", { name: "Home" }),
+      page.getByRole("main").getByRole("link", { name: "Home" }),
     ).toBeVisible();
     await expect(
-      page.getByTitle("content").getByRole("link", { name: "Breadcrumbs" }),
+      page.getByRole("main").getByRole("link", { name: "Breadcrumbs" }),
     ).toBeVisible();
   });
 });
