@@ -34,12 +34,12 @@ export class SliderContext {
   #radius: () => SliderRadius;
   onChange: ((value: number) => void) | undefined;
   onChangeEnd: ((value: number) => void) | undefined;
-  handleRenderer: Snippet<[SliderHandleProps]>;
-  handleLabelRenderer: Snippet<[SliderHandleLabelProps]>;
-  handleLabelArrowRenderer: Snippet<[SliderHandleLabelArrowProps]>;
-  markRenderer: Snippet<[SliderMarkProps]>;
-  markDotRenderer: Snippet<[SliderMarkDotProps]>;
-  markLabelRenderer: Snippet<[SliderMarkLabelProps]>;
+  #handleRenderer: () => Snippet<[SliderHandleProps]>;
+  #handleLabelRenderer: () => Snippet<[SliderHandleLabelProps]>;
+  #handleLabelArrowRenderer: () => Snippet<[SliderHandleLabelArrowProps]>;
+  #markRenderer: () => Snippet<[SliderMarkProps]>;
+  #markDotRenderer: () => Snippet<[SliderMarkDotProps]>;
+  #markLabelRenderer: () => Snippet<[SliderMarkLabelProps]>;
   sliderEl!: HTMLDivElement;
   hovered: boolean = $state(false);
   clicked: boolean = $state(false);
@@ -63,12 +63,12 @@ export class SliderContext {
     radius: () => SliderRadius,
     onChange: ((value: number) => void) | undefined,
     onChangeEnd: ((value: number) => void) | undefined,
-    handleRenderer: Snippet<[SliderHandleProps]>,
-    handleLabelRenderer: Snippet<[SliderHandleLabelProps]>,
-    handleLabelArrowRenderer: Snippet<[SliderHandleLabelArrowProps]>,
-    markRenderer: Snippet<[SliderMarkProps]>,
-    markDotRenderer: Snippet<[SliderMarkDotProps]>,
-    markLabelRenderer: Snippet<[SliderMarkLabelProps]>,
+    handleRenderer: () => Snippet<[SliderHandleProps]>,
+    handleLabelRenderer: () => Snippet<[SliderHandleLabelProps]>,
+    handleLabelArrowRenderer: () => Snippet<[SliderHandleLabelArrowProps]>,
+    markRenderer: () => Snippet<[SliderMarkProps]>,
+    markDotRenderer: () => Snippet<[SliderMarkDotProps]>,
+    markLabelRenderer: () => Snippet<[SliderMarkLabelProps]>,
   ) {
     this.#value = new Bindable(getValue());
     this.#value.bind(getValue, setValue);
@@ -86,12 +86,12 @@ export class SliderContext {
     this.#radius = radius;
     this.onChange = onChange;
     this.onChangeEnd = onChangeEnd;
-    this.handleRenderer = handleRenderer;
-    this.handleLabelRenderer = handleLabelRenderer;
-    this.handleLabelArrowRenderer = handleLabelArrowRenderer;
-    this.markRenderer = markRenderer;
-    this.markDotRenderer = markDotRenderer;
-    this.markLabelRenderer = markLabelRenderer;
+    this.#handleRenderer = handleRenderer;
+    this.#handleLabelRenderer = handleLabelRenderer;
+    this.#handleLabelArrowRenderer = handleLabelArrowRenderer;
+    this.#markRenderer = markRenderer;
+    this.#markDotRenderer = markDotRenderer;
+    this.#markLabelRenderer = markLabelRenderer;
   }
 
   get value(): number {
@@ -149,6 +149,30 @@ export class SliderContext {
 
   get radius(): SliderRadius {
     return this.#radius();
+  }
+
+  get handleRenderer(): Snippet<[SliderHandleProps]> {
+    return this.#handleRenderer();
+  }
+
+  get handleLabelRenderer(): Snippet<[SliderHandleLabelProps]> {
+    return this.#handleLabelRenderer();
+  }
+
+  get handleLabelArrowRenderer(): Snippet<[SliderHandleLabelArrowProps]> {
+    return this.#handleLabelArrowRenderer();
+  }
+
+  get markRenderer(): Snippet<[SliderMarkProps]> {
+    return this.#markRenderer();
+  }
+
+  get markDotRenderer(): Snippet<[SliderMarkDotProps]> {
+    return this.#markDotRenderer();
+  }
+
+  get markLabelRenderer(): Snippet<[SliderMarkLabelProps]> {
+    return this.#markLabelRenderer();
   }
 
   get position(): number {
