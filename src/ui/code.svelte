@@ -10,8 +10,19 @@
     bindables?: (keyof T)[];
     defaults: T;
     values: Partial<T>;
+    expressions?: Record<string, string | undefined>;
+    imports?: string[];
+    children?: string;
   };
-  let { component, bindables = [], defaults, values }: CodeProps = $props();
+  let {
+    component,
+    bindables = [],
+    defaults,
+    values,
+    expressions = {},
+    imports = [],
+    children,
+  }: CodeProps = $props();
 
   function eq(objA: unknown, objB: unknown): boolean {
     return JSON.stringify(objA) === JSON.stringify(objB);
@@ -55,7 +66,13 @@
       }
     }
 
-    const script = [`import { ${component} } from "kosui";`];
+    for (const [key, expression] of Object.entries(expressions)) {
+      if (expression !== undefined) {
+        props.push(`${key}={${expression}}`);
+      }
+    }
+
+    const script = [`import { ${component} } from "kosui";`, ...imports];
     if (bindables.length > 0) {
       script.push(``);
     }
@@ -70,9 +87,19 @@
       ...script.map((line) => `  ${line}`),
       `</${"script"}>`,
       ``,
-      `<${component}${joinProps(props)}/>`,
+      element(joinProps(props)),
     ].join("\n");
   });
+
+  function element(props: string): string {
+    if (children === undefined) {
+      return `<${component}${props}/>`;
+    }
+    if (props.includes("\n")) {
+      return `<${component}${props}>\n  ${children}\n</${component}>`;
+    }
+    return `<${component}${props.trimEnd()}>${children}</${component}>`;
+  }
 </script>
 
 <!-- eslint-disable-next-line svelte/no-at-html-tags -->

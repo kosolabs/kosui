@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 test.describe.configure({ mode: "parallel" });
 
@@ -7,61 +7,51 @@ test.describe("Button Component Tests", () => {
     await page.goto("/button");
   });
 
-  test("buttons should have correct roles", async ({ page }) => {
-    await expect(
-      page.getByRole("button", { name: "Elevated Primary Rounded Button" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: "Elevated Primary Rounded Icon" }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: "Elevated Primary Rounded Disabled" }),
-    ).toBeVisible();
-  });
-
-  test("buttons should activate when enter is pressed", async ({ page }) => {
-    await page.getByTestId("result").isHidden();
-    await page
-      .getByRole("button", { name: "Elevated Primary Rounded Button" })
-      .focus();
-    await page.keyboard.press("Enter");
-    await expect(page.getByTestId("result")).toBeVisible();
-  });
-
-  test("buttons should activate when space is pressed", async ({ page }) => {
-    await page.getByTestId("result").isHidden();
-    await page
-      .getByRole("button", { name: "Elevated Primary Rounded Button" })
-      .focus();
-    await page.keyboard.press("Space");
-    await expect(page.getByTestId("result")).toBeVisible();
-  });
-
-  test("buttons should activate when clicked", async ({ page }) => {
-    await page.getByTestId("result").isHidden();
-    await page
-      .getByRole("button", { name: "Elevated Primary Rounded Button" })
+  const preview = (page: Page) => page.getByTestId("preview");
+  const save = (page: Page) =>
+    preview(page).getByRole("button", { name: "Save" });
+  const choose = (page: Page, setting: string, option: string) =>
+    page
+      .getByRole("listbox", { name: setting })
+      .getByRole("option", { name: option, exact: true })
       .click();
-    await expect(page.getByTestId("result")).toBeVisible();
+
+  test("button has the button role and its label as its name", async ({
+    page,
+  }) => {
+    await expect(save(page)).toBeVisible();
   });
 
-  test("disabled buttons should be disabled", async ({ page }) => {
-    await expect(
-      page.getByRole("button", { name: "Elevated Primary Rounded Disabled" }),
-    ).toBeDisabled();
+  test("buttons activate when enter is pressed", async ({ page }) => {
+    await save(page).focus();
+    await page.keyboard.press("Enter");
+    await expect(preview(page)).toContainText("Pressed 1 time");
   });
 
-  test("disabled buttons should not be focusable", async ({ page }) => {
-    await page
-      .getByRole("button", { name: "Elevated Primary Rounded Disabled" })
-      .focus();
-    const focusedElement = await page.evaluate(
-      () => document.activeElement?.tagName,
-    );
-    expect(focusedElement).not.toBe("BUTTON");
+  test("buttons activate when space is pressed", async ({ page }) => {
+    await save(page).focus();
+    await page.keyboard.press("Space");
+    await expect(preview(page)).toContainText("Pressed 1 time");
   });
 
-  // TODO: Add a test for focus rings
+  test("buttons activate when clicked", async ({ page }) => {
+    await save(page).click();
+    await expect(preview(page)).toContainText("Pressed 1 time");
+  });
+
+  test("disabled buttons are disabled and not focusable", async ({ page }) => {
+    await page.getByRole("switch", { name: "Disabled" }).click();
+    await expect(save(page)).toBeDisabled();
+
+    await save(page).focus();
+    await expect(save(page)).not.toBeFocused();
+  });
+
+  test("icon-only buttons keep an accessible name", async ({ page }) => {
+    await choose(page, "Content", "icon");
+    await expect(save(page)).toBeVisible();
+    await expect(save(page)).not.toContainText("Save");
+  });
 });
 
 test.describe("Button with tooltip", () => {
@@ -93,8 +83,8 @@ test.describe("Button with tooltip", () => {
 test.describe("Button focus ring", () => {
   test("shows for keyboard focus but not after a click", async ({ page }) => {
     await page.goto("/button");
-    const button = page.getByRole("button", {
-      name: "Outlined Primary Rounded Button",
+    const button = page.getByTestId("preview").getByRole("button", {
+      name: "Save",
     });
     const outline = () =>
       button.evaluate((el) => getComputedStyle(el).outlineStyle);
