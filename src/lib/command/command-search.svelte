@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { CommandInput, type CommandInputProps } from "$lib/command/index.js";
+  import { CommandInput, type CommandInputProps } from "#lib/command/index.js";
   import { SearchIcon } from "@lucide/svelte";
 
   export type CommandSearchProps = {} & CommandInputProps;

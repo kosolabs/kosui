@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { ToggleButton, ToggleGroup } from "$lib/index.js";
-  import { Setting } from "$ui/index.js";
+  import { ToggleButton, ToggleGroup } from "#lib/index.js";
+  import { Setting } from "#ui";
 
   export type ToggleButtonSettingProps = {
     value: string;

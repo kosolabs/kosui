@@ -25,7 +25,7 @@
     MarkdownTokens,
     setMarkdownContext,
     type MarkdownComponentProps,
-  } from "$lib/markdown/index.js";
+  } from "#lib/markdown/index.js";
   import {
     Lexer,
     type MarkedOptions,

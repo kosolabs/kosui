@@ -1,5 +1,5 @@
-import type { Variants } from "$lib/base.js";
-import type { InputProps } from "$lib/input/index.js";
+import type { Variants } from "#lib/base.js";
+import type { InputProps } from "#lib/input/index.js";
 import type { LucideIcon } from "@lucide/svelte";
 import { getContext, setContext, type Snippet } from "svelte";
 

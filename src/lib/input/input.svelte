@@ -9,8 +9,8 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "$lib/base.js";
-  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  } from "#lib/base.js";
+  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 

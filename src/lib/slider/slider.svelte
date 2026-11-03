@@ -9,8 +9,8 @@
     type RadiusProp,
     type Size,
     type SizeProp,
-  } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
+  } from "#lib/base.js";
+  import { mergeProps } from "#lib/merge-props.js";
   import {
     setSliderContext,
     SliderContext,
@@ -26,8 +26,8 @@
     type SliderMarkDotProps,
     type SliderMarkLabelProps,
     type SliderMarkProps,
-  } from "$lib/slider/index.js";
-  import type { ClassName } from "$lib/utils.js";
+  } from "#lib/slider/index.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

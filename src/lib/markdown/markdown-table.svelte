@@ -2,7 +2,7 @@
   import {
     getMarkdownContext,
     type MarkdownComponentProps,
-  } from "$lib/markdown/index.js";
+  } from "#lib/markdown/index.js";
   import type { Tokens } from "marked";
   import type { HTMLTableAttributes } from "svelte/elements";
 

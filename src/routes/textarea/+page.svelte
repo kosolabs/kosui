@@ -9,7 +9,7 @@
     type TextareaRadius,
     type TextareaSize,
     type TextareaVariant,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
@@ -18,7 +18,7 @@
     Setting,
     SizeSetting,
     Usage,
-  } from "$ui";
+  } from "#ui";
 
   let variant: TextareaVariant = $state("filled");
   let color: TextareaColor = $state("primary");

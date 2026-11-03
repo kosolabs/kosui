@@ -7,7 +7,7 @@
     MarkdownList,
     MarkdownTable,
     MarkdownTableCell,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import { twMerge } from "tailwind-merge";
 
   let value = `

@@ -1,6 +1,6 @@
-import { Bindable } from "$lib/bindable.svelte.js";
-import { OrderedHTMLElements } from "$lib/ordered-html-elements.js";
-import { Shortcut } from "$lib/shortcut/index.js";
+import { Bindable } from "#lib/bindable.svelte.js";
+import { OrderedHTMLElements } from "#lib/ordered-html-elements.js";
+import { Shortcut } from "#lib/shortcut/index.js";
 
 export class ItemContext {
   #input = new Bindable<string>("");

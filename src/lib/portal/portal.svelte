@@ -1,5 +1,5 @@
 <script lang="ts" module>
-  import { Proxy } from "$lib/portal/index.js";
+  import { Proxy } from "#lib/portal/index.js";
   import { mount, unmount, type Snippet } from "svelte";
 
   export type PortalProps = { children?: Snippet; target?: HTMLElement };

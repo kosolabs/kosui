@@ -4,8 +4,8 @@
     ToggleButton,
     ToggleGroup,
     type Color,
-  } from "$lib/index.js";
-  import { Setting } from "$ui/index.js";
+  } from "#lib/index.js";
+  import { Setting } from "#ui";
 
   export type ColorSettingProps = {
     color: Color;

@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { mergeComponentProps } from "$lib/merge-props.js";
-  import { Modal, type ModalProps } from "$lib/modal/index.js";
+  import { mergeComponentProps } from "#lib/merge-props.js";
+  import { Modal, type ModalProps } from "#lib/modal/index.js";
   import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import { twMerge } from "tailwind-merge";

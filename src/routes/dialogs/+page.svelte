@@ -4,7 +4,7 @@
     Dialog,
     DialogButton,
     getDialoguerContext,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import { CalendarDays, TriangleAlert } from "@lucide/svelte";
 
   const dialog = getDialoguerContext();

@@ -3,8 +3,8 @@
     SwitchColorProp,
     SwitchRadiusProp,
     SwitchSizeProp,
-  } from "$lib/switch/index.js";
-  import type { ClassName } from "$lib/utils.js";
+  } from "#lib/switch/index.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
 

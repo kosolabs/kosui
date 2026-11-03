@@ -7,11 +7,11 @@
     CommandItem,
     CommandSearch,
     Registry,
-  } from "$lib/command/index.js";
-  import { events } from "$lib/index.js";
-  import { Modal } from "$lib/modal/index.js";
-  import { Shortcut, ShortcutBadge } from "$lib/shortcut/index.js";
-  import { match } from "$lib/utils.js";
+  } from "#lib/command/index.js";
+  import { events } from "#lib/index.js";
+  import { Modal } from "#lib/modal/index.js";
+  import { Shortcut, ShortcutBadge } from "#lib/shortcut/index.js";
+  import { match } from "#lib/utils.js";
   import { Check, ChevronRight } from "@lucide/svelte";
 
   export type CommanderProps = {

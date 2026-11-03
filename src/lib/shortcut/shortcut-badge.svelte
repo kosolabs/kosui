@@ -1,7 +1,7 @@
 <script module lang="ts">
-  import { Box } from "$lib/box/index.js";
-  import type { Shortcut } from "$lib/shortcut/index.js";
-  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import { Box } from "#lib/box/index.js";
+  import type { Shortcut } from "#lib/shortcut/index.js";
+  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
   import { twMerge, type ClassNameValue } from "tailwind-merge";
 

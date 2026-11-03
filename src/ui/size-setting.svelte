@@ -4,8 +4,8 @@
     ToggleButton,
     ToggleGroup,
     type Size,
-  } from "$lib/index.js";
-  import { Setting } from "$ui/index.js";
+  } from "#lib/index.js";
+  import { Setting } from "#ui";
 
   export type SizeSettingProps = {
     size: Size;

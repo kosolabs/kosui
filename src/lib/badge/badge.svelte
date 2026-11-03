@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Box, type BoxProps } from "$lib/box/index.js";
+  import { Box, type BoxProps } from "#lib/box/index.js";
   import { twMerge } from "tailwind-merge";
 
   export type BadgeProps = {

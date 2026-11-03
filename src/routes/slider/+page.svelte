@@ -7,7 +7,7 @@
     type SliderColor,
     type SliderRadius,
     type SliderSize,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
@@ -16,7 +16,7 @@
     SizeSetting,
     SwitchSetting,
     Usage,
-  } from "$ui/index.js";
+  } from "#ui";
   import { onMount } from "svelte";
 
   let color: SliderColor = $state("primary");

@@ -1,13 +1,13 @@
 <script lang="ts" module>
-  import { events } from "$lib/index.js";
-  import { mergeProps } from "$lib/merge-props.js";
-  import { Shortcut } from "$lib/shortcut/index.js";
+  import { events } from "#lib/index.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import { Shortcut } from "#lib/shortcut/index.js";
   import {
     noop,
     type ClassName,
     type ElementRef,
     type ToggleEventWithTarget,
-  } from "$lib/utils.js";
+  } from "#lib/utils.js";
   import * as floatingUi from "@floating-ui/dom";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";

@@ -1,4 +1,4 @@
-import type { Shortcut } from "$lib/shortcut/index.js";
+import type { Shortcut } from "#lib/shortcut/index.js";
 import { CircleSlash, type LucideIcon } from "@lucide/svelte";
 import { untrack } from "svelte";
 

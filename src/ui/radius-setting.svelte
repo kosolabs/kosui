@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { RADII, Slider, type Radius } from "$lib/index.js";
-  import { Setting } from "$ui/index.js";
+  import { RADII, Slider, type Radius } from "#lib/index.js";
+  import { Setting } from "#ui";
 
   export type RadiusSettingProps = {
     radius: Radius;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { MarkdownComponentProps } from "$lib/markdown/index.js";
+  import type { MarkdownComponentProps } from "#lib/markdown/index.js";
   import type { Tokens } from "marked";
   import type { HTMLQuoteAttributes } from "svelte/elements";
 

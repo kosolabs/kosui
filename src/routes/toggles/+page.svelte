@@ -5,7 +5,7 @@
     ToggleButton,
     ToggleGroup,
     toTitleCase,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
 
   let value: "1" | "2" | "3" | undefined = $state("2");
 </script>

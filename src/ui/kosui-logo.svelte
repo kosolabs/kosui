@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mergeProps } from "$lib/merge-props.js";
+  import { mergeProps } from "#lib/merge-props.js";
   import type { HTMLImgAttributes } from "svelte/elements";
 
   export type Props = HTMLImgAttributes;

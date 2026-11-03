@@ -1,7 +1,7 @@
-import { Bindable } from "$lib/bindable.svelte.js";
-import { OrderedHTMLElements } from "$lib/ordered-html-elements.js";
-import { Shortcut } from "$lib/shortcut/index.js";
-import { TypingBuffer } from "$lib/utils.js";
+import { Bindable } from "#lib/bindable.svelte.js";
+import { OrderedHTMLElements } from "#lib/ordered-html-elements.js";
+import { Shortcut } from "#lib/shortcut/index.js";
+import { TypingBuffer } from "#lib/utils.js";
 import { getContext, setContext } from "svelte";
 
 export class MenuContext {

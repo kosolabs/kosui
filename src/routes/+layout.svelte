@@ -1,34 +1,34 @@
 <script module lang="ts">
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import { Link, toTitleCase } from "$lib/index.js";
-  import { KosuiLogo } from "$ui";
+  import { Link, toTitleCase } from "#lib/index.js";
+  import { KosuiLogo } from "#ui";
   import type { Snippet } from "svelte";
   import "../app.css";
 
   const paths = [
-    resolve("/alert"),
-    resolve("/autocomplete"),
-    resolve("/avatar"),
-    resolve("/badge"),
-    resolve("/breadcrumbs"),
-    resolve("/button"),
-    resolve("/chips"),
-    resolve("/command"),
-    resolve("/dialogs"),
-    resolve("/fab"),
-    resolve("/input"),
-    resolve("/links"),
-    resolve("/markdown"),
-    resolve("/menus"),
-    resolve("/progress-indicators"),
-    resolve("/slider"),
-    resolve("/switch"),
-    resolve("/shortcuts"),
-    resolve("/skeleton"),
-    resolve("/textarea"),
-    resolve("/toggles"),
-    resolve("/tooltips"),
+    resolve("alert"),
+    resolve("autocomplete"),
+    resolve("avatar"),
+    resolve("badge"),
+    resolve("breadcrumbs"),
+    resolve("button"),
+    resolve("chips"),
+    resolve("command"),
+    resolve("dialogs"),
+    resolve("fab"),
+    resolve("input"),
+    resolve("links"),
+    resolve("markdown"),
+    resolve("menus"),
+    resolve("progress-indicators"),
+    resolve("slider"),
+    resolve("switch"),
+    resolve("shortcuts"),
+    resolve("skeleton"),
+    resolve("textarea"),
+    resolve("toggles"),
+    resolve("tooltips"),
   ];
 </script>
 

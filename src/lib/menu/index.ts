@@ -1,7 +1,7 @@
 export {
   Divider as MenuDivider,
   Header as MenuHeader,
-} from "$lib/common/index.js";
+} from "#lib/common/index.js";
 export {
   default as MenuActions,
   type MenuActionsProps,

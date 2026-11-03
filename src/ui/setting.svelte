@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Label } from "$ui/index.js";
+  import { Label } from "#ui";
   import type { Snippet } from "svelte";
 
   export type SettingProps = {

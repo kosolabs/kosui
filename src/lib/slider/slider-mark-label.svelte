@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { mergeProps } from "$lib/merge-props.js";
-  import type { ClassName } from "$lib/utils.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import type { ClassName } from "#lib/utils.js";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";
   import { getSliderContext } from "./slider-context.svelte.js";

@@ -8,7 +8,7 @@
     MenuHeader,
     MenuItem,
     MenuTrigger,
-  } from "$lib/index.js";
+  } from "#lib/index.js";
   import { twMerge } from "tailwind-merge";
 
   let open = $state(false);

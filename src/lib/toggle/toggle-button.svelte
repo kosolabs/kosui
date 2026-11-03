@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import type { Variants } from "$lib/base.js";
-  import { mergeProps } from "$lib/merge-props.js";
-  import { getToggleContext } from "$lib/toggle/index.js";
-  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import type { Variants } from "#lib/base.js";
+  import { mergeProps } from "#lib/merge-props.js";
+  import { getToggleContext } from "#lib/toggle/index.js";
+  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

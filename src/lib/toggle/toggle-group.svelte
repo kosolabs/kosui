@@ -1,6 +1,6 @@
 <script module lang="ts">
-  import { setToggleContext, ToggleContext } from "$lib/toggle/index.js";
-  import { noop, type ClassName, type ElementRef } from "$lib/utils.js";
+  import { setToggleContext, ToggleContext } from "#lib/toggle/index.js";
+  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
   import { twMerge } from "tailwind-merge";

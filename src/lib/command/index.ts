@@ -1,7 +1,7 @@
 export {
   Divider as CommandDivider,
   Header as CommandHeader,
-} from "$lib/common/index.js";
+} from "#lib/common/index.js";
 export { Action, Registry } from "./action.svelte";
 export { default as CommandContent } from "./command-content.svelte";
 export {

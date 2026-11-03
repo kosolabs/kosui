@@ -1,7 +1,7 @@
 <script module lang="ts">
-  import { getAutocompleteContext } from "$lib/autocomplete/index.js";
-  import { Input, type InputProps } from "$lib/input/index.js";
-  import { mergeComponentProps } from "$lib/merge-props.js";
+  import { getAutocompleteContext } from "#lib/autocomplete/index.js";
+  import { Input, type InputProps } from "#lib/input/index.js";
+  import { mergeComponentProps } from "#lib/merge-props.js";
 
   export type AutocompleteInputProps = InputProps;
 </script>
