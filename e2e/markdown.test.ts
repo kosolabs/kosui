@@ -16,33 +16,31 @@ test.describe("Markdown Component Tests", () => {
     });
 
     await page.goto("/markdown");
-    await expect(page.getByTitle("content").getByText("EOF")).toBeVisible();
+    await expect(page.getByRole("main").getByText("EOF")).toBeVisible();
 
     expect(warnings).toEqual([]);
   });
 
   test("blockquote", async ({ page }) => {
-    await expect(
-      page.getByTitle("content").getByRole("blockquote"),
-    ).toBeVisible();
+    await expect(page.getByRole("main").getByRole("blockquote")).toBeVisible();
   });
 
   test("break", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("paragraph").locator("br"),
+      page.getByRole("main").getByRole("paragraph").locator("br"),
     ).toBeAttached();
   });
 
   test("code", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("code").getByText("key"),
+      page.getByRole("main").getByRole("code").getByText("key"),
     ).toBeVisible();
   });
 
   test("codespan", async ({ page }) => {
     await expect(
       page
-        .getByTitle("content")
+        .getByRole("main")
         .getByRole("paragraph")
         .getByText("Markdown")
         .getByRole("code")
@@ -53,7 +51,7 @@ test.describe("Markdown Component Tests", () => {
   test("del", async ({ page }) => {
     await expect(
       page
-        .getByTitle("content")
+        .getByRole("main")
         .getByRole("paragraph")
         .getByText("Markdown")
         .getByRole("deletion"),
@@ -63,7 +61,7 @@ test.describe("Markdown Component Tests", () => {
   test("emphasis", async ({ page }) => {
     await expect(
       page
-        .getByTitle("content")
+        .getByRole("main")
         .getByRole("paragraph")
         .getByText("Markdown")
         .getByRole("emphasis"),
@@ -72,62 +70,62 @@ test.describe("Markdown Component Tests", () => {
 
   test("heading", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("heading", { name: "Heading 1" }),
+      page.getByRole("main").getByRole("heading", { name: "Heading 1" }),
     ).toBeVisible();
 
     await expect(
-      page.getByTitle("content").getByRole("heading", { name: "Heading 2" }),
+      page.getByRole("main").getByRole("heading", { name: "Heading 2" }),
     ).toBeVisible();
 
     await expect(
-      page.getByTitle("content").getByRole("heading", { name: "Heading 3" }),
+      page.getByRole("main").getByRole("heading", { name: "Heading 3" }),
     ).toBeVisible();
   });
 
   test("hr", async ({ page }) => {
-    await expect(page.getByTitle("content").locator("hr")).toBeVisible();
+    await expect(page.getByRole("main").locator("hr")).toBeVisible();
   });
 
   test("html", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("paragraph").getByText("HTML"),
+      page.getByRole("main").getByRole("paragraph").getByText("HTML"),
     ).toBeVisible();
   });
 
   test("image", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("img", { name: "image" }),
+      page.getByRole("main").getByRole("img", { name: "image" }),
     ).toBeVisible();
   });
 
   test("link", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("link").getByText("link"),
+      page.getByRole("main").getByRole("link").getByText("link"),
     ).toBeVisible();
   });
 
   test("list", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("list").getByText("ol"),
+      page.getByRole("main").getByRole("list").getByText("ol"),
     ).toHaveCount(2);
     await expect(
-      page.getByTitle("content").getByRole("list").getByText("ul"),
+      page.getByRole("main").getByRole("list").getByText("ul"),
     ).toHaveCount(2);
     await expect(
-      page.getByTitle("content").getByRole("list").getByText("sub"),
+      page.getByRole("main").getByRole("list").getByText("sub"),
     ).toHaveCount(2);
   });
 
   test("paragraph", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("paragraph").getByText("paragraph"),
+      page.getByRole("main").getByRole("paragraph").getByText("paragraph"),
     ).toBeVisible();
   });
 
   test("strong", async ({ page }) => {
     await expect(
       page
-        .getByTitle("content")
+        .getByRole("main")
         .getByRole("paragraph")
         .getByText("Markdown")
         .getByRole("strong"),
@@ -135,12 +133,12 @@ test.describe("Markdown Component Tests", () => {
   });
 
   test("table", async ({ page }) => {
-    await expect(page.getByTitle("content").getByRole("table")).toBeVisible();
+    await expect(page.getByRole("main").getByRole("table")).toBeVisible();
   });
 
   test("text", async ({ page }) => {
     await expect(
-      page.getByTitle("content").getByRole("paragraph").getByText("Markdown"),
+      page.getByRole("main").getByRole("paragraph").getByText("Markdown"),
     ).toBeVisible();
   });
 });

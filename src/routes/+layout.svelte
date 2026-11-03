@@ -56,8 +56,8 @@
       {/each}
     </aside>
 
-    <div title="content" class="flex flex-1 flex-col gap-4 overflow-y-auto p-6">
+    <main class="flex flex-1 flex-col gap-4 overflow-y-auto p-6">
       {@render children()}
-    </div>
+    </main>
   </div>
 </div>
