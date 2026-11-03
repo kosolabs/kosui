@@ -31,12 +31,21 @@
     ...props
   }: LinkProps = $props();
 
-  const classes = twMerge(
-    baseClasses({ variant, color, shape, underline, hover: true, focus: true }),
-    variant !== "text" &&
-      "flex h-9 items-center justify-center gap-2 text-nowrap transition-all active:scale-95",
-    "cursor-pointer",
-    className,
+  const classes = $derived(
+    twMerge(
+      baseClasses({
+        variant,
+        color,
+        shape,
+        underline,
+        hover: true,
+        focus: true,
+      }),
+      variant !== "text" &&
+        "flex h-9 items-center justify-center gap-2 text-nowrap transition-all active:scale-95",
+      "cursor-pointer",
+      className,
+    ),
   );
 </script>
 

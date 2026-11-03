@@ -26,7 +26,7 @@ export class EventManager {
       this.#destroyers[type] = on(document, type, (event) => {
         runEventHandlers(
           document,
-          event as Event & { currentTarget: EventTarget & Element },
+          event as unknown as Event & { currentTarget: EventTarget & Element },
           ...(this.#listeners[type] as EventHandler[]),
         );
       });

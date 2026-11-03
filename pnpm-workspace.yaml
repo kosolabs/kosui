@@ -1,0 +1,8 @@
+engineStrict: true
+
+allowBuilds:
+  "@tailwindcss/oxide": true
+  esbuild: true
+
+overrides:
+  cookie: 1.1.1

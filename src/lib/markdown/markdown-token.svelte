@@ -9,7 +9,7 @@
 
   const ctx = getMarkdownContext();
 
-  let renderer = ctx.getRenderer(token.type);
+  let renderer = $derived(ctx.getRenderer(token.type));
 </script>
 
 {#snippet children()}

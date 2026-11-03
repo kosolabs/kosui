@@ -79,5 +79,4 @@
 
     className,
   )}
-  {...restProps}
-></textarea>
+  {...restProps}></textarea>

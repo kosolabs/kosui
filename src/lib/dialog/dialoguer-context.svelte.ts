@@ -1,6 +1,6 @@
 import type { Variants } from "$lib/base.js";
 import type { InputProps } from "$lib/input/index.js";
-import type { Icon } from "@lucide/svelte";
+import type { LucideIcon } from "@lucide/svelte";
 import { getContext, setContext, type Snippet } from "svelte";
 
 export type DialoguerButtonProps<T> = {
@@ -10,7 +10,7 @@ export type DialoguerButtonProps<T> = {
 } & Variants;
 
 type ShowDialogProps<T> = {
-  icon?: typeof Icon;
+  icon?: LucideIcon;
   title?: string;
   inputProps?: InputProps;
   message: Snippet<[]> | string;
@@ -18,14 +18,14 @@ type ShowDialogProps<T> = {
 };
 
 type NoticeDialogProps = {
-  icon?: typeof Icon;
+  icon?: LucideIcon;
   title?: string;
   message: Snippet<[]> | string;
   acceptText?: string;
 };
 
 type ConfirmDialogProps = {
-  icon?: typeof Icon;
+  icon?: LucideIcon;
   title?: string;
   message: Snippet<[]> | string;
   cancelText?: string;
@@ -33,7 +33,7 @@ type ConfirmDialogProps = {
 };
 
 type InputDialogProps = {
-  icon?: typeof Icon;
+  icon?: LucideIcon;
   title?: string;
   props: InputProps;
   message: Snippet<[]> | string;
@@ -43,7 +43,7 @@ type InputDialogProps = {
 
 export class DialoguerContext {
   message: Snippet<[]> | string = $state("");
-  icon: typeof Icon | undefined = $state();
+  icon: LucideIcon | undefined = $state();
   title: string | undefined = $state();
   inputProps: InputProps | undefined = $state();
   buttons: DialoguerButtonProps<unknown>[] = $state.raw([]);

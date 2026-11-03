@@ -9,12 +9,15 @@
   let { radius = $bindable(), radii: radii = RADII }: RadiusSettingProps =
     $props();
 
-  const v2r: Record<number, Radius> = Object.fromEntries(
-    radii.map((radius, index) => [index, radius]),
+  const v2r: Record<number, Radius> = $derived(
+    Object.fromEntries(radii.map((radius, index) => [index, radius])),
   );
-  const r2v: Record<Radius, number> = Object.fromEntries(
-    radii.map((radius, index) => [radius, index]),
-  ) as Record<Radius, number>;
+  const r2v = $derived(
+    Object.fromEntries(radii.map((radius, index) => [radius, index])) as Record<
+      Radius,
+      number
+    >,
+  );
 </script>
 
 <Setting label="radius">
