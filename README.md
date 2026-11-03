@@ -6,7 +6,7 @@ A Svelte component library used by [Koso](https://koso.app) and [Cipherly](https
 
 These principles are listed in order of priority. When they conflict, the higher principle wins.
 
-**Svelte First** — Write idiomatic Svelte. Prefer runes, snippets, and Svelte's built-in reactivity over external state management or patterns that fight the framework.
+**Svelte First** — Write idiomatic, current Svelte. Use runes, snippets, and attachments, and reach for Svelte's built-ins before writing our own: `$derived` (writable when needed) over effects that sync state, `createContext` for context, `$props.id()` for ids. When Svelte adds a built-in for something we hand-rolled, adopt it.
 
 **Be Parsimonious** — Keep components as simple as possible. Reach for CSS first; use JavaScript only when CSS can't do it. Don't add abstractions that aren't earning their weight.
 
@@ -14,7 +14,7 @@ These principles are listed in order of priority. When they conflict, the higher
 
 **Convention over Invention** — If a component is standard across major platforms and frameworks — iOS, Android, Windows, macOS, and the web — it belongs in the library. Its behavior should be unsurprising: implement it the way those platforms do, not the way we imagine it might work.
 
-**Transparent Props** — Components don't hide their underlying DOM element. Every component spreads `...restProps` and provides an `el` binding so consumers can always reach the element without fighting the component.
+**Transparent Props** — Components behave like the element they render. Every component spreads `...restProps` onto that element, attachments included, and provides an `el` binding. Props like `class` accept whatever the native element accepts.
 
 **Composable over Configurable** — Prefer Svelte snippets and composition over a proliferation of boolean props and string options. When a component needs customization, reach for `{#snippet}` before adding another prop.
 
