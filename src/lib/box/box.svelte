@@ -1,6 +1,6 @@
 <script lang="ts">
   import { baseClasses, type Variants } from "#lib/base.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
@@ -17,7 +17,6 @@
     centered = false,
     children,
     el = $bindable(),
-    ref = noop,
     class: className,
     variant,
     color,
@@ -28,7 +27,6 @@
 
 <div
   bind:this={el}
-  use:ref
   class={cn(
     backdrop && "bg-m3-surface-container",
     baseClasses({ variant, color, shape }),

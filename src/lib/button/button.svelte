@@ -2,7 +2,7 @@
   import { baseClasses, type Variants } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { Tooltip, type TooltipTriggerProps } from "#lib/tooltip/index.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type {
@@ -36,7 +36,6 @@
     tooltip,
     children,
     el = $bindable(),
-    ref = noop,
     class: className,
     variant = "outlined",
     color = "primary",
@@ -66,15 +65,12 @@
 {/snippet}
 
 {#snippet button({
-  ref: anchorRef,
   "aria-describedby": describedBy,
   ...triggerProps
 }: TooltipTriggerProps)}
   {#if restProps.href === undefined}
     <button
       bind:this={el}
-      use:ref
-      use:anchorRef
       aria-label={tooltipLabel}
       aria-describedby={tooltipLabel ? undefined : describedBy}
       class={classes}
@@ -87,8 +83,6 @@
     <!-- eslint-disable svelte/no-navigation-without-resolve -->
     <a
       bind:this={el}
-      use:ref
-      use:anchorRef
       aria-label={tooltipLabel}
       aria-describedby={tooltipLabel ? undefined : describedBy}
       class={classes}
@@ -112,5 +106,5 @@
     {/if}
   </Tooltip>
 {:else}
-  {@render button({ ref: noop })}
+  {@render button({})}
 {/if}

@@ -1,6 +1,6 @@
 <script module lang="ts">
   import { setToggleContext, ToggleContext } from "#lib/toggle/index.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
@@ -19,7 +19,6 @@
     onChange,
     children,
     el = $bindable(),
-    ref = noop,
     class: className,
     ...restProps
   }: ToggleGroupProps<T> = $props();
@@ -37,7 +36,6 @@
 
 <div
   bind:this={el}
-  use:ref
   role="listbox"
   aria-orientation="horizontal"
   class={cn("flex", className)}

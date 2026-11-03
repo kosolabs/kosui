@@ -2,9 +2,10 @@
   import { Popover, type PopoverProps } from "#lib/popover/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
+  import { createAttachmentKey, type Attachment } from "svelte/attachments";
 
   export type TooltipTriggerProps = {
-    ref: (el: HTMLElement) => void;
+    [attachment: symbol]: Attachment<HTMLElement>;
     "aria-describedby"?: string;
     onclick?: () => void;
     onmouseenter?: () => void;
@@ -43,6 +44,11 @@
 
   let id = $derived(providedId ?? generatedId);
 
+  const anchor = createAttachmentKey();
+  const attachAnchor: Attachment<HTMLElement> = (node) => {
+    anchorEl = node;
+  };
+
   function isTouchDevice() {
     return "ontouchstart" in window || navigator.maxTouchPoints > 0;
   }
@@ -68,11 +74,11 @@
   const triggerProps: TooltipTriggerProps = $derived(
     click
       ? {
-          ref: (ref) => (anchorEl = ref),
+          [anchor]: attachAnchor,
           onclick: () => (open = true),
         }
       : {
-          ref: (ref) => (anchorEl = ref),
+          [anchor]: attachAnchor,
           "aria-describedby": open ? id : undefined,
           onmouseenter: () => !isTouchDevice() && show(),
           onmouseleave: () => hide(),

@@ -184,12 +184,6 @@
           description: "Bindable. The rendered `<a>` element.",
         },
         {
-          name: "ref",
-          type: "(el: HTMLElement) => void",
-          description:
-            "Called with the element when it mounts. `{@attach}` does the same and composes better.",
-        },
-        {
           name: "class",
           type: "ClassValue",
           description:

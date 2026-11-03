@@ -4,7 +4,7 @@
     type ColorProp,
     type UnderlineProp,
   } from "#lib/base.js";
-  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAnchorAttributes } from "svelte/elements";
 
@@ -23,7 +23,6 @@
     href,
     children,
     el = $bindable(),
-    ref = noop,
     class: className,
     color = "primary",
     underline = "always",
@@ -34,7 +33,6 @@
 <!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
   bind:this={el}
-  use:ref
   {href}
   class={cn(
     baseClasses({
