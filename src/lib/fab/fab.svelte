@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button, type ButtonProps } from "#lib/button/index.js";
-  import type { ElementRef } from "#lib/utils.js";
-  import { twMerge } from "tailwind-merge";
+  import { cn, type ElementRef } from "#lib/utils.js";
 
   export type FabProps = {} & ElementRef & ButtonProps;
 
@@ -19,7 +18,7 @@
 <div class="grow"></div>
 <Button
   bind:el
-  class={twMerge("sticky bottom-0 ml-auto p-4 backdrop-blur-sm", className)}
+  class={cn("sticky bottom-0 ml-auto p-4 backdrop-blur-sm", className)}
   {variant}
   {shape}
   {icon}

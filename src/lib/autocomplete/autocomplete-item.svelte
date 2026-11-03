@@ -2,10 +2,9 @@
   import { getAutocompleteContext } from "#lib/autocomplete/index.js";
   import { baseClasses, type Variants } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
-  import type { ClassName, ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type AutocompleteItemProps = {
     onSelect?: (el: HTMLElement) => void;
@@ -51,7 +50,7 @@
   bind:this={el}
   role="option"
   aria-selected={ctx.focused === el}
-  class={twMerge(
+  class={cn(
     baseClasses({ variant, color, shape }),
     "flex w-full cursor-pointer items-center gap-1 px-2 py-1 text-left text-sm focus:ring-0 disabled:bg-transparent aria-selected:bg-m3-secondary/15",
     className,

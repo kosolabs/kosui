@@ -1,8 +1,8 @@
+import { cn } from "#lib/utils.js";
 import type { Component, ComponentProps } from "svelte";
-import type { EventHandler } from "svelte/elements";
-import { twMerge, type ClassNameValue } from "tailwind-merge";
+import type { ClassValue, EventHandler } from "svelte/elements";
 
-function isClass(value: unknown): value is ClassNameValue {
+function isClass(value: unknown): value is ClassValue {
   if (value === null || value === undefined) {
     return true;
   }
@@ -12,11 +12,15 @@ function isClass(value: unknown): value is ClassNameValue {
   if (Array.isArray(value)) {
     return value.every((item) => isClass(item));
   }
-  return false;
+  return Object.getPrototypeOf(value) === Object.prototype;
 }
 
-function isHandlerKey(key: string): boolean {
-  return key.startsWith("on") && key[2].toLowerCase() === key[2];
+function isHandlerKey(key: PropertyKey): boolean {
+  return (
+    typeof key === "string" &&
+    key.startsWith("on") &&
+    key[2].toLowerCase() === key[2]
+  );
 }
 
 function isHandler(value: unknown): value is EventHandler {
@@ -71,7 +75,11 @@ function chainCallbacks(...callbacks: Callable[]): Callable {
   };
 }
 
-type Props = Record<string, unknown>;
+type Props = Record<PropertyKey, unknown>;
+
+function ownKeys(props: Props): PropertyKey[] {
+  return [...Object.keys(props), ...Object.getOwnPropertySymbols(props)];
+}
 
 type PropsUnion<T extends Props[]> = (
   T extends (infer U)[]
@@ -86,7 +94,7 @@ type PropsUnion<T extends Props[]> = (
 export function mergeProps<T extends Props[]>(...args: [...T]): PropsUnion<T> {
   const result: Props = {};
   for (const props of args) {
-    for (const key in props) {
+    for (const key of ownKeys(props)) {
       const prevVal = result[key];
       const currVal = props[key];
 
@@ -110,7 +118,7 @@ export function mergeProps<T extends Props[]>(...args: [...T]): PropsUnion<T> {
       }
 
       if (key === "class" && isClass(prevVal) && isClass(currVal)) {
-        result[key] = twMerge(prevVal, currVal);
+        result[key] = cn(prevVal, currVal);
         continue;
       }
 

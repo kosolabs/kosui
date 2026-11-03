@@ -29,6 +29,7 @@
               {color}
               {shape}
               icon={Link2}
+              aria-label="{title} Link"
               onclick={() => (clicked = true)}
             />
             <Button

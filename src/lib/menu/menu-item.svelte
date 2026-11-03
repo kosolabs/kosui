@@ -3,10 +3,9 @@
   import { getMenuContext } from "#lib/menu/index.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { Shortcut } from "#lib/shortcut/index.js";
-  import type { ClassName, ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type MenuItemProps = {
     onSelect?: (el: HTMLElement) => void;
@@ -66,9 +65,9 @@
 <button
   bind:this={el}
   role="menuitem"
-  class={twMerge(
-    baseClasses({ variant, color, shape, focus: true }),
-    "flex w-full items-center gap-1 px-2 py-1 text-left text-sm focus:ring-0",
+  class={cn(
+    baseClasses({ variant, color, shape, hover: true, focus: true }),
+    "flex w-full items-center gap-1 px-2 py-1 text-left text-sm focus-visible:outline-none",
     className,
   )}
   {...mergeProps(

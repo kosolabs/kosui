@@ -27,10 +27,9 @@
     type SliderMarkLabelProps,
     type SliderMarkProps,
   } from "#lib/slider/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export const SLIDER_COLORS = COLORS;
   export type SliderColor = Color;
@@ -166,7 +165,7 @@
 
 <!-- Track -->
 <div
-  class={twMerge(
+  class={cn(
     "cursor-pointer bg-m3-surface-container-highest px-2 select-none",
 
     ctx.disabled && "cursor-not-allowed opacity-50",
@@ -207,7 +206,7 @@
   <div bind:this={ctx.sliderEl} class="relative h-full">
     <!-- Filled track -->
     <div
-      class={twMerge(
+      class={cn(
         "absolute h-full",
 
         ctx.animated && "transition-all",
@@ -237,7 +236,7 @@
 
     <!-- Handle -->
     <div
-      class={twMerge(
+      class={cn(
         "absolute top-1/2 -translate-x-1/2 -translate-y-1/2",
         ctx.animated && "transition-all",
       )}

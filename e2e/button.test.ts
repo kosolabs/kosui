@@ -63,3 +63,48 @@ test.describe("Button Component Tests", () => {
 
   // TODO: Add a test for focus rings
 });
+
+test.describe("Button with tooltip", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/tooltips");
+  });
+
+  test("icon-only buttons are named by their tooltip", async ({ page }) => {
+    await expect(page.getByRole("button", { name: "Copy link" })).toBeVisible();
+  });
+
+  test("keyboard focus shows the tooltip and describes the button", async ({
+    page,
+  }) => {
+    const button = page.getByRole("button", { name: "Tooltip Prop" });
+    await button.focus();
+    await expect(
+      page.getByRole("tooltip").filter({ hasText: "I'm a tooltip prop" }),
+    ).toBeVisible();
+    await expect(button).toHaveAccessibleDescription("I'm a tooltip prop");
+
+    await button.blur();
+    await expect(
+      page.getByRole("tooltip").filter({ hasText: "I'm a tooltip prop" }),
+    ).toBeHidden();
+  });
+});
+
+test.describe("Button focus ring", () => {
+  test("shows for keyboard focus but not after a click", async ({ page }) => {
+    await page.goto("/button");
+    const button = page.getByRole("button", {
+      name: "Outlined Primary Rounded Button",
+    });
+    const outline = () =>
+      button.evaluate((el) => getComputedStyle(el).outlineStyle);
+
+    await button.click();
+    expect(await outline()).toBe("none");
+
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Tab");
+    await expect(button).toBeFocused();
+    expect(await outline()).toBe("solid");
+  });
+});

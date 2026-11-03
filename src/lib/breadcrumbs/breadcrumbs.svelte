@@ -1,7 +1,7 @@
 <script module lang="ts">
   import { Link, type LinkProps } from "#lib/link/index.js";
   import type { Snippet } from "svelte";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   type Crumb = {
     title: string;
@@ -23,7 +23,7 @@
   }: BreadcrumbsProps = $props();
 </script>
 
-<div class={twMerge("flex gap-2", className)}>
+<div class={cn("flex gap-2", className)}>
   {#each path as { title, href }, index (title)}
     {#if index !== 0}
       <div>

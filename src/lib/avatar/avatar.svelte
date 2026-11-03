@@ -1,6 +1,6 @@
 <script lang="ts" module>
   import { Box, type BoxProps } from "#lib/box/index.js";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   export type AvatarProps = {
     src?: string;
@@ -31,7 +31,7 @@
   {color}
   {shape}
   {centered}
-  class={twMerge("aspect-square h-9 overflow-clip text-xl", className)}
+  class={cn("aspect-square h-9 overflow-clip text-xl", className)}
   {...restProps}
 >
   {#if src && !error}

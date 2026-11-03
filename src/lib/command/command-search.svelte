@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   let {
     value = $bindable(""),
@@ -16,7 +16,7 @@
   }: CommandSearchProps = $props();
 </script>
 
-<div class={twMerge("flex items-center gap-2 px-2", className)}>
+<div class={cn("flex items-center gap-2 px-2", className)}>
   <SearchIcon size={16} />
   <CommandInput
     autofocus

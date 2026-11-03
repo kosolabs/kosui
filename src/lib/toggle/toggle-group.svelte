@@ -1,9 +1,8 @@
 <script module lang="ts">
   import { setToggleContext, ToggleContext } from "#lib/toggle/index.js";
-  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type ToggleGroupProps<T> = {
     value?: T;
@@ -41,7 +40,7 @@
   use:ref
   role="listbox"
   aria-orientation="horizontal"
-  class={twMerge("flex", className)}
+  class={cn("flex", className)}
   {...restProps}
 >
   {@render children()}

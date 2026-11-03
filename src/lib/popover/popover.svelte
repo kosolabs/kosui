@@ -3,6 +3,7 @@
   import { mergeProps } from "#lib/merge-props.js";
   import { Shortcut } from "#lib/shortcut/index.js";
   import {
+    cn,
     noop,
     type ClassName,
     type ElementRef,
@@ -10,13 +11,12 @@
   } from "#lib/utils.js";
   import * as floatingUi from "@floating-ui/dom";
   import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { HTMLAttributes, ClassValue } from "svelte/elements";
   import { scale } from "svelte/transition";
-  import { twMerge, type ClassNameValue } from "tailwind-merge";
 
   export type PopoverProps = {
     arrow?: boolean;
-    arrowClass?: ClassNameValue;
+    arrowClass?: ClassValue;
     placement?: floatingUi.Placement;
     strategy?: floatingUi.Strategy;
     open?: boolean;
@@ -163,14 +163,14 @@
     bind:this={popoverEl}
     use:ref
     popover="manual"
-    class={twMerge(className)}
+    class={cn(className)}
     transition:scale={{ duration: 150, start: 0.95 }}
     {...mergeProps(restProps, { onbeforetoggle, onclick: handleClickInside })}
   >
     {@render children()}
     <div
       bind:this={arrowEl}
-      class={twMerge(
+      class={cn(
         arrowClass,
         "absolute size-2 rotate-45",
         arrow ? "block" : "hidden",

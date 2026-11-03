@@ -1,7 +1,6 @@
 <script lang="ts">
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
   import { getSliderContext } from "./index.js";
 
   export type SliderMarkDotProps = {} & ClassName &
@@ -11,7 +10,7 @@
 </script>
 
 <div
-  class={twMerge(
+  class={cn(
     "rounded-full bg-m3-surface-container-lowest",
 
     ctx.size === "sm" && "size-0.5",

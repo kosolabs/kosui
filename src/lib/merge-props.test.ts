@@ -1,3 +1,4 @@
+import { createAttachmentKey } from "svelte/attachments";
 import { describe, expect, it, vi } from "vitest";
 import { mergeProps } from "./merge-props.js";
 
@@ -81,5 +82,19 @@ describe("mergeProps", () => {
     const props2 = { class: "text-sm" };
     const result = mergeProps(props1, props2);
     expect(result).toEqual({ class: "text-sm" });
+  });
+
+  it("should merge class objects and arrays", () => {
+    const props1 = { class: ["p-2", { hidden: false, "text-lg": true }] };
+    const props2 = { class: { "p-4": true } };
+    const result = mergeProps(props1, props2);
+    expect(result).toEqual({ class: "text-lg p-4" });
+  });
+
+  it("should keep attachments", () => {
+    const attachment = vi.fn();
+    const key = createAttachmentKey();
+    const result = mergeProps({ [key]: attachment, a: 1 }, { b: 2 });
+    expect(result[key]).toBe(attachment);
   });
 });

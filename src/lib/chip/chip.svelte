@@ -2,7 +2,7 @@
   import { Box, type BoxProps } from "#lib/box/index.js";
   import { X } from "@lucide/svelte";
   import type { Snippet } from "svelte";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   export type ChipProps = {
     title?: string;
@@ -33,7 +33,7 @@
   {variant}
   {color}
   {shape}
-  class={twMerge("inline-flex gap-1 px-1 py-0 text-xs", className)}
+  class={cn("inline-flex gap-1 px-1 py-0 text-xs", className)}
   {...restProps}
 >
   <button onclick={onClick} {title}>
@@ -43,7 +43,7 @@
   {#if onDelete}
     <button
       aria-label="Delete chip"
-      class={twMerge(
+      class={cn(
         "transition-all hover:ring-1 active:scale-95",
         shape === "rounded" && "rounded",
         shape === "circle" && "rounded-full",

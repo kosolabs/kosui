@@ -45,7 +45,9 @@
   "dependencies": {
     "@floating-ui/dom": "^1.7.4",
     "@lucide/svelte": "^1.1.0",
-    "marked": "^18.0.0"
+    "clsx": "^2.1.1",
+    "marked": "^18.0.0",
+    "tailwind-merge": "^3.7.0"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
@@ -78,7 +80,6 @@
     "publint": "0.3.25",
     "svelte": "^5.57.3",
     "svelte-check": "4.7.8",
-    "tailwind-merge": "3.7.0",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.1",

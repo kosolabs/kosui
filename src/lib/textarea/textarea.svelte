@@ -10,9 +10,8 @@
     type Size,
     type SizeProp,
   } from "#lib/base.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLTextareaAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export const TEXTAREA_VARIANTS = ["outlined", "filled", "inherit"] as const;
   export type TextareaVariant = (typeof TEXTAREA_VARIANTS)[number];
@@ -52,7 +51,7 @@
 
 <textarea
   bind:value
-  class={twMerge(
+  class={cn(
     "px-3 py-2 disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
 
     variant === "outlined" &&

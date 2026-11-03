@@ -3,7 +3,7 @@
   import { Modal, type ModalProps } from "#lib/modal/index.js";
   import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   export type DialogProps<T> = {
     ref?: HTMLDialogElement;
@@ -41,19 +41,19 @@
 <Modal
   bind:ref
   bind:open
-  class={twMerge("w-[min(calc(100%-1em),36em)]", className)}
+  class={cn("w-[min(calc(100%-1em),36em)]", className)}
   {...mergeComponentProps(
     Modal,
     { role: "dialog", "aria-modal": "true", onCancel: handleCancel },
     restProps,
   )}
 >
-  <div class={twMerge("flex flex-col gap-4")}>
+  <div class={cn("flex flex-col gap-4")}>
     {#if IconComponent}
       <IconComponent class="mx-auto" />
     {/if}
     {#if title}
-      <div class={twMerge("text-xl", IconComponent ? "text-center" : "")}>
+      <div class={cn("text-xl", IconComponent ? "text-center" : "")}>
         {title}
       </div>
     {/if}

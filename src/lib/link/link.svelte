@@ -1,12 +1,11 @@
 <script module lang="ts">
   import { baseClasses, type Variants } from "#lib/base.js";
-  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type {
     HTMLAnchorAttributes,
     HTMLButtonAttributes,
   } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type LinkProps = {
     children: Snippet;
@@ -32,7 +31,7 @@
   }: LinkProps = $props();
 
   const classes = $derived(
-    twMerge(
+    cn(
       baseClasses({
         variant,
         color,

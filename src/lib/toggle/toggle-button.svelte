@@ -2,10 +2,9 @@
   import type { Variants } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { getToggleContext } from "#lib/toggle/index.js";
-  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type ToggleButtonProps<T> = {
     value: T;
@@ -37,7 +36,7 @@
   use:ref
   role="option"
   aria-selected={ctx.value === value}
-  class={twMerge(
+  class={cn(
     "bg-md-background text-md-on-surface flex items-center gap-1 border-y border-l px-4 py-2 text-sm last:border-r",
 
     shape === "square" && "",
