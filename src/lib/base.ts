@@ -1,4 +1,4 @@
-import { twMerge } from "tailwind-merge";
+import { cn } from "#lib/utils.js";
 
 export const VARIANTS = [
   "elevated",
@@ -58,7 +58,7 @@ export type Variants = VariantProp &
   };
 
 const hoverBaseClasses = ({ variant, color }: VariantProp & ColorProp) =>
-  twMerge(
+  cn(
     "disabled:text-m3-on-surface/38 disabled:bg-m3-on-surface/12 disabled:cursor-not-allowed",
 
     variant === "filled" && "hover:opacity-90",
@@ -99,60 +99,45 @@ const hoverBaseClasses = ({ variant, color }: VariantProp & ColorProp) =>
   );
 
 const focusBaseClasses = ({ variant, color }: VariantProp & ColorProp) =>
-  twMerge(
+  cn(
     "disabled:text-m3-on-surface/38 disabled:bg-m3-on-surface/12 disabled:cursor-not-allowed",
 
-    "focus:ring-1 focus-visible:outline-hidden",
-    variant === "filled" && "focus:opacity-90",
-    variant === "tonal" && "focus:opacity-80",
-    variant === "text" && "focus:opacity-80",
-
-    color === "primary" && "focus:ring-m3-primary",
-    color === "secondary" && "focus:ring-m3-secondary",
-    color === "tertiary" && "focus:ring-m3-tertiary",
-    color === "error" && "focus:ring-m3-error",
-
-    variant === "filled" && color === "primary" && "focus:ring-m3-on-primary",
-
-    variant === "filled" &&
-      color === "secondary" &&
-      "focus:ring-m3-on-secondary",
-
-    variant === "filled" && color === "tertiary" && "focus:ring-m3-on-tertiary",
-
-    variant === "filled" && color === "error" && "focus:ring-m3-on-error",
+    "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-m3-secondary",
+    variant === "filled" && "focus-visible:opacity-90",
+    variant === "tonal" && "focus-visible:opacity-80",
+    variant === "text" && "focus-visible:opacity-80",
 
     variant === "elevated" &&
       color === "primary" &&
-      "focus:bg-m3-primary-container/30",
+      "focus-visible:bg-m3-primary-container/30",
 
     variant === "elevated" &&
       color === "secondary" &&
-      "focus:bg-m3-secondary-container/30",
+      "focus-visible:bg-m3-secondary-container/30",
 
     variant === "elevated" &&
       color === "tertiary" &&
-      "focus:bg-m3-tertiary-container/30",
+      "focus-visible:bg-m3-tertiary-container/30",
 
     variant === "elevated" &&
       color === "error" &&
-      "focus:bg-m3-error-container/30",
+      "focus-visible:bg-m3-error-container/30",
 
     (variant === "outlined" || variant === "plain") &&
       color === "primary" &&
-      "focus:bg-m3-primary/15",
+      "focus-visible:bg-m3-primary/15",
 
     (variant === "outlined" || variant === "plain") &&
       color === "secondary" &&
-      "focus:bg-m3-secondary/15",
+      "focus-visible:bg-m3-secondary/15",
 
     (variant === "outlined" || variant === "plain") &&
       color === "tertiary" &&
-      "focus:bg-m3-tertiary/15",
+      "focus-visible:bg-m3-tertiary/15",
 
     (variant === "outlined" || variant === "plain") &&
       color === "error" &&
-      "focus:bg-m3-error/15",
+      "focus-visible:bg-m3-error/15",
   );
 
 export const baseClasses = ({
@@ -163,7 +148,7 @@ export const baseClasses = ({
   hover = false,
   focus = false,
 }: Variants) =>
-  twMerge(
+  cn(
     variant === "elevated" &&
       "bg-m3-surface-container-low shadow shadow-m3-shadow/20",
     variant === "outlined" && "ring-1",

@@ -11,10 +11,9 @@
     type SizeProp,
   } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
   import SwitchThumb, { type SwitchThumbProps } from "./switch-thumb.svelte";
 
   export const SWITCH_COLORS = COLORS;
@@ -59,7 +58,7 @@
   type="button"
   role="switch"
   aria-checked={checked}
-  class={twMerge(
+  class={cn(
     "group relative inline-flex cursor-pointer bg-m3-surface-container-highest transition-all focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
 
     color === "primary" &&

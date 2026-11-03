@@ -1,4 +1,6 @@
-import type { ClassNameValue } from "tailwind-merge";
+import { clsx, type ClassValue as ClassInput } from "clsx";
+import type { ClassValue } from "svelte/elements";
+import { twMerge } from "tailwind-merge";
 
 export function noop() {}
 
@@ -7,7 +9,16 @@ export type ElementRef = {
   ref?: (el: HTMLElement) => void;
 };
 
-export type ClassName = { class?: ClassNameValue };
+export type ClassName = { class?: ClassValue };
+
+/**
+ * Resolves class values the way Svelte's `class` attribute does (strings,
+ * arrays and objects), then merges conflicting Tailwind classes so later
+ * values win.
+ */
+export function cn(...values: ClassInput[]): string {
+  return twMerge(clsx(values));
+}
 
 export type ToggleEventWithTarget<T extends HTMLElement> = ToggleEvent & {
   currentTarget: EventTarget & T;

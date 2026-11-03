@@ -3,10 +3,9 @@
   import { getMenuContext } from "#lib/menu/index.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { Shortcut } from "#lib/shortcut/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type MenuTriggerProps = {
     children?: Snippet;
@@ -23,7 +22,7 @@
 
 <button
   bind:this={ctx.anchorEl}
-  class={twMerge(className)}
+  class={cn(className)}
   {...mergeProps(
     {
       onclick: () => (ctx.open = !ctx.open),

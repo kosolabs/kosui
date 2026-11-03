@@ -4,9 +4,8 @@
     SwitchRadiusProp,
     SwitchSizeProp,
   } from "#lib/switch/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type SwitchThumbProps = {} & ClassName &
     SwitchColorProp &
@@ -26,7 +25,7 @@
 </script>
 
 <div
-  class={twMerge(
+  class={cn(
     "absolute top-0.5 left-0.5 shadow-sm transition-all",
 
     color === "primary" && "bg-m3-on-primary",

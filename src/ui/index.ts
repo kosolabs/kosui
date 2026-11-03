@@ -26,4 +26,15 @@ export {
   default as ToggleButtonSetting,
   type ToggleButtonSettingProps,
 } from "./toggle-button-setting.svelte";
-export { default as Usage, type UsageProps } from "./usage.svelte";
+export {
+  default as Playground,
+  type PlaygroundProps,
+} from "./playground.svelte";
+export { default as CodeBlock, type CodeBlockProps } from "./code-block.svelte";
+export { default as Example, type ExampleProps } from "./example.svelte";
+export {
+  default as PropsTable,
+  type PropRow,
+  type PropsTableProps,
+} from "./props-table.svelte";
+export { default as Section, type SectionProps } from "./section.svelte";

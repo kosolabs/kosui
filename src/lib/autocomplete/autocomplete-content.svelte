@@ -2,9 +2,8 @@
   import { getAutocompleteContext } from "#lib/autocomplete/index.js";
   import { baseClasses, type Variants } from "#lib/base.js";
   import { Popover, type PopoverProps } from "#lib/popover/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
-  import { twMerge } from "tailwind-merge";
 
   export type AutocompleteProps = {
     children: Snippet;
@@ -34,7 +33,7 @@
 <Popover
   bind:open={ctx.open}
   role="menu"
-  class={twMerge(
+  class={cn(
     baseClasses({ variant, color, shape }),
     "max-h-[40%] border bg-m3-surface-container-highest p-1 shadow",
     className,

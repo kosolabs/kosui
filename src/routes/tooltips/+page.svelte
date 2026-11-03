@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button, Link, Shortcut, Tooltip } from "#lib/index.js";
+  import { Copy } from "@lucide/svelte";
 
   const shortcut = new Shortcut({ key: "Enter", shift: true });
 
@@ -58,6 +59,7 @@
   </Tooltip>
 
   <Button tooltip="I'm a tooltip prop">Tooltip Prop</Button>
+  <Button icon={Copy} tooltip="Copy link" />
 
   <Button>
     Tooltip Snippet

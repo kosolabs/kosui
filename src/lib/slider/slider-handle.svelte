@@ -1,9 +1,8 @@
 <script lang="ts" module>
   import { mergeProps } from "#lib/merge-props.js";
   import { getSliderContext } from "#lib/slider/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type SliderHandleProps = {} & ClassName &
     HTMLAttributes<HTMLDivElement>;
@@ -17,7 +16,7 @@
 
 <div class="relative">
   <div
-    class={twMerge(
+    class={cn(
       "border-2 border-m3-surface shadow-md",
 
       ctx.animated && "transition-all",

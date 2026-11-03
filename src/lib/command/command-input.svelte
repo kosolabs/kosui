@@ -2,9 +2,8 @@
   import { baseClasses, type Variants } from "#lib/base.js";
   import { getCommandContext } from "#lib/command/index.js";
   import { mergeProps } from "#lib/merge-props.js";
-  import type { ClassName, ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type CommandInputProps = {} & ElementRef &
     ClassName &
@@ -35,7 +34,7 @@
 
 <input
   bind:value={ctx.input}
-  class={twMerge(
+  class={cn(
     baseClasses({ variant, color, shape }),
     "w-full p-1 focus-visible:outline-hidden",
     className,

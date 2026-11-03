@@ -10,9 +10,8 @@
     type Size,
     type SizeProp,
   } from "#lib/base.js";
-  import { noop, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, noop, type ClassName, type ElementRef } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
   export type InputVariant = (typeof INPUT_VARIANTS)[number];
@@ -57,7 +56,7 @@
   bind:value
   bind:this={el}
   use:ref
-  class={twMerge(
+  class={cn(
     "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
 
     variant === "outlined" &&

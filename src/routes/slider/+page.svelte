@@ -15,7 +15,7 @@
     RadiusSetting,
     SizeSetting,
     SwitchSetting,
-    Usage,
+    Playground,
   } from "#ui";
   import { onMount } from "svelte";
 
@@ -49,7 +49,7 @@
 
 <h1 class="text-4xl">Slider</h1>
 
-<Usage>
+<Playground>
   {#snippet component()}
     <div class="w-full max-w-md">
       <Slider
@@ -107,4 +107,4 @@
       }}
     />
   {/snippet}
-</Usage>
+</Playground>

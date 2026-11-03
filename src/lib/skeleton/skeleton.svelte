@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Box, type BoxProps } from "#lib/box/index.js";
   import type { Snippet } from "svelte";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   export type SkeletonProps = { children?: Snippet } & BoxProps;
   let {
@@ -13,11 +13,6 @@
   }: SkeletonProps = $props();
 </script>
 
-<Box
-  class={twMerge("animate-pulse", className)}
-  {backdrop}
-  {shape}
-  {...restProps}
->
+<Box class={cn("animate-pulse", className)} {backdrop} {shape} {...restProps}>
   {@render children?.()}
 </Box>

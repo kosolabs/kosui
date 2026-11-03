@@ -16,7 +16,7 @@
     RadiusSetting,
     Setting,
     SizeSetting,
-    Usage,
+    Playground,
   } from "#ui";
 
   let variant: InputVariant = $state("filled");
@@ -29,7 +29,7 @@
 
 <h1 class="text-4xl">Input</h1>
 
-<Usage>
+<Playground>
   {#snippet component()}
     <Input {variant} {color} {size} {radius} {disabled} {placeholder} />
   {/snippet}
@@ -72,4 +72,4 @@
       }}
     />
   {/snippet}
-</Usage>
+</Playground>

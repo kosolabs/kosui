@@ -1,9 +1,8 @@
 <script module lang="ts">
   import { baseClasses, type Variants } from "#lib/base.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
-  import { twMerge } from "tailwind-merge";
 
   export type HeaderProps = {
     children: Snippet;
@@ -24,7 +23,7 @@
 </script>
 
 <div
-  class={twMerge(
+  class={cn(
     baseClasses({ variant, color, shape }),
     "px-2 py-1 text-xs uppercase",
     className,

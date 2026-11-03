@@ -2,11 +2,10 @@
   import { events } from "#lib/index.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { Shortcut } from "#lib/shortcut/index.js";
-  import type { ClassName } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLDialogAttributes } from "svelte/elements";
   import { scale } from "svelte/transition";
-  import { twMerge } from "tailwind-merge";
 
   export type ModalProps = {
     ref?: HTMLDialogElement;
@@ -69,7 +68,7 @@
 {#if open}
   <dialog
     bind:this={ref}
-    class={twMerge("m-auto rounded-lg p-5 shadow-lg", className)}
+    class={cn("m-auto rounded-lg p-5 shadow-lg", className)}
     transition:scale={{ duration: 150, start: 0.95 }}
     {...mergeProps(restProps, {
       onintrostart: () => {

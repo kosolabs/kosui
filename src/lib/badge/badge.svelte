@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Box, type BoxProps } from "#lib/box/index.js";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "#lib/utils.js";
 
   export type BadgeProps = {
     verticalAlignment?: "top" | "bottom";
@@ -27,7 +27,7 @@
       {color}
       {centered}
       shape="circle"
-      class={twMerge(
+      class={cn(
         "absolute z-10 size-5 p-1 text-xs",
 
         verticalAlignment === "top" && "top-0 -translate-y-1/2",
