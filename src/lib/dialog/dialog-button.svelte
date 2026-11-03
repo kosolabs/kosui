@@ -1,5 +1,5 @@
 <script module lang="ts">
-  import { Button, type ButtonProps } from "#lib/button/index.js";
+  import { Button, type ButtonActionProps } from "#lib/button/index.js";
   import type { Snippet } from "svelte";
 
   export type DialogButtonProps<T> = {
@@ -7,7 +7,7 @@
     autofocus?: boolean;
     onSelect: (value: T | undefined) => void;
     children: Snippet;
-  } & Omit<ButtonProps, "value">;
+  } & Omit<ButtonActionProps, "value">;
 </script>
 
 <script lang="ts" generics="T">

@@ -35,15 +35,6 @@ test.describe("Link Component Tests", () => {
     expect(await decoration(link(page))).toBe("none");
   });
 
-  test("button-like variants stay links without an underline", async ({
-    page,
-  }) => {
-    await choose(page, "Variant", "filled");
-    await choose(page, "Underline", "none");
-    await expect(link(page)).toBeVisible();
-    expect(await decoration(link(page))).toBe("none");
-  });
-
   test("links take keyboard focus", async ({ page }) => {
     await link(page).focus();
     await expect(link(page)).toBeFocused();

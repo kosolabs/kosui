@@ -47,6 +47,19 @@ test.describe("Button Component Tests", () => {
     await expect(save(page)).not.toBeFocused();
   });
 
+  test("buttons with href render a link", async ({ page }) => {
+    const getStarted = page
+      .getByRole("main")
+      .getByRole("link", { name: "Get started" });
+    await expect(getStarted).toHaveAttribute(
+      "href",
+      "https://svelte.dev/docs/svelte",
+    );
+    await expect(
+      page.getByRole("main").getByRole("button", { name: "Get started" }),
+    ).toHaveCount(0);
+  });
+
   test("icon-only buttons keep an accessible name", async ({ page }) => {
     await choose(page, "Content", "icon");
     await expect(save(page)).toBeVisible();
