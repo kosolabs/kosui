@@ -3,7 +3,9 @@
   import { cn } from "#lib/utils.js";
   import type { Attachment } from "svelte/attachments";
 
-  export type FabProps = ButtonProps;
+  export type FabProps = ButtonProps & {
+    overlap?: boolean;
+  };
 
   let {
     el = $bindable(),
@@ -11,14 +13,17 @@
     style,
     size = 20,
     variant = "elevated",
+    overlap = false,
     ...restProps
   }: FabProps = $props();
 
   let width = $state(0);
+  let height = $state(0);
 
-  const measureWidth: Attachment<HTMLElement> = (node) => {
+  const measure: Attachment<HTMLElement> = (node) => {
     const observer = new ResizeObserver(() => {
       width = node.offsetWidth;
+      height = node.offsetHeight;
     });
     observer.observe(node, { box: "border-box" });
     return () => observer.disconnect();
@@ -28,12 +33,13 @@
 <Button
   bind:el
   class={cn(
-    "sticky bottom-0 left-[calc(100%-var(--fab-width))] mt-auto ml-auto flex w-fit p-4",
+    "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex w-fit shrink-0 p-4 transition",
+    overlap && "mt-[calc(-1*var(--fab-height))]",
     className,
   )}
-  style="--fab-width: {width}px; {style ?? ''}"
+  style="--fab-width: {width}px; --fab-height: {height}px; {style ?? ''}"
   {variant}
   {size}
   {...restProps}
-  {@attach measureWidth}
+  {@attach measure}
 />

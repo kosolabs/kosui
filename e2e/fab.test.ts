@@ -98,6 +98,46 @@ test.describe("Fab Component Tests", () => {
     });
   }
 
+  test("with overlap, a fab covers the end of the content", async ({
+    page,
+  }) => {
+    const box = container(page);
+    const lastLine = box.getByText("Line 20", { exact: true });
+    const scrollEnd = async () => {
+      await box.evaluate((el) => el.scrollTo(0, el.scrollHeight));
+      return box.evaluate((el) => el.scrollHeight);
+    };
+    const overlapAtEnd = async () => {
+      await scrollEnd();
+      const line = (await lastLine.boundingBox())!;
+      return Math.round(
+        line.y + line.height - (await fab(page).boundingBox())!.y,
+      );
+    };
+    await expect.poll(overlapAtEnd).toBeLessThanOrEqual(0);
+    const clearHeight = await scrollEnd();
+
+    await page.getByRole("switch", { name: "Overlap" }).click();
+    await expect.poll(scrollEnd).toBeLessThan(clearHeight);
+    await expect.poll(overlapAtEnd).toBeGreaterThan(0);
+    await expect
+      .poll(() => gaps(fab(page), box))
+      .toEqual({ right: 8, bottom: 8 });
+  });
+
+  test("with overlap, a fab adds no scrolling to a short container", async ({
+    page,
+  }) => {
+    await page.getByRole("switch", { name: "Overlap" }).click();
+    await choose(page, "Container", "empty");
+    await expect
+      .poll(() => gaps(fab(page), container(page)))
+      .toEqual({ right: 8, bottom: 8 });
+    expect(
+      await container(page).evaluate((el) => el.scrollHeight - el.clientHeight),
+    ).toBe(0);
+  });
+
   test("at the end of the content, a fab sits below the last item", async ({
     page,
   }) => {

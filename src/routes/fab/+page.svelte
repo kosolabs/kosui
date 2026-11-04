@@ -33,6 +33,7 @@
   let shape: Shape = $state("rounded");
   let content = $state("icon");
   let container = $state("tall");
+  let overlap = $state(false);
   let tooltip = $state(true);
   let disabled = $state(false);
   let presses = $state(0);
@@ -54,6 +55,7 @@
     variant,
     color,
     shape,
+    overlap,
     disabled,
     icon: Plus,
     tooltip: tooltipText || undefined,
@@ -121,6 +123,7 @@
         options={CONTAINERS}
         label="Container"
       />
+      <SwitchSetting label="Overlap" bind:value={overlap} />
       <SwitchSetting label="Tooltip" bind:value={tooltip} />
       <DisabledSetting bind:disabled />
     {/snippet}
@@ -131,6 +134,7 @@
           variant: "elevated",
           color: "primary",
           shape: "rounded",
+          overlap: false,
           tooltip: "",
           "aria-label": "",
           disabled: false,
@@ -139,6 +143,7 @@
           variant,
           color,
           shape,
+          overlap,
           tooltip: tooltipText,
           "aria-label": ariaLabel,
           disabled,
@@ -155,9 +160,9 @@
       {#snippet description()}
         Make Fab the last child of a scrolling container. It stays in the bottom
         corner while the content scrolls, and at the end it sits below the last
-        item instead of covering it. In a flex column, it also moves to the
-        bottom when the content is short. To pin it to the window instead, pass
-        <code>class="fixed right-4 bottom-4 left-auto"</code>.
+        item instead of covering it. Set <code>overlap</code> to let it float
+        over the end of the content instead. To pin it to the window, pass
+        <code>class="fixed inset-auto right-4 bottom-4"</code>.
       {/snippet}
       <PlacementExample />
     </Example>
@@ -189,6 +194,13 @@
           type: `"elevated" | "filled" | "tonal" | "outlined" | "plain" | "text"`,
           default: `"elevated"`,
           description: "How much attention the Fab draws.",
+        },
+        {
+          name: "overlap",
+          type: "boolean",
+          default: "false",
+          description:
+            "Float over the end of the content instead of making room below it.",
         },
         {
           name: "size",
