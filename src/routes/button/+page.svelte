@@ -4,10 +4,12 @@
     COLORS,
     Link,
     SHAPES,
+    SIZES,
     VARIANTS,
     type ButtonProps,
     type Color,
     type Shape,
+    type Size,
     type Variant,
   } from "#lib/index.js";
   import { resolve } from "$app/paths";
@@ -94,6 +96,7 @@
   let variant: Variant = $state("outlined");
   let color: Color = $state("primary");
   let shape: Shape = $state("rounded");
+  let size: Size = $state("sm");
   let content = $state("label");
   let tooltip = $state(false);
   let disabled = $state(false);
@@ -108,6 +111,7 @@
     variant,
     color,
     shape,
+    size,
     disabled,
     icon: hasIcon ? Save : undefined,
     tooltip: tooltipText || undefined,
@@ -155,6 +159,11 @@
         label="Shape"
       />
       <ToggleButtonSetting
+        bind:value={size}
+        options={[...SIZES]}
+        label="Size"
+      />
+      <ToggleButtonSetting
         bind:value={content}
         options={CONTENTS}
         label="Content"
@@ -169,6 +178,7 @@
           variant: "outlined",
           color: "primary",
           shape: "rounded",
+          size: "sm",
           tooltip: "",
           "aria-label": "",
           disabled: false,
@@ -177,6 +187,7 @@
           variant,
           color,
           shape,
+          size,
           tooltip: tooltipText,
           "aria-label": ariaLabel,
           disabled,
@@ -320,10 +331,10 @@
         },
         {
           name: "size",
-          type: "number",
-          default: "16",
+          type: `"xs" | "sm" | "md" | "lg" | "xl"`,
+          default: `"sm"`,
           description:
-            "The icon's size in pixels. It doesn't change the button's size.",
+            "The row height: 28, 36, 44, 52 or 60 pixels, with text and icon to match. Buttons, inputs and other controls of the same size line up. Icon-only buttons are square.",
         },
         {
           name: "tooltip",

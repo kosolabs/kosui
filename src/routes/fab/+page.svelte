@@ -4,10 +4,12 @@
     Fab,
     Link,
     SHAPES,
+    SIZES,
     VARIANTS,
     type Color,
     type FabProps,
     type Shape,
+    type Size,
     type Variant,
   } from "#lib/index.js";
   import { resolve } from "$app/paths";
@@ -31,6 +33,7 @@
   let variant: Variant = $state("elevated");
   let color: Color = $state("primary");
   let shape: Shape = $state("rounded");
+  let size: Size = $state("lg");
   let content = $state("icon");
   let container = $state("tall");
   let clear = $state(false);
@@ -55,6 +58,7 @@
     variant,
     color,
     shape,
+    size,
     clear,
     disabled,
     icon: Plus,
@@ -68,8 +72,8 @@
   <p class="max-w-prose text-lg">
     A floating action button (Fab) holds the main action on a screen, like
     creating a task. It's a <Link href={resolve("button")}>Button</Link> with more
-    presence: elevated by default, with a larger icon and padding, and it floats in
-    the bottom corner of its container. Give it a label to make an extended Fab.
+    presence: elevated by default, two sizes larger, and it floats in the bottom corner
+    of its container. Give it a label to make an extended Fab.
   </p>
 
   <Playground>
@@ -114,6 +118,11 @@
         label="Shape"
       />
       <ToggleButtonSetting
+        bind:value={size}
+        options={[...SIZES]}
+        label="Size"
+      />
+      <ToggleButtonSetting
         bind:value={content}
         options={CONTENTS}
         label="Content"
@@ -134,6 +143,7 @@
           variant: "elevated",
           color: "primary",
           shape: "rounded",
+          size: "lg",
           clear: false,
           tooltip: "",
           "aria-label": "",
@@ -143,6 +153,7 @@
           variant,
           color,
           shape,
+          size,
           clear,
           tooltip: tooltipText,
           "aria-label": ariaLabel,
@@ -204,9 +215,10 @@
         },
         {
           name: "size",
-          type: "number",
-          default: "20",
-          description: "The icon's size in pixels.",
+          type: `"xs" | "sm" | "md" | "lg" | "xl"`,
+          default: `"lg"`,
+          description:
+            "The row height, on Button's scale: 28, 36, 44, 52 or 60 pixels. The default, 52, is two sizes above Button's.",
         },
       ]}
     />
