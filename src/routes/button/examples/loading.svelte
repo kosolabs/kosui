@@ -13,7 +13,7 @@
 
 <Button variant="filled" aria-busy={saving} onclick={save}>
   {#if saving}
-    <CircularProgress size={16} />
+    <CircularProgress size="xs" color="inherit" aria-hidden="true" />
   {/if}
   {saving ? "Saving…" : "Save"}
 </Button>
