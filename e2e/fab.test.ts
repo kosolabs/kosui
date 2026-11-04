@@ -98,7 +98,7 @@ test.describe("Fab Component Tests", () => {
     });
   }
 
-  test("with overlap, a fab covers the end of the content", async ({
+  test("a fab floats over the end of the content, and clear makes room", async ({
     page,
   }) => {
     const box = container(page);
@@ -114,31 +114,35 @@ test.describe("Fab Component Tests", () => {
         line.y + line.height - (await fab(page).boundingBox())!.y,
       );
     };
-    await expect.poll(overlapAtEnd).toBeLessThanOrEqual(0);
-    const clearHeight = await scrollEnd();
-
-    await page.getByRole("switch", { name: "Overlap" }).click();
-    await expect.poll(scrollEnd).toBeLessThan(clearHeight);
     await expect.poll(overlapAtEnd).toBeGreaterThan(0);
     await expect
       .poll(() => gaps(fab(page), box))
       .toEqual({ right: 8, bottom: 8 });
+    const floatingHeight = await scrollEnd();
+
+    await page.getByRole("switch", { name: "Clear" }).click();
+    await expect.poll(scrollEnd).toBeGreaterThan(floatingHeight);
+    await expect.poll(overlapAtEnd).toBeLessThanOrEqual(0);
   });
 
-  test("with overlap, a fab adds no scrolling to a short container", async ({
-    page,
-  }) => {
-    await page.getByRole("switch", { name: "Overlap" }).click();
-    await choose(page, "Container", "empty");
-    await expect
-      .poll(() => gaps(fab(page), container(page)))
-      .toEqual({ right: 8, bottom: 8 });
-    expect(
-      await container(page).evaluate((el) => el.scrollHeight - el.clientHeight),
-    ).toBe(0);
-  });
+  for (const clear of [false, true]) {
+    test(`a fab adds no scrolling to a short container${clear ? " with clear" : ""}`, async ({
+      page,
+    }) => {
+      if (clear) await page.getByRole("switch", { name: "Clear" }).click();
+      await choose(page, "Container", "empty");
+      await expect
+        .poll(() => gaps(fab(page), container(page)))
+        .toEqual({ right: 8, bottom: 8 });
+      expect(
+        await container(page).evaluate(
+          (el) => el.scrollHeight - el.clientHeight,
+        ),
+      ).toBe(0);
+    });
+  }
 
-  test("at the end of the content, a fab sits below the last item", async ({
+  test("with clear, a fab sits below the last item at the end", async ({
     page,
   }) => {
     const list = page.getByRole("list", { name: "Tasks" });

@@ -4,7 +4,7 @@
   import type { Attachment } from "svelte/attachments";
 
   export type FabProps = ButtonProps & {
-    overlap?: boolean;
+    clear?: boolean;
   };
 
   let {
@@ -13,7 +13,7 @@
     style,
     size = 20,
     variant = "elevated",
-    overlap = false,
+    clear = false,
     ...restProps
   }: FabProps = $props();
 
@@ -34,7 +34,7 @@
   bind:el
   class={cn(
     "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex w-fit shrink-0 p-4 transition",
-    overlap && "mt-[calc(-1*var(--fab-height))]",
+    !clear && "mt-[calc(-1*var(--fab-height))]",
     className,
   )}
   style="--fab-width: {width}px; --fab-height: {height}px; {style ?? ''}"

@@ -11,5 +11,5 @@
       <li class="py-1">Task {n}</li>
     {/each}
   </ul>
-  <Fab icon={Plus} tooltip="New task" />
+  <Fab icon={Plus} tooltip="New task" clear />
 </div>

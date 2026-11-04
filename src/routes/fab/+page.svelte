@@ -33,7 +33,7 @@
   let shape: Shape = $state("rounded");
   let content = $state("icon");
   let container = $state("tall");
-  let overlap = $state(false);
+  let clear = $state(false);
   let tooltip = $state(true);
   let disabled = $state(false);
   let presses = $state(0);
@@ -55,7 +55,7 @@
     variant,
     color,
     shape,
-    overlap,
+    clear,
     disabled,
     icon: Plus,
     tooltip: tooltipText || undefined,
@@ -123,7 +123,7 @@
         options={CONTAINERS}
         label="Container"
       />
-      <SwitchSetting label="Overlap" bind:value={overlap} />
+      <SwitchSetting label="Clear" bind:value={clear} />
       <SwitchSetting label="Tooltip" bind:value={tooltip} />
       <DisabledSetting bind:disabled />
     {/snippet}
@@ -134,7 +134,7 @@
           variant: "elevated",
           color: "primary",
           shape: "rounded",
-          overlap: false,
+          clear: false,
           tooltip: "",
           "aria-label": "",
           disabled: false,
@@ -143,7 +143,7 @@
           variant,
           color,
           shape,
-          overlap,
+          clear,
           tooltip: tooltipText,
           "aria-label": ariaLabel,
           disabled,
@@ -158,10 +158,10 @@
   <Section title="Examples">
     <Example title="Placing a Fab" source={placementSource}>
       {#snippet description()}
-        Make Fab the last child of a scrolling container. It stays in the bottom
-        corner while the content scrolls, and at the end it sits below the last
-        item instead of covering it. Set <code>overlap</code> to let it float
-        over the end of the content instead. To pin it to the window, pass
+        Make Fab the last child of a scrolling container. It floats in the
+        bottom corner while the content scrolls. Set <code>clear</code> so that
+        at the end it sits below the last item instead of covering it, as in
+        this list. To pin it to the window, pass
         <code>class="fixed inset-auto right-4 bottom-4"</code>.
       {/snippet}
       <PlacementExample />
@@ -196,11 +196,11 @@
           description: "How much attention the Fab draws.",
         },
         {
-          name: "overlap",
+          name: "clear",
           type: "boolean",
           default: "false",
           description:
-            "Float over the end of the content instead of making room below it.",
+            "Make room below the content, so at the end of a scroll the Fab sits below the last item instead of covering it.",
         },
         {
           name: "size",
