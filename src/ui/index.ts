@@ -1,19 +1,11 @@
 export { default as Code, type CodeProps } from "./code.svelte";
 export {
-  default as ColorSetting,
-  type ColorSettingProps,
-} from "./color-setting.svelte";
-export {
   default as DisabledSetting,
   type DisabledSettingProps,
 } from "./disabled-setting.svelte";
 export { default as KosuiLogo } from "./kosui-logo.svelte";
 export { default as Label, type LabelProps } from "./label.svelte";
 export { default as Setting, type SettingProps } from "./setting.svelte";
-export {
-  default as SizeSetting,
-  type SizeSettingProps,
-} from "./size-setting.svelte";
 export {
   default as SwitchSetting,
   type SwitchSettingProps,

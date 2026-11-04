@@ -5,9 +5,12 @@ test.describe.configure({ mode: "parallel" });
 const FULL = Infinity;
 
 const radius = (locator: Locator) =>
-  locator.evaluate((el) =>
-    parseFloat(getComputedStyle(el).borderTopLeftRadius),
-  );
+  locator.evaluate((el) => {
+    const style = getComputedStyle(el);
+    return el instanceof HTMLInputElement && el.type === "range"
+      ? parseFloat(style.getPropertyValue("--radius"))
+      : parseFloat(style.borderTopLeftRadius);
+  });
 
 const expectRadius = async (locator: Locator, pixels: number) => {
   if (pixels === FULL) {
