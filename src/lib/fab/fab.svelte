@@ -1,27 +1,45 @@
 <script lang="ts">
   import { Button, type ButtonProps } from "#lib/button/index.js";
-  import { cn, type ElementRef } from "#lib/utils.js";
+  import { cn } from "#lib/utils.js";
+  import type { Attachment } from "svelte/attachments";
 
-  export type FabProps = {} & ElementRef & ButtonProps;
+  export type FabProps = ButtonProps & {
+    clear?: boolean;
+  };
 
   let {
     el = $bindable(),
     class: className,
-    icon,
+    style,
     size = 20,
     variant = "elevated",
-    shape = "circle",
+    clear = false,
     ...restProps
   }: FabProps = $props();
+
+  let width = $state(0);
+  let height = $state(0);
+
+  const measure: Attachment<HTMLElement> = (node) => {
+    const observer = new ResizeObserver(() => {
+      width = node.offsetWidth;
+      height = node.offsetHeight;
+    });
+    observer.observe(node, { box: "border-box" });
+    return () => observer.disconnect();
+  };
 </script>
 
-<div class="grow"></div>
 <Button
   bind:el
-  class={cn("sticky bottom-0 ml-auto p-4 backdrop-blur-sm", className)}
+  class={cn(
+    "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex w-fit shrink-0 p-4 transition",
+    !clear && "mt-[calc(-1*var(--fab-height))]",
+    className,
+  )}
+  style="--fab-width: {width}px; --fab-height: {height}px; {style ?? ''}"
   {variant}
-  {shape}
-  {icon}
   {size}
   {...restProps}
+  {@attach measure}
 />

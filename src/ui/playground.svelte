@@ -47,6 +47,7 @@
   .component {
     display: flex;
     flex: 1;
+    min-width: 0;
     align-items: center;
     justify-content: center;
     padding: calc(var(--spacing) * 4);
