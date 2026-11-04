@@ -31,7 +31,6 @@ export * from "./markdown/index.js";
 export * from "./menu/index.js";
 export * from "./modal/index.js";
 export * from "./popover/index.js";
-export * from "./portal/index.js";
 export * from "./progress/index.js";
 export * from "./shortcut/index.js";
 export * from "./skeleton/index.js";
