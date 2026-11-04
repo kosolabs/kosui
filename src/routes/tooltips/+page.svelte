@@ -18,7 +18,7 @@
   >
     Fully Controlled
   </Button>
-  <Tooltip bind:this={tooltip} anchorEl={el} arrow>
+  <Tooltip bind:this={tooltip} anchorEl={el}>
     <div class="flex items-center gap-2">
       I'm a fully controlled tooltip
       <div class="font-bold">
@@ -27,7 +27,7 @@
     </div>
   </Tooltip>
 
-  <Tooltip arrow>
+  <Tooltip>
     {#snippet trigger(props)}
       <Button {...props}>Render Delegated</Button>
     {/snippet}
@@ -39,7 +39,7 @@
     </div>
   </Tooltip>
 
-  <Tooltip click arrow>
+  <Tooltip click>
     {#snippet trigger(props)}
       <Button {...props}>Show on Click</Button>
     {/snippet}
@@ -51,7 +51,7 @@
     </div>
   </Tooltip>
 
-  <Tooltip arrow>
+  <Tooltip>
     {#snippet trigger(props)}
       <div {...props} class="rounded border p-1">Just a Div</div>
     {/snippet}
@@ -79,14 +79,14 @@
     {#snippet trigger(props)}
       <Button {...props}>Tooltip Button Trigger</Button>
     {/snippet}
-    Tooltip without arrow
+    Tooltip
   </Tooltip>
 
-  <Tooltip open click arrow>
+  <Tooltip open click>
     {#snippet trigger(props)}
       <Button {...props}>Tooltip Button Trigger</Button>
     {/snippet}
-    Tooltip with arrow
+    Tooltip that stays open
   </Tooltip>
 
   <Tooltip open click>
@@ -117,7 +117,7 @@
     </div>
   </Tooltip>
 
-  <Tooltip open click rich arrow>
+  <Tooltip open click rich>
     {#snippet trigger(props)}
       <Button {...props}>Extra Wide Tooltip Button Trigger</Button>
     {/snippet}
@@ -126,7 +126,7 @@
       <div>
         I'm a rich tooltip with a <Link href="https://svelte.dev"
           >link to a thing</Link
-        > which should wrap. And I should have an arrow.
+        > which should wrap.
       </div>
       <div class="flex gap-2">
         <Button>Action 1</Button>

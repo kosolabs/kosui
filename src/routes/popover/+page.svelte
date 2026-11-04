@@ -6,7 +6,6 @@
     Playground,
     PropsTable,
     Section,
-    SwitchSetting,
     ToggleButtonSetting,
   } from "#ui";
   import FilterExample from "./examples/filter.svelte";
@@ -15,7 +14,6 @@
   const PLACEMENTS = ["top", "right", "bottom", "left"] as const;
 
   let placement: (typeof PLACEMENTS)[number] = $state("bottom");
-  let arrow = $state(true);
   let open = $state(false);
   let anchorEl: HTMLElement | undefined = $state();
 </script>
@@ -42,11 +40,9 @@
           bind:open
           {anchorEl}
           {placement}
-          {arrow}
           role="dialog"
           aria-label="Details"
           class="max-w-56 rounded-md border bg-m3-surface-container p-3 text-sm shadow"
-          arrowClass="border-r border-b bg-m3-surface-container"
         >
           Due Friday. Three tasks left, one blocked on review.
         </Popover>
@@ -58,14 +54,13 @@
         options={[...PLACEMENTS]}
         label="Placement"
       />
-      <SwitchSetting label="Arrow" bind:value={arrow} />
     {/snippet}
     {#snippet code()}
       <Code
         component="Popover"
         bindables={["open"]}
-        defaults={{ placement: "top", arrow: false }}
-        values={{ placement, arrow }}
+        defaults={{ placement: "top" }}
+        values={{ placement }}
         expressions={{ anchorEl: "trigger" }}
         children="Due Friday. Three tasks left, one blocked on review."
       />
@@ -125,19 +120,7 @@
           type: `"top" | "right" | "bottom" | "left", optionally with "-start" or "-end"`,
           default: `"top"`,
           description:
-            "Where the popover goes. It flips to the other side and shifts along the edge to stay on screen.",
-        },
-        {
-          name: "arrow",
-          type: "boolean",
-          default: "false",
-          description: "Show an arrow pointing at the anchor.",
-        },
-        {
-          name: "arrowClass",
-          type: "ClassValue",
-          description:
-            "Classes for the arrow, usually the popover's background and border colors.",
+            "Where the popover goes, positioned with CSS anchor positioning. It flips to the other side and shifts along the edge to stay on screen.",
         },
         {
           name: "onKeydownWhileOpen",

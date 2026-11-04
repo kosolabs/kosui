@@ -7,16 +7,16 @@
     type ClassName,
     type ToggleEventWithTarget,
   } from "#lib/utils.js";
-  import * as floatingUi from "@floating-ui/dom";
   import type { Snippet } from "svelte";
   import { prefersReducedMotion } from "svelte/motion";
-  import type { HTMLAttributes, ClassValue } from "svelte/elements";
+  import type { HTMLAttributes } from "svelte/elements";
   import { scale } from "svelte/transition";
 
+  type Side = "top" | "right" | "bottom" | "left";
+  export type PopoverPlacement = Side | `${Side}-start` | `${Side}-end`;
+
   export type PopoverProps = {
-    arrow?: boolean;
-    arrowClass?: ClassValue;
-    placement?: floatingUi.Placement;
+    placement?: PopoverPlacement;
     open?: boolean;
     anchorEl?: HTMLElement;
     onKeydownWhileOpen?: (event: KeyboardEvent) => void;
@@ -25,36 +25,37 @@
   } & ClassName &
     Omit<HTMLAttributes<HTMLDivElement>, "class">;
 
-  type Side = "top" | "bottom" | "left" | "right";
+  const AREAS: Record<PopoverPlacement, string> = {
+    top: "top span-all",
+    "top-start": "top span-right",
+    "top-end": "top span-left",
+    bottom: "bottom span-all",
+    "bottom-start": "bottom span-right",
+    "bottom-end": "bottom span-left",
+    left: "left span-all",
+    "left-start": "left span-bottom",
+    "left-end": "left span-top",
+    right: "right span-all",
+    "right-start": "right span-bottom",
+    "right-end": "right span-top",
+  };
 </script>
 
 <script lang="ts">
   let {
-    arrow = false,
     placement = "top",
     open = $bindable(false),
     anchorEl,
     children,
     onKeydownWhileOpen,
     el: popoverEl = $bindable(),
-    arrowClass,
     class: className,
     ...restProps
   }: PopoverProps = $props();
 
-  let arrowEl: HTMLDivElement | undefined = $state();
-
-  function getArrowRotation(placement: Side) {
-    if (placement === "top") {
-      return "rotateZ(0deg)";
-    } else if (placement === "right") {
-      return "rotateZ(90deg)";
-    } else if (placement === "bottom") {
-      return "rotateZ(180deg)";
-    } else if (placement === "left") {
-      return "rotateZ(270deg)";
-    }
-  }
+  let side = $derived(placement.split("-")[0] as Side);
+  let vertical = $derived(side === "top" || side === "bottom");
+  let centered = $derived(!placement.includes("-"));
 
   function handleEscape(event: KeyboardEvent) {
     if (popoverEl && Shortcut.ESCAPE.matches(event)) {
@@ -77,84 +78,44 @@
   }
 
   function onbeforetoggle(event: ToggleEventWithTarget<HTMLDivElement>) {
-    if (event.newState === "closed") {
-      open = false;
-    } else {
-      open = true;
-    }
+    open = event.newState === "open";
   }
 
   $effect(() => {
-    if (popoverEl) {
-      popoverEl.showPopover();
-      events.on("keydown", handleEscape);
-      events.on("keydown", onKeydownWhileOpen);
-      events.on("mousedown", handleClickOutside);
-
-      return () => {
-        events.remove("keydown", handleEscape);
-        events.remove("keydown", onKeydownWhileOpen);
-        events.remove("mousedown", handleClickOutside);
-      };
+    if (!open || !popoverEl) return;
+    if (!popoverEl.matches(":popover-open")) {
+      popoverEl.showPopover({ source: anchorEl });
     }
+    events.on("keydown", handleEscape);
+    events.on("keydown", onKeydownWhileOpen);
+    events.on("mousedown", handleClickOutside);
+
+    return () => {
+      events.remove("keydown", handleEscape);
+      events.remove("keydown", onKeydownWhileOpen);
+      events.remove("mousedown", handleClickOutside);
+    };
   });
-
-  $effect(() => {
-    if (anchorEl && popoverEl) {
-      return floatingUi.autoUpdate(anchorEl, popoverEl, updatePosition);
-    }
-  });
-
-  async function updatePosition() {
-    if (anchorEl && popoverEl && arrowEl) {
-      const computedPosition = await floatingUi.computePosition(
-        anchorEl,
-        popoverEl,
-        {
-          placement,
-          middleware: [
-            floatingUi.offset(6),
-            floatingUi.flip(),
-            floatingUi.shift({ padding: 5 }),
-            floatingUi.arrow({ element: arrowEl }),
-          ],
-          strategy: "fixed",
-        },
-      );
-
-      Object.assign(popoverEl.style, {
-        left: `${computedPosition.x}px`,
-        top: `${computedPosition.y}px`,
-      });
-
-      if (computedPosition.middlewareData.arrow) {
-        const arrow = computedPosition.middlewareData.arrow;
-
-        const side = computedPosition.placement.split("-")[0] as Side;
-
-        const staticSide = {
-          top: "bottom",
-          right: "left",
-          bottom: "top",
-          left: "right",
-        }[side];
-
-        Object.assign(arrowEl.style, {
-          left: arrow.x != null ? `${arrow.x}px` : "",
-          top: arrow.y != null ? `${arrow.y}px` : "",
-          [staticSide]: "-4px",
-          transform: getArrowRotation(side),
-        });
-      }
-    }
-  }
 </script>
 
 {#if open}
   <div
     bind:this={popoverEl}
     popover="manual"
-    class={cn(arrow && "overflow-visible", className)}
+    class={cn(className)}
+    style:position-area={anchorEl && AREAS[placement]}
+    style:position-try-fallbacks={anchorEl &&
+      (vertical
+        ? "flip-block, flip-inline, flip-block flip-inline"
+        : "flip-inline, flip-block, flip-block flip-inline")}
+    style:inset={anchorEl && "auto"}
+    style:margin={anchorEl && (centered ? "6px" : vertical ? "6px 0" : "0 6px")}
+    style:justify-self={anchorEl && vertical && centered
+      ? "anchor-center"
+      : undefined}
+    style:align-self={anchorEl && !vertical && centered
+      ? "anchor-center"
+      : undefined}
     transition:scale={{
       duration: prefersReducedMotion.current ? 0 : 150,
       start: 0.95,
@@ -162,13 +123,5 @@
     {...mergeProps(restProps, { onbeforetoggle })}
   >
     {@render children()}
-    <div
-      bind:this={arrowEl}
-      class={cn(
-        arrowClass,
-        "absolute size-2 rotate-45",
-        arrow ? "block" : "hidden",
-      )}
-    ></div>
   </div>
 {/if}
