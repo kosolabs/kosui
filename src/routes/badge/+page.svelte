@@ -36,7 +36,7 @@
     {
       "icon button": `<Button\n    variant="plain"\n    shape="circle"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`,
       button: `<Button\n    variant="tonal"\n    icon={Inbox}\n    aria-label="Inbox, ${content} unread"\n  >\n    Inbox\n  </Button>`,
-      avatar: `<Avatar role="img" aria-label="Ada Lovelace, ${content} new">\n    AL\n  </Avatar>`,
+      avatar: `<Avatar alt="Ada Lovelace, ${content} new">\n    AL\n  </Avatar>`,
     }[element]!,
   );
   let elementComponent = $derived(element === "avatar" ? "Avatar" : "Button");
@@ -79,8 +79,7 @@
             aria-label="Inbox, {content} unread">Inbox</Button
           >
         {:else}
-          <Avatar role="img" aria-label="Ada Lovelace, {content} new">AL</Avatar
-          >
+          <Avatar alt="Ada Lovelace, {content} new">AL</Avatar>
         {/if}
       </Badge>
     {/snippet}
