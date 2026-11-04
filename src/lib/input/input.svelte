@@ -1,36 +1,33 @@
 <script lang="ts" module>
   import {
     baseClasses,
-    COLORS,
-    SIZES,
-    type Color,
     type ColorProp,
     type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
-  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLInputAttributes } from "svelte/elements";
 
-  export const INPUT_VARIANTS = ["outlined", "filled", "inherit"] as const;
+  export const INPUT_VARIANTS = ["outlined", "filled", "plain"] as const;
   export type InputVariant = (typeof INPUT_VARIANTS)[number];
-  export type InputVariantProp = { variant?: InputVariant };
 
-  export const INPUT_COLORS = COLORS;
-  export type InputColor = Color;
-  export type InputColorProp = ColorProp;
-
-  export const INPUT_SIZES = SIZES;
-  export type InputSize = Size;
-  export type InputSizeProp = SizeProp;
-
-  export type InputProps = ElementRef &
-    ClassName &
-    InputVariantProp &
-    InputSizeProp &
+  export type InputProps = {
+    variant?: InputVariant;
+    el?: HTMLInputElement;
+  } & ClassName &
+    ColorProp &
+    SizeProp &
     ShapeProp &
-    InputColorProp &
-    Omit<HTMLInputAttributes, "size">;
+    Omit<HTMLInputAttributes, "size" | "class">;
+
+  const SIZES: Record<Size, string> = {
+    xs: "h-7 px-2.5 text-xs",
+    sm: "h-9 px-3 text-sm",
+    md: "h-11 px-3.5 text-base",
+    lg: "h-13 px-4 text-lg",
+    xl: "h-15 px-5 text-xl",
+  };
 </script>
 
 <script lang="ts">
@@ -50,24 +47,23 @@
   bind:value
   bind:this={el}
   class={cn(
-    "disabled:cursor-not-allowed disabled:bg-m3-on-surface/12 disabled:text-m3-on-surface/38",
+    "min-w-0 bg-transparent placeholder:text-m3-on-surface-variant focus-visible:outline-2 disabled:cursor-not-allowed disabled:text-m3-on-surface/38 disabled:placeholder:text-m3-on-surface/38",
 
     variant === "outlined" &&
-      "bg-m3-surface-container-lowest outline-1 outline-m3-outline-variant hover:outline-m3-outline/80 disabled:hover:outline-m3-outline-variant",
+      "bg-m3-surface-container-lowest outline-1 outline-m3-outline hover:outline-m3-on-surface disabled:outline-m3-on-surface/12",
     variant === "filled" &&
-      "bg-m3-surface-container hover:bg-m3-surface-container-high focus:outline-1",
+      "border-b border-m3-on-surface-variant bg-m3-surface-container-highest hover:border-m3-on-surface disabled:border-m3-on-surface/38 disabled:bg-m3-on-surface/4",
 
     color === "primary" && "focus-visible:outline-m3-primary",
     color === "secondary" && "focus-visible:outline-m3-secondary",
     color === "tertiary" && "focus-visible:outline-m3-tertiary",
     color === "error" && "focus-visible:outline-m3-error",
+    (color === "plain" || color === "inherit") &&
+      "focus-visible:outline-current",
 
-    size === "xs" && "px-2.5 py-1.5 text-xs",
-    size === "sm" && "px-3 py-1.5 text-sm",
-    size === "md" && "px-3.5 py-2 text-base",
-    size === "lg" && "px-4 py-2.5 text-lg",
-    size === "xl" && "px-5 py-4 text-xl",
+    "user-invalid:border-m3-error user-invalid:outline-m3-error user-invalid:focus-visible:outline-m3-error aria-invalid:border-m3-error aria-invalid:outline-m3-error",
 
+    SIZES[size],
     baseClasses({ shape }),
 
     className,

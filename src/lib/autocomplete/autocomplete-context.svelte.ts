@@ -4,7 +4,7 @@ import { getContext, setContext } from "svelte";
 
 export class AutocompleteContext extends ItemContext {
   #open = new Bindable<boolean>(false);
-  #anchorEl = new Bindable<HTMLElement | undefined>(undefined);
+  #anchorEl = new Bindable<HTMLInputElement | undefined>(undefined);
 
   get open(): boolean {
     return this.#open.value;
@@ -18,17 +18,17 @@ export class AutocompleteContext extends ItemContext {
     this.#open.bind(getOpen, setOpen);
   }
 
-  get anchorEl(): HTMLElement | undefined {
+  get anchorEl(): HTMLInputElement | undefined {
     return this.#anchorEl.value;
   }
 
-  set anchorEl(value: HTMLElement | undefined) {
+  set anchorEl(value: HTMLInputElement | undefined) {
     this.#anchorEl.value = value;
   }
 
   bindAnchorEl(
-    getAnchorEl: () => HTMLElement | undefined,
-    setAnchorEl: (val: HTMLElement | undefined) => void,
+    getAnchorEl: () => HTMLInputElement | undefined,
+    setAnchorEl: (val: HTMLInputElement | undefined) => void,
   ) {
     this.#anchorEl.bind(getAnchorEl, setAnchorEl);
   }
