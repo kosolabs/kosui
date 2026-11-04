@@ -34,7 +34,7 @@
     <span
       bind:this={el}
       class={cn(
-        baseClasses({ variant, color, shape: "circle" }),
+        baseClasses({ variant, color, shape: "full" }),
         "absolute inline-flex h-5 min-w-5 items-center justify-center px-1 text-xs tabular-nums",
         verticalAlignment === "top" && "top-0 -translate-y-1/2",
         verticalAlignment === "bottom" && "bottom-0 translate-y-1/2",

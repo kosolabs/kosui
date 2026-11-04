@@ -34,7 +34,7 @@
 
   let elementCode = $derived(
     {
-      "icon button": `<Button\n    variant="plain"\n    shape="circle"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`,
+      "icon button": `<Button\n    variant="plain"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`,
       button: `<Button\n    variant="tonal"\n    icon={Inbox}\n    aria-label="Inbox, ${content} unread"\n  >\n    Inbox\n  </Button>`,
       avatar: `<Avatar alt="Ada Lovelace, ${content} new">\n    AL\n  </Avatar>`,
     }[element]!,
@@ -68,7 +68,6 @@
         {#if element === "icon button"}
           <Button
             variant="plain"
-            shape="circle"
             icon={Bell}
             aria-label="Notifications, {content} new"
           />

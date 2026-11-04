@@ -1,4 +1,5 @@
 <script lang="ts" module>
+  import { baseClasses } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
   import { getSliderContext } from "#lib/slider/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
@@ -33,13 +34,7 @@
       ctx.size === "lg" && "size-6",
       ctx.size === "xl" && "size-7",
 
-      ctx.radius === "none" && "rounded-none",
-      ctx.radius === "xs" && "rounded-xs",
-      ctx.radius === "sm" && "rounded-sm",
-      ctx.radius === "md" && "rounded-lg",
-      ctx.radius === "lg" && "rounded-2xl",
-      ctx.radius === "xl" && "rounded-4xl",
-      ctx.radius === "full" && "rounded-full",
+      baseClasses({ shape: ctx.shape }),
 
       className,
     )}

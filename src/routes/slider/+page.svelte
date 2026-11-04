@@ -1,27 +1,28 @@
 <script lang="ts">
   import {
+    SHAPES,
     events,
     Shortcut,
     Slider,
     type Mark,
     type SliderColor,
-    type SliderRadius,
+    type Shape,
     type SliderSize,
   } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
     DisabledSetting,
-    RadiusSetting,
     SizeSetting,
     SwitchSetting,
     Playground,
+    ToggleButtonSetting,
   } from "#ui";
   import { onMount } from "svelte";
 
   let color: SliderColor = $state("primary");
   let size: SliderSize = $state("md");
-  let radius: SliderRadius = $state("full");
+  let shape: Shape = $state("full");
   let disabled: boolean = $state(false);
   let value: number = $state(30);
   let labelAlwaysOn: boolean = $state(false);
@@ -56,7 +57,7 @@
         bind:value
         {color}
         {size}
-        {radius}
+        {shape}
         {disabled}
         {labelAlwaysOn}
         {inverted}
@@ -72,7 +73,11 @@
   {#snippet controls()}
     <ColorSetting bind:color />
     <SizeSetting bind:size />
-    <RadiusSetting bind:radius />
+    <ToggleButtonSetting
+      bind:value={shape}
+      options={[...SHAPES]}
+      label="Shape"
+    />
     <DisabledSetting bind:disabled />
     <SwitchSetting label="Label always on" bind:value={labelAlwaysOn} />
     <SwitchSetting label="Inverted" bind:value={inverted} />
@@ -87,7 +92,7 @@
         value: 30,
         color: "primary",
         size: "md",
-        radius: "full",
+        shape: "full",
         disabled: false,
         labelAlwaysOn: false,
         inverted: false,
@@ -98,7 +103,7 @@
         value,
         color,
         size,
-        radius,
+        shape,
         disabled,
         labelAlwaysOn,
         inverted,

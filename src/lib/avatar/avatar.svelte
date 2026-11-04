@@ -17,7 +17,7 @@
     class: className,
     variant = "tonal",
     color = "secondary",
-    shape = "rounded",
+    shape = "full",
     ...restProps
   }: AvatarProps = $props();
 

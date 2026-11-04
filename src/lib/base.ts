@@ -22,28 +22,13 @@ export const COLORS = [
 export type Color = (typeof COLORS)[number];
 export type ColorProp = { color?: Color };
 
-export const SHAPES = ["square", "rounded", "circle"] as const;
+export const SHAPES = ["none", "xs", "sm", "md", "lg", "xl", "full"] as const;
 export type Shape = (typeof SHAPES)[number];
 export type ShapeProp = { shape?: Shape };
 
 export const SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 export type Size = (typeof SIZES)[number];
 export type SizeProp = { size?: Size };
-
-export const RADII = [
-  "none",
-  "xs",
-  "sm",
-  "md",
-  "lg",
-  "xl",
-  "2xl",
-  "3xl",
-  "4xl",
-  "full",
-] as const;
-export type Radius = (typeof RADII)[number];
-export type RadiusProp = { radius?: Radius };
 
 export const UNDERLINES = ["always", "hover", "none"] as const;
 export type Underline = (typeof UNDERLINES)[number];
@@ -160,9 +145,13 @@ export const baseClasses = ({
     color === "tertiary" && "text-m3-tertiary",
     color === "error" && "text-m3-error",
 
-    shape === "square" && "",
-    shape === "rounded" && "rounded-md",
-    shape === "circle" && "rounded-full",
+    shape === "none" && "rounded-none",
+    shape === "xs" && "rounded-sm",
+    shape === "sm" && "rounded-lg",
+    shape === "md" && "rounded-xl",
+    shape === "lg" && "rounded-2xl",
+    shape === "xl" && "rounded-[1.75rem]",
+    shape === "full" && "rounded-full",
 
     underline === "always" && "underline",
     underline === "hover" && "hover:underline",

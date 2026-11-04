@@ -1,12 +1,13 @@
 <script lang="ts">
   import {
+    SHAPES,
     Input,
     Textarea,
     TEXTAREA_VARIANTS,
     ToggleButton,
     ToggleGroup,
     type TextareaColor,
-    type TextareaRadius,
+    type Shape,
     type TextareaSize,
     type TextareaVariant,
   } from "#lib/index.js";
@@ -14,16 +15,16 @@
     Code,
     ColorSetting,
     DisabledSetting,
-    RadiusSetting,
     Setting,
     SizeSetting,
     Playground,
+    ToggleButtonSetting,
   } from "#ui";
 
   let variant: TextareaVariant = $state("filled");
   let color: TextareaColor = $state("primary");
   let size: TextareaSize = $state("sm");
-  let radius: TextareaRadius = $state("md");
+  let shape: Shape = $state("xs");
   let disabled: boolean = $state(false);
   let placeholder: string = $state("Text area component");
 </script>
@@ -32,7 +33,7 @@
 
 <Playground>
   {#snippet component()}
-    <Textarea {variant} {color} {size} {radius} {disabled} {placeholder} />
+    <Textarea {variant} {color} {size} {shape} {disabled} {placeholder} />
   {/snippet}
   {#snippet controls()}
     <Setting label="Variant">
@@ -44,7 +45,11 @@
     </Setting>
     <ColorSetting bind:color />
     <SizeSetting bind:size />
-    <RadiusSetting bind:radius />
+    <ToggleButtonSetting
+      bind:value={shape}
+      options={[...SHAPES]}
+      label="Shape"
+    />
     <DisabledSetting bind:disabled />
     <Setting label="Placeholder">
       <Input variant="filled" bind:value={placeholder} />
@@ -59,7 +64,7 @@
         variant: "filled",
         color: "primary",
         size: "sm",
-        radius: "md",
+        shape: "xs",
         disabled: false,
         placeholder: "",
       }}
@@ -67,7 +72,7 @@
         variant,
         color,
         size,
-        radius,
+        shape,
         disabled,
         placeholder,
       }}

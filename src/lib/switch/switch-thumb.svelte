@@ -1,16 +1,13 @@
 <script lang="ts" module>
-  import type {
-    SwitchColorProp,
-    SwitchRadiusProp,
-    SwitchSizeProp,
-  } from "#lib/switch/index.js";
+  import { baseClasses, type ShapeProp } from "#lib/base.js";
+  import type { SwitchColorProp, SwitchSizeProp } from "#lib/switch/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
   import type { HTMLAttributes } from "svelte/elements";
 
   export type SwitchThumbProps = {} & ClassName &
     SwitchColorProp &
     SwitchSizeProp &
-    SwitchRadiusProp &
+    ShapeProp &
     HTMLAttributes<HTMLDivElement>;
 </script>
 
@@ -19,7 +16,7 @@
     class: className,
     color = "primary",
     size = "sm",
-    radius = "xl",
+    shape = "full",
     ...restProps
   }: SwitchThumbProps = $props();
 </script>
@@ -39,11 +36,7 @@
     size === "lg" && "size-6 group-aria-checked:translate-x-7",
     size === "xl" && "size-7 group-aria-checked:translate-x-8",
 
-    radius === "xs" && "rounded-xs",
-    radius === "sm" && "rounded-sm",
-    radius === "md" && "rounded-lg",
-    radius === "lg" && "rounded-2xl",
-    radius === "xl" && "rounded-4xl",
+    baseClasses({ shape }),
 
     className,
   )}

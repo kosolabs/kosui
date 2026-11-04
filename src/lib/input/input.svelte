@@ -1,12 +1,11 @@
 <script lang="ts" module>
   import {
+    baseClasses,
     COLORS,
-    RADII,
     SIZES,
     type Color,
     type ColorProp,
-    type Radius,
-    type RadiusProp,
+    type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
@@ -25,15 +24,11 @@
   export type InputSize = Size;
   export type InputSizeProp = SizeProp;
 
-  export const INPUT_RADII = RADII;
-  export type InputRadius = Radius;
-  export type InputRadiusProp = RadiusProp;
-
   export type InputProps = ElementRef &
     ClassName &
     InputVariantProp &
     InputSizeProp &
-    InputRadiusProp &
+    ShapeProp &
     InputColorProp &
     Omit<HTMLInputAttributes, "size">;
 </script>
@@ -46,7 +41,7 @@
     variant = "outlined",
     color = "primary",
     size = "sm",
-    radius = "md",
+    shape = "xs",
     ...restProps
   }: InputProps = $props();
 </script>
@@ -73,11 +68,7 @@
     size === "lg" && "px-4 py-2.5 text-lg",
     size === "xl" && "px-5 py-4 text-xl",
 
-    radius == "xs" && "rounded-xs",
-    radius == "sm" && "rounded-sm",
-    radius == "md" && "rounded-lg",
-    radius == "lg" && "rounded-2xl",
-    radius == "xl" && "rounded-4xl",
+    baseClasses({ shape }),
 
     className,
   )}

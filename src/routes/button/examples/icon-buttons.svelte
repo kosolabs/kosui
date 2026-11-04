@@ -4,7 +4,7 @@
 </script>
 
 <div role="group" aria-label="Text style" class="flex gap-1">
-  <Button variant="plain" shape="circle" icon={Bold} tooltip="Bold" />
-  <Button variant="plain" shape="circle" icon={Italic} tooltip="Italic" />
-  <Button variant="plain" shape="circle" icon={Underline} tooltip="Underline" />
+  <Button variant="plain" icon={Bold} tooltip="Bold" />
+  <Button variant="plain" icon={Italic} tooltip="Italic" />
+  <Button variant="plain" icon={Underline} tooltip="Underline" />
 </div>

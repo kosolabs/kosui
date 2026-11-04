@@ -9,7 +9,6 @@
   <Badge content={unread ? String(unread) : ""} aria-hidden="true">
     <Button
       variant="plain"
-      shape="circle"
       icon={Inbox}
       aria-label={unread ? `Inbox, ${unread} unread` : "Inbox"}
       onclick={() => (unread = 0)}

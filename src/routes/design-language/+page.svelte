@@ -65,11 +65,15 @@
   ];
 
   const SHAPE_GUIDANCE: GuidanceRow<Shape>[] = [
-    { name: "square", use: "Square corners." },
-    { name: "rounded", use: "Slightly rounded corners." },
+    { name: "none", use: "Square corners." },
+    { name: "xs", use: "4 pixels, for text fields and menus." },
+    { name: "sm", use: "8 pixels, for chips." },
+    { name: "md", use: "12 pixels, for cards and alerts." },
+    { name: "lg", use: "16 pixels, for Fabs." },
+    { name: "xl", use: "28 pixels, for large surfaces like dialogs." },
     {
-      name: "circle",
-      use: "Fully round ends: a pill when there's a label, a circle when the component is square.",
+      name: "full",
+      use: "Fully round ends: a pill when there's a label, a circle when the component is square. For buttons, avatars, switches and sliders.",
     },
   ];
 
@@ -101,18 +105,14 @@
     {
       prop: "shape",
       values: SHAPES.join(", "),
-      components: "Alert, Avatar, Box, Button, Chip, Fab, Menu, Skeleton",
+      components:
+        "Alert, Avatar, Box, Button, Chip, Fab, Input, Menu, Skeleton, Slider, Switch, Textarea",
     },
     {
       prop: "size",
       values: SIZES.join(", "),
       components:
         "Button, Chip, Circular Progress, Fab, Input, Slider, Switch, Textarea",
-    },
-    {
-      prop: "radius",
-      values: "none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, full",
-      components: "Input, Slider, Switch, Textarea",
     },
     {
       prop: "underline",
@@ -165,7 +165,12 @@
     </GuidanceTable>
 
     <h3 class="text-xl font-light">Shape</h3>
-    <p class="max-w-prose">The style of a component's corners.</p>
+    <p class="max-w-prose">
+      How rounded a component's corners are, on Material 3's shape scale. Each
+      component defaults to the shape Material 3 gives it: buttons are pills,
+      chips are slightly rounded, and text fields are nearly square. For a
+      one-off radius, use <code>class</code>.
+    </p>
     <GuidanceTable heading="Shape" rows={SHAPE_GUIDANCE}>
       {#snippet example(shape)}
         <div class="flex items-center gap-2">

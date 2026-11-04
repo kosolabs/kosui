@@ -38,7 +38,7 @@
     baseClasses({
       variant: "text",
       color,
-      shape: "rounded",
+      shape: "xs",
       underline,
       hover: true,
       focus: true,

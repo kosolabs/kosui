@@ -1,11 +1,12 @@
 <script lang="ts">
   import {
+    SHAPES,
     Input,
     INPUT_VARIANTS,
     ToggleButton,
     ToggleGroup,
     type InputColor,
-    type InputRadius,
+    type Shape,
     type InputSize,
     type InputVariant,
   } from "#lib/index.js";
@@ -13,16 +14,16 @@
     Code,
     ColorSetting,
     DisabledSetting,
-    RadiusSetting,
     Setting,
     SizeSetting,
     Playground,
+    ToggleButtonSetting,
   } from "#ui";
 
   let variant: InputVariant = $state("filled");
   let color: InputColor = $state("primary");
   let size: InputSize = $state("sm");
-  let radius: InputRadius = $state("md");
+  let shape: Shape = $state("xs");
   let disabled: boolean = $state(false);
   let placeholder: string = $state("Input component");
 </script>
@@ -31,7 +32,7 @@
 
 <Playground>
   {#snippet component()}
-    <Input {variant} {color} {size} {radius} {disabled} {placeholder} />
+    <Input {variant} {color} {size} {shape} {disabled} {placeholder} />
   {/snippet}
   {#snippet controls()}
     <Setting label="Variant">
@@ -43,7 +44,11 @@
     </Setting>
     <ColorSetting bind:color />
     <SizeSetting bind:size />
-    <RadiusSetting bind:radius />
+    <ToggleButtonSetting
+      bind:value={shape}
+      options={[...SHAPES]}
+      label="Shape"
+    />
     <DisabledSetting bind:disabled />
     <Setting label="Placeholder">
       <Input variant="filled" bind:value={placeholder} />
@@ -58,7 +63,7 @@
         variant: "filled",
         color: "primary",
         size: "sm",
-        radius: "md",
+        shape: "xs",
         disabled: false,
         placeholder: "",
       }}
@@ -66,7 +71,7 @@
         variant,
         color,
         size,
-        radius,
+        shape,
         disabled,
         placeholder,
       }}

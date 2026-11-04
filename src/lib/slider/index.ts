@@ -30,14 +30,11 @@ export {
 export {
   default as Slider,
   SLIDER_COLORS,
-  SLIDER_RADII,
   SLIDER_SIZES,
   type Mark,
   type SliderColor,
   type SliderColorProp,
   type SliderProps,
-  type SliderRadius,
-  type SliderRadiusProp,
   type SliderSize,
   type SliderSizeProp,
 } from "./slider.svelte";

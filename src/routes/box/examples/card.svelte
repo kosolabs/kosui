@@ -6,7 +6,7 @@
 
 <Box
   variant="elevated"
-  shape="rounded"
+  shape="md"
   role="region"
   aria-labelledby="{id}-title"
   class="flex max-w-sm flex-col gap-2 p-4"

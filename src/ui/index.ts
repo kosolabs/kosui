@@ -9,10 +9,6 @@ export {
 } from "./disabled-setting.svelte";
 export { default as KosuiLogo } from "./kosui-logo.svelte";
 export { default as Label, type LabelProps } from "./label.svelte";
-export {
-  default as RadiusSetting,
-  type RadiusSettingProps,
-} from "./radius-setting.svelte";
 export { default as Setting, type SettingProps } from "./setting.svelte";
 export {
   default as SizeSetting,

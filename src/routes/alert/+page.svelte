@@ -23,7 +23,7 @@
 
   let variant: Variant = $state("tonal");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("md");
 </script>
 
 <div class="flex max-w-5xl flex-col gap-12">
@@ -58,7 +58,7 @@
     {#snippet code()}
       <Code
         component="Alert"
-        defaults={{ variant: "tonal", color: "primary", shape: "rounded" }}
+        defaults={{ variant: "tonal", color: "primary", shape: "md" }}
         values={{ variant, color, shape }}
         children="Your trial ends in 3 days. Add a payment method to keep your projects."
       />
@@ -121,9 +121,9 @@
         },
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"md"`,
+          description: "Corner rounding.",
         },
         {
           name: "role",

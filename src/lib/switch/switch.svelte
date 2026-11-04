@@ -1,12 +1,11 @@
 <script lang="ts" module>
   import {
+    baseClasses,
     COLORS,
-    RADII,
     SIZES,
     type Color,
     type ColorProp,
-    type Radius,
-    type RadiusProp,
+    type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
@@ -24,17 +23,13 @@
   export type SwitchSize = Size;
   export type SwitchSizeProp = SizeProp;
 
-  export const SWITCH_RADII = RADII;
-  export type SwitchRadius = Radius;
-  export type SwitchRadiusProp = RadiusProp;
-
   export type SwitchProps = {
     checked?: boolean;
     thumb?: Snippet<[SwitchThumbProps]>;
   } & ClassName &
     SwitchColorProp &
     SwitchSizeProp &
-    SwitchRadiusProp &
+    ShapeProp &
     HTMLButtonAttributes;
 </script>
 
@@ -45,7 +40,7 @@
     class: className,
     color = "primary",
     size = "sm",
-    radius = "xl",
+    shape = "full",
     ...restProps
   }: SwitchProps = $props();
 </script>
@@ -76,15 +71,11 @@
     size === "lg" && "h-7 w-14",
     size === "xl" && "h-8 w-16",
 
-    radius === "xs" && "rounded-xs",
-    radius === "sm" && "rounded-sm",
-    radius === "md" && "rounded-lg",
-    radius === "lg" && "rounded-2xl",
-    radius === "xl" && "rounded-4xl",
+    baseClasses({ shape }),
 
     className,
   )}
   {...mergeProps(restProps, { onclick: () => (checked = !checked) })}
 >
-  {@render thumb({ color, size, radius })}
+  {@render thumb({ color, size, shape })}
 </button>

@@ -65,7 +65,7 @@
     class: className,
     variant = "outlined",
     color = "primary",
-    shape = "rounded",
+    shape = "full",
     size = "sm",
     ...restProps
   }: ButtonProps = $props();

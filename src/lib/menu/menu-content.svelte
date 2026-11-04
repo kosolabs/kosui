@@ -19,7 +19,7 @@
     class: className,
     variant = "elevated",
     color = "primary",
-    shape = "rounded",
+    shape = "xs",
     placement = "bottom",
     ...restProps
   }: MenuContentProps = $props();

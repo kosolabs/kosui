@@ -29,7 +29,7 @@
 
   let variant: Variant = $state("filled");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("sm");
   let size: Size = $state("sm");
   let clickable = $state(false);
   let deletable = $state(true);
@@ -110,7 +110,7 @@
         defaults={{
           variant: "filled",
           color: "primary",
-          shape: "rounded",
+          shape: "sm",
           size: "sm",
         }}
         values={{ variant, color, shape, size }}
@@ -196,9 +196,9 @@
         },
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"sm"`,
+          description: "Corner rounding.",
         },
         {
           name: "size",

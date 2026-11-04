@@ -30,7 +30,7 @@ test.describe("Alert Component Tests", () => {
   });
 
   test("an alert takes the shared shapes", async ({ page }) => {
-    await choose(page, "Shape", "square");
+    await choose(page, "Shape", "none");
     await expect
       .poll(() =>
         alert(page).evaluate((el) => getComputedStyle(el).borderRadius),

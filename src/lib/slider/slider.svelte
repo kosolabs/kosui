@@ -1,12 +1,11 @@
 <script lang="ts" module>
   import {
+    baseClasses,
     COLORS,
-    RADII,
     SIZES,
     type Color,
     type ColorProp,
-    type Radius,
-    type RadiusProp,
+    type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
@@ -39,10 +38,6 @@
   export type SliderSize = Size;
   export type SliderSizeProp = SizeProp;
 
-  export const SLIDER_RADII = RADII;
-  export type SliderRadius = Radius;
-  export type SliderRadiusProp = RadiusProp;
-
   export type Mark = {
     value: number;
     label?: string;
@@ -70,7 +65,7 @@
   } & ClassName &
     SliderColorProp &
     SliderSizeProp &
-    SliderRadiusProp &
+    ShapeProp &
     HTMLAttributes<HTMLDivElement>;
 </script>
 
@@ -97,7 +92,7 @@
     class: className,
     color = "primary",
     size = "md",
-    radius = "full",
+    shape = "full",
     ...restProps
   }: SliderProps = $props();
 
@@ -116,7 +111,7 @@
       () => restrictToMarks,
       () => color,
       () => size,
-      () => radius,
+      () => shape,
       (val) => onChange?.(val),
       (val) => onChangeEnd?.(val),
       () => sliderHandle,
@@ -170,13 +165,7 @@
 
     ctx.disabled && "cursor-not-allowed opacity-50",
 
-    ctx.radius === "none" && "rounded-none",
-    ctx.radius === "xs" && "rounded-xs",
-    ctx.radius === "sm" && "rounded-sm",
-    ctx.radius === "md" && "rounded-lg",
-    ctx.radius === "lg" && "rounded-2xl",
-    ctx.radius === "xl" && "rounded-4xl",
-    ctx.radius === "full" && "rounded-full",
+    baseClasses({ shape: ctx.shape }),
 
     ctx.size === "xs" && "my-1 h-0.5 px-1.5",
     ctx.size === "sm" && "my-1 h-1 px-2",
@@ -216,13 +205,7 @@
         ctx.color === "tertiary" && "bg-m3-tertiary",
         ctx.color === "error" && "bg-m3-error",
 
-        ctx.radius === "none" && "rounded-none",
-        ctx.radius === "xs" && "rounded-xs",
-        ctx.radius === "sm" && "rounded-sm",
-        ctx.radius === "md" && "rounded-lg",
-        ctx.radius === "lg" && "rounded-2xl",
-        ctx.radius === "xl" && "rounded-4xl",
-        ctx.radius === "full" && "rounded-full",
+        baseClasses({ shape: ctx.shape }),
       )}
       style={ctx.inverted
         ? `right: 0; margin-right: calc(var(--spacing) * -${ratio}); width: calc(${100 - ctx.position}% + var(--spacing) * ${ratio})`

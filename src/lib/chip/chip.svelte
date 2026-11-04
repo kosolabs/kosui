@@ -39,7 +39,7 @@
     class: className,
     variant = "filled",
     color = "primary",
-    shape = "rounded",
+    shape = "sm",
     size = "sm",
     ...restProps
   }: ChipProps = $props();

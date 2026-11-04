@@ -32,7 +32,7 @@
   let size = $state("medium");
   let variant: Variant = $state("tonal");
   let color: Color = $state("secondary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("full");
 
   let src = $derived(
     {
@@ -113,7 +113,7 @@
           alt: "",
           variant: "tonal",
           color: "secondary",
-          shape: "rounded",
+          shape: "full",
           class: "",
         }}
         values={{
@@ -184,9 +184,9 @@
         },
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"full"`,
+          description: "Corner rounding.",
         },
         {
           name: "el",
