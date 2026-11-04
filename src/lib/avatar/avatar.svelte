@@ -5,7 +5,7 @@
   export type AvatarProps = {
     src?: string;
     alt?: string;
-  } & BoxProps;
+  } & Omit<BoxProps, "centered" | "backdrop">;
 </script>
 
 <script lang="ts">
@@ -18,30 +18,34 @@
     variant = "tonal",
     color = "secondary",
     shape = "rounded",
-    centered = true,
     ...restProps
   }: AvatarProps = $props();
 
-  let error: boolean = $state(false);
+  let failedSrc: string | undefined = $state();
 </script>
 
 <Box
   bind:el
+  role={alt ? "img" : undefined}
+  aria-label={alt || undefined}
   {variant}
   {color}
   {shape}
-  {centered}
-  class={cn("aspect-square h-9 overflow-clip text-xl", className)}
+  centered
+  class={cn("@container aspect-square h-9 overflow-clip", className)}
   {...restProps}
 >
-  {#if src && !error}
+  {#if src && src !== failedSrc}
     <img
+      class="size-full object-cover"
       {src}
-      {alt}
-      onerror={() => (error = true)}
+      alt=""
+      onerror={() => (failedSrc = src)}
       referrerpolicy="no-referrer"
     />
   {:else}
-    {@render children?.()}
+    <span class="contents text-[50cqw] leading-none">
+      {@render children?.()}
+    </span>
   {/if}
 </Box>
