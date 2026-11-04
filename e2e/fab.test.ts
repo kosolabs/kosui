@@ -177,16 +177,16 @@ test.describe("Fab Component Tests", () => {
     page,
   }) => {
     const list = page.getByRole("list", { name: "Tasks" });
-    await list.evaluate((el) => {
-      const scroller = el.parentElement!;
-      scroller.scrollTo(0, scroller.scrollHeight);
-    });
-    const lastItem = (await list.getByRole("listitem").last().boundingBox())!;
-    const placed = (await page
-      .getByRole("main")
-      .getByRole("button", { name: "New task" })
-      .last()
-      .boundingBox())!;
-    expect(placed.y).toBeGreaterThanOrEqual(lastItem.y + lastItem.height);
+    await expect
+      .poll(() =>
+        list.evaluate((el) => {
+          const scroller = el.parentElement!;
+          scroller.scrollTo(0, scroller.scrollHeight);
+          const lastItem = el.lastElementChild!.getBoundingClientRect();
+          const fab = scroller.querySelector("button")!.getBoundingClientRect();
+          return Math.round(fab.top - lastItem.bottom);
+        }),
+      )
+      .toBeGreaterThanOrEqual(0);
   });
 });
