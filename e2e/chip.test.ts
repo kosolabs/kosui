@@ -49,8 +49,8 @@ test.describe("Chip Component Tests", () => {
     let lastHeight = 0;
     for (const size of ["xs", "sm", "md", "lg", "xl"]) {
       await page
-        .getByRole("listbox", { name: "Size" })
-        .getByRole("option", { name: size, exact: true })
+        .getByRole("radiogroup", { name: "Size" })
+        .getByRole("radio", { name: size, exact: true })
         .click();
       const chip = preview(page)
         .getByText("Design", { exact: true })

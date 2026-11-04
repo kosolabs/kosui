@@ -15,8 +15,8 @@ test.describe("Textarea Component Tests", () => {
     page.getByRole("textbox", { name: "Comment" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const outline = (textarea: Locator) =>
     textarea.evaluate((el) => {

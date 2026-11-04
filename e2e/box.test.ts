@@ -11,8 +11,8 @@ test.describe("Box Component Tests", () => {
     page.getByTestId("preview").getByText("A box of content", { exact: true });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const style = (page: Page, property: string) =>
     box(page).evaluate(

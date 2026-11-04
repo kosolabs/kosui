@@ -11,8 +11,8 @@ test.describe("CircularProgress Component Tests", () => {
     page.getByTestId("preview").getByRole("progressbar");
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
 
   test("a ring is a progress bar named Loading, with its value", async ({

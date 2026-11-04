@@ -13,8 +13,8 @@ test.describe("Badge Component Tests", () => {
   const badge = (page: Page) => preview(page).getByText("3", { exact: true });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const center = async (locator: Locator) => {
     const box = (await locator.boundingBox())!;

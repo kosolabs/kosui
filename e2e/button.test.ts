@@ -12,8 +12,8 @@ test.describe("Button Component Tests", () => {
     preview(page).getByRole("button", { name: "Save" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
 
   test("button has the button role and its label as its name", async ({
