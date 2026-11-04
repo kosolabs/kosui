@@ -93,8 +93,8 @@
     if (children === undefined) {
       return `<${component}${props}/>`;
     }
-    if (props.includes("\n")) {
-      return `<${component}${props}>\n  ${children}\n</${component}>`;
+    if (props.includes("\n") || children.includes("\n")) {
+      return `<${component}${props.trimEnd()}>\n  ${children}\n</${component}>`;
     }
     return `<${component}${props.trimEnd()}>${children}</${component}>`;
   }

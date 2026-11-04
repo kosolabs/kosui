@@ -1,22 +1,201 @@
-<script>
-  import { Badge, Button } from "#lib/index.js";
-  import { Menu } from "@lucide/svelte";
+<script lang="ts">
+  import {
+    Badge,
+    Button,
+    COLORS,
+    VARIANTS,
+    type Color,
+    type Variant,
+  } from "#lib/index.js";
+  import {
+    Code,
+    Example,
+    Playground,
+    PropsTable,
+    Section,
+    ToggleButtonSetting,
+  } from "#ui";
+  import { Bell } from "@lucide/svelte";
+  import AvatarStatusExample from "./examples/avatar-status.svelte";
+  import avatarStatusSource from "./examples/avatar-status.svelte?raw";
+  import UnreadCountExample from "./examples/unread-count.svelte";
+  import unreadCountSource from "./examples/unread-count.svelte?raw";
+
+  const CONTENTS = ["3", "42", "999+"];
+
+  let variant: Variant = $state("filled");
+  let color: Color = $state("error");
+  let content = $state("3");
+  let verticalAlignment: "top" | "bottom" = $state("top");
+  let horizontalAlignment: "left" | "right" = $state("right");
 </script>
 
-<div class="flex gap-5">
-  <Badge content="👑" variant="plain">
-    <Button>Button with Badge</Button>
-  </Badge>
+<div class="flex max-w-5xl flex-col gap-12">
+  <p class="max-w-prose text-lg">
+    Badges show a count or status on the corner of another element, like unread
+    messages on an inbox button.
+  </p>
 
-  <Badge content="2" verticalAlignment="bottom" horizontalAlignment="left">
-    <Button>Button with Badge</Button>
-  </Badge>
+  <Playground>
+    {#snippet component()}
+      <Badge
+        {content}
+        {variant}
+        {color}
+        {verticalAlignment}
+        {horizontalAlignment}
+        aria-hidden="true"
+      >
+        <Button
+          variant="plain"
+          shape="circle"
+          icon={Bell}
+          aria-label="Notifications, {content} new"
+        />
+      </Badge>
+    {/snippet}
+    {#snippet controls()}
+      <ToggleButtonSetting
+        bind:value={content}
+        options={CONTENTS}
+        label="Content"
+      />
+      <ToggleButtonSetting
+        bind:value={variant}
+        options={[...VARIANTS]}
+        label="Variant"
+      />
+      <ToggleButtonSetting
+        bind:value={color}
+        options={[...COLORS]}
+        label="Color"
+      />
+      <ToggleButtonSetting
+        bind:value={verticalAlignment}
+        options={["top", "bottom"]}
+        label="Vertical alignment"
+      />
+      <ToggleButtonSetting
+        bind:value={horizontalAlignment}
+        options={["left", "right"]}
+        label="Horizontal alignment"
+      />
+    {/snippet}
+    {#snippet code()}
+      <Code
+        component="Badge"
+        defaults={{
+          content: "",
+          variant: "filled",
+          color: "error",
+          verticalAlignment: "top",
+          horizontalAlignment: "right",
+          "aria-hidden": "",
+        }}
+        values={{
+          content,
+          variant,
+          color,
+          verticalAlignment,
+          horizontalAlignment,
+          "aria-hidden": "true",
+        }}
+        imports={[
+          `import { Button } from "kosui";`,
+          `import { Bell } from "@lucide/svelte";`,
+        ]}
+        children={`<Button\n    variant="plain"\n    shape="circle"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`}
+      />
+    {/snippet}
+  </Playground>
 
-  <Badge content="3" verticalAlignment="bottom">
-    <Button>Button with Badge</Button>
-  </Badge>
+  <Section title="Examples">
+    <Example title="Unread count" source={unreadCountSource}>
+      {#snippet description()}
+        Put the count in the button's name, so screen readers announce it with
+        the button, and hide the badge itself with <code>aria-hidden</code>. An
+        empty <code>content</code> hides the badge.
+      {/snippet}
+      <UnreadCountExample />
+    </Example>
 
-  <Badge content="4" class="m-1.5">
-    <Button icon={Menu} shape="circle" />
-  </Badge>
+    <Example title="Status on an avatar" source={avatarStatusSource}>
+      {#snippet description()}
+        Pass a <code>content</code> snippet to show an icon instead of text.
+      {/snippet}
+      <AvatarStatusExample />
+    </Example>
+  </Section>
+
+  <Section title="Accessibility">
+    <ul class="flex max-w-prose list-disc flex-col gap-2 pl-5">
+      <li>
+        A badge is separate text after its element, so a screen reader reads it
+        apart from the element it labels. Put what the badge says in the
+        element's name, like <code>aria-label="Inbox, 3 unread"</code>, and give
+        the badge <code>aria-hidden="true"</code>.
+      </li>
+      <li>
+        Don't rely on the badge's color alone to carry meaning; say it in the
+        element's name too.
+      </li>
+    </ul>
+  </Section>
+
+  <Section title="API">
+    <PropsTable
+      rows={[
+        {
+          name: "content",
+          type: "string | Snippet",
+          description:
+            "What the badge shows. When empty, the badge isn't rendered.",
+        },
+        {
+          name: "variant",
+          type: `"elevated" | "filled" | "tonal" | "outlined" | "plain" | "text"`,
+          default: `"filled"`,
+          description: "How much attention the badge draws.",
+        },
+        {
+          name: "color",
+          type: `"primary" | "secondary" | "tertiary" | "error" | "plain" | "inherit"`,
+          default: `"error"`,
+          description: "The theme color the badge uses.",
+        },
+        {
+          name: "verticalAlignment",
+          type: `"top" | "bottom"`,
+          default: `"top"`,
+          description: "Which edge of the element the badge sits on.",
+        },
+        {
+          name: "horizontalAlignment",
+          type: `"left" | "right"`,
+          default: `"right"`,
+          description: "Which side of the element the badge sits on.",
+        },
+        {
+          name: "el",
+          type: "HTMLElement",
+          description: "Bindable. The badge's `<span>`.",
+        },
+        {
+          name: "class",
+          type: "ClassValue",
+          description:
+            "Classes for the badge. Your classes override the badge's.",
+        },
+        {
+          name: "children",
+          type: "Snippet",
+          description: "The element the badge sits on.",
+        },
+      ]}
+    />
+    <p class="max-w-prose text-sm text-m3-on-surface-variant">
+      Every other attribute, event handler and attachment passes through to the
+      badge's <code>&lt;span&gt;</code>.
+    </p>
+  </Section>
 </div>
