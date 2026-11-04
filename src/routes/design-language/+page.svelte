@@ -94,7 +94,7 @@
       prop: "variant",
       values: VARIANTS.join(", "),
       components:
-        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Menu, Skeleton. Input takes outlined, filled and plain; Textarea takes outlined, filled and inherit.",
+        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Menu, Skeleton. Input and Textarea take outlined, filled and plain.",
     },
     {
       prop: "color",

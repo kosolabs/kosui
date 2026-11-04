@@ -1,13 +1,1 @@
-export {
-  default as Textarea,
-  TEXTAREA_COLORS,
-  TEXTAREA_SIZES,
-  TEXTAREA_VARIANTS,
-  type TextareaColor,
-  type TextareaColorProp,
-  type TextareaProps,
-  type TextareaSize,
-  type TextareaSizeProp,
-  type TextareaVariant,
-  type TextareaVariantProp,
-} from "./textarea.svelte";
+export { default as Textarea, type TextareaProps } from "./textarea.svelte";

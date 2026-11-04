@@ -1,6 +1,2 @@
-export {
-  default as Input,
-  INPUT_VARIANTS,
-  type InputProps,
-  type InputVariant,
-} from "./input.svelte";
+export { INPUT_VARIANTS, type InputVariant } from "./field.js";
+export { default as Input, type InputProps } from "./input.svelte";
