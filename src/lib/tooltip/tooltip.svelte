@@ -35,7 +35,6 @@
     open = $bindable(false),
     click = false,
     rich = false,
-    arrow,
     trigger,
     anchorEl,
     class: className,
@@ -103,17 +102,11 @@
   role="tooltip"
   {id}
   {anchorEl}
-  {arrow}
   class={cn(
     rich
       ? "rounded-md border bg-m3-surface-container p-2 text-sm shadow shadow-m3-shadow/20"
       : "rounded-sm bg-m3-inverse-surface px-2 py-1 text-xs text-m3-inverse-on-surface",
     className,
-  )}
-  arrowClass={cn(
-    rich
-      ? "bg-m3-surface-container border-r border-b"
-      : "bg-m3-inverse-surface",
   )}
   {...restProps}
 />

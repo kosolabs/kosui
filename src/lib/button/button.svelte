@@ -122,7 +122,7 @@
 {/snippet}
 
 {#if tooltip}
-  <Tooltip arrow>
+  <Tooltip>
     {#snippet trigger(props)}
       {@render button(props)}
     {/snippet}
