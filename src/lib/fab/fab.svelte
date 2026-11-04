@@ -13,4 +13,10 @@
   }: FabProps = $props();
 </script>
 
-<Button bind:el class={cn("p-4", className)} {variant} {size} {...restProps} />
+<Button
+  bind:el
+  class={cn("sticky bottom-0 mt-auto ml-auto flex w-fit p-4", className)}
+  {variant}
+  {size}
+  {...restProps}
+/>

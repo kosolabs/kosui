@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 test.describe.configure({ mode: "parallel" });
 
@@ -45,36 +45,55 @@ test.describe("Fab Component Tests", () => {
     await expect(preview(page)).toContainText("Pressed 1 time");
   });
 
+  const container = (page: Page) => preview(page).getByTestId("container");
+  const gaps = async (fab: Locator, box: Locator) => {
+    const f = (await fab.boundingBox())!;
+    const b = (await box.boundingBox())!;
+    return {
+      right: Math.round(b.x + b.width - f.x - f.width),
+      bottom: Math.round(b.y + b.height - f.y - f.height),
+    };
+  };
+
   test("a fab renders only its button", async ({ page }) => {
-    const before = await fab(page).evaluate(
-      (el) => el.previousElementSibling?.outerHTML ?? null,
-    );
-    expect(before).toBeNull();
+    await choose(page, "Container", "empty");
+    await expect(container(page).locator("> *")).toHaveCount(1);
   });
 
-  test("a placed fab stays in its corner while the list scrolls", async ({
+  for (const option of ["empty", "tall", "wide", "block"]) {
+    test(`a fab sits in the bottom corner of the "${option}" container`, async ({
+      page,
+    }) => {
+      await choose(page, "Container", option);
+      expect(await gaps(fab(page), container(page))).toEqual({
+        right: 8,
+        bottom: 8,
+      });
+    });
+  }
+
+  test("a fab stays in the corner while its container scrolls", async ({
+    page,
+  }) => {
+    const box = container(page);
+    await box.evaluate((el) => el.scrollTo(0, el.scrollHeight / 3));
+    expect(await gaps(fab(page), box)).toEqual({ right: 8, bottom: 8 });
+  });
+
+  test("at the end of the content, a fab sits below the last item", async ({
     page,
   }) => {
     const list = page.getByRole("list", { name: "Tasks" });
-    const placed = page
+    await list.evaluate((el) => {
+      const scroller = el.parentElement!;
+      scroller.scrollTo(0, scroller.scrollHeight);
+    });
+    const lastItem = (await list.getByRole("listitem").last().boundingBox())!;
+    const placed = (await page
       .getByRole("main")
       .getByRole("button", { name: "New task" })
-      .last();
-    const corner = async () => {
-      const box = await placed.boundingBox();
-      const container = await list.boundingBox();
-      return {
-        right: Math.round(
-          container!.x + container!.width - box!.x - box!.width,
-        ),
-        bottom: Math.round(
-          container!.y + container!.height - box!.y - box!.height,
-        ),
-      };
-    };
-    const before = await corner();
-    await list.evaluate((el) => el.scrollTo(0, el.scrollHeight));
-    expect(await corner()).toEqual(before);
-    expect(before).toEqual({ right: 16, bottom: 16 });
+      .last()
+      .boundingBox())!;
+    expect(placed.y).toBeGreaterThanOrEqual(lastItem.y + lastItem.height);
   });
 });

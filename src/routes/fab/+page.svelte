@@ -26,16 +26,27 @@
   import placementSource from "./examples/placement.svelte?raw";
 
   const CONTENTS = ["icon", "both"];
+  const CONTAINERS = ["empty", "tall", "wide", "block"];
 
   let variant: Variant = $state("elevated");
   let color: Color = $state("primary");
   let shape: Shape = $state("rounded");
   let content = $state("icon");
+  let container = $state("tall");
   let tooltip = $state(true);
   let disabled = $state(false);
   let presses = $state(0);
 
   let hasLabel = $derived(content === "both");
+  let lines = $derived(
+    container === "empty"
+      ? []
+      : Array.from({ length: 20 }, (_, i) =>
+          container === "wide"
+            ? `Line ${i + 1} is long enough to overflow its container sideways, so it scrolls both ways`
+            : `Line ${i + 1}`,
+        ),
+  );
   let tooltipText = $derived(tooltip ? "New task" : "");
   let ariaLabel = $derived(!hasLabel && !tooltip ? "New task" : "");
 
@@ -55,18 +66,29 @@
   <p class="max-w-prose text-lg">
     A floating action button (Fab) holds the main action on a screen, like
     creating a task. It's a <Link href={resolve("button")}>Button</Link> with more
-    presence: elevated by default, with a larger icon and padding. Give it a label
-    to make an extended Fab.
+    presence: elevated by default, with a larger icon and padding, and it floats in
+    the bottom corner of its container. Give it a label to make an extended Fab.
   </p>
 
   <Playground>
     {#snippet component()}
-      <div class="flex flex-col items-center gap-3">
-        {#if hasLabel}
-          <Fab {...fabProps}>New task</Fab>
-        {:else}
-          <Fab {...fabProps} />
-        {/if}
+      <div class="flex w-full min-w-0 flex-col items-center gap-3">
+        <div
+          data-testid="container"
+          class={[
+            "h-72 w-full overflow-auto rounded-lg bg-m3-surface-container-highest p-2",
+            container !== "block" && "flex flex-col",
+          ]}
+        >
+          {#each lines as line (line)}
+            <div class="text-nowrap">{line}</div>
+          {/each}
+          {#if hasLabel}
+            <Fab {...fabProps}>New task</Fab>
+          {:else}
+            <Fab {...fabProps} />
+          {/if}
+        </div>
         <p class="text-sm" aria-live="polite">
           Pressed {presses}
           {presses === 1 ? "time" : "times"}
@@ -93,6 +115,11 @@
         bind:value={content}
         options={CONTENTS}
         label="Content"
+      />
+      <ToggleButtonSetting
+        bind:value={container}
+        options={CONTAINERS}
+        label="Container"
       />
       <SwitchSetting label="Tooltip" bind:value={tooltip} />
       <DisabledSetting bind:disabled />
@@ -126,10 +153,11 @@
   <Section title="Examples">
     <Example title="Placing a Fab" source={placementSource}>
       {#snippet description()}
-        Fab doesn't position itself, so it works in any layout. Pin it to a
-        scrolling region with <code>absolute</code> inside a
-        <code>relative</code> container that doesn't scroll, as here, or to the
-        window with <code>fixed right-4 bottom-4</code>.
+        Make Fab the last child of a scrolling container. It stays in the bottom
+        corner while the content scrolls, and at the end it sits below the last
+        item instead of covering it. In a flex column, it also moves to the
+        bottom when the content is short. To pin it to the window instead, pass
+        <code>class="fixed right-4 bottom-4"</code>.
       {/snippet}
       <PlacementExample />
     </Example>
@@ -147,8 +175,8 @@
         <code>aria-label</code>.
       </li>
       <li>
-        Place the Fab where it falls in the reading order you want. Positioning
-        it with CSS moves it on screen but not in the tab order.
+        Fab comes after the content it follows, so it's also last in the tab
+        order and reading order of its container.
       </li>
     </ul>
   </Section>
