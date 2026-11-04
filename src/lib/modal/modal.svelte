@@ -1,10 +1,10 @@
 <script module lang="ts">
   import { events } from "#lib/index.js";
   import { mergeProps } from "#lib/merge-props.js";
-  import { Shortcut } from "#lib/shortcut/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLDialogAttributes } from "svelte/elements";
+  import { prefersReducedMotion } from "svelte/motion";
   import { scale } from "svelte/transition";
 
   export type ModalProps = {
@@ -12,7 +12,7 @@
     onCancel?: () => void;
     children: Snippet;
   } & ClassName &
-    HTMLDialogAttributes;
+    Omit<HTMLDialogAttributes, "class">;
 </script>
 
 <script lang="ts">
@@ -25,98 +25,49 @@
     ...restProps
   }: ModalProps = $props();
 
-  function handleKeydown(event: KeyboardEvent) {
-    if (Shortcut.ESCAPE.matches(event)) {
-      open = false;
-      onCancel?.();
-      event.preventDefault();
-    }
+  function isolateKeys(event: KeyboardEvent) {
     event.stopImmediatePropagation();
   }
 
-  function handleClickOutside(event: MouseEvent) {
-    if (el && el === event.target) {
-      const rect = el.getBoundingClientRect();
-      if (
-        event.clientY < rect.top ||
-        event.clientY > rect.top + rect.height ||
-        event.clientX < rect.left ||
-        event.clientX > rect.left + rect.width
-      ) {
-        open = false;
-        onCancel?.();
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-    }
+  function oncancel(event: Event) {
+    event.preventDefault();
+    open = false;
+    onCancel?.();
   }
 
   $effect(() => {
-    if (el) {
-      el.showModal();
-      events.on("keydown", handleKeydown);
-      events.on("mousedown", handleClickOutside);
+    if (!el) return;
+    const opener =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : undefined;
+    if (!el.open) el.showModal();
+    events.on("keydown", isolateKeys);
 
-      return () => {
-        events.remove("keydown", handleKeydown);
-        events.remove("mousedown", handleClickOutside);
-      };
-    }
+    return () => {
+      events.remove("keydown", isolateKeys);
+      opener?.focus();
+    };
   });
 </script>
 
 {#if open}
   <dialog
     bind:this={el}
-    class={cn("m-auto rounded-lg p-5 shadow-lg", className)}
-    transition:scale={{ duration: 150, start: 0.95 }}
+    closedby="any"
+    class={cn(
+      "m-auto rounded-lg p-5 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-[2px] data-closing:backdrop:bg-transparent motion-safe:backdrop:transition-colors starting:backdrop:bg-transparent",
+      className,
+    )}
+    transition:scale={{
+      duration: prefersReducedMotion.current ? 0 : 150,
+      start: 0.95,
+    }}
     {...mergeProps(restProps, {
-      onintrostart: () => {
-        if (el) {
-          el.classList.remove("backdrop-out");
-          el.classList.add("backdrop-in");
-        }
-      },
-      onoutrostart: () => {
-        if (el) {
-          el.classList.remove("backdrop-in");
-          el.classList.add("backdrop-out");
-        }
-      },
+      oncancel,
+      onoutrostart: () => el?.setAttribute("data-closing", ""),
     })}
   >
     {@render children()}
   </dialog>
 {/if}
-
-<style>
-  .backdrop-in::backdrop {
-    animation: backdrop-in 150ms forwards;
-  }
-
-  .backdrop-out::backdrop {
-    animation: backdrop-out 150ms forwards;
-  }
-
-  @keyframes backdrop-in {
-    from {
-      background: rgba(0, 0, 0, 0);
-      backdrop-filter: blur(0px);
-    }
-    to {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(2px);
-    }
-  }
-
-  @keyframes backdrop-out {
-    from {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(2px);
-    }
-    to {
-      background: rgba(0, 0, 0, 0);
-      backdrop-filter: blur(0px);
-    }
-  }
-</style>

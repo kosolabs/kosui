@@ -22,6 +22,7 @@
     resolve("links"),
     resolve("markdown"),
     resolve("menus"),
+    resolve("modal"),
     resolve("popover"),
     resolve("progress-indicators"),
     resolve("slider"),
