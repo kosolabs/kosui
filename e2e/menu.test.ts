@@ -34,6 +34,27 @@ test.describe("Menu Component Tests", () => {
     await expect(menuItems).toHaveCount(3);
   });
 
+  test("a menu divider is a separator inset from the menu's edges", async ({
+    page,
+  }) => {
+    await page.getByRole("button", { name: "Open Menu" }).click();
+    const menu = page.getByRole("menu");
+    const separator = menu.getByRole("separator");
+    await expect(separator).toBeVisible();
+    await expect
+      .poll(async () => {
+        const [outer, line] = await Promise.all([
+          menu.boundingBox(),
+          separator.boundingBox(),
+        ]);
+        return (
+          line!.x - outer!.x >= 4 &&
+          outer!.x + outer!.width - (line!.x + line!.width) >= 4
+        );
+      })
+      .toBe(true);
+  });
+
   test("keyboard navigation should work correctly", async ({ page }) => {
     const trigger = page.getByRole("button", { name: "Open Menu" });
     await trigger.click();
