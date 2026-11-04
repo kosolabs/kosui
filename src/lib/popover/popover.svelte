@@ -5,11 +5,11 @@
   import {
     cn,
     type ClassName,
-    type ElementRef,
     type ToggleEventWithTarget,
   } from "#lib/utils.js";
   import * as floatingUi from "@floating-ui/dom";
   import type { Snippet } from "svelte";
+  import { prefersReducedMotion } from "svelte/motion";
   import type { HTMLAttributes, ClassValue } from "svelte/elements";
   import { scale } from "svelte/transition";
 
@@ -17,14 +17,13 @@
     arrow?: boolean;
     arrowClass?: ClassValue;
     placement?: floatingUi.Placement;
-    strategy?: floatingUi.Strategy;
     open?: boolean;
     anchorEl?: HTMLElement;
     onKeydownWhileOpen?: (event: KeyboardEvent) => void;
     children: Snippet;
+    el?: HTMLDivElement;
   } & ClassName &
-    ElementRef &
-    HTMLAttributes<HTMLDivElement>;
+    Omit<HTMLAttributes<HTMLDivElement>, "class">;
 
   type Side = "top" | "bottom" | "left" | "right";
 </script>
@@ -33,7 +32,6 @@
   let {
     arrow = false,
     placement = "top",
-    strategy = "fixed",
     open = $bindable(false),
     anchorEl,
     children,
@@ -78,10 +76,6 @@
     }
   }
 
-  function handleClickInside(event: MouseEvent) {
-    event.stopImmediatePropagation();
-  }
-
   function onbeforetoggle(event: ToggleEventWithTarget<HTMLDivElement>) {
     if (event.newState === "closed") {
       open = false;
@@ -124,7 +118,7 @@
             floatingUi.shift({ padding: 5 }),
             floatingUi.arrow({ element: arrowEl }),
           ],
-          strategy,
+          strategy: "fixed",
         },
       );
 
@@ -160,9 +154,12 @@
   <div
     bind:this={popoverEl}
     popover="manual"
-    class={cn(className)}
-    transition:scale={{ duration: 150, start: 0.95 }}
-    {...mergeProps(restProps, { onbeforetoggle, onclick: handleClickInside })}
+    class={cn(arrow && "overflow-visible", className)}
+    transition:scale={{
+      duration: prefersReducedMotion.current ? 0 : 150,
+      start: 0.95,
+    }}
+    {...mergeProps(restProps, { onbeforetoggle })}
   >
     {@render children()}
     <div
