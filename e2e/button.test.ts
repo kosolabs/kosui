@@ -65,6 +65,49 @@ test.describe("Button Component Tests", () => {
     await expect(save(page)).toBeVisible();
     await expect(save(page)).not.toContainText("Save");
   });
+
+  const HEIGHTS = { xs: 28, sm: 36, md: 44, lg: 52, xl: 60 };
+
+  for (const content of ["label", "icon", "both"]) {
+    test(`buttons with ${content} content are the same height at each size`, async ({
+      page,
+    }) => {
+      await choose(page, "Content", content);
+      for (const [size, height] of Object.entries(HEIGHTS)) {
+        await choose(page, "Size", size);
+        await expect
+          .poll(async () =>
+            Math.round((await save(page).boundingBox())!.height),
+          )
+          .toBe(height);
+      }
+    });
+  }
+
+  test("icon-only buttons are square at each size", async ({ page }) => {
+    await choose(page, "Content", "icon");
+    for (const [size, height] of Object.entries(HEIGHTS)) {
+      await choose(page, "Size", size);
+      await expect
+        .poll(async () => {
+          const box = (await save(page).boundingBox())!;
+          return [Math.round(box.width), Math.round(box.height)];
+        })
+        .toEqual([height, height]);
+    }
+  });
+
+  test("the icon grows with the button", async ({ page }) => {
+    await choose(page, "Content", "both");
+    const icon = save(page).locator("svg");
+    let last = 0;
+    for (const size of Object.keys(HEIGHTS)) {
+      await choose(page, "Size", size);
+      const width = (await icon.boundingBox())!.width;
+      expect(width).toBeGreaterThan(last);
+      last = width;
+    }
+  });
 });
 
 test.describe("Button with tooltip", () => {

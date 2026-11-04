@@ -55,6 +55,37 @@ test.describe("Fab Component Tests", () => {
     };
   };
 
+  test("a fab is a size larger than a button by default", async ({ page }) => {
+    const box = (await fab(page).boundingBox())!;
+    expect([Math.round(box.width), Math.round(box.height)]).toEqual([52, 52]);
+  });
+
+  for (const content of ["icon", "both"]) {
+    test(`a fab with ${content} content stays in the corner at each size`, async ({
+      page,
+    }) => {
+      await choose(page, "Content", content);
+      for (const [size, height] of Object.entries({
+        xs: 28,
+        sm: 36,
+        md: 44,
+        lg: 52,
+        xl: 60,
+      })) {
+        await choose(page, "Size", size);
+        await expect
+          .poll(async () => Math.round((await fab(page).boundingBox())!.height))
+          .toBe(height);
+        await expect
+          .poll(async () => {
+            const { right, bottom } = await gaps(fab(page), container(page));
+            return Math.abs(right - 8) <= 1 && Math.abs(bottom - 8) <= 1;
+          })
+          .toBe(true);
+      }
+    });
+  }
+
   test("a fab renders only its button", async ({ page }) => {
     await choose(page, "Container", "empty");
     await expect(container(page).locator("> *")).toHaveCount(1);

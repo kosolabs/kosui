@@ -11,7 +11,7 @@
     el = $bindable(),
     class: className,
     style,
-    size = 20,
+    size = "lg",
     variant = "elevated",
     clear = false,
     ...restProps
@@ -33,7 +33,8 @@
 <Button
   bind:el
   class={cn(
-    "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex w-fit shrink-0 p-4 transition",
+    "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex transition",
+    restProps.children && "w-fit",
     !clear && "mt-[calc(-1*var(--fab-height))]",
     className,
   )}
