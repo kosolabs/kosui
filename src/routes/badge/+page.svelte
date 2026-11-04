@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    Avatar,
     Badge,
     Button,
     COLORS,
@@ -15,19 +16,37 @@
     Section,
     ToggleButtonSetting,
   } from "#ui";
-  import { Bell } from "@lucide/svelte";
+  import { Bell, Inbox } from "@lucide/svelte";
   import AvatarStatusExample from "./examples/avatar-status.svelte";
   import avatarStatusSource from "./examples/avatar-status.svelte?raw";
   import UnreadCountExample from "./examples/unread-count.svelte";
   import unreadCountSource from "./examples/unread-count.svelte?raw";
 
   const CONTENTS = ["3", "42", "999+"];
+  const ELEMENTS = ["icon button", "button", "avatar"];
 
   let variant: Variant = $state("filled");
   let color: Color = $state("error");
   let content = $state("3");
   let verticalAlignment: "top" | "bottom" = $state("top");
   let horizontalAlignment: "left" | "right" = $state("right");
+  let element = $state("icon button");
+
+  let elementCode = $derived(
+    {
+      "icon button": `<Button\n    variant="plain"\n    shape="circle"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`,
+      button: `<Button\n    variant="tonal"\n    icon={Inbox}\n    aria-label="Inbox, ${content} unread"\n  >\n    Inbox\n  </Button>`,
+      avatar: `<Avatar role="img" aria-label="Ada Lovelace, ${content} new">\n    AL\n  </Avatar>`,
+    }[element]!,
+  );
+  let elementComponent = $derived(element === "avatar" ? "Avatar" : "Button");
+  let elementImports = $derived(
+    {
+      "icon button": [`import { Bell } from "@lucide/svelte";`],
+      button: [`import { Inbox } from "@lucide/svelte";`],
+      avatar: [],
+    }[element]!,
+  );
 </script>
 
 <div class="flex max-w-5xl flex-col gap-12">
@@ -46,15 +65,31 @@
         {horizontalAlignment}
         aria-hidden="true"
       >
-        <Button
-          variant="plain"
-          shape="circle"
-          icon={Bell}
-          aria-label="Notifications, {content} new"
-        />
+        {#if element === "icon button"}
+          <Button
+            variant="plain"
+            shape="circle"
+            icon={Bell}
+            aria-label="Notifications, {content} new"
+          />
+        {:else if element === "button"}
+          <Button
+            variant="tonal"
+            icon={Inbox}
+            aria-label="Inbox, {content} unread">Inbox</Button
+          >
+        {:else}
+          <Avatar role="img" aria-label="Ada Lovelace, {content} new">AL</Avatar
+          >
+        {/if}
       </Badge>
     {/snippet}
     {#snippet controls()}
+      <ToggleButtonSetting
+        bind:value={element}
+        options={ELEMENTS}
+        label="Element"
+      />
       <ToggleButtonSetting
         bind:value={content}
         options={CONTENTS}
@@ -100,11 +135,9 @@
           horizontalAlignment,
           "aria-hidden": "true",
         }}
-        imports={[
-          `import { Button } from "kosui";`,
-          `import { Bell } from "@lucide/svelte";`,
-        ]}
-        children={`<Button\n    variant="plain"\n    shape="circle"\n    icon={Bell}\n    aria-label="Notifications, ${content} new"\n  />`}
+        components={[elementComponent]}
+        imports={elementImports}
+        children={elementCode}
       />
     {/snippet}
   </Playground>

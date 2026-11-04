@@ -38,6 +38,25 @@ test.describe("Badge Component Tests", () => {
     });
   });
 
+  for (const [element, role, name] of [
+    ["icon button", "button", /^Notifications, 3 new$/],
+    ["button", "button", /^Inbox, 3 unread$/],
+    ["avatar", "img", /^Ada Lovelace, 3 new$/],
+  ] as const) {
+    test(`the badge sits on the corner of the ${element}, which carries the count in its name`, async ({
+      page,
+    }) => {
+      await choose(page, "Element", element);
+      const target = preview(page).getByRole(role, { name });
+      await expect(target).toBeVisible();
+      const box = (await target.boundingBox())!;
+      expectNear(await center(badge(page)), {
+        x: box.x + box.width,
+        y: box.y,
+      });
+    });
+  }
+
   test("the badge moves to the bottom-left corner", async ({ page }) => {
     await choose(page, "Vertical alignment", "bottom");
     await choose(page, "Horizontal alignment", "left");
@@ -79,6 +98,7 @@ test.describe("Badge Component Tests", () => {
   test("the badge stays on its element in a block container", async ({
     page,
   }) => {
+    await page.waitForLoadState("networkidle");
     const wrapper = badge(page).locator("..");
     await wrapper.evaluate((el) => {
       const block = document.createElement("div");
@@ -86,11 +106,13 @@ test.describe("Badge Component Tests", () => {
       el.replaceWith(block);
       block.append(el);
     });
-    const box = (await anchor(page).boundingBox())!;
-    expectNear(await center(badge(page)), {
-      x: box.x + box.width,
-      y: box.y,
-    });
+    await expect
+      .poll(async () => {
+        const box = (await anchor(page).boundingBox())!;
+        const { x, y } = await center(badge(page));
+        return Math.max(Math.abs(x - box.x - box.width), Math.abs(y - box.y));
+      })
+      .toBeLessThanOrEqual(1);
   });
 
   test("an empty count hides the badge in the unread example", async ({
