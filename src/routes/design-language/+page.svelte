@@ -96,7 +96,7 @@
       prop: "color",
       values: COLORS.join(", "),
       components:
-        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Input, Link, Menu, Skeleton, Slider, Switch, Textarea",
+        "Alert, Avatar, Badge, Box, Button, Chip, Circular Progress, Fab, Input, Link, Menu, Skeleton, Slider, Switch, Textarea",
     },
     {
       prop: "shape",
@@ -106,7 +106,8 @@
     {
       prop: "size",
       values: SIZES.join(", "),
-      components: "Button, Chip, Fab, Input, Slider, Switch, Textarea",
+      components:
+        "Button, Chip, Circular Progress, Fab, Input, Slider, Switch, Textarea",
     },
     {
       prop: "radius",
