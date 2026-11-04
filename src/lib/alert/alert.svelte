@@ -11,7 +11,7 @@
     class: className,
     variant = "tonal",
     color = "primary",
-    shape = "rounded",
+    shape = "md",
     ...restProps
   }: AlertProps = $props();
 </script>

@@ -32,7 +32,7 @@
       <Chip
         variant="tonal"
         color="secondary"
-        shape="circle"
+        shape="full"
         onDelete={() => recipients.splice(recipients.indexOf(recipient), 1)}
       >
         {recipient}

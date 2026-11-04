@@ -7,7 +7,7 @@
     children,
     class: className,
     variant,
-    shape = "rounded",
+    shape = "xs",
     ...restProps
   }: SkeletonProps = $props();
 </script>

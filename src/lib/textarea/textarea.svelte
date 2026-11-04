@@ -1,12 +1,11 @@
 <script module lang="ts">
   import {
+    baseClasses,
     COLORS,
-    RADII,
     SIZES,
     type Color,
     type ColorProp,
-    type Radius,
-    type RadiusProp,
+    type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
@@ -25,14 +24,10 @@
   export type TextareaSize = Size;
   export type TextareaSizeProp = SizeProp;
 
-  export const TEXTAREA_RADII = RADII;
-  export type TextareaRadius = Radius;
-  export type TextareaRadiusProp = RadiusProp;
-
   export type TextareaProps = ClassName &
     TextareaVariantProp &
     TextareaSizeProp &
-    TextareaRadiusProp &
+    ShapeProp &
     TextareaColorProp &
     Omit<HTMLTextareaAttributes, "size">;
 </script>
@@ -44,7 +39,7 @@
     variant = "outlined",
     color = "primary",
     size = "sm",
-    radius = "md",
+    shape = "xs",
     ...restProps
   }: TextareaProps = $props();
 </script>
@@ -70,11 +65,7 @@
     size === "lg" && "px-4 py-2.5 text-lg",
     size === "xl" && "px-5 py-4 text-xl",
 
-    radius == "xs" && "rounded-xs",
-    radius == "sm" && "rounded-sm",
-    radius == "md" && "rounded-lg",
-    radius == "lg" && "rounded-2xl",
-    radius == "xl" && "rounded-4xl",
+    baseClasses({ shape }),
 
     className,
   )}

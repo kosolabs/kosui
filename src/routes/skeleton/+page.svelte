@@ -20,7 +20,7 @@
   };
 
   let standIn = $state("text line");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("xs");
 </script>
 
 <div class="flex max-w-5xl flex-col gap-12">
@@ -48,7 +48,7 @@
     {#snippet code()}
       <Code
         component="Skeleton"
-        defaults={{ shape: "rounded" }}
+        defaults={{ shape: "xs" }}
         values={{ shape, class: STAND_INS[standIn] }}
       />
     {/snippet}
@@ -95,9 +95,9 @@
       rows={[
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"xs"`,
+          description: "Corner rounding.",
         },
         {
           name: "variant",

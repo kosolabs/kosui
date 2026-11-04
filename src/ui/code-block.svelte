@@ -30,7 +30,6 @@
     class="copy"
     variant="plain"
     color="secondary"
-    shape="circle"
     icon={copied ? Check : Copy}
     tooltip={copied ? "Copied" : "Copy code"}
     onclick={copy}

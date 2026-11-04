@@ -19,7 +19,7 @@
     class: className,
     variant = "plain",
     color = "primary",
-    shape = "rounded",
+    shape = "xs",
     ...restProps
   }: HeaderProps = $props();
 </script>

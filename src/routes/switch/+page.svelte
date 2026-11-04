@@ -1,22 +1,23 @@
 <script lang="ts">
   import {
+    SHAPES,
     Switch,
     type SwitchColor,
-    type SwitchRadius,
+    type Shape,
     type SwitchSize,
   } from "#lib/index.js";
   import {
     Code,
     ColorSetting,
     DisabledSetting,
-    RadiusSetting,
     SizeSetting,
     Playground,
+    ToggleButtonSetting,
   } from "#ui";
 
   let color: SwitchColor = $state("primary");
   let size: SwitchSize = $state("sm");
-  let radius: SwitchRadius = $state("xl");
+  let shape: Shape = $state("full");
   let disabled: boolean = $state(false);
   let checked: boolean = $state(false);
 </script>
@@ -25,12 +26,16 @@
 
 <Playground>
   {#snippet component()}
-    <Switch bind:checked {color} {size} {radius} {disabled} />
+    <Switch bind:checked {color} {size} {shape} {disabled} />
   {/snippet}
   {#snippet controls()}
     <ColorSetting bind:color />
     <SizeSetting bind:size />
-    <RadiusSetting bind:radius />
+    <ToggleButtonSetting
+      bind:value={shape}
+      options={[...SHAPES]}
+      label="Shape"
+    />
     <DisabledSetting bind:disabled />
   {/snippet}
   {#snippet code()}
@@ -40,14 +45,14 @@
       defaults={{
         color: "primary",
         size: "sm",
-        radius: "xl",
+        shape: "full",
         disabled: false,
         checked: false,
       }}
       values={{
         color,
         size,
-        radius,
+        shape,
         disabled,
         checked,
       }}

@@ -106,8 +106,12 @@ test.describe("Fab Component Tests", () => {
     page,
   }) => {
     const box = container(page);
-    await box.evaluate((el) => el.scrollTo(0, el.scrollHeight / 3));
-    expect(await gaps(fab(page), box)).toEqual({ right: 8, bottom: 8 });
+    await expect
+      .poll(async () => {
+        await box.evaluate((el) => el.scrollTo(0, el.scrollHeight / 3));
+        return gaps(fab(page), box);
+      })
+      .toEqual({ right: 8, bottom: 8 });
   });
 
   for (const content of ["icon", "both"]) {

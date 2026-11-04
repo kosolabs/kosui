@@ -25,7 +25,7 @@
 
   let variant: Variant = $state("elevated");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("md");
 </script>
 
 <div class="flex max-w-5xl flex-col gap-12">
@@ -119,8 +119,8 @@
         },
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          description: "Corner rounding.",
         },
         {
           name: "el",

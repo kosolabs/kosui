@@ -1,5 +1,6 @@
 import { Bindable } from "#lib/bindable.svelte.js";
 import { Shortcut } from "#lib/shortcut/shortcut.js";
+import type { Shape } from "#lib/base.js";
 import type {
   SliderColor,
   SliderHandleLabelArrowProps,
@@ -8,7 +9,6 @@ import type {
   SliderMarkDotProps,
   SliderMarkLabelProps,
   SliderMarkProps,
-  SliderRadius,
   SliderSize,
 } from "#lib/slider/index.js";
 import { getContext, setContext, type Snippet } from "svelte";
@@ -31,7 +31,7 @@ export class SliderContext {
   #restrictToMarks: () => boolean;
   #color: () => SliderColor;
   #size: () => SliderSize;
-  #radius: () => SliderRadius;
+  #shape: () => Shape;
   onChange: ((value: number) => void) | undefined;
   onChangeEnd: ((value: number) => void) | undefined;
   #handleRenderer: () => Snippet<[SliderHandleProps]>;
@@ -60,7 +60,7 @@ export class SliderContext {
     restrictToMarks: () => boolean,
     color: () => SliderColor,
     size: () => SliderSize,
-    radius: () => SliderRadius,
+    shape: () => Shape,
     onChange: ((value: number) => void) | undefined,
     onChangeEnd: ((value: number) => void) | undefined,
     handleRenderer: () => Snippet<[SliderHandleProps]>,
@@ -83,7 +83,7 @@ export class SliderContext {
     this.#restrictToMarks = restrictToMarks;
     this.#color = color;
     this.#size = size;
-    this.#radius = radius;
+    this.#shape = shape;
     this.onChange = onChange;
     this.onChangeEnd = onChangeEnd;
     this.#handleRenderer = handleRenderer;
@@ -147,8 +147,8 @@ export class SliderContext {
     return this.#size();
   }
 
-  get radius(): SliderRadius {
-    return this.#radius();
+  get shape(): Shape {
+    return this.#shape();
   }
 
   get handleRenderer(): Snippet<[SliderHandleProps]> {

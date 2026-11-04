@@ -95,7 +95,7 @@
 
   let variant: Variant = $state("outlined");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("full");
   let size: Size = $state("sm");
   let content = $state("label");
   let tooltip = $state(false);
@@ -177,7 +177,7 @@
         defaults={{
           variant: "outlined",
           color: "primary",
-          shape: "rounded",
+          shape: "full",
           size: "sm",
           tooltip: "",
           "aria-label": "",
@@ -314,9 +314,9 @@
         },
         {
           name: "shape",
-          type: `"square" | "rounded" | "circle"`,
-          default: `"rounded"`,
-          description: "Corner style.",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"full"`,
+          description: "Corner rounding.",
         },
         {
           name: "href",

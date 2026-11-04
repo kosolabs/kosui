@@ -34,7 +34,7 @@
         baseClasses({
           variant: "outlined",
           color: "primary",
-          shape: "rounded",
+          shape: "full",
           hover: true,
           focus: true,
         }),

@@ -12,6 +12,7 @@
     class: className,
     style,
     size = "lg",
+    shape = "lg",
     variant = "elevated",
     clear = false,
     ...restProps
@@ -41,6 +42,7 @@
   style="--fab-width: {width}px; --fab-height: {height}px; {style ?? ''}"
   {variant}
   {size}
+  {shape}
   {...restProps}
   {@attach measure}
 />

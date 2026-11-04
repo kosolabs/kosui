@@ -19,13 +19,13 @@
     class="flex w-72 items-center gap-3"
   >
     {#if loading}
-      <Skeleton shape="circle" class="size-9 shrink-0" />
+      <Skeleton shape="full" class="size-9 shrink-0" />
       <div class="flex flex-1 flex-col gap-1 text-sm">
         <Skeleton class="w-2/3" />
         <Skeleton class="w-full" />
       </div>
     {:else}
-      <Avatar shape="circle" class="shrink-0">AL</Avatar>
+      <Avatar class="shrink-0">AL</Avatar>
       <div class="flex flex-col gap-1 text-sm">
         <span class="font-medium">Ada Lovelace</span>
         <span class="text-m3-on-surface-variant">ada@example.com</span>

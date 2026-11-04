@@ -40,9 +40,9 @@ test.describe("Box Component Tests", () => {
   });
 
   test("shape sets the corners", async ({ page }) => {
-    await choose(page, "Shape", "square");
+    await choose(page, "Shape", "none");
     await expect.poll(() => style(page, "border-radius")).toBe("0px");
-    await choose(page, "Shape", "circle");
+    await choose(page, "Shape", "full");
     await expect
       .poll(async () => parseFloat(await style(page, "border-radius")))
       .toBeGreaterThan(100);

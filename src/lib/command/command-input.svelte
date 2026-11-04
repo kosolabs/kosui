@@ -17,7 +17,7 @@
     class: className,
     variant = "plain",
     color = "secondary",
-    shape = "rounded",
+    shape = "xs",
     ...restProps
   }: CommandInputProps = $props();
 

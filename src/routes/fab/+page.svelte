@@ -32,7 +32,7 @@
 
   let variant: Variant = $state("elevated");
   let color: Color = $state("primary");
-  let shape: Shape = $state("rounded");
+  let shape: Shape = $state("lg");
   let size: Size = $state("lg");
   let content = $state("icon");
   let container = $state("tall");
@@ -142,7 +142,7 @@
         defaults={{
           variant: "elevated",
           color: "primary",
-          shape: "rounded",
+          shape: "lg",
           size: "lg",
           clear: false,
           tooltip: "",
@@ -220,11 +220,18 @@
           description:
             "The row height, on Button's scale: 28, 36, 44, 52 or 60 pixels. The default, 52, is two sizes above Button's.",
         },
+        {
+          name: "shape",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"lg"`,
+          description:
+            "Corner rounding. The default, 16 pixels, is Material 3's FAB shape.",
+        },
       ]}
     />
     <p class="max-w-prose text-sm text-m3-on-surface-variant">
       Fab takes every other Button prop, including <code>color</code>,
-      <code>shape</code>, <code>href</code>, <code>icon</code> and
+      <code>href</code>, <code>icon</code> and
       <code>tooltip</code>, with the same defaults. Every attribute, event
       handler and attachment passes through to the rendered element.
     </p>
