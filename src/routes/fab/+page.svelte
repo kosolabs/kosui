@@ -157,7 +157,7 @@
         corner while the content scrolls, and at the end it sits below the last
         item instead of covering it. In a flex column, it also moves to the
         bottom when the content is short. To pin it to the window instead, pass
-        <code>class="fixed right-4 bottom-4"</code>.
+        <code>class="fixed right-4 bottom-4 left-auto"</code>.
       {/snippet}
       <PlacementExample />
     </Example>

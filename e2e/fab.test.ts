@@ -65,10 +65,9 @@ test.describe("Fab Component Tests", () => {
       page,
     }) => {
       await choose(page, "Container", option);
-      expect(await gaps(fab(page), container(page))).toEqual({
-        right: 8,
-        bottom: 8,
-      });
+      await expect
+        .poll(() => gaps(fab(page), container(page)))
+        .toEqual({ right: 8, bottom: 8 });
     });
   }
 
@@ -79,6 +78,25 @@ test.describe("Fab Component Tests", () => {
     await box.evaluate((el) => el.scrollTo(0, el.scrollHeight / 3));
     expect(await gaps(fab(page), box)).toEqual({ right: 8, bottom: 8 });
   });
+
+  for (const content of ["icon", "both"]) {
+    test(`a fab with ${content} content stays in the corner while its container scrolls sideways`, async ({
+      page,
+    }) => {
+      await choose(page, "Content", content);
+      await choose(page, "Container", "wide");
+      const box = container(page);
+      for (const fraction of [0.5, 1]) {
+        await box.evaluate(
+          (el, f) => el.scrollTo(el.scrollWidth * f, el.scrollHeight * f),
+          fraction,
+        );
+        await expect
+          .poll(() => gaps(fab(page), box))
+          .toEqual({ right: 8, bottom: 8 });
+      }
+    });
+  }
 
   test("at the end of the content, a fab sits below the last item", async ({
     page,
