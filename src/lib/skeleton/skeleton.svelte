@@ -1,9 +1,8 @@
 <script lang="ts">
   import { Box, type BoxProps } from "#lib/box/index.js";
-  import type { Snippet } from "svelte";
   import { cn } from "#lib/utils.js";
 
-  export type SkeletonProps = { children?: Snippet } & BoxProps;
+  export type SkeletonProps = BoxProps;
   let {
     children,
     class: className,
@@ -14,10 +13,16 @@
 </script>
 
 <Box
-  class={cn("animate-pulse", !variant && "bg-m3-surface-container", className)}
+  class={cn(
+    "min-h-lh motion-safe:animate-pulse",
+    !variant && "bg-m3-surface-container",
+    className,
+  )}
   {variant}
   {shape}
   {...restProps}
 >
-  {@render children?.()}
+  {#if children}
+    <div class="invisible">{@render children()}</div>
+  {/if}
 </Box>
