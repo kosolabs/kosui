@@ -1,44 +1,16 @@
 <script lang="ts" module>
   import {
-    baseClasses,
-    COLORS,
-    SIZES,
     type Color,
     type ColorProp,
+    type Shape,
     type ShapeProp,
     type Size,
     type SizeProp,
   } from "#lib/base.js";
-  import { mergeProps } from "#lib/merge-props.js";
-  import {
-    setSliderContext,
-    SliderContext,
-    SliderHandle,
-    SliderHandleLabel,
-    SliderHandleLabelArrow,
-    SliderMark,
-    SliderMarkDot,
-    SliderMarkLabel,
-    type SliderHandleLabelArrowProps,
-    type SliderHandleLabelProps,
-    type SliderHandleProps,
-    type SliderMarkDotProps,
-    type SliderMarkLabelProps,
-    type SliderMarkProps,
-  } from "#lib/slider/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
-  import type { Snippet } from "svelte";
-  import type { HTMLAttributes } from "svelte/elements";
+  import type { HTMLInputAttributes } from "svelte/elements";
 
-  export const SLIDER_COLORS = COLORS;
-  export type SliderColor = Color;
-  export type SliderColorProp = ColorProp;
-
-  export const SLIDER_SIZES = SIZES;
-  export type SliderSize = Size;
-  export type SliderSizeProp = SizeProp;
-
-  export type Mark = {
+  export type SliderMark = {
     value: number;
     label?: string;
   };
@@ -47,185 +19,200 @@
     value?: number;
     min?: number;
     max?: number;
-    step?: number;
-    marks?: Mark[];
-    disabled?: boolean;
-    label?: (value: number) => string;
-    labelAlwaysOn?: boolean;
-    inverted?: boolean;
-    restrictToMarks?: boolean;
-    onChange?: (value: number) => void;
-    onChangeEnd?: (value: number) => void;
-    sliderHandle?: Snippet<[SliderHandleProps]>;
-    sliderHandleLabel?: Snippet<[SliderHandleLabelProps]>;
-    sliderHandleLabelArrow?: Snippet<[SliderHandleLabelArrowProps]>;
-    sliderMark?: Snippet<[SliderMarkProps]>;
-    sliderMarkDot?: Snippet<[SliderMarkDotProps]>;
-    sliderMarkLabel?: Snippet<[SliderMarkLabelProps]>;
+    step?: number | "any";
+    marks?: SliderMark[];
+    format?: (value: number) => string;
+    showValue?: boolean;
+    el?: HTMLInputElement;
   } & ClassName &
-    SliderColorProp &
-    SliderSizeProp &
+    ColorProp &
+    SizeProp &
     ShapeProp &
-    HTMLAttributes<HTMLDivElement>;
+    Omit<
+      HTMLInputAttributes,
+      "type" | "value" | "min" | "max" | "step" | "size" | "class"
+    >;
+
+  const SIZES: Record<Size, string> = {
+    xs: "[--height:1.25rem] [--thumb:0.75rem] [--track:0.25rem]",
+    sm: "[--height:1.5rem] [--thumb:1rem] [--track:0.375rem]",
+    md: "[--height:1.75rem] [--thumb:1.25rem] [--track:0.5rem]",
+    lg: "[--height:2rem] [--thumb:1.5rem] [--track:0.625rem]",
+    xl: "[--height:2.25rem] [--thumb:1.75rem] [--track:0.75rem]",
+  };
+
+  const SHAPES: Record<Shape, string> = {
+    none: "[--radius:0]",
+    xs: "[--radius:0.25rem]",
+    sm: "[--radius:0.5rem]",
+    md: "[--radius:0.75rem]",
+    lg: "[--radius:1rem]",
+    xl: "[--radius:1.75rem]",
+    full: "[--radius:9999px]",
+  };
+
+  const COLORS: Record<Color, string> = {
+    primary: "text-m3-primary",
+    secondary: "text-m3-secondary",
+    tertiary: "text-m3-tertiary",
+    error: "text-m3-error",
+    plain: "",
+    inherit: "",
+  };
+
+  const clamp = (value: number, min: number, max: number) =>
+    Math.min(Math.max(value, min), max);
 </script>
 
 <script lang="ts">
   let {
-    value = $bindable(0),
+    value = $bindable(),
     min = 0,
     max = 100,
     step = 1,
     marks = [],
-    disabled = false,
-    label = (val: number) => val.toString(),
-    labelAlwaysOn = false,
-    inverted = false,
-    restrictToMarks = false,
-    onChange,
-    onChangeEnd,
-    sliderHandle = defaultSliderHandle,
-    sliderHandleLabel = defaultSliderHandleLabel,
-    sliderHandleLabelArrow = defaultSliderHandleLabelArrow,
-    sliderMark = defaultSliderMark,
-    sliderMarkDot = defaultSliderMarkDot,
-    sliderMarkLabel = defaultSliderMarkLabel,
+    format = String,
+    showValue = false,
+    el = $bindable(),
     class: className,
     color = "primary",
-    size = "md",
+    size = "sm",
     shape = "full",
+    disabled,
     ...restProps
   }: SliderProps = $props();
 
-  const ctx = setSliderContext(
-    new SliderContext(
-      () => value,
-      (newValue) => (value = newValue),
-      () => min,
-      () => max,
-      () => step,
-      () => marks,
-      () => disabled,
-      (val) => label(val),
-      () => labelAlwaysOn,
-      () => inverted,
-      () => restrictToMarks,
-      () => color,
-      () => size,
-      () => shape,
-      (val) => onChange?.(val),
-      (val) => onChangeEnd?.(val),
-      () => sliderHandle,
-      () => sliderHandleLabel,
-      () => sliderHandleLabelArrow,
-      () => sliderMark,
-      () => sliderMarkDot,
-      () => sliderMarkLabel,
-    ),
-  );
+  const fractionOf = (at: number) =>
+    max > min ? (clamp(at, min, max) - min) / (max - min) : 0;
 
-  const SIZE_RATIO: Record<Size, number> = {
-    xs: 1.5,
-    sm: 2,
-    md: 2.5,
-    lg: 3,
-    xl: 3.5,
-  };
-
-  let ratio = $derived(SIZE_RATIO[ctx.size]);
+  let current = $derived(value ?? (min + max) / 2);
+  let text = $derived(format(current));
 </script>
 
-{#snippet defaultSliderHandle(props: SliderHandleProps)}
-  <SliderHandle {...props} />
-{/snippet}
-
-{#snippet defaultSliderHandleLabel(props: SliderHandleLabelProps)}
-  <SliderHandleLabel {...props} />
-{/snippet}
-
-{#snippet defaultSliderHandleLabelArrow(props: SliderHandleLabelArrowProps)}
-  <SliderHandleLabelArrow {...props} />
-{/snippet}
-
-{#snippet defaultSliderMark(props: SliderMarkProps)}
-  <SliderMark {...props} />
-{/snippet}
-
-{#snippet defaultSliderMarkDot(props: SliderMarkDotProps)}
-  <SliderMarkDot {...props} />
-{/snippet}
-
-{#snippet defaultSliderMarkLabel(props: SliderMarkLabelProps)}
-  <SliderMarkLabel {...props} />
-{/snippet}
-
-<!-- Track -->
 <div
   class={cn(
-    "cursor-pointer bg-m3-surface-container-highest px-2 select-none",
-
-    ctx.disabled && "cursor-not-allowed opacity-50",
-
-    baseClasses({ shape: ctx.shape }),
-
-    ctx.size === "xs" && "my-1 h-0.5 px-1.5",
-    ctx.size === "sm" && "my-1 h-1 px-2",
-    ctx.size === "md" && "my-1 h-2 px-2.5",
-    ctx.size === "lg" && "my-1 h-3 px-3",
-    ctx.size === "xl" && "my-1 h-4 px-3.5",
-
-    marks.length > 0 && "mb-6",
-
+    "slider relative w-full",
+    SIZES[size],
+    SHAPES[shape],
+    COLORS[color],
+    marks.some((mark) => mark.label) && "pb-5",
+    disabled && "opacity-38",
     className,
   )}
-  {...mergeProps(restProps, {
-    role: "slider",
-    tabindex: ctx.disabled ? -1 : 0,
-    "aria-valuenow": ctx.value,
-    "aria-valuemin": ctx.min,
-    "aria-valuemax": ctx.max,
-    "aria-disabled": ctx.disabled,
-    onpointerdown: ctx.pointerDown,
-    onpointermove: ctx.pointerMove,
-    onpointerup: ctx.pointerUp,
-    onkeydown: ctx.keyDown,
-    onfocus: ctx.focus,
-    onblur: ctx.blur,
-  })}
+  style:--fraction={fractionOf(current)}
 >
-  <div bind:this={ctx.sliderEl} class="relative h-full">
-    <!-- Filled track -->
-    <div
-      class={cn(
-        "absolute h-full",
+  <input
+    bind:this={el}
+    bind:value
+    type="range"
+    {min}
+    {max}
+    {step}
+    {disabled}
+    aria-valuetext={text}
+    class="peer block h-(--height) w-full cursor-pointer appearance-none bg-transparent disabled:cursor-not-allowed"
+    {...restProps}
+  />
 
-        ctx.animated && "transition-all",
-
-        ctx.color === "primary" && "bg-m3-primary",
-        ctx.color === "secondary" && "bg-m3-secondary",
-        ctx.color === "tertiary" && "bg-m3-tertiary",
-        ctx.color === "error" && "bg-m3-error",
-
-        baseClasses({ shape: ctx.shape }),
-      )}
-      style={ctx.inverted
-        ? `right: 0; margin-right: calc(var(--spacing) * -${ratio}); width: calc(${100 - ctx.position}% + var(--spacing) * ${ratio})`
-        : `left: 0; margin-left: calc(var(--spacing) * -${ratio}); width: calc(${ctx.position}% + var(--spacing) * ${ratio})`}
-    ></div>
-
-    <!-- Marks -->
-    {#each marks as { value, label } (value)}
-      {@render ctx.markRenderer({ value, label })}
-    {/each}
-
-    <!-- Handle -->
-    <div
-      class={cn(
-        "absolute top-1/2 -translate-x-1/2 -translate-y-1/2",
-        ctx.animated && "transition-all",
-      )}
-      style={`left: ${ctx.position}%`}
-    >
-      {@render ctx.handleRenderer({})}
+  {#if marks.length > 0}
+    <div aria-hidden="true" class="pointer-events-none">
+      {#each marks as mark (mark.value)}
+        {#if mark.value !== current}
+          <span
+            class="at dot absolute top-[calc(var(--height)/2)] size-1 -translate-1/2 rounded-full"
+            class:filled={mark.value <= current}
+            style:--at={fractionOf(mark.value)}
+          ></span>
+        {/if}
+        {#if mark.label}
+          <span
+            class="at absolute top-(--height) -translate-x-1/2 pt-1 text-xs whitespace-nowrap text-m3-on-surface-variant"
+            style:--at={fractionOf(mark.value)}
+          >
+            {mark.label}
+          </span>
+        {/if}
+      {/each}
     </div>
-  </div>
+  {/if}
+
+  <span
+    aria-hidden="true"
+    class={cn(
+      "at pointer-events-none absolute bottom-full mb-1 -translate-x-1/2 rounded-md bg-m3-inverse-surface px-2 py-1 text-xs whitespace-nowrap text-m3-inverse-on-surface opacity-0 transition-opacity peer-hover:opacity-100 peer-focus-visible:opacity-100 peer-active:opacity-100",
+      showValue && "opacity-100",
+      disabled && "hidden",
+    )}
+    style:--at={fractionOf(current)}
+  >
+    {text}
+  </span>
 </div>
+
+<style>
+  .slider {
+    --fill-at: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--fraction));
+    --track-fill: linear-gradient(
+      to right,
+      currentColor var(--fill-at),
+      color-mix(in oklab, currentColor 24%, transparent) var(--fill-at)
+    );
+  }
+
+  .at {
+    left: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--at));
+  }
+
+  .dot {
+    background: currentColor;
+  }
+
+  .dot.filled {
+    background: var(--md-sys-color-surface);
+  }
+
+  input::-webkit-slider-runnable-track {
+    height: var(--track);
+    border-radius: var(--radius);
+    background: var(--track-fill);
+  }
+
+  input::-moz-range-track {
+    height: var(--track);
+    border-radius: var(--radius);
+    background: var(--track-fill);
+  }
+
+  input::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--thumb);
+    height: var(--thumb);
+    margin-top: calc((var(--track) - var(--thumb)) / 2);
+    border-radius: var(--radius);
+    background: currentColor;
+    box-shadow: 0 0 0 2px var(--md-sys-color-surface);
+  }
+
+  input::-moz-range-thumb {
+    width: var(--thumb);
+    height: var(--thumb);
+    border: none;
+    border-radius: var(--radius);
+    background: currentColor;
+    box-shadow: 0 0 0 2px var(--md-sys-color-surface);
+  }
+
+  input:focus-visible {
+    outline: none;
+  }
+
+  input:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  input:focus-visible::-moz-range-thumb {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+</style>
