@@ -1,1 +1,5 @@
-export { default as Breadcrumbs } from "./breadcrumbs.svelte";
+export {
+  default as Breadcrumbs,
+  type BreadcrumbsProps,
+  type Crumb,
+} from "./breadcrumbs.svelte";
