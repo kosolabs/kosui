@@ -5,6 +5,7 @@
     T extends Record<string, unknown> = Record<string, unknown>,
   > = {
     component: string;
+    components?: string[];
     bindables?: (keyof T)[];
     defaults: T;
     values: Partial<T>;
@@ -14,6 +15,7 @@
   };
   let {
     component,
+    components = [],
     bindables = [],
     defaults,
     values,
@@ -70,7 +72,10 @@
       }
     }
 
-    const script = [`import { ${component} } from "kosui";`, ...imports];
+    const script = [
+      `import { ${[component, ...components].join(", ")} } from "kosui";`,
+      ...imports,
+    ];
     if (bindables.length > 0) {
       script.push(``);
     }
@@ -93,8 +98,8 @@
     if (children === undefined) {
       return `<${component}${props}/>`;
     }
-    if (props.includes("\n")) {
-      return `<${component}${props}>\n  ${children}\n</${component}>`;
+    if (props.includes("\n") || children.includes("\n")) {
+      return `<${component}${props.trimEnd()}>\n  ${children}\n</${component}>`;
     }
     return `<${component}${props.trimEnd()}>${children}</${component}>`;
   }
