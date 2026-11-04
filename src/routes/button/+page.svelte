@@ -334,7 +334,7 @@
           type: `"xs" | "sm" | "md" | "lg" | "xl"`,
           default: `"sm"`,
           description:
-            "Height, text and icon size. Icon-only buttons are square, as tall as a labeled button of the same size.",
+            "The row height: 28, 36, 44, 52 or 60 pixels, with text and icon to match. Buttons, inputs and other controls of the same size line up. Icon-only buttons are square.",
         },
         {
           name: "tooltip",

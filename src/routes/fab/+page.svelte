@@ -72,7 +72,7 @@
   <p class="max-w-prose text-lg">
     A floating action button (Fab) holds the main action on a screen, like
     creating a task. It's a <Link href={resolve("button")}>Button</Link> with more
-    presence: elevated by default, one size larger, and it floats in the bottom corner
+    presence: elevated by default, two sizes larger, and it floats in the bottom corner
     of its container. Give it a label to make an extended Fab.
   </p>
 
@@ -218,7 +218,7 @@
           type: `"xs" | "sm" | "md" | "lg" | "xl"`,
           default: `"lg"`,
           description:
-            "Height, text and icon size, on Button's scale. The default is a size larger than Button's.",
+            "The row height, on Button's scale: 28, 36, 44, 52 or 60 pixels. The default, 52, is two sizes above Button's.",
         },
       ]}
     />
