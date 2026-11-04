@@ -57,12 +57,7 @@
   aria-valuenow={fraction === undefined
     ? undefined
     : Math.round(fraction * 100)}
-  class={cn(
-    "shrink-0",
-    SIZES[size],
-    baseClasses({ color }),
-    className,
-  )}
+  class={cn("shrink-0", SIZES[size], baseClasses({ color }), className)}
   class:spin={fraction === undefined}
   {...restProps}
 >
