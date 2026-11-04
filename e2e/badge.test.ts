@@ -20,22 +20,30 @@ test.describe("Badge Component Tests", () => {
     const box = (await locator.boundingBox())!;
     return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
   };
-  const expectNear = (
-    actual: { x: number; y: number },
-    expected: { x: number; y: number },
+  const distanceFromCorner = async (
+    page: Page,
+    target: Locator,
+    corner: "top-right" | "bottom-left",
   ) => {
-    expect(Math.abs(actual.x - expected.x)).toBeLessThanOrEqual(1);
-    expect(Math.abs(actual.y - expected.y)).toBeLessThanOrEqual(1);
+    const box = (await target.boundingBox())!;
+    const { x, y } = await center(badge(page));
+    return corner === "top-right"
+      ? Math.max(Math.abs(x - box.x - box.width), Math.abs(y - box.y))
+      : Math.max(Math.abs(x - box.x), Math.abs(y - box.y - box.height));
   };
+  const expectOnCorner = (
+    page: Page,
+    target: Locator,
+    corner: "top-right" | "bottom-left",
+  ) =>
+    expect
+      .poll(() => distanceFromCorner(page, target, corner))
+      .toBeLessThanOrEqual(1);
 
   test("the badge is centered on its element's top-right corner", async ({
     page,
   }) => {
-    const box = (await anchor(page).boundingBox())!;
-    expectNear(await center(badge(page)), {
-      x: box.x + box.width,
-      y: box.y,
-    });
+    await expectOnCorner(page, anchor(page), "top-right");
   });
 
   for (const [element, role, name] of [
@@ -49,22 +57,14 @@ test.describe("Badge Component Tests", () => {
       await choose(page, "Element", element);
       const target = preview(page).getByRole(role, { name });
       await expect(target).toBeVisible();
-      const box = (await target.boundingBox())!;
-      expectNear(await center(badge(page)), {
-        x: box.x + box.width,
-        y: box.y,
-      });
+      await expectOnCorner(page, target, "top-right");
     });
   }
 
   test("the badge moves to the bottom-left corner", async ({ page }) => {
     await choose(page, "Vertical alignment", "bottom");
     await choose(page, "Horizontal alignment", "left");
-    const box = (await anchor(page).boundingBox())!;
-    expectNear(await center(badge(page)), {
-      x: box.x,
-      y: box.y + box.height,
-    });
+    await expectOnCorner(page, anchor(page), "bottom-left");
   });
 
   test("longer content widens the badge instead of overflowing", async ({
@@ -106,13 +106,7 @@ test.describe("Badge Component Tests", () => {
       el.replaceWith(block);
       block.append(el);
     });
-    await expect
-      .poll(async () => {
-        const box = (await anchor(page).boundingBox())!;
-        const { x, y } = await center(badge(page));
-        return Math.max(Math.abs(x - box.x - box.width), Math.abs(y - box.y));
-      })
-      .toBeLessThanOrEqual(1);
+    await expectOnCorner(page, anchor(page), "top-right");
   });
 
   test("an empty count hides the badge in the unread example", async ({
