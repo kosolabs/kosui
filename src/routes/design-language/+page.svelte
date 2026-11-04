@@ -90,7 +90,7 @@
       prop: "variant",
       values: VARIANTS.join(", "),
       components:
-        "Avatar, Badge, Box, Button, Chip, Fab, Menu, Skeleton. Input and Textarea take outlined, filled and inherit; Alert takes filled, tonal and plain.",
+        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Menu, Skeleton. Input and Textarea take outlined, filled and inherit.",
     },
     {
       prop: "color",
@@ -101,7 +101,7 @@
     {
       prop: "shape",
       values: SHAPES.join(", "),
-      components: "Avatar, Box, Button, Chip, Fab, Menu, Skeleton",
+      components: "Alert, Avatar, Box, Button, Chip, Fab, Menu, Skeleton",
     },
     {
       prop: "size",
@@ -111,7 +111,7 @@
     {
       prop: "radius",
       values: "none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, full",
-      components: "Alert, Input, Slider, Switch, Textarea",
+      components: "Input, Slider, Switch, Textarea",
     },
     {
       prop: "underline",
