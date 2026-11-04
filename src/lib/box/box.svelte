@@ -5,16 +5,12 @@
   import type { HTMLAttributes } from "svelte/elements";
 
   export type BoxProps = {
-    centered?: boolean;
-    backdrop?: boolean;
     children?: Snippet;
   } & ElementRef &
     ClassName &
     Variants &
     HTMLAttributes<HTMLDivElement>;
   let {
-    backdrop = false,
-    centered = false,
     children,
     el = $bindable(),
     class: className,
@@ -27,12 +23,7 @@
 
 <div
   bind:this={el}
-  class={cn(
-    backdrop && "bg-m3-surface-container",
-    baseClasses({ variant, color, shape }),
-    centered && "flex items-center justify-center",
-    className,
-  )}
+  class={cn(baseClasses({ variant, color, shape }), className)}
   {...restProps}
 >
   {@render children?.()}

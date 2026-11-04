@@ -11,7 +11,7 @@
     onDelete?: (event: MouseEvent | KeyboardEvent) => void;
     children: Snippet;
   } & SizeProp &
-    Omit<BoxProps, "centered" | "backdrop">;
+    BoxProps;
 
   const LABEL_SIZES: Record<Size, string> = {
     xs: "px-2 py-0.5 text-xs",

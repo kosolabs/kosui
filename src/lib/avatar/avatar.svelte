@@ -5,7 +5,7 @@
   export type AvatarProps = {
     src?: string;
     alt?: string;
-  } & Omit<BoxProps, "centered" | "backdrop">;
+  } & BoxProps;
 </script>
 
 <script lang="ts">
@@ -31,8 +31,10 @@
   {variant}
   {color}
   {shape}
-  centered
-  class={cn("@container aspect-square h-9 overflow-clip", className)}
+  class={cn(
+    "@container flex aspect-square h-9 items-center justify-center overflow-clip",
+    className,
+  )}
   {...restProps}
 >
   {#if src && src !== failedSrc}

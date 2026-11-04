@@ -7,12 +7,17 @@
   let {
     children,
     class: className,
-    backdrop = true,
+    variant,
     shape = "rounded",
     ...restProps
   }: SkeletonProps = $props();
 </script>
 
-<Box class={cn("animate-pulse", className)} {backdrop} {shape} {...restProps}>
+<Box
+  class={cn("animate-pulse", !variant && "bg-m3-surface-container", className)}
+  {variant}
+  {shape}
+  {...restProps}
+>
   {@render children?.()}
 </Box>
