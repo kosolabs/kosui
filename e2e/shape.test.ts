@@ -34,8 +34,8 @@ test.describe("Shape", () => {
     ] as const;
     for (const [shape, pixels] of scale) {
       await page
-        .getByRole("listbox", { name: "Shape" })
-        .getByRole("option", { name: shape, exact: true })
+        .getByRole("radiogroup", { name: "Shape" })
+        .getByRole("radio", { name: shape, exact: true })
         .click();
       await expectRadius(box, pixels);
     }

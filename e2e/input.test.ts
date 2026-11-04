@@ -15,8 +15,8 @@ test.describe("Input Component Tests", () => {
     page.getByRole("textbox", { name: "Username" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const outline = (input: Locator) =>
     input.evaluate((el) => {

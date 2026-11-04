@@ -12,8 +12,8 @@ test.describe("Link Component Tests", () => {
     preview(page).getByRole("link", { name: "Svelte docs" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const decoration = (locator: Locator) =>
     locator.evaluate((el) => getComputedStyle(el).textDecorationLine);

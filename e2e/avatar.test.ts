@@ -12,8 +12,8 @@ test.describe("Avatar Component Tests", () => {
     preview(page).getByRole("img", { name: "Ada Lovelace" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
 
   for (const content of ["image", "initials", "icon", "broken image"]) {

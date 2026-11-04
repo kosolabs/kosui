@@ -16,8 +16,8 @@ test.describe("Breadcrumbs Component Tests", () => {
       .nth(1);
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
 
   test("breadcrumbs are a navigation landmark with a list of levels", async ({

@@ -11,8 +11,8 @@ test.describe("Switch Component Tests", () => {
     page.getByTestId("preview").getByRole("switch", { name: "Wi-Fi" });
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const look = (locator: Locator) =>
     locator.evaluate((el) => {

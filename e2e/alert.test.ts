@@ -10,8 +10,8 @@ test.describe("Alert Component Tests", () => {
   const alert = (page: Page) => page.getByTestId("preview").getByRole("alert");
   const choose = (page: Page, setting: string, option: string) =>
     page
-      .getByRole("listbox", { name: setting })
-      .getByRole("option", { name: option, exact: true })
+      .getByRole("radiogroup", { name: setting })
+      .getByRole("radio", { name: option, exact: true })
       .click();
   const background = (page: Page) =>
     alert(page).evaluate((el) => getComputedStyle(el).backgroundColor);

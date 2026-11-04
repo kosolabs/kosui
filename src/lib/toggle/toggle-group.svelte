@@ -1,43 +1,65 @@
 <script module lang="ts">
-  import { setToggleContext, ToggleContext } from "#lib/toggle/index.js";
-  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
+  import type { ColorProp, ShapeProp, SizeProp } from "#lib/base.js";
+  import { setToggleContext } from "#lib/toggle/toggle-context.js";
+  import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
   export type ToggleGroupProps<T> = {
     value?: T;
-    onChange?: (value?: T) => void;
-    children: Snippet<[]>;
-  } & ElementRef &
-    ClassName &
-    Omit<HTMLAttributes<HTMLDivElement>, "children">;
+    onChange?: (value: T) => void;
+    name?: string;
+    children: Snippet;
+    el?: HTMLDivElement;
+  } & ClassName &
+    ColorProp &
+    SizeProp &
+    ShapeProp &
+    Omit<HTMLAttributes<HTMLDivElement>, "children" | "class">;
 </script>
 
 <script lang="ts" generics="T">
   let {
     value = $bindable(),
     onChange,
+    name,
     children,
     el = $bindable(),
     class: className,
+    color = "primary",
+    size = "sm",
+    shape = "full",
     ...restProps
   }: ToggleGroupProps<T> = $props();
 
-  setToggleContext(
-    new ToggleContext(
-      () => value,
-      (newValue) => {
-        value = newValue;
-        onChange?.(newValue);
-      },
-    ),
-  );
+  const id = $props.id();
+
+  setToggleContext({
+    get value() {
+      return value;
+    },
+    get name() {
+      return name ?? id;
+    },
+    get color() {
+      return color;
+    },
+    get size() {
+      return size;
+    },
+    get shape() {
+      return shape;
+    },
+    select(selected) {
+      value = selected as T;
+      onChange?.(selected as T);
+    },
+  });
 </script>
 
 <div
   bind:this={el}
-  role="listbox"
-  aria-orientation="horizontal"
+  role="radiogroup"
   class={cn("flex", className)}
   {...restProps}
 >
