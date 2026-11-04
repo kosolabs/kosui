@@ -1,4 +1,5 @@
 <script lang="ts" module>
+  import { mergeProps } from "#lib/merge-props.js";
   import { Popover, type PopoverProps } from "#lib/popover/index.js";
   import { cn, type ClassName } from "#lib/utils.js";
   import type { Snippet } from "svelte";
@@ -7,9 +8,11 @@
   export type TooltipTriggerProps = {
     [attachment: symbol]: Attachment<HTMLElement>;
     "aria-describedby"?: string;
+    "aria-expanded"?: boolean;
+    "aria-controls"?: string;
     onclick?: () => void;
-    onmouseenter?: () => void;
-    onmouseleave?: () => void;
+    onpointerenter?: (event: PointerEvent) => void;
+    onpointerleave?: (event: PointerEvent) => void;
     onfocus?: (event: FocusEvent) => void;
     onblur?: () => void;
     ontouchstart?: () => void;
@@ -24,6 +27,8 @@
     trigger?: Snippet<[TooltipTriggerProps]>;
   } & ClassName &
     PopoverProps;
+
+  const GRACE = 100;
 </script>
 
 <script lang="ts">
@@ -48,13 +53,10 @@
     anchorEl = node;
   };
 
-  function isTouchDevice() {
-    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  }
-
   let timeout: number;
 
   export function show(after?: number) {
+    cancel();
     timeout = window.setTimeout(
       () => (open = true),
       after === undefined ? delay : after,
@@ -70,17 +72,30 @@
     open = false;
   }
 
+  function hideSoon() {
+    cancel();
+    timeout = window.setTimeout(() => (open = false), GRACE);
+  }
+
+  const notTouch =
+    (handler: () => void) =>
+    ({ pointerType }: PointerEvent) => {
+      if (pointerType !== "touch") handler();
+    };
+
   const triggerProps: TooltipTriggerProps = $derived(
     click
       ? {
           [anchor]: attachAnchor,
-          onclick: () => (open = true),
+          "aria-expanded": open,
+          "aria-controls": open ? id : undefined,
+          onclick: () => (open = !open),
         }
       : {
           [anchor]: attachAnchor,
           "aria-describedby": open ? id : undefined,
-          onmouseenter: () => !isTouchDevice() && show(),
-          onmouseleave: () => hide(),
+          onpointerenter: notTouch(() => show()),
+          onpointerleave: notTouch(hideSoon),
           onfocus: (event) => {
             if (
               event.target instanceof HTMLElement &&
@@ -95,11 +110,22 @@
           ontouchend: () => cancel(),
         },
   );
+
+  const popupProps: Omit<PopoverProps, "children"> = $derived(
+    click
+      ? {}
+      : {
+          role: "tooltip",
+          onpointerenter: notTouch(cancel),
+          onpointerleave: notTouch(hideSoon),
+        },
+  );
 </script>
+
+{@render trigger?.(triggerProps)}
 
 <Popover
   bind:open
-  role="tooltip"
   {id}
   {anchorEl}
   class={cn(
@@ -108,7 +134,5 @@
       : "rounded-sm bg-m3-inverse-surface px-2 py-1 text-xs text-m3-inverse-on-surface",
     className,
   )}
-  {...restProps}
+  {...mergeProps(popupProps, restProps)}
 />
-
-{@render trigger?.(triggerProps)}
