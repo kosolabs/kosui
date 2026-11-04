@@ -26,8 +26,10 @@
     <Box
       variant="elevated"
       color="secondary"
-      centered
-      class={cn("h-5 min-w-5 rounded border p-1 text-xs", badgeClass)}
+      class={cn(
+        "flex h-5 min-w-5 items-center justify-center rounded border p-1 text-xs",
+        badgeClass,
+      )}
     >
       {symbol}
     </Box>

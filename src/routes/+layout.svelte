@@ -11,6 +11,7 @@
     resolve("autocomplete"),
     resolve("avatar"),
     resolve("badge"),
+    resolve("box"),
     resolve("breadcrumbs"),
     resolve("button"),
     resolve("chips"),
