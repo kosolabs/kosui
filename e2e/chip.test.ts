@@ -43,6 +43,30 @@ test.describe("Chip Component Tests", () => {
     expect(box.height).toBeGreaterThanOrEqual(24);
   });
 
+  test("chips grow with size, with 24 pixel remove targets from sm up", async ({
+    page,
+  }) => {
+    let lastHeight = 0;
+    for (const size of ["xs", "sm", "md", "lg", "xl"]) {
+      await page
+        .getByRole("listbox", { name: "Size" })
+        .getByRole("option", { name: size, exact: true })
+        .click();
+      const chip = preview(page)
+        .getByText("Design", { exact: true })
+        .locator("..");
+      const height = (await chip.boundingBox())!.height;
+      expect(height).toBeGreaterThan(lastHeight);
+      lastHeight = height;
+      if (size !== "xs") {
+        const target = (await remove(page, "Design").boundingBox())!;
+        expect(Math.min(target.width, target.height)).toBeGreaterThanOrEqual(
+          24,
+        );
+      }
+    }
+  });
+
   test("a chip without actions is text, not a button", async ({ page }) => {
     await page.getByRole("switch", { name: "Deletable" }).click();
     await expect(preview(page).getByText("Design")).toBeVisible();

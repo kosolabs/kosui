@@ -4,9 +4,11 @@
     Chip,
     COLORS,
     SHAPES,
+    SIZES,
     VARIANTS,
     type Color,
     type Shape,
+    type Size,
     type Variant,
   } from "#lib/index.js";
   import {
@@ -28,6 +30,7 @@
   let variant: Variant = $state("filled");
   let color: Color = $state("primary");
   let shape: Shape = $state("rounded");
+  let size: Size = $state("sm");
   let clickable = $state(false);
   let deletable = $state(true);
   let labels = $state([...LABELS]);
@@ -61,6 +64,7 @@
               {variant}
               {color}
               {shape}
+              {size}
               onClick={actions.onClick?.(label)}
               onDelete={actions.onDelete?.(label)}
             >
@@ -92,14 +96,24 @@
         options={[...SHAPES]}
         label="Shape"
       />
+      <ToggleButtonSetting
+        bind:value={size}
+        options={[...SIZES]}
+        label="Size"
+      />
       <SwitchSetting label="Clickable" bind:value={clickable} />
       <SwitchSetting label="Deletable" bind:value={deletable} />
     {/snippet}
     {#snippet code()}
       <Code
         component="Chip"
-        defaults={{ variant: "filled", color: "primary", shape: "rounded" }}
-        values={{ variant, color, shape }}
+        defaults={{
+          variant: "filled",
+          color: "primary",
+          shape: "rounded",
+          size: "sm",
+        }}
+        values={{ variant, color, shape, size }}
         expressions={{
           onClick: clickable ? "() => open(tag)" : undefined,
           onDelete: deletable ? "() => remove(tag)" : undefined,
@@ -136,7 +150,8 @@
       </li>
       <li>
         The remove button is named "Remove" plus the chip's label, like "Remove
-        ada@example.com", and is 24 pixels square.
+        ada@example.com", and is at least 24 pixels square from the
+        <code>sm</code> size up.
       </li>
       <li>
         Backspace or Delete on a focused chip calls <code>onDelete</code>.
@@ -184,6 +199,13 @@
           type: `"square" | "rounded" | "circle"`,
           default: `"rounded"`,
           description: "Corner style.",
+        },
+        {
+          name: "size",
+          type: `"xs" | "sm" | "md" | "lg" | "xl"`,
+          default: `"sm"`,
+          description:
+            "Text size and padding. The remove button grows with it, and is 24 pixels or larger from `sm` up.",
         },
         {
           name: "el",
