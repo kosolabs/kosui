@@ -1,27 +1,16 @@
 <script lang="ts">
   import { Button, type ButtonProps } from "#lib/button/index.js";
-  import { cn, type ElementRef } from "#lib/utils.js";
+  import { cn } from "#lib/utils.js";
 
-  export type FabProps = {} & ElementRef & ButtonProps;
+  export type FabProps = ButtonProps;
 
   let {
     el = $bindable(),
     class: className,
-    icon,
     size = 20,
     variant = "elevated",
-    shape = "circle",
     ...restProps
   }: FabProps = $props();
 </script>
 
-<div class="grow"></div>
-<Button
-  bind:el
-  class={cn("sticky bottom-0 ml-auto p-4 backdrop-blur-sm", className)}
-  {variant}
-  {shape}
-  {icon}
-  {size}
-  {...restProps}
-/>
+<Button bind:el class={cn("p-4", className)} {variant} {size} {...restProps} />
