@@ -1,10 +1,5 @@
 <script lang="ts">
-  import {
-    SWITCH_SIZES,
-    ToggleButton,
-    ToggleGroup,
-    type Size,
-  } from "#lib/index.js";
+  import { SIZES, ToggleButton, ToggleGroup, type Size } from "#lib/index.js";
   import { Setting } from "#ui";
 
   export type SizeSettingProps = {
@@ -15,7 +10,7 @@
 
 <Setting label="size">
   <ToggleGroup id="size" aria-label="size" bind:value={size}>
-    {#each SWITCH_SIZES as size (size)}
+    {#each SIZES as size (size)}
       <ToggleButton value={size}>{size}</ToggleButton>
     {/each}
   </ToggleGroup>
