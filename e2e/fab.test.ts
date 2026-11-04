@@ -56,8 +56,12 @@ test.describe("Fab Component Tests", () => {
   };
 
   test("a fab is a size larger than a button by default", async ({ page }) => {
-    const box = (await fab(page).boundingBox())!;
-    expect([Math.round(box.width), Math.round(box.height)]).toEqual([52, 52]);
+    await expect
+      .poll(async () => {
+        const box = (await fab(page).boundingBox())!;
+        return [Math.round(box.width), Math.round(box.height)];
+      })
+      .toEqual([52, 52]);
   });
 
   for (const content of ["icon", "both"]) {
