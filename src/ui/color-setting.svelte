@@ -1,10 +1,5 @@
 <script lang="ts">
-  import {
-    SWITCH_COLORS,
-    ToggleButton,
-    ToggleGroup,
-    type Color,
-  } from "#lib/index.js";
+  import { COLORS, ToggleButton, ToggleGroup, type Color } from "#lib/index.js";
   import { Setting } from "#ui";
 
   export type ColorSettingProps = {
@@ -15,7 +10,7 @@
 
 <Setting label="color">
   <ToggleGroup id="color" aria-label="color" bind:value={color}>
-    {#each SWITCH_COLORS as color (color)}
+    {#each COLORS as color (color)}
       <ToggleButton value={color}>{color}</ToggleButton>
     {/each}
   </ToggleGroup>
