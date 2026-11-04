@@ -39,33 +39,28 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-26.04
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
       id-token: write # Required for OIDC
     needs: build
     environment:
       name: kosuinpm
       url: https://www.npmjs.com/package/kosui
     steps:
+      - uses: actions/create-github-app-token@v3.3.0
+        id: releaser-token
+        with:
+          client-id: Iv23liXdlxbyAb7jyk9P
+          private-key: ${{ secrets.RELEASER_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - name: Checkout code repository
         uses: actions/checkout@v7.0.1
       - name: Setup pnpm and node
         uses: ./.github/actions/setup-pnpm
       - name: Create and publish versions
-        id: changesets
         uses: changesets/action@v2.1.2
         with:
+          github-token: ${{ steps.releaser-token.outputs.token }}
           commit-message: "chore: update versions"
           pr-title: "chore: update versions"
           publish-script: pnpm ci:publish
-      - uses: actions/create-github-app-token@v3.3.0
-        if: steps.changesets.outputs.has-changesets == 'true' && steps.changesets.outputs.published == 'false'
-        id: releaser-token
-        with:
-          app-id: ${{ secrets.RELEASER_APP_ID }}
-          private-key: ${{ secrets.RELEASER_PRIVATE_KEY }}
-      - name: Enable auto-merge for Changesets PRs
-        if: steps.changesets.outputs.has-changesets == 'true' && steps.changesets.outputs.published == 'false'
-        run: gh pr --repo "${{ github.repository }}" merge --auto --squash "${{ steps.changesets.outputs.pr-number }}"
-        env:
-          GH_TOKEN: ${{ steps.releaser-token.outputs.token }}
