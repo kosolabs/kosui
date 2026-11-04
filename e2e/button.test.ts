@@ -122,16 +122,24 @@ test.describe("Button with tooltip", () => {
   test("keyboard focus shows the tooltip and describes the button", async ({
     page,
   }) => {
-    const button = page.getByRole("button", { name: "Tooltip Prop" });
+    const button = page.getByRole("button", { name: "Duplicate" });
     await button.focus();
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Tab");
     await expect(
-      page.getByRole("tooltip").filter({ hasText: "I'm a tooltip prop" }),
+      page
+        .getByRole("tooltip")
+        .filter({ hasText: "Saves a copy you can edit" }),
     ).toBeVisible();
-    await expect(button).toHaveAccessibleDescription("I'm a tooltip prop");
+    await expect(button).toHaveAccessibleDescription(
+      "Saves a copy you can edit",
+    );
 
     await button.blur();
     await expect(
-      page.getByRole("tooltip").filter({ hasText: "I'm a tooltip prop" }),
+      page
+        .getByRole("tooltip")
+        .filter({ hasText: "Saves a copy you can edit" }),
     ).toBeHidden();
   });
 });
@@ -148,6 +156,7 @@ test.describe("Button focus ring", () => {
     await button.click();
     expect(await outline()).toBe("none");
 
+    await button.focus();
     await page.keyboard.press("Shift+Tab");
     await page.keyboard.press("Tab");
     await expect(button).toBeFocused();
