@@ -73,7 +73,7 @@
 
 <label
   class={cn(
-    "relative inline-flex cursor-pointer items-center border-y border-l select-none last:border-r has-disabled:cursor-not-allowed has-disabled:opacity-38",
+    "relative inline-flex cursor-pointer items-center justify-center border-y border-l select-none last:border-r has-disabled:cursor-not-allowed has-disabled:opacity-38",
     SIZES[ctx.size],
     SHAPES[ctx.shape],
     COLORS[ctx.color],

@@ -113,4 +113,31 @@ test.describe("Toggle Group Component Tests", () => {
     await page.getByRole("button", { name: "Continue" }).click();
     await expect(page.getByText("Submitted billing=yearly")).toBeVisible();
   });
+
+  test("grid classes give every button the same width", async ({ page }) => {
+    const widths = (name: string) =>
+      page
+        .getByRole("radiogroup", { name })
+        .getByRole("radio")
+        .evaluateAll((radios) =>
+          radios.map((radio) =>
+            Math.round(radio.parentElement!.getBoundingClientRect().width),
+          ),
+        );
+    await expect
+      .poll(async () => new Set(await widths("Priority")).size)
+      .toBe(1);
+    const period = page.getByRole("radiogroup", { name: "Period" });
+    await expect
+      .poll(async () => {
+        const total = (await widths("Period")).reduce((a, b) => a + b);
+        const group = (await period.boundingBox())!.width;
+        return [
+          new Set(await widths("Period")).size,
+          Math.abs(total - group) <= 2,
+        ];
+      })
+      .toEqual([1, true]);
+    expect(new Set(await widths("View")).size).toBeGreaterThan(1);
+  });
 });

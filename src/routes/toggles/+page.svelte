@@ -18,6 +18,8 @@
     ToggleButtonSetting,
   } from "#ui";
   import AlignmentExample from "./examples/alignment.svelte";
+  import EqualWidthsExample from "./examples/equal-widths.svelte";
+  import equalWidthsSource from "./examples/equal-widths.svelte?raw";
   import alignmentSource from "./examples/alignment.svelte?raw";
   import FormExample from "./examples/form.svelte";
   import formSource from "./examples/form.svelte?raw";
@@ -98,6 +100,16 @@
         <code>title</code> adds a hover hint.
       {/snippet}
       <AlignmentExample />
+    </Example>
+
+    <Example title="Equal widths" source={equalWidthsSource}>
+      {#snippet description()}
+        Buttons are as wide as their content. To make them all as wide as the
+        widest, give the group <code
+          >inline-grid auto-cols-fr grid-flow-col</code
+        >; with <code>grid</code> and a width instead, they share the width equally.
+      {/snippet}
+      <EqualWidthsExample />
     </Example>
 
     <Example title="In a form" source={formSource}>
