@@ -14,6 +14,8 @@ These principles are listed in order of priority. When they conflict, the higher
 
 **Convention over Invention** — If a component is standard across major platforms and frameworks — iOS, Android, Windows, macOS, and the web — it belongs in the library. Its behavior should be unsurprising: implement it the way those platforms do, not the way we imagine it might work.
 
+**Shared Vocabulary** — A concept has one name across the library. `variant`, `color`, `shape`, `size`, `radius`, and `underline` take the same values and mean the same thing on every component that uses them, so a prop learned once works everywhere. A `size` is a row height (`xs` 28px, `sm` 36px, `md` 44px, `lg` 52px, `xl` 60px): components at the same size line up in a row, each choosing its own default. Components adopt a shared prop wherever its concept applies, and never reuse a shared name for something else.
+
 **Transparent Props** — Components behave like the element they render. Every component spreads `...restProps` onto that element, attachments included, and provides an `el` binding. Props like `class` accept whatever the native element accepts.
 
 **Composable over Configurable** — Prefer Svelte snippets and composition over a proliferation of boolean props and string options. When a component needs customization, reach for `{#snippet}` before adding another prop.
