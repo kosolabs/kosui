@@ -49,6 +49,14 @@
   </div>
   <div class="flex min-h-0 flex-1">
     <aside class="flex flex-col items-start overflow-y-auto border-r p-6">
+      <Link href={resolve("design-language")} underline="hover">
+        Design Language
+      </Link>
+      <h2
+        class="mt-4 mb-1 text-xs font-medium tracking-wide text-m3-on-surface-variant uppercase"
+      >
+        Components
+      </h2>
       {#each paths as path (path)}
         <Link href={path} underline="hover">
           {toTitleCase(path.split("/").slice(-1)[0])}
