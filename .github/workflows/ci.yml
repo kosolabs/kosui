@@ -22,8 +22,13 @@ jobs:
         with:
           path: build/
 
-  e2e:
+  e2e-browser:
+    name: e2e (${{ matrix.browser }})
     runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
@@ -34,9 +39,19 @@ jobs:
         uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-playwright-
+          key: ${{ runner.os }}-playwright-${{ matrix.browser }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-playwright-${{ matrix.browser }}-
       - name: Install Playwright
-        run: pnpm exec playwright install --with-deps
+        run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-      - run: pnpm test:e2e
+      - name: Install Playwright system dependencies
+        run: pnpm exec playwright install-deps ${{ matrix.browser }}
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+      - run: pnpm test:e2e --project=${{ matrix.browser }}
+
+  e2e:
+    if: always()
+    needs: e2e-browser
+    runs-on: ubuntu-26.04
+    steps:
+      - run: test "${{ needs.e2e-browser.result }}" = success

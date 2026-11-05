@@ -46,10 +46,16 @@ Install playwright dependencies:
 pnpm exec playwright install
 ```
 
-To run all E2E tests:
+To run all E2E tests in Chromium, Firefox and WebKit:
 
 ```bash
 pnpm test:e2e
+```
+
+To run them in one browser:
+
+```bash
+pnpm test:e2e --project=webkit
 ```
 
 To run a specific test file:

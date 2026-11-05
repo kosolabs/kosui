@@ -1,4 +1,4 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices, type PlaywrightTestConfig } from "@playwright/test";
 
 const port = 5175;
 
@@ -11,6 +11,11 @@ const config: PlaywrightTestConfig = {
   },
   testDir: "e2e",
   fullyParallel: true,
+  projects: [
+    { name: "chromium", use: devices["Desktop Chrome"] },
+    { name: "firefox", use: devices["Desktop Firefox"] },
+    { name: "webkit", use: devices["Desktop Safari"] },
+  ],
 };
 
 export default config;
