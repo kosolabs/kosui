@@ -11,7 +11,7 @@
       category: "Edit",
       name: "Cut",
       icon: Scissors,
-      shortcut: new Shortcut({ key: "x", meta: true }),
+      shortcut: new Shortcut({ key: "x", mod: true }),
       callback: () => (last = "Cut"),
     }),
     new Action({
@@ -19,7 +19,7 @@
       category: "Edit",
       name: "Copy",
       icon: Copy,
-      shortcut: new Shortcut({ key: "c", meta: true }),
+      shortcut: new Shortcut({ key: "c", mod: true }),
       callback: () => (last = "Copied"),
     }),
     new Action({

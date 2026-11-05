@@ -1,7 +1,7 @@
 <script module lang="ts">
   import { events } from "#lib/index.js";
   import { Modal } from "#lib/modal/index.js";
-  import { Shortcut, ShortcutBadge } from "#lib/shortcut/index.js";
+  import { Shortcut, ShortcutHint } from "#lib/shortcut/index.js";
   import { match } from "#lib/utils.js";
   import { Check, Search } from "@lucide/svelte";
   import type { Action, Registry } from "./action.svelte";
@@ -149,7 +149,7 @@
           <Check size={16} class="shrink-0 text-m3-primary" />
         {/if}
         {#if action.shortcut}
-          <ShortcutBadge shortcut={action.shortcut} />
+          <ShortcutHint shortcut={action.shortcut} />
         {/if}
       </div>
     {/each}

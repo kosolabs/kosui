@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Shortcut } from "#lib/index.js";
+  import { Button, Shortcut, ShortcutHint } from "#lib/index.js";
   import { Copy, Send } from "@lucide/svelte";
 
   const send = new Shortcut({ key: "Enter", shift: true });
@@ -13,7 +13,7 @@
     {#snippet tooltip()}
       <span class="flex items-center gap-2">
         Send now
-        <kbd class="font-bold">{send.toString()}</kbd>
+        <ShortcutHint shortcut={send} />
       </span>
     {/snippet}
   </Button>
