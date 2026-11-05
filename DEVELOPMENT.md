@@ -46,11 +46,19 @@ Install playwright dependencies:
 pnpm exec playwright install
 ```
 
-To run all E2E tests:
+To run all E2E tests in Chromium, Firefox and WebKit:
 
 ```bash
 pnpm test:e2e
 ```
+
+To run them in one browser:
+
+```bash
+pnpm test:e2e --project=webkit
+```
+
+On a Mac, WebKit's keyboard tests need **Keyboard navigation** turned on in System Settings › Keyboard. Without it, Tab skips buttons, as it does in Safari.
 
 To run a specific test file:
 

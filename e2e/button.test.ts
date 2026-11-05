@@ -157,8 +157,8 @@ test.describe("Button focus ring", () => {
     expect(await outline()).toBe("none");
 
     await button.focus();
-    await page.keyboard.press("Shift+Tab");
     await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
     await expect(button).toBeFocused();
     expect(await outline()).toBe("solid");
   });

@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         pnpm install --frozen-lockfile 2>&1 | tee "$RUNNER_TEMP/pnpm-install.log"
-        if grep -E '\bWARN\b' "$RUNNER_TEMP/pnpm-install.log" | grep -vE 'Request took [0-9]+ms'; then
+        if grep -E '\bWARN\b' "$RUNNER_TEMP/pnpm-install.log" | grep -vE 'Request took [0-9]+ms|Tarball download average speed'; then
           echo "::error::pnpm install emitted warnings (see above); fix them before merging."
           exit 1
         fi

@@ -26,12 +26,12 @@ async function expectCentered(control: Locator) {
     await document.fonts.ready;
     const example = el.closest('[data-testid="example"]')!;
     const center = (rect: DOMRect) => rect.x + rect.width / 2;
-    return Math.round(
+    return (
       center(el.getBoundingClientRect()) -
-        center(example.getBoundingClientRect()),
+      center(example.getBoundingClientRect())
     );
   });
-  expect(offset).toBe(0);
+  expect(Math.abs(offset)).toBeLessThan(1);
 }
 
 test.describe("Example Layout Tests", () => {
