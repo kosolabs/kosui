@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 test.describe.configure({ mode: "parallel" });
 
@@ -7,238 +7,161 @@ test.describe("Dialog Component Tests", () => {
     await page.goto("/dialogs");
   });
 
-  test("notice dialog should open and close with OK", async ({ page }) => {
-    // Initial state
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
+  const button = (page: Page, name: string) =>
+    page.getByRole("button", { name, exact: true });
+  const status = (page: Page) => page.getByText(/^Project:/);
 
-    // Open dialog
-    await page.getByRole("button", { name: "Show Notice" }).click();
-    await expect(page.getByText("Notice Dialog Open!").first()).toBeVisible();
+  async function press(page: Page, name: string) {
+    await button(page, name).focus();
+    await page.keyboard.press("Enter");
+  }
 
-    // Check dialog content
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByText("Lookout")).toBeVisible();
-    await expect(
-      dialog.getByText("Heads up. A thing just happened!"),
-    ).toBeVisible();
-
-    // Close with OK button
-    await dialog.getByRole("button", { name: "OK" }).click();
-    await expect(dialog).not.toBeVisible();
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
-  });
-
-  test("notice dialog should open and close with Escape", async ({ page }) => {
-    // Initial state
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
-
-    // Close by pressing escape
-    await page.getByRole("button", { name: "Show Notice" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
-  });
-
-  test("notice dialog should open and close with click outside", async ({
+  test("a dialog is named by its title and closes with a value", async ({
     page,
   }) => {
-    // Initial state
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
-
-    // Close by clicking outside
-    await page.getByRole("button", { name: "Show Notice" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.mouse.click(10, 10);
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(page.getByText("Notice Dialog Closed!").first()).toBeVisible();
-  });
-
-  test("confirm dialog should return correct values", async ({ page }) => {
-    // Open confirm dialog
-    await page.getByRole("button", { name: "Show Confirm" }).click();
-    const dialog = page.getByRole("dialog");
-
-    // Check dialog content
+    await press(page, "Discard draft");
+    const dialog = page.getByRole("dialog", { name: "Discard draft?" });
     await expect(dialog).toBeVisible();
-    await expect(dialog.getByText("Do Something Destructive?")).toBeVisible();
-
-    // Confirm and check result
-    await dialog.getByRole("button", { name: "Accept" }).click();
-    await expect(page.getByText("Confirm Dialog Accepted!")).toBeVisible();
-
-    // Open again and cancel
-    await page.getByRole("button", { name: "Show Confirm" }).click();
-    await dialog.getByRole("button", { name: "Cancel" }).click();
-    await expect(page.getByText("Cancelled!")).toBeVisible();
+    await expect(dialog.getByRole("heading")).toHaveText("Discard draft?");
+    await dialog.getByRole("button", { name: "Discard" }).click();
+    await expect(dialog).toBeHidden();
+    await expect(page.getByText("Discarded")).toBeVisible();
   });
 
-  test("confirm dialog should cancel with Escape", async ({ page }) => {
-    // Initial state
-    await expect(
-      page.getByText("Confirm Dialog Closed!").first(),
-    ).toBeVisible();
-
-    // Close by pressing escape
-    await page.getByRole("button", { name: "Show Confirm" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(
-      page.getByText("Confirm Dialog Cancelled!").first(),
-    ).toBeVisible();
-  });
-
-  test("confirm dialog should cancel with click outside", async ({ page }) => {
-    // Initial state
-    await expect(
-      page.getByText("Confirm Dialog Closed!").first(),
-    ).toBeVisible();
-
-    // Close by pressing escape
-    await page.getByRole("button", { name: "Show Confirm" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.mouse.click(10, 10);
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(
-      page.getByText("Confirm Dialog Cancelled!").first(),
-    ).toBeVisible();
-  });
-
-  test("select dialog should show all options and return selection", async ({
+  test("confirm is described by its message, focuses OK and returns focus", async ({
     page,
   }) => {
-    // Open select dialog
-    await page.getByRole("button", { name: "Show Select" }).click();
-    const dialog = page.getByRole("dialog");
-
-    // Check all options are present
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "North" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "South" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "East" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "West" })).toBeVisible();
-
-    // Select and check result
-    await dialog.getByRole("button", { name: "East" }).click();
-    await expect(page.getByText("Selected: East")).toBeVisible();
+    await press(page, "Delete");
+    const dialog = page.getByRole("dialog", { name: "Delete project?" });
+    await expect(dialog).toHaveAccessibleDescription(
+      "Quarterly plan and its tasks will be deleted for everyone.",
+    );
+    await expect(dialog.getByRole("button", { name: "Delete" })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(dialog).toBeHidden();
+    await expect(status(page)).toHaveText(
+      "Project: Quarterly plan · Deleted Quarterly plan",
+    );
+    await expect(button(page, "Delete")).toBeFocused();
   });
 
-  test("date picker dialog should show all options and return selection", async ({
+  test("dismissing confirm resolves false", async ({ page }) => {
+    await press(page, "Delete");
+    const dialog = page.getByRole("dialog", { name: "Delete project?" });
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(status(page)).toHaveText("Project: Quarterly plan · Kept");
+    await expect(button(page, "Delete")).toBeFocused();
+  });
+
+  test("clicking the backdrop dismisses a dialog", async ({ page }) => {
+    await press(page, "Delete");
+    const dialog = page.getByRole("dialog", { name: "Delete project?" });
+    await expect(dialog).toBeVisible();
+    const box = (await dialog.boundingBox())!;
+    await page.mouse.click(box.x / 2, box.y / 2);
+    await expect(dialog).toBeHidden();
+    await expect(status(page)).toHaveText("Project: Quarterly plan · Kept");
+  });
+
+  test("Enter submits a prompt, and its field's validation applies", async ({
     page,
   }) => {
-    await page.getByRole("button", { name: "Show Date Picker" }).click();
-    const dialog = page.getByRole("dialog");
-
+    await press(page, "Rename");
+    const dialog = page.getByRole("dialog", { name: "Rename project" });
+    const field = dialog.getByRole("textbox", { name: "Name" });
+    await expect(field).toBeFocused();
+    await expect(field).toHaveValue("Quarterly plan");
+    await field.fill("");
+    await page.keyboard.press("Enter");
     await expect(dialog).toBeVisible();
-    await page.keyboard.type("07012001");
-
-    await dialog.getByRole("button", { name: "Accept" }).click();
-    await expect(page.getByText("Date: 2001-07-01")).toBeVisible();
+    await field.fill("Roadmap");
+    await page.keyboard.press("Enter");
+    await expect(dialog).toBeHidden();
+    await expect(status(page)).toHaveText("Project: Roadmap");
+    await expect(button(page, "Rename")).toBeFocused();
   });
 
-  test("select dialog should cancel with Escape", async ({ page }) => {
-    // Initial state
-    await expect(page.getByText("Select Dialog Closed!").first()).toBeVisible();
-
-    // Close by pressing escape
-    await page.getByRole("button", { name: "Show Select" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(
-      page.getByText("Select Dialog Cancelled!").first(),
-    ).toBeVisible();
+  test("alert closes with OK", async ({ page }) => {
+    await press(page, "Share");
+    const dialog = page.getByRole("dialog", { name: "Link copied" });
+    await expect(dialog.getByRole("button", { name: "OK" })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(dialog).toBeHidden();
+    await expect(status(page)).toHaveText("Project: Quarterly plan · Shared");
   });
 
-  test("select dialog should cancel with click outside", async ({ page }) => {
-    // Initial state
-    await expect(page.getByText("Select Dialog Closed!").first()).toBeVisible();
+  test("show resolves with the chosen value, or undefined when dismissed", async ({
+    page,
+  }) => {
+    await press(page, "Ship order");
+    const dialog = page.getByRole("dialog", { name: "Choose shipping" });
+    await expect(dialog.getByRole("button", { name: "Express" })).toBeFocused();
+    await dialog.getByRole("button", { name: "Standard" }).click();
+    await expect(dialog).toBeHidden();
+    await expect(page.getByText("Shipping: standard")).toBeVisible();
 
-    // Close by pressing escape
-    await page.getByRole("button", { name: "Show Select" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await page.mouse.click(10, 10);
-    await expect(page.getByRole("dialog")).not.toBeVisible();
-    await expect(
-      page.getByText("Select Dialog Cancelled!").first(),
-    ).toBeVisible();
-  });
-
-  test("custom dialog should support custom actions", async ({ page }) => {
-    // Open custom dialog
-    await page.getByRole("button", { name: "Show Custom" }).click();
-    const dialog = page.getByRole("dialog");
-
-    // Check custom content
+    await press(page, "Ship order");
     await expect(dialog).toBeVisible();
-    await expect(dialog.getByText("Cool Title Batman!")).toBeVisible();
-    await expect(dialog.getByText("This is a custom dialog.")).toBeVisible();
-    await expect(dialog.getByText("where")).toBeVisible();
-    await expect(dialog.getByText("...anything can happen!")).toBeVisible();
-
-    // Check all buttons are present
-    await expect(dialog.getByRole("button", { name: "One" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "Two" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "Three" })).toBeVisible();
-    await expect(dialog.getByRole("button", { name: "Four" })).toBeVisible();
-
-    // Select and check result
-    await dialog.getByRole("button", { name: "One" }).click();
-    await expect(page.getByText("Selected: one")).toBeVisible();
-  });
-
-  test("dialog should be accessible via keyboard", async ({ page }) => {
-    // Open dialog
-    await page.getByRole("button", { name: "Show Custom" }).click();
-    const dialog = page.getByRole("dialog");
-
-    // One should be focused by default
-    await expect(dialog.getByRole("button", { name: "One" })).toBeFocused();
-
-    // Tab navigation should work
-    await page.keyboard.press("Tab");
-    await expect(dialog.getByRole("button", { name: "Two" })).toBeFocused();
-
-    await page.keyboard.press("Tab");
-    await expect(dialog.getByRole("button", { name: "Three" })).toBeFocused();
-
-    // Close with Escape key
     await page.keyboard.press("Escape");
-    await expect(dialog).not.toBeVisible();
+    await expect(page.getByText("Shipping: not chosen")).toBeVisible();
   });
 
-  test("nested dialogs should work correctly", async ({ page }) => {
-    // Open custom dialog
-    await page.getByRole("button", { name: "Show Custom" }).click();
-
-    // Click Four to open nested dialog
-    await page
-      .getByRole("dialog")
-      .getByRole("button", { name: "Four" })
-      .click();
-
-    // Check new dialog is visible
-    await expect(page.getByText("Confirmation Title!")).toBeVisible();
-
-    // Click confirmation
-    await page.getByRole("button", { name: "Absolutely!" }).click();
-
-    // Check result
-    await expect(page.getByText("Selected: four")).toBeVisible();
+  test("requests made while a dialog is open wait their turn", async ({
+    page,
+  }) => {
+    await press(page, "Share");
+    const alert = page.getByRole("dialog", { name: "Link copied" });
+    await expect(alert).toBeVisible();
+    await button(page, "Delete").dispatchEvent("click");
+    await expect(alert).toBeVisible();
+    await page.keyboard.press("Enter");
+    const confirm = page.getByRole("dialog", { name: "Delete project?" });
+    await expect(confirm.getByRole("button", { name: "Delete" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(confirm).toBeHidden();
+    await expect(status(page)).toHaveText("Project: Quarterly plan · Kept");
   });
 
-  test("dialog should have proper ARIA attributes", async ({ page }) => {
-    // Open dialog
-    await page.getByRole("button", { name: "Show Notice" }).click();
-    const dialog = page.getByRole("dialog");
+  test("closing nested dialogs together returns focus to the first opener", async ({
+    page,
+  }) => {
+    await press(page, "Edit profile");
+    const profile = page.getByRole("dialog", { name: "Edit profile" });
+    await profile.getByRole("textbox", { name: "Name" }).fill("Grace Hopper");
+    await profile.getByRole("button", { name: "Cancel" }).click();
+    const discard = page.getByRole("dialog", { name: "Discard changes?" });
+    await discard.getByRole("button", { name: "Discard" }).click();
+    await expect(discard).toBeHidden();
+    await expect(profile).toBeHidden();
+    await expect(page.getByText("Name: Ada Lovelace")).toBeVisible();
+    await expect(button(page, "Edit profile")).toBeFocused();
+  });
 
-    // Check ARIA attributes
-    await expect(dialog).toHaveAttribute("role", "dialog");
-    await expect(dialog).toHaveAttribute("aria-modal", "true");
+  test("closing a nested dialog returns focus inside the first", async ({
+    page,
+  }) => {
+    await press(page, "Edit profile");
+    const profile = page.getByRole("dialog", { name: "Edit profile" });
+    await profile.getByRole("textbox", { name: "Name" }).fill("Grace Hopper");
+    const cancel = profile.getByRole("button", { name: "Cancel" });
+    await cancel.focus();
+    await page.keyboard.press("Enter");
+    const discard = page.getByRole("dialog", { name: "Discard changes?" });
+    await expect(discard).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(discard).toBeHidden();
+    await expect(profile).toBeVisible();
+    await expect(cancel).toBeFocused();
+  });
 
-    // Close dialog
-    await dialog.getByRole("button", { name: "OK" }).click();
+  test("a form in a dialog submits from its actions", async ({ page }) => {
+    await press(page, "Edit profile");
+    const profile = page.getByRole("dialog", { name: "Edit profile" });
+    await profile.getByRole("textbox", { name: "Name" }).fill("Grace Hopper");
+    await page.keyboard.press("Enter");
+    await expect(profile).toBeHidden();
+    await expect(page.getByText("Name: Grace Hopper")).toBeVisible();
   });
 });

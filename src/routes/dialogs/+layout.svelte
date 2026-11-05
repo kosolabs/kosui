@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Dialoguer } from "#lib/index.js";
+  import { DialogProvider } from "#lib/index.js";
 
   let { children } = $props();
 </script>
 
-<Dialoguer>
+<DialogProvider>
   {@render children()}
-</Dialoguer>
+</DialogProvider>

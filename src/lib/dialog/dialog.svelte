@@ -1,17 +1,15 @@
 <script module lang="ts">
   import { mergeComponentProps } from "#lib/merge-props.js";
   import { Modal, type ModalProps } from "#lib/modal/index.js";
+  import { cn } from "#lib/utils.js";
   import type { LucideIcon } from "@lucide/svelte";
   import type { Snippet } from "svelte";
-  import { cn } from "#lib/utils.js";
 
   export type DialogProps<T> = {
-    el?: HTMLDialogElement;
-    onSelect?: (value: T | undefined) => void;
     icon?: LucideIcon;
     title?: string;
-    children: Snippet;
-    actions?: Snippet<[{ onSelect: (value: T | undefined) => void }]>;
+    onSelect?: (value: T | undefined) => void;
+    actions?: Snippet<[select: (value: T | undefined) => void]>;
   } & ModalProps;
 </script>
 
@@ -19,51 +17,51 @@
   let {
     el = $bindable(),
     open = $bindable(),
-    onSelect,
-    class: className,
-    icon: IconComponent,
+    icon: Icon,
     title,
+    onSelect,
     children,
     actions,
+    class: className,
     ...restProps
   }: DialogProps<T> = $props();
 
-  function handleSelect(value: T | undefined) {
-    onSelect?.(value);
-    open = false;
-  }
+  const id = $props.id();
 
-  function handleCancel() {
-    onSelect?.(undefined);
+  function select(value: T | undefined) {
+    open = false;
+    onSelect?.(value);
   }
 </script>
 
 <Modal
   bind:el
   bind:open
-  class={cn("w-[min(calc(100%-1em),36em)]", className)}
+  class={cn("flex w-[min(calc(100%-1em),36em)] flex-col gap-4", className)}
   {...mergeComponentProps(
     Modal,
-    { role: "dialog", "aria-modal": "true", onCancel: handleCancel },
+    {
+      "aria-labelledby":
+        title && !restProps["aria-label"] ? `${id}-title` : undefined,
+      onCancel: () => onSelect?.(undefined),
+    },
     restProps,
   )}
 >
-  <div class={cn("flex flex-col gap-4")}>
-    {#if IconComponent}
-      <IconComponent class="mx-auto" />
-    {/if}
-    {#if title}
-      <div class={cn("text-xl", IconComponent ? "text-center" : "")}>
-        {title}
-      </div>
-    {/if}
-    <div>
-      {@render children()}
-    </div>
-    {#if actions}
-      <div class="mt-2 flex place-content-end gap-2">
-        {@render actions({ onSelect: handleSelect })}
-      </div>
-    {/if}
+  {#if Icon}
+    <Icon class="mx-auto text-m3-secondary" />
+  {/if}
+  {#if title}
+    <h2 id="{id}-title" class={cn("text-2xl", Icon && "text-center")}>
+      {title}
+    </h2>
+  {/if}
+  <div class="text-sm text-m3-on-surface-variant">
+    {@render children()}
   </div>
+  {#if actions}
+    <div class="mt-2 flex flex-wrap justify-end gap-2">
+      {@render actions(select)}
+    </div>
+  {/if}
 </Modal>

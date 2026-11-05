@@ -26,7 +26,7 @@
         <Modal
           bind:open
           aria-labelledby="{id}-title"
-          class="w-[min(calc(100%-1em),28em)] bg-m3-surface-container-high"
+          class="w-[min(calc(100%-1em),28em)]"
           onCancel={() => (closedBy = "Dismissed")}
         >
           <h2 id="{id}-title" class="mb-2 text-xl">Terms of service</h2>
@@ -102,6 +102,12 @@
             "Called when someone dismisses the modal with Escape, the backdrop or the back gesture.",
         },
         {
+          name: "shape",
+          type: `"none" | "xs" | "sm" | "md" | "lg" | "xl" | "full"`,
+          default: `"xl"`,
+          description: "The corner radius.",
+        },
+        {
           name: "el",
           type: "HTMLDialogElement",
           description: "Bindable. The `<dialog>`.",
@@ -110,7 +116,7 @@
           name: "class",
           type: "ClassValue",
           description:
-            "Classes for the dialog box, such as its width and background.",
+            "Classes for the dialog box, such as its width. It has Material 3's dialog surface by default.",
         },
         {
           name: "children",

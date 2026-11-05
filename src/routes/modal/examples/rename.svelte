@@ -23,7 +23,7 @@
 <Modal
   bind:open
   aria-labelledby="{id}-title"
-  class="w-[min(calc(100%-1em),24em)] bg-m3-surface-container-high"
+  class="w-[min(calc(100%-1em),24em)]"
 >
   <form
     class="flex flex-col gap-4"
