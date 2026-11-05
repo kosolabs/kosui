@@ -6,11 +6,12 @@
   import type { Snippet } from "svelte";
   import type { HTMLDialogAttributes } from "svelte/elements";
   import { prefersReducedMotion } from "svelte/motion";
-  import { scale } from "svelte/transition";
+  import { scale, type TransitionConfig } from "svelte/transition";
 
   export type ModalProps = {
     el?: HTMLDialogElement;
     onCancel?: () => void;
+    transition?: (node: Element) => TransitionConfig;
     children: Snippet;
   } & ClassName &
     ShapeProp &
@@ -19,6 +20,13 @@
   type Layer = { el: HTMLDialogElement; opener?: HTMLElement };
 
   const layers: Layer[] = [];
+
+  function zoom(node: Element) {
+    return scale(node, {
+      duration: prefersReducedMotion.current ? 0 : 150,
+      start: 0.95,
+    });
+  }
 
   function focusedElement() {
     const active = document.activeElement;
@@ -46,6 +54,7 @@
     el = $bindable(),
     open = $bindable(),
     onCancel,
+    transition = zoom,
     children,
     shape = "xl",
     class: className,
@@ -85,10 +94,7 @@
       baseClasses({ shape }),
       className,
     )}
-    transition:scale={{
-      duration: prefersReducedMotion.current ? 0 : 150,
-      start: 0.95,
-    }}
+    transition:transition
     {...mergeProps(restProps, {
       oncancel,
       onintrostart: () => el?.removeAttribute("data-closing"),

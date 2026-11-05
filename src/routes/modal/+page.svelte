@@ -108,6 +108,13 @@
           description: "The corner radius.",
         },
         {
+          name: "transition",
+          type: "(node: Element) => TransitionConfig",
+          default: "a quick zoom",
+          description:
+            "The Svelte transition for opening and closing. Drawer uses it to slide in.",
+        },
+        {
           name: "el",
           type: "HTMLDialogElement",
           description: "Bindable. The `<dialog>`.",

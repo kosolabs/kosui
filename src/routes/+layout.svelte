@@ -2,14 +2,14 @@
   import { afterNavigate } from "$app/navigation";
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import { Button, cn } from "#lib/index.js";
+  import { Button, Drawer, NavGroup, NavItem } from "#lib/index.js";
   import { KosuiLogo } from "#ui";
-  import { Menu, Moon, Sun, X } from "@lucide/svelte";
+  import { Menu, Moon, Sun } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import { on } from "svelte/events";
   import "../app.css";
   import GithubMark from "./github-mark.svelte";
-  import { CATEGORIES, findPage, GUIDES, type NavItem } from "./nav.js";
+  import { CATEGORIES, findPage, GUIDES } from "./nav.js";
 
   const { children }: { children: Snippet } = $props();
 
@@ -47,6 +47,12 @@
     }),
   );
 
+  $effect(() =>
+    on(matchMedia("(min-width: 48rem)"), "change", (event) => {
+      if (event.matches) navOpen = false;
+    }),
+  );
+
   afterNavigate(() => (navOpen = false));
 </script>
 
@@ -59,22 +65,33 @@
   />
 </svelte:head>
 
-<svelte:window
-  onkeydown={(event) => {
-    if (navOpen && event.key === "Escape") navOpen = false;
-  }}
-/>
-
-{#snippet navLink({ name, href }: Pick<NavItem, "name" | "href">)}
-  <!-- eslint-disable svelte/no-navigation-without-resolve -->
-  <a
-    {href}
-    aria-current={href === page.url.pathname ? "page" : undefined}
-    class="flex h-8 shrink-0 items-center rounded-full px-4 text-sm text-m3-on-surface-variant hover:bg-m3-on-surface/8 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-m3-secondary aria-[current=page]:bg-m3-secondary-container aria-[current=page]:font-medium aria-[current=page]:text-m3-on-secondary-container"
-  >
-    {name}
-  </a>
-  <!-- eslint-enable svelte/no-navigation-without-resolve -->
+{#snippet navigation(inDrawer: boolean)}
+  <nav aria-label="Docs" class="flex flex-col gap-0.5">
+    {#each [{ name: "Overview", href: home }, ...GUIDES] as item (item.href)}
+      <NavItem
+        href={item.href}
+        current={item.href === page.url.pathname}
+        autofocus={inDrawer && item.href === page.url.pathname}
+        size="sm"
+      >
+        {item.name}
+      </NavItem>
+    {/each}
+    {#each CATEGORIES as category (category.name)}
+      <NavGroup label={category.name}>
+        {#each category.items as item (item.href)}
+          <NavItem
+            href={item.href}
+            current={item.href === page.url.pathname}
+            autofocus={inDrawer && item.href === page.url.pathname}
+            size="sm"
+          >
+            {item.name}
+          </NavItem>
+        {/each}
+      </NavGroup>
+    {/each}
+  </nav>
 {/snippet}
 
 <a
@@ -87,14 +104,14 @@
 <div class="flex h-dvh flex-col">
   <header class="flex items-center gap-2 border-b px-4 py-2">
     <Button
-      icon={navOpen ? X : Menu}
+      icon={Menu}
       variant="plain"
       color="plain"
       class="md:hidden"
       aria-label="Navigation"
+      aria-haspopup="dialog"
       aria-expanded={navOpen}
-      aria-controls="nav"
-      onclick={() => (navOpen = !navOpen)}
+      onclick={() => (navOpen = true)}
     />
     <a
       href={home}
@@ -124,32 +141,10 @@
     </div>
   </header>
 
-  <div class="relative flex min-h-0 flex-1">
-    <nav
-      id="nav"
-      aria-label="Docs"
-      class={cn(
-        "w-60 shrink-0 flex-col gap-0.5 overflow-y-auto border-r p-3 md:flex",
-        navOpen ? "absolute inset-0 z-20 flex w-auto bg-m3-surface" : "hidden",
-      )}
-    >
-      {@render navLink({ name: "Overview", href: home })}
-      {#each GUIDES as item (item.href)}
-        {@render navLink(item)}
-      {/each}
-      {#each CATEGORIES as category (category.name)}
-        <h2
-          class="mt-4 px-4 pb-1 text-xs font-medium tracking-wide text-m3-on-surface-variant uppercase"
-        >
-          {category.name}
-        </h2>
-        <ul class="flex flex-col gap-0.5">
-          {#each category.items as item (item.href)}
-            <li>{@render navLink(item)}</li>
-          {/each}
-        </ul>
-      {/each}
-    </nav>
+  <div class="flex min-h-0 flex-1">
+    <aside class="hidden w-60 shrink-0 overflow-y-auto border-r p-3 md:block">
+      {@render navigation(false)}
+    </aside>
 
     <main
       id="main"
@@ -162,3 +157,7 @@
     </main>
   </div>
 </div>
+
+<Drawer bind:open={navOpen} aria-label="Navigation">
+  {@render navigation(true)}
+</Drawer>

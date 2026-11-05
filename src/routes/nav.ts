@@ -7,6 +7,8 @@ import {
   ChevronRight,
   CircleUserRound,
   Command,
+  PanelLeft,
+  Navigation,
   Keyboard,
   Layers,
   Link,
@@ -169,6 +171,12 @@ export const CATEGORIES: NavCategory[] = [
         icon: MessageCircleQuestionMark,
       },
       {
+        name: "Drawer",
+        href: resolve("/drawer"),
+        description: "Navigation or a panel that slides in from the edge.",
+        icon: PanelLeft,
+      },
+      {
         name: "Command Palette",
         href: resolve("/command"),
         description: "Search every action and run one from the keyboard.",
@@ -184,6 +192,12 @@ export const CATEGORIES: NavCategory[] = [
         href: resolve("/links"),
         description: "Go to another page or place on the page.",
         icon: Link,
+      },
+      {
+        name: "Nav Item",
+        href: resolve("/nav-item"),
+        description: "Links in a sidebar or drawer, with the current page.",
+        icon: Navigation,
       },
       {
         name: "Breadcrumbs",
