@@ -22,17 +22,29 @@ jobs:
         with:
           path: build/
 
-  e2e-browser:
-    name: e2e (${{ matrix.browser }} ${{ matrix.shard }})
+  e2e-linux:
+    name: e2e (${{ matrix.browser }})
     runs-on: ubuntu-26.04
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      env:
+        HOME: /root
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - { browser: chromium, shard: 1/1, workers: 100% }
-          - { browser: firefox, shard: 1/1, workers: 100% }
-          - { browser: webkit, shard: 1/2, workers: 2 }
-          - { browser: webkit, shard: 2/2, workers: 2 }
+        browser: [chromium, firefox]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+      - name: Setup pnpm and node
+        uses: ./.github/actions/setup-pnpm
+      - run: pnpm test:e2e --project=${{ matrix.browser }}
+
+  e2e-webkit:
+    name: e2e (webkit)
+    runs-on: macos-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
@@ -45,19 +57,16 @@ jobs:
         id: playwright-cache
         uses: actions/cache@v6.1.0
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ matrix.browser }}-${{ steps.playwright.outputs.version }}
+          path: ~/Library/Caches/ms-playwright
+          key: ${{ runner.os }}-playwright-webkit-${{ steps.playwright.outputs.version }}
       - name: Install Playwright
-        run: pnpm exec playwright install --with-deps ${{ matrix.browser }}
+        run: pnpm exec playwright install webkit
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-      - name: Install Playwright system dependencies
-        run: pnpm exec playwright install-deps ${{ matrix.browser }}
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-      - run: pnpm test:e2e --project=${{ matrix.browser }} --shard=${{ matrix.shard }} --workers=${{ matrix.workers }}
+      - run: pnpm test:e2e --project=webkit
 
   e2e:
     if: always()
-    needs: e2e-browser
+    needs: [e2e-linux, e2e-webkit]
     runs-on: ubuntu-26.04
     steps:
-      - run: test "${{ needs.e2e-browser.result }}" = success
+      - run: test "${{ needs.e2e-linux.result }}" = success && test "${{ needs.e2e-webkit.result }}" = success

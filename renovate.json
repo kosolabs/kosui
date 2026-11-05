@@ -16,6 +16,10 @@
     {
       "matchPackageNames": ["web-features"],
       "groupName": "web-features"
+    },
+    {
+      "matchPackageNames": ["@playwright/test", "mcr.microsoft.com/playwright"],
+      "groupName": "Playwright"
     }
   ]
 }
