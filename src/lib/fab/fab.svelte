@@ -36,7 +36,7 @@
   class={cn(
     "sticky top-[calc(100%-var(--fab-height))] bottom-0 left-[calc(100%-var(--fab-width))] flex transition",
     restProps.children && "w-fit",
-    !clear && "mt-[calc(-1*var(--fab-height))]",
+    !clear && "-mt-(--fab-height)",
     className,
   )}
   style="--fab-width: {width}px; --fab-height: {height}px; {style ?? ''}"
