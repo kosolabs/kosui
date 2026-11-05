@@ -1,5 +1,16 @@
 # kosui
 
+## 0.5.0
+
+### Minor Changes
+
+- 403b3ae: Add `Drawer`, `NavItem` and `NavGroup`.
+
+  - `Drawer` is a Modal that slides in from the start or end edge, for navigation on small screens or a panel like filters.
+  - `NavItem` is a link in a navigation list. `current` marks it with a filled indicator and `aria-current="page"`. It takes `icon`, `size` and `shape`.
+  - `NavGroup` labels a group of nav items.
+  - `Modal` takes a `transition` for opening and closing.
+
 ## 0.4.0
 
 ### Minor Changes
