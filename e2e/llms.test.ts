@@ -23,11 +23,13 @@ test.describe("LLM Docs Tests", () => {
     await expect(cards.first()).toBeVisible();
     expect(links.length).toBe((await cards.count()) + 1);
     for (const [, name, url] of links) {
-      expect(url).toMatch(new RegExp(`^${SITE}/[a-z-]+\\.md$`));
-      const page = await request.get(url.replace(SITE, ""));
+      expect(url.startsWith(`${SITE}/`), url).toBe(true);
+      const path = url.slice(SITE.length);
+      expect(path).toMatch(/^\/[a-z-]+\.md$/);
+      const page = await request.get(path);
       expect(page.ok(), url).toBe(true);
       expect(page.headers()["content-type"]).toContain("text/markdown");
-      expect(await page.text()).toMatch(new RegExp(`^# ${name}\\n`));
+      expect((await page.text()).startsWith(`# ${name}\n`), url).toBe(true);
     }
   });
 
