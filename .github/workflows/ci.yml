@@ -28,8 +28,9 @@ jobs:
     timeout-minutes: 20
     container:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --user 1001
       env:
-        HOME: /root
+        pnpm_config_store_dir: /__w/.pnpm-store
     strategy:
       fail-fast: false
       matrix:
