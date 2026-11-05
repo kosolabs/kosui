@@ -4,6 +4,11 @@ test.describe.configure({ mode: "parallel" });
 
 test.describe("Command Palette Tests", () => {
   test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(Navigator.prototype, "platform", {
+        get: () => "MacIntel",
+      });
+    });
     await page.goto("/command");
   });
 
@@ -34,9 +39,9 @@ test.describe("Command Palette Tests", () => {
       - dialog "Command palette":
         - combobox "Search commands" [expanded]
         - listbox "Command palette":
-          - 'option "View: Command palette ⌘ K" [selected]'
-          - 'option "Share: Copy link ⌥ L"'
-          - 'option "Help: Keyboard shortcuts ⇧ ?"'
+          - 'option "View: Command palette Command+K" [selected]'
+          - 'option "Share: Copy link Option+L"'
+          - 'option "Help: Keyboard shortcuts Shift+?"'
           - 'option "Theme: Light" [checked]'
           - 'option "Theme: Dark"'
     `);

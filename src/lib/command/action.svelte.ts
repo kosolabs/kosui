@@ -50,7 +50,6 @@ export class Action {
 
 export class Registry {
   #actions: Action[] = $state([]);
-  #shortcuts: Record<string, Action> = {};
 
   get actions(): Action[] {
     return this.#actions;
@@ -65,7 +64,7 @@ export class Registry {
   }
 
   getByShortcut(shortcut: Shortcut): Action | undefined {
-    return this.#shortcuts[shortcut.toString()];
+    return this.#actions.find((action) => action.shortcut?.equals(shortcut));
   }
 
   call(id: string) {
@@ -82,11 +81,8 @@ export class Registry {
         if (this.#actions.some((existing) => existing.id === action.id)) {
           throw new Error(`${action.id} is already registered`);
         }
-        if (action.shortcut) {
-          if (action.shortcut.toString() in this.#shortcuts) {
-            throw new Error(`${action.shortcut} is already registered`);
-          }
-          this.#shortcuts[action.shortcut.toString()] = action;
+        if (action.shortcut && this.getByShortcut(action.shortcut)) {
+          throw new Error(`${action.shortcut} is already registered`);
         }
       }
       this.#actions.unshift(...actions);
@@ -100,9 +96,6 @@ export class Registry {
         const index = this.#actions.indexOf(action);
         if (index !== -1) {
           this.#actions.splice(index, 1);
-          if (action.shortcut) {
-            delete this.#shortcuts[action.shortcut.toString()];
-          }
         }
       }
     });

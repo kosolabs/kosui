@@ -1,5 +1,5 @@
+export { Shortcut, type ShortcutOptions } from "./shortcut.js";
 export {
-  default as ShortcutBadge,
-  type ShortcutBadgeProps,
-} from "./shortcut-badge.svelte";
-export { Shortcut } from "./shortcut.js";
+  default as ShortcutHint,
+  type ShortcutHintProps,
+} from "./shortcut-hint.svelte";

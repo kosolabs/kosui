@@ -6,6 +6,7 @@
     Input,
     Registry,
     Shortcut,
+    ShortcutHint,
   } from "#lib/index.js";
   import { Example, Playground, PropsTable, Section } from "#ui";
   import { Command, Keyboard, Link, Moon, Sun } from "@lucide/svelte";
@@ -17,6 +18,12 @@
   let theme = $state("light");
   let log = $state("");
 
+  const shortcuts = {
+    palette: new Shortcut({ key: "k", mod: true }),
+    copyLink: new Shortcut({ key: "l", alt: true }),
+    help: new Shortcut({ key: "?", shift: true }),
+  };
+
   $effect(() =>
     registry.register(
       new Action({
@@ -24,7 +31,7 @@
         category: "View",
         name: "Command palette",
         icon: Command,
-        shortcut: new Shortcut({ key: "k", meta: true }),
+        shortcut: shortcuts.palette,
         callback: () => (open = true),
       }),
       new Action({
@@ -33,7 +40,7 @@
         name: "Copy link",
         description: "Copies a link to this page",
         icon: Link,
-        shortcut: new Shortcut({ key: "l", alt: true }),
+        shortcut: shortcuts.copyLink,
         callback: () => (log = "Copied link"),
       }),
       new Action({
@@ -41,7 +48,7 @@
         category: "Help",
         name: "Keyboard shortcuts",
         icon: Keyboard,
-        shortcut: new Shortcut({ key: "?", shift: true }),
+        shortcut: shortcuts.help,
         callback: () => (log = "Showed shortcuts"),
       }),
       new Action({
@@ -84,7 +91,11 @@
         <Button variant="tonal" onclick={() => (open = true)}>
           Open command palette
         </Button>
-        <p class="text-sm">Or press ⌘K, ⌥L or ?</p>
+        <p class="flex items-center gap-1 text-sm">
+          Or press <ShortcutHint shortcut={shortcuts.palette} />,
+          <ShortcutHint shortcut={shortcuts.copyLink} /> or
+          <ShortcutHint shortcut={shortcuts.help} />
+        </p>
         <Input aria-label="Notes" placeholder="Typing ? here doesn't run it" />
         <p class="text-sm" aria-live="polite">
           Theme: {theme}{log && ` · ${log}`}
@@ -122,8 +133,8 @@
         <code>aria-checked</code>. Disabled actions are left out.
       </li>
       <li>
-        Shortcuts without Ctrl, Alt or ⌘ don't run while someone is typing in a
-        text field, so a shortcut like <kbd>?</kbd> doesn't interrupt typing.
+        Shortcuts without Ctrl, Alt or Command don't run while someone is typing
+        in a text field, so a shortcut like <kbd>?</kbd> doesn't interrupt typing.
       </li>
     </ul>
   </Section>

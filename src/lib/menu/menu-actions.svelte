@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Action } from "#lib/command/index.js";
   import { Divider as MenuDivider } from "#lib/common/index.js";
+  import { ShortcutHint } from "#lib/shortcut/index.js";
   import MenuGroup from "./menu-group.svelte";
   import MenuItem from "./menu-item.svelte";
 
@@ -36,9 +37,7 @@
       <action.icon size={16} class="shrink-0" />
       {action.name}
       {#if action.shortcut}
-        <span class="ml-auto pl-4 text-xs text-m3-on-surface-variant">
-          {action.shortcut.toString()}
-        </span>
+        <ShortcutHint shortcut={action.shortcut} class="ml-auto pl-4" />
       {/if}
     </MenuItem>
   {/each}
