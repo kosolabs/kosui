@@ -16,8 +16,8 @@
     Section,
     ToggleButtonSetting,
   } from "#ui";
-  import ErrorExample from "./examples/error.svelte";
-  import errorSource from "./examples/error.svelte?raw";
+  import SignInFailedExample from "./examples/sign-in-failed.svelte";
+  import signInFailedSource from "./examples/sign-in-failed.svelte?raw";
   import StatusExample from "./examples/status.svelte";
   import statusSource from "./examples/status.svelte?raw";
 
@@ -66,13 +66,13 @@
   </Playground>
 
   <Section title="Examples">
-    <Example title="Error" source={errorSource}>
+    <Example title="Error" source={signInFailedSource}>
       {#snippet description()}
         Alerts take any content, so add an icon or an action with
         <code>class</code> for the layout. Screen readers announce an alert as soon
         as it appears.
       {/snippet}
-      <ErrorExample />
+      <SignInFailedExample />
     </Example>
 
     <Example title="Status message" source={statusSource}>

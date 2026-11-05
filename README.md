@@ -1,6 +1,35 @@
 # Kosui
 
-A Svelte component library used by [Koso](https://koso.app) and [Cipherly](https://cipherly.app).
+Accessible Svelte 5 components, styled with Material 3 and Tailwind CSS. Used by [Cipherly](https://cipherly.app).
+
+**Docs and live examples: [kosui.kosolabs.com](https://kosui.kosolabs.com)**
+
+## Getting Started
+
+Kosui needs Svelte 5 and Tailwind CSS 4.
+
+```
+pnpm add kosui
+```
+
+Import Kosui's theme after Tailwind in your app's CSS. It adds the Material 3 colors as utilities like `bg-m3-primary`, a default palette, and tells Tailwind to scan Kosui's components.
+
+```css
+@import "tailwindcss";
+@import "kosui/theme.css";
+```
+
+Then use the components:
+
+```svelte
+<script lang="ts">
+  import { Button } from "kosui";
+</script>
+
+<Button variant="filled">Save</Button>
+```
+
+To use your own colors, override the `--md-sys-color-*` variables, for example with a palette from the [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/). Add the `dark` class to `<html>` for the dark palette.
 
 ## Design Philosophy
 
