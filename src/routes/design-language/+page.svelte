@@ -94,19 +94,19 @@
       prop: "variant",
       values: VARIANTS.join(", "),
       components:
-        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Menu, Skeleton. Input and Textarea take outlined, filled and plain.",
+        "Alert, Avatar, Badge, Box, Button, Chip, Fab, Skeleton. Input and Textarea take outlined, filled and plain.",
     },
     {
       prop: "color",
       values: COLORS.join(", "),
       components:
-        "Alert, Avatar, Badge, Box, Button, Chip, Circular Progress, Fab, Input, Link, Menu, Skeleton, Slider, Switch, Textarea",
+        "Alert, Avatar, Badge, Box, Button, Chip, Circular Progress, Fab, Input, Link, Menu Item, Skeleton, Slider, Switch, Textarea",
     },
     {
       prop: "shape",
       values: SHAPES.join(", "),
       components:
-        "Alert, Avatar, Box, Button, Chip, Fab, Input, Menu, Skeleton, Slider, Switch, Textarea",
+        "Alert, Avatar, Box, Button, Chip, Dialog, Fab, Input, Menu, Modal, Skeleton, Slider, Switch, Textarea",
     },
     {
       prop: "size",
