@@ -65,10 +65,36 @@
     event.stopImmediatePropagation();
   }
 
-  function oncancel(event: Event) {
-    event.preventDefault();
+  let pressedBackdrop = false;
+
+  function isOnBackdrop(event: MouseEvent) {
+    if (!el || event.target !== el) return false;
+    const rect = el.getBoundingClientRect();
+    return (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    );
+  }
+
+  function dismiss() {
+    if (!open) return;
     open = false;
     onCancel?.();
+  }
+
+  function oncancel(event: Event) {
+    event.preventDefault();
+    dismiss();
+  }
+
+  function onpointerdown(event: PointerEvent) {
+    pressedBackdrop = isOnBackdrop(event);
+  }
+
+  function onclick(event: MouseEvent) {
+    if (pressedBackdrop && isOnBackdrop(event)) dismiss();
   }
 
   $effect(() => {
@@ -88,7 +114,6 @@
 {#if open}
   <dialog
     bind:this={el}
-    closedby="any"
     class={cn(
       "m-auto bg-m3-surface-container-high p-6 text-m3-on-surface shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-[2px] data-closing:backdrop:bg-transparent motion-safe:backdrop:transition-colors starting:backdrop:bg-transparent",
       baseClasses({ shape }),
@@ -97,6 +122,8 @@
     transition:transition
     {...mergeProps(restProps, {
       oncancel,
+      onpointerdown,
+      onclick,
       onintrostart: () => el?.removeAttribute("data-closing"),
       onoutrostart: () => el?.setAttribute("data-closing", ""),
     })}

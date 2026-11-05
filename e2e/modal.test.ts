@@ -45,6 +45,26 @@ test.describe("Modal Component Tests", () => {
     await expect(terms(page)).toBeHidden();
   });
 
+  test("a drag between the backdrop and the modal doesn't close it", async ({
+    page,
+  }) => {
+    await showTerms(page).click();
+    await expect(terms(page)).toBeVisible();
+    const box = (await terms(page).boundingBox())!;
+    const inside = { x: box.x + 10, y: box.y + 10 };
+    const outside = { x: box.x / 2, y: box.y / 2 };
+    for (const [from, to] of [
+      [outside, inside],
+      [inside, outside],
+    ]) {
+      await page.mouse.move(from.x, from.y);
+      await page.mouse.down();
+      await page.mouse.move(to.x, to.y);
+      await page.mouse.up();
+      await expect(terms(page)).toBeVisible();
+    }
+  });
+
   test("a form in a modal submits and returns focus to its opener", async ({
     page,
   }) => {
