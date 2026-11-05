@@ -41,12 +41,14 @@
   ];
 </script>
 
-<div class="flex items-center gap-3">
+<div class="flex flex-col items-center gap-3">
   <Menu>
     {#snippet trigger(props)}
       <Button {...props}>Actions</Button>
     {/snippet}
     <MenuActions {actions} />
   </Menu>
-  <span class="text-sm" aria-live="polite">Theme: {theme} {last}</span>
+  <p class="text-sm" aria-live="polite">
+    Theme: {theme}{last && ` · ${last}`}
+  </p>
 </div>

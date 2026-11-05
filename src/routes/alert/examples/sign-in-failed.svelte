@@ -5,7 +5,7 @@
   let failed = $state(false);
 </script>
 
-<div class="flex flex-col items-start gap-3">
+<div class="flex flex-col items-center gap-3">
   <Button variant="filled" onclick={() => (failed = true)}>Sign in</Button>
   {#if failed}
     <Alert color="error" class="flex items-center gap-3">

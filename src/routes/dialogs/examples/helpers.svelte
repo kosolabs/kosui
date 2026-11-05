@@ -35,8 +35,8 @@
   }
 </script>
 
-<div class="flex flex-col gap-3">
-  <div class="flex flex-wrap gap-2">
+<div class="flex flex-col items-center gap-3">
+  <div class="flex flex-wrap justify-center gap-2">
     <Button variant="tonal" onclick={rename}>Rename</Button>
     <Button variant="tonal" onclick={share}>Share</Button>
     <Button variant="tonal" color="error" onclick={remove}>Delete</Button>

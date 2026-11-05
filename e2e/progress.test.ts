@@ -47,7 +47,7 @@ test.describe("CircularProgress Component Tests", () => {
   test("aria-label names the ring", async ({ page }) => {
     await page.getByRole("button", { name: "Upload report.pdf" }).click();
     const upload = page.getByRole("progressbar", {
-      name: "Uploading report.pdf",
+      name: "report.pdf upload",
     });
     await expect(upload).toHaveAttribute("aria-valuenow", "100");
   });

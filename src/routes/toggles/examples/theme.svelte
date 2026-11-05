@@ -9,7 +9,7 @@
   );
 </script>
 
-<div class="flex flex-col items-start gap-3">
+<div class="flex flex-col items-center gap-3">
   <ToggleGroup
     bind:value={theme}
     onChange={() => changes++}

@@ -70,7 +70,9 @@ test.describe("Chip Component Tests", () => {
   test("a chip without actions is text, not a button", async ({ page }) => {
     await page.getByRole("switch", { name: "Deletable" }).click();
     await expect(preview(page).getByText("Design")).toBeVisible();
-    await expect(preview(page).getByRole("button")).toHaveCount(0);
+    await expect(
+      preview(page).getByRole("button").filter({ hasNotText: "Restore chips" }),
+    ).toHaveCount(0);
   });
 
   test("a clickable chip is a button that calls onClick", async ({ page }) => {

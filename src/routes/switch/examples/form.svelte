@@ -5,7 +5,7 @@
 </script>
 
 <form
-  class="flex max-w-md flex-col gap-3"
+  class="flex w-full max-w-sm flex-col gap-3"
   onsubmit={(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -21,7 +21,7 @@
     I agree to the terms (required)
   </label>
   <Button type="submit" variant="filled" class="self-start">Save</Button>
-  {#if submitted}
-    <p role="status" class="text-sm">Submitted: {submitted}</p>
-  {/if}
+  <p class="text-sm" aria-live="polite">
+    {submitted ? `Submitted: ${submitted}` : "Not submitted yet"}
+  </p>
 </form>

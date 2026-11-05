@@ -6,7 +6,7 @@
 </script>
 
 <form
-  class="flex flex-col items-start gap-3"
+  class="flex w-full max-w-sm flex-col items-start gap-3"
   onsubmit={(event) => {
     event.preventDefault();
     submitted = new FormData(event.currentTarget).get("billing")?.toString();
@@ -18,7 +18,7 @@
     <ToggleButton value="yearly">Yearly</ToggleButton>
   </ToggleGroup>
   <Button type="submit" variant="filled">Continue</Button>
-  {#if submitted}
-    <p role="status" class="text-sm">Submitted billing={submitted}</p>
-  {/if}
+  <p class="text-sm" aria-live="polite">
+    {submitted ? `Submitted billing=${submitted}` : "Not submitted yet"}
+  </p>
 </form>

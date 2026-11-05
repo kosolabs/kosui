@@ -12,13 +12,15 @@
   }
 </script>
 
-<div class="flex items-center gap-3">
+<div class="flex flex-col items-center gap-3">
   <Button onclick={upload} disabled={progress !== undefined && progress < 1}>
     Upload report.pdf
   </Button>
-  {#if progress !== undefined}
-    <CircularProgress {progress} size="lg" aria-label="Uploading report.pdf">
-      {Math.round(progress * 100)}%
-    </CircularProgress>
-  {/if}
+  <CircularProgress
+    progress={progress ?? 0}
+    size="lg"
+    aria-label="report.pdf upload"
+  >
+    {Math.round((progress ?? 0) * 100)}%
+  </CircularProgress>
 </div>

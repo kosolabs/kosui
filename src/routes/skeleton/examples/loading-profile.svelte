@@ -11,7 +11,7 @@
   reload();
 </script>
 
-<div class="flex flex-col items-start gap-4">
+<div class="flex flex-col items-center gap-4">
   <div
     aria-busy={loading}
     aria-label="Profile"

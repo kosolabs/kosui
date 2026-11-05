@@ -4,7 +4,7 @@
   let saved = $state(false);
 </script>
 
-<div class="flex flex-col items-start gap-3">
+<div class="flex flex-col items-center gap-3">
   <Button onclick={() => (saved = true)}>Save draft</Button>
   {#if saved}
     <Alert role="status" variant="outlined" color="secondary">

@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="flex items-center gap-3">
+<div class="flex flex-col items-center gap-3">
   <Button variant="tonal" onclick={choose}>Ship order</Button>
-  <span class="text-sm">Shipping: {speed ?? "not chosen"}</span>
+  <p class="text-sm" aria-live="polite">Shipping: {speed ?? "not chosen"}</p>
 </div>
