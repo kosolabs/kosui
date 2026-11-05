@@ -15,7 +15,7 @@
   let extensions = $state(true);
 </script>
 
-<div class="flex items-center gap-3">
+<div class="flex flex-col items-center gap-3">
   <Menu>
     {#snippet trigger(props)}
       <Button {...props} variant="tonal">
@@ -49,9 +49,9 @@
       </MenuItem>
     </MenuGroup>
   </Menu>
-  <span class="text-sm">
+  <p class="text-sm" aria-live="polite">
     Sorted by {sort}{hidden ? ", hidden files shown" : ""}{extensions
       ? ""
       : ", extensions hidden"}
-  </span>
+  </p>
 </div>

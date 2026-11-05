@@ -4,7 +4,7 @@
 
   const id = $props.id();
   let open = $state(false);
-  let closedBy = $state("");
+  let closedBy = $state("No answer yet");
   import { docs } from "./docs.js";
 </script>
 

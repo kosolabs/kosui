@@ -7,7 +7,7 @@
 </script>
 
 <form
-  class="flex max-w-sm flex-col gap-1"
+  class="flex w-full max-w-sm flex-col gap-1"
   onsubmit={(event) => {
     event.preventDefault();
     subscribed = email;
@@ -28,7 +28,7 @@
   <Button type="submit" variant="filled" class="mt-2 self-start">
     Subscribe
   </Button>
-  {#if subscribed}
-    <p role="status" class="text-sm">Subscribed {subscribed}.</p>
-  {/if}
+  <p class="text-sm" aria-live="polite">
+    {subscribed ? `Subscribed ${subscribed}.` : "Not subscribed yet."}
+  </p>
 </form>

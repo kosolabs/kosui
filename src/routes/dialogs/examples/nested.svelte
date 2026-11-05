@@ -8,8 +8,7 @@
   let draft = $state("");
 </script>
 
-<div class="flex items-center gap-3">
-  <span class="text-sm">Name: {name}</span>
+<div class="flex flex-col items-center gap-3">
   <Button
     variant="tonal"
     onclick={() => {
@@ -19,6 +18,7 @@
   >
     Edit profile
   </Button>
+  <p class="text-sm" aria-live="polite">Name: {name}</p>
 </div>
 
 <Dialog bind:open title="Edit profile">

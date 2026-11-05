@@ -9,7 +9,7 @@
   let showArchived = $state(false);
 </script>
 
-<div class="flex flex-col items-start gap-3">
+<div class="flex flex-col items-center gap-3">
   <Button
     bind:el={anchorEl}
     icon={SlidersHorizontal}

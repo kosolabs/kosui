@@ -10,16 +10,18 @@
   }
 </script>
 
-<form class="flex flex-wrap gap-2" onsubmit={subscribe}>
-  <Input
-    type="email"
-    aria-label="Email"
-    placeholder="you@example.com"
-    required
-    bind:value={email}
-  />
-  <Button type="submit" variant="filled">Subscribe</Button>
+<form class="flex flex-col items-center gap-3" onsubmit={subscribe}>
+  <div class="flex flex-wrap justify-center gap-2">
+    <Input
+      type="email"
+      aria-label="Email"
+      placeholder="you@example.com"
+      required
+      bind:value={email}
+    />
+    <Button type="submit" variant="filled">Subscribe</Button>
+  </div>
+  <p class="text-sm" aria-live="polite">
+    {subscribed ? `Subscribed ${subscribed}` : "Not subscribed yet"}
+  </p>
 </form>
-{#if subscribed}
-  <p class="w-full text-center text-sm">Subscribed {subscribed}</p>
-{/if}

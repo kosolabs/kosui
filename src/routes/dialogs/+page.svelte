@@ -12,7 +12,7 @@
   let open = $state(false);
   let icon = $state(false);
   let shape: Shape = $state("xl");
-  let result = $state("");
+  let result = $state("No answer yet");
   import { docs } from "./docs.js";
 </script>
 

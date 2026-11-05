@@ -28,7 +28,7 @@
   let clickable = $state(false);
   let deletable = $state(true);
   let labels = $state([...LABELS]);
-  let last = $state("");
+  let last = $state("No chip pressed yet");
 
   let actions = $derived({
     onClick: clickable
@@ -63,11 +63,13 @@
               </Chip>
             {/each}
           </div>
-          {#if labels.length < LABELS.length}
-            <Button variant="text" onclick={() => (labels = [...LABELS])}>
-              Restore chips
-            </Button>
-          {/if}
+          <Button
+            variant="text"
+            disabled={labels.length === LABELS.length}
+            onclick={() => (labels = [...LABELS])}
+          >
+            Restore chips
+          </Button>
           <p class="text-sm" aria-live="polite">{last}</p>
         </div>
       {/snippet}
