@@ -11,7 +11,6 @@ const config: PlaywrightTestConfig = {
   },
   testDir: "e2e",
   fullyParallel: true,
-  workers: process.env.CI ? "100%" : undefined,
   projects: [
     { name: "chromium", use: devices["Desktop Chrome"] },
     { name: "firefox", use: devices["Desktop Firefox"] },

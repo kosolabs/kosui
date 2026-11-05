@@ -23,12 +23,16 @@ jobs:
           path: build/
 
   e2e-browser:
-    name: e2e (${{ matrix.browser }})
+    name: e2e (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, firefox, webkit]
+        include:
+          - { browser: chromium, shard: 1/1, workers: 100% }
+          - { browser: firefox, shard: 1/1, workers: 100% }
+          - { browser: webkit, shard: 1/2, workers: 2 }
+          - { browser: webkit, shard: 2/2, workers: 2 }
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.1
@@ -49,7 +53,7 @@ jobs:
       - name: Install Playwright system dependencies
         run: pnpm exec playwright install-deps ${{ matrix.browser }}
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-      - run: pnpm test:e2e --project=${{ matrix.browser }}
+      - run: pnpm test:e2e --project=${{ matrix.browser }} --shard=${{ matrix.shard }} --workers=${{ matrix.workers }}
 
   e2e:
     if: always()
