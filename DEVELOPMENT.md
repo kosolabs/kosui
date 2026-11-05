@@ -58,6 +58,8 @@ To run them in one browser:
 pnpm test:e2e --project=webkit
 ```
 
+On a Mac, WebKit's keyboard tests need **Keyboard navigation** turned on in System Settings › Keyboard. Without it, Tab skips buttons, as it does in Safari.
+
 To run a specific test file:
 
 ```bash
