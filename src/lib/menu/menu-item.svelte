@@ -1,84 +1,62 @@
 <script module lang="ts">
-  import { baseClasses, type Variants } from "#lib/base.js";
-  import { getMenuContext } from "#lib/menu/index.js";
+  import { baseClasses, type ColorProp } from "#lib/base.js";
   import { mergeProps } from "#lib/merge-props.js";
-  import { Shortcut } from "#lib/shortcut/index.js";
-  import { cn, type ClassName, type ElementRef } from "#lib/utils.js";
+  import { cn, type ClassName } from "#lib/utils.js";
+  import { Check } from "@lucide/svelte";
   import type { Snippet } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
+  import { getMenuContext } from "./menu-context.js";
 
   export type MenuItemProps = {
-    onSelect?: (el: HTMLElement) => void;
-    children: Snippet<[]>;
-  } & ElementRef &
-    ClassName &
-    Variants &
-    Omit<HTMLButtonAttributes, "type" | "value">;
+    onSelect?: () => void;
+    checked?: boolean;
+    el?: HTMLButtonElement;
+    children: Snippet;
+  } & ClassName &
+    ColorProp &
+    Omit<HTMLButtonAttributes, "type" | "value" | "role" | "class">;
 </script>
 
 <script lang="ts">
   let {
     onSelect,
+    checked,
     children,
     el = $bindable(),
+    color = "plain",
     class: className,
-    variant = "plain",
-    color = "secondary",
-    shape = "xs",
     ...restProps
   }: MenuItemProps = $props();
 
-  const ctx = getMenuContext();
-
-  function handleClick() {
-    if (el) {
-      onSelect?.(el);
-    }
-    ctx.close();
-  }
-
-  function handleMouseEnter(event: MouseEvent) {
-    if (event.target instanceof HTMLElement) {
-      ctx.focus(event.target);
-    }
-  }
-
-  function handleFocus(event: FocusEvent) {
-    if (event.target instanceof HTMLElement) {
-      ctx.focus(event.target);
-    }
-  }
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if (Shortcut.ENTER.matches(event) || Shortcut.SPACE.matches(event)) {
-      event.stopImmediatePropagation();
-    }
-  }
-
-  $effect(() => {
-    if (el) {
-      return ctx.add(el);
-    }
-  });
+  const menu = getMenuContext();
 </script>
 
 <button
   bind:this={el}
-  role="menuitem"
+  type="button"
+  role={checked === undefined ? "menuitem" : "menuitemcheckbox"}
+  aria-checked={checked}
+  tabindex={-1}
   class={cn(
-    baseClasses({ variant, color, shape, hover: true, focus: true }),
-    "flex w-full items-center gap-1 px-2 py-1 text-left text-sm focus-visible:outline-none",
+    baseClasses({ color }),
+    "flex h-8 w-full items-center gap-2 rounded-sm px-3 text-left text-sm outline-none focus:bg-current/10 disabled:text-m3-on-surface/38",
     className,
   )}
   {...mergeProps(
     {
-      onclick: handleClick,
-      onmouseenter: handleMouseEnter,
-      onfocus: handleFocus,
-      onkeydown: handleKeyDown,
+      onclick: () => {
+        menu.close();
+        onSelect?.();
+      },
+      onpointermove: () => {
+        if (el && !el.disabled && document.activeElement !== el) el.focus();
+      },
     },
     restProps,
   )}
 >
+  {#if checked !== undefined}
+    <Check size={16} class={cn("shrink-0", !checked && "invisible")} />
+  {/if}
   {@render children()}
 </button>
