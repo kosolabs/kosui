@@ -2,6 +2,7 @@
   import { Button } from "#lib/index.js";
   import { Check, Copy } from "@lucide/svelte";
   import { highlight } from "./highlight.js";
+  import "./theme.css";
 
   export type CodeBlockProps = {
     code: string;
