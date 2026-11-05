@@ -39,8 +39,6 @@
       </Chip>
     {/each}
   </div>
-  <div class="flex items-center gap-3">
-    <Button type="submit" variant="filled">Send</Button>
-    <span class="text-sm" aria-live="polite">{sent}</span>
-  </div>
+  <Button type="submit" variant="filled" class="self-start">Send</Button>
+  <p class="text-sm" aria-live="polite">{sent || "Not sent yet"}</p>
 </form>

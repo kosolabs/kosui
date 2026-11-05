@@ -40,7 +40,7 @@
             />
           </label>
           <p class="text-sm" aria-live="polite">
-            {chosen && `Chose ${chosen}`}
+            {chosen ? `Chose ${chosen}` : "Nothing chosen yet"}
           </p>
         </div>
       {/snippet}

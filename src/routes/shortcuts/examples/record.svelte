@@ -18,8 +18,8 @@
 
 <svelte:window {onkeydown} />
 
-<div class="flex items-center gap-3">
-  <span class="text-sm">Search shortcut</span>
+<div class="flex w-full max-w-sm items-center gap-3">
+  <span class="flex-1 text-sm">Search shortcut</span>
   <span class="text-sm text-m3-on-surface-variant" aria-live="polite">
     {#if recording}
       Press keys…

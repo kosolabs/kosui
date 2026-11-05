@@ -8,7 +8,7 @@
   let taken = $derived(TAKEN.includes(username.trim().toLowerCase()));
 </script>
 
-<div class="flex max-w-sm flex-col gap-1">
+<div class="flex w-full max-w-sm flex-col gap-1">
   <label for="{id}-username" class="text-sm font-medium">Username</label>
   <Input
     id="{id}-username"

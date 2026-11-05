@@ -21,7 +21,7 @@
   );
 </script>
 
-<div class="flex max-w-sm flex-col gap-2">
+<div class="flex w-full max-w-sm flex-col gap-2">
   <label class="flex flex-col gap-1 text-sm">
     Assignee
     <Autocomplete

@@ -22,7 +22,10 @@
     </div>
   {/if}
   <div class="rounded-md border">
-    <div class="flex flex-wrap items-center justify-center gap-2 p-6">
+    <div
+      data-testid="example"
+      class="flex flex-wrap items-center justify-center gap-2 p-6"
+    >
       {@render children()}
     </div>
     <div class="rounded-b-md border-t bg-m3-surface-container p-4 text-sm">

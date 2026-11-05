@@ -7,8 +7,7 @@
   let draft = $state("");
 </script>
 
-<div class="flex items-center gap-3">
-  <span class="text-sm">Project: {name}</span>
+<div class="flex flex-col items-center gap-3">
   <Button
     variant="tonal"
     onclick={() => {
@@ -18,6 +17,7 @@
   >
     Rename
   </Button>
+  <p class="text-sm" aria-live="polite">Project: {name}</p>
 </div>
 
 <Modal

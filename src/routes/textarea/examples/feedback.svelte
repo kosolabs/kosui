@@ -9,7 +9,7 @@
 </script>
 
 <form
-  class="flex max-w-md flex-col gap-1"
+  class="flex w-full max-w-md flex-col gap-1"
   onsubmit={(event) => {
     event.preventDefault();
     sent = true;
@@ -28,7 +28,7 @@
     {feedback.length} of {MAX} characters
   </p>
   <Button type="submit" variant="filled" class="mt-2 self-start">Send</Button>
-  {#if sent}
-    <p role="status" class="text-sm">Thanks for the feedback.</p>
-  {/if}
+  <p class="text-sm" aria-live="polite">
+    {sent ? "Thanks for the feedback." : "Not sent yet."}
+  </p>
 </form>

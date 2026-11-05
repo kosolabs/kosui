@@ -5,7 +5,7 @@
   const registry = new Registry();
   let open = $state(false);
   let showArchive = $state(false);
-  let log = $state("");
+  let log = $state("No command run yet");
 
   $effect(() =>
     registry.register(
@@ -40,12 +40,14 @@
   });
 </script>
 
-<div class="flex flex-wrap items-center gap-3">
-  <Button variant="tonal" onclick={() => (open = true)}>Commands</Button>
-  <Button variant="plain" onclick={() => (showArchive = !showArchive)}>
-    {showArchive ? "Hide" : "Show"} archive
-  </Button>
-  <span class="text-sm" aria-live="polite">{log}</span>
+<div class="flex flex-col items-center gap-3">
+  <div class="flex flex-wrap justify-center gap-3">
+    <Button variant="tonal" onclick={() => (open = true)}>Commands</Button>
+    <Button variant="plain" onclick={() => (showArchive = !showArchive)}>
+      {showArchive ? "Hide" : "Show"} archive
+    </Button>
+  </div>
+  <p class="text-sm" aria-live="polite">{log}</p>
 </div>
 
 <CommandPalette bind:open {registry} />

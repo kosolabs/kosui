@@ -25,7 +25,7 @@
 </script>
 
 <form
-  class="flex max-w-sm flex-col gap-2"
+  class="flex w-full max-w-sm flex-col gap-2"
   onsubmit={(event) => {
     event.preventDefault();
     submitted = query;
