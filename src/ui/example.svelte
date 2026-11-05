@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import CodeBlock from "./code-block.svelte";
+  import { exampleCode } from "./docs.js";
 
   export type ExampleProps = {
     title: string;
@@ -10,9 +11,7 @@
   };
   let { title, source, description, children }: ExampleProps = $props();
 
-  let code = $derived(
-    source.replaceAll(`"#lib/index.js"`, `"kosui"`).trimEnd(),
-  );
+  let code = $derived(exampleCode(source));
 </script>
 
 <div class="flex flex-col gap-2">

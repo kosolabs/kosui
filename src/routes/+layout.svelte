@@ -9,6 +9,7 @@
   import { on } from "svelte/events";
   import "../app.css";
   import GithubMark from "./github-mark.svelte";
+  import { SUMMARY } from "./docs.js";
   import { CATEGORIES, findPage, GUIDES } from "./nav.js";
 
   const { children }: { children: Snippet } = $props();
@@ -58,11 +59,7 @@
 
 <svelte:head>
   <title>{current ? `${current.name} · Kosui` : "Kosui"}</title>
-  <meta
-    name="description"
-    content={current?.description ??
-      "Accessible Svelte 5 components styled with Material 3 and Tailwind CSS."}
-  />
+  <meta name="description" content={current?.description ?? SUMMARY} />
 </svelte:head>
 
 {#snippet navigation(inDrawer: boolean)}

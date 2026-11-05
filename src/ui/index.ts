@@ -31,3 +31,12 @@ export {
   type GuidanceRow,
   type GuidanceTableProps,
 } from "./guidance-table.svelte";
+export { default as DocPage, type DocPageProps } from "./doc-page.svelte";
+export {
+  exampleCode,
+  toMarkdown,
+  type ComponentDocs,
+  type DocApi,
+  type DocExample,
+  type DocSection,
+} from "./docs.js";
