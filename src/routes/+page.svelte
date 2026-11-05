@@ -3,6 +3,7 @@
   import { Button, Link } from "#lib/index.js";
   import { CodeBlock, KosuiLogo } from "#ui";
   import { ArrowRight } from "@lucide/svelte";
+  import { SETUP, SUMMARY } from "./docs.js";
   import { CATEGORIES } from "./nav.js";
   import Showcase from "./showcase.svelte";
 
@@ -32,25 +33,6 @@
       "Svelte, Tailwind CSS, marked and Lucide icons. That's it.",
     ],
   ];
-
-  const INSTALL = "pnpm add kosui";
-  const CSS = `@import "tailwindcss";
-@import "kosui/theme.css";`;
-  const USAGE = `<script lang="ts">
-  import { Button } from "kosui";
-</${"script"}>
-
-<Button variant="filled">Save</Button>`;
-  const THEME = `:root {
-  --md-sys-color-primary: rgb(68 94 145);
-  --md-sys-color-on-primary: rgb(255 255 255);
-  /* … */
-}
-
-.dark {
-  --md-sys-color-primary: rgb(173 198 255);
-  /* … */
-}`;
 </script>
 
 {#snippet code(source: string)}
@@ -70,8 +52,7 @@
         Kosui
       </h1>
       <p class="max-w-xl text-xl text-m3-on-surface-variant">
-        Accessible Svelte 5 components, styled with Material 3 and Tailwind CSS.
-        Built for web apps, with live examples of every component.
+        {SUMMARY} Built for web apps, with live examples of every component.
       </p>
       <div class="flex flex-wrap gap-3">
         <Button variant="filled" size="md" href="#getting-started">
@@ -158,7 +139,7 @@
         <p class="text-m3-on-surface-variant">
           Kosui needs Svelte 5 and Tailwind CSS 4.
         </p>
-        {@render code(INSTALL)}
+        {@render code(SETUP.install)}
       </li>
       <li class="flex flex-col gap-3">
         <h3 class="text-lg">2. Add the theme</h3>
@@ -167,11 +148,11 @@
           Material 3 colors as utilities like <code>bg-m3-primary</code>, a
           default palette, and tells Tailwind to scan Kosui's components.
         </p>
-        {@render code(CSS)}
+        {@render code(SETUP.css)}
       </li>
       <li class="flex flex-col gap-3">
         <h3 class="text-lg">3. Use components</h3>
-        {@render code(USAGE)}
+        {@render code(SETUP.usage)}
       </li>
       <li class="flex flex-col gap-3">
         <h3 class="text-lg">4. Make it yours</h3>
@@ -185,7 +166,7 @@
           >. Add the <code>dark</code> class to <code>&lt;html&gt;</code> for the
           dark palette.
         </p>
-        {@render code(THEME)}
+        {@render code(SETUP.theme)}
       </li>
     </ol>
   </section>

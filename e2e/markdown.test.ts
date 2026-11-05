@@ -2,6 +2,20 @@ import { expect, test, type Page } from "@playwright/test";
 
 test.describe.configure({ mode: "parallel" });
 
+test("the Markdown page renders without warnings", async ({ page }) => {
+  const warnings: string[] = [];
+  page.on("console", (msg) => {
+    if (msg.type() === "warning" || msg.type() === "error") {
+      warnings.push(msg.text());
+    }
+  });
+  await page.goto("/markdown");
+  await expect(
+    page.getByRole("img", { name: "An example avatar" }),
+  ).toBeVisible();
+  expect(warnings).toEqual([]);
+});
+
 test.describe("Markdown Component Tests", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/markdown");
@@ -15,20 +29,6 @@ test.describe("Markdown Component Tests", () => {
   async function render(page: Page, markdown: string) {
     await source(page).fill(markdown);
   }
-
-  test("renders without warnings", async ({ page }) => {
-    const warnings: string[] = [];
-    page.on("console", (msg) => {
-      if (msg.type() === "warning" || msg.type() === "error") {
-        warnings.push(msg.text());
-      }
-    });
-    await page.goto("/markdown");
-    await expect(
-      page.getByRole("img", { name: "An example avatar" }),
-    ).toBeVisible();
-    expect(warnings).toEqual([]);
-  });
 
   test("renders semantic elements", async ({ page }) => {
     await render(

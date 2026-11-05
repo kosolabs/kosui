@@ -22,11 +22,11 @@
       </div>
     {/if}
   </div>
-  <div class="code">
-    {#if code}
+  {#if code}
+    <div class="code">
       {@render code()}
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>
 
 <style>
