@@ -1,6 +1,6 @@
 # Kosui Development Guide
 
-This guide covers how to set up Kosui for local development, run tests, manage releases, and publish updates to NPM.
+This guide covers how to set up Kosui for local development, run tests, and release new versions.
 
 ---
 
@@ -68,30 +68,11 @@ pnpm exec playwright test e2e/button.test.ts
 
 ---
 
-## Adding Release Notes with Changesets
+## Releasing
 
-Kosui uses [Changesets](https://github.com/changesets/changesets) to manage release notes and versioning.
+Kosui releases with [release-please](https://github.com/googleapis/release-please). PRs are squash-merged, so each PR title becomes a commit on `main` and must be a [Conventional Commit](https://www.conventionalcommits.org/), like `feat: Add Drawer` or `fix!: Slider is a styled native range input`. The titles of `feat` and `fix` PRs, and of any breaking change, become the release notes. To explain a breaking change in the notes, add a `BREAKING CHANGE:` footer to the squash commit's body.
 
-To add a new changeset:
-
-```bash
-pnpm changeset
-```
-
-Follow the prompts to describe your changes. For more info, see the [common questions](https://github.com/changesets/changesets/blob/main/docs/common-questions.md).
-
----
-
-## Publishing a New Version to NPM
-
-Publishing is automated via GitHub Actions:
-
-1. Create a pull request
-2. Run `pnpm changeset` to add release notes and version bumps.
-3. Merge your feature/fix PRs into `main`.
-4. Push your changes. This will create a `chore: update versions` pull request.
-5. Enable auto-merge on the `chore: update versions` PR.
-6. Once auto-merge completes, the release workflow will publish the new version to NPM.
+Each merge to `main` updates a `chore(main): release` PR with the next version and changelog. Merging that PR tags the release, and the release workflow publishes it to npm.
 
 ---
 
