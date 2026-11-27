@@ -53,14 +53,16 @@ jobs:
           private-key: ${{ secrets.RELEASER_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
+      - uses: googleapis/release-please-action@v5.0.0
+        id: release
+        with:
+          token: ${{ steps.releaser-token.outputs.token }}
       - name: Checkout code repository
+        if: steps.release.outputs.release_created
         uses: actions/checkout@v7.0.1
       - name: Setup pnpm and node
+        if: steps.release.outputs.release_created
         uses: ./.github/actions/setup-pnpm
-      - name: Create and publish versions
-        uses: changesets/action@v2.1.2
-        with:
-          github-token: ${{ steps.releaser-token.outputs.token }}
-          commit-message: "chore: update versions"
-          pr-title: "chore: update versions"
-          publish-script: pnpm ci:publish
+      - name: Publish to npm
+        if: steps.release.outputs.release_created
+        run: pnpm publish --no-git-checks

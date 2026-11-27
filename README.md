@@ -52,11 +52,3 @@ These principles are listed in order of priority. When they conflict, the higher
 **Minimal Dependencies** — As few external dependencies as possible. Every dependency is a maintenance burden and a potential breaking change. A little copied, well-understood code beats a large transitive dependency graph.
 
 **Modern Baseline** — Target current, evergreen browsers. Dropping legacy browser support is acceptable in exchange for simpler code.
-
-## Changesets
-
-Add a new changeset:
-
-```
-pnpm changeset
-```
