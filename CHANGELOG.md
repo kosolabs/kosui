@@ -1,5 +1,12 @@
 # kosui
 
+## [0.5.1](https://github.com/kosolabs/kosui/compare/v0.5.0...v0.5.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* Close Modal on backdrop clicks in Safari ([#214](https://github.com/kosolabs/kosui/issues/214)) ([e46460b](https://github.com/kosolabs/kosui/commit/e46460b11bffa690571bebeee2a743f94791f8b5))
+
 ## 0.5.0
 
 ### Minor Changes
