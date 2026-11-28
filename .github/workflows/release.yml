@@ -46,7 +46,7 @@ jobs:
       name: kosuinpm
       url: https://www.npmjs.com/package/kosui
     steps:
-      - uses: actions/create-github-app-token@v3.3.0
+      - uses: actions/create-github-app-token@v3.4.0
         id: releaser-token
         with:
           client-id: Iv23liXdlxbyAb7jyk9P
